@@ -4,6 +4,7 @@
     - docker:$DOCKER_VERSION-dind
 
 .base_register_stage:
+  stage: "Register"
   extends: .base_docker_image_stage
   before_script:
     - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
