@@ -29,7 +29,6 @@ Get Github Id (prod):
     - tags
 
 .send_url_to_github_stage: &send_url_to_github_stage
-  stage: "Send Url to GitHub"
   image:
     name: $CI_REGISTRY/$IMAGE_INFRA_BASE_NAME/docker-kube:latest
     entrypoint: [""]
@@ -41,6 +40,7 @@ Get Github Id (prod):
 
 Send deployment url to Github (dev):
   <<: *send_url_to_github_stage
+  stage: "Send Url to GitHub (dev)"
   before_script:
     - HASH_BRANCH_NAME=$(printf "$CI_COMMIT_REF_NAME" | sha1sum | cut -c1-5)
     - export HASH_BRANCH_NAME=$HASH_BRANCH_NAME
@@ -54,6 +54,7 @@ Send deployment url to Github (dev):
 
 Send deployment url to Github (prod):
   <<: *send_url_to_github_stage
+  stage: "Send Url to GitHub (prod)"
   before_script:
     - export URL=http://${CI_PROJECT_NAME}.${CI_ENVIRONMENT_NAME}/
   environment:
