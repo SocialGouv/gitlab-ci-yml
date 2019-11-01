@@ -18,6 +18,10 @@ These jobs sends the feature-branch deployed environment url and status to GitHu
 | Prepare                      | get github deployment id |
 | Send Url to GitHub (feature) | send deployment url      |
 
+| Env var              | example            |
+| -------------------- | ------------------ |
+| DEV_ENVIRONMENT_NAME | gitlab environment |
+
 ## register-stage.yml
 
 An extend to build and publish some docker image.

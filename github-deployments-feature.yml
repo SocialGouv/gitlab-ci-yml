@@ -19,7 +19,7 @@
 Get Github Id (feature):
   <<: *get_github_id_stage
   environment:
-    name: feature-${CLUSTER_NAME}
+    name: ${DEV_ENVIRONMENT_NAME}
   except:
     - master
     - /^v.*/
@@ -41,7 +41,7 @@ Send deployment url to Github (feature):
     - export INGRESS_ENVIRONMENT_PREFIX=${HASH_BRANCH_NAME}
     - export URL=https://${INGRESS_ENVIRONMENT_PREFIX}.${CI_PROJECT_NAME}.${DOMAIN_NAME}/
   environment:
-    name: feature-${CLUSTER_NAME}
+    name: ${DEV_ENVIRONMENT_NAME}
   except:
     - master
     - /^v.*/
