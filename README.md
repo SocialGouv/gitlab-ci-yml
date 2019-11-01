@@ -9,26 +9,27 @@ include:
   - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/register-stage.yml"
 ```
 
-## github-deployments
+## github-deployments-feature.yml
 
-| Stage                     | usage                    |
-| ------------------------- | ------------------------ |
-| Prepare                   | get github deployment id |
-| Send Url to GitHub (dev)  | send dev url             |
-| Send Url to GitHub (prod) | send prod url            |
+These jobs sends the feature-branch deployed environment url and status to GitHub API so it appears in the GitHub PR.
 
-| Env var               | example     |
-| --------------------- | ----------- |
-| DEV_ENVIRONMENT_NAME  | dev.factory |
-| PROD_ENVIRONMENT_NAME | incubateur  |
+| Stage                        | usage                    |
+| ---------------------------- | ------------------------ |
+| Prepare                      | get github deployment id |
+| Send Url to GitHub (feature) | send deployment url      |
 
-## register-stage
+## register-stage.yml
+
+An extend to build and publish some docker image.
+
+`extends .base_register_stage`
 
 | Stage        | usage                 |
 | ------------ | --------------------- |
 | Registration | register docker image |
 
-| Env var           | example |
-| ----------------- | ------- |
-| IMAGE_NAME        |         |
-| DOCKER_BUILD_ARGS |         |
+| Env var           | example                               |
+| ----------------- | ------------------------------------- |
+| IMAGE_NAME        | cdtn/api                              |
+| CONTEXT           | packages/api                          |
+| DOCKER_BUILD_ARGS | --build-arg SENTRY_DSN=https://sentry |

@@ -1,3 +1,8 @@
+#
+# docker image registration
+# these base jobs can be reused to build and publish your docker images
+#
+
 .base_docker_image_stage:
   image: docker:$DOCKER_VERSION
   services:
