@@ -26,7 +26,7 @@ Get Github Id (feature):
 
 .send_url_to_github_stage: &send_url_to_github_stage
   image:
-    name: $CI_REGISTRY/$IMAGE_INFRA_BASE_NAME/docker-kube:latest
+    name: ${CI_REGISTRY}/${IMAGE_INFRA_BASE_NAME}/git-deploy:1.0
   script:
     - export DEPLOY_ID=$(cat github_deploy_id)
     - envsubst < /scripts/send-url.sh > /scripts/send-url-to-github.sh
