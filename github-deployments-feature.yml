@@ -6,7 +6,7 @@
 .get_github_id_stage: &get_github_id_stage
   stage: "Prepare"
   image:
-    name: ${CI_REGISTRY}/${IMAGE_INFRA_BASE_NAME}/git-deploy:${INFRA_GIT_DEPLOY_VERSION}
+    name: ${CI_REGISTRY}/${IMAGE_INFRA_BASE_NAME}/git-deploy:1.0
   before_script:
     - envsubst < /scripts/get-deploy-id.sh > /scripts/get-github-deploy-id.sh
   script:
