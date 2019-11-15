@@ -1,4 +1,20 @@
-# gitlab-ci-yml
+<h1 align="center">
+  <img src="https://github.com/SocialGouv/docker/raw/master/.github/gitlab.gif" width="250"/>
+  <p align="center">.gitlab-ci.yml</p>
+  <p align="center" style="font-size: 0.5em">✨✨✨✨✨✨✨✨</p>
+</h1>
+
+<p align="center">
+  <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache--2.0-yellow.svg" alt="License: Apache-2.0"></a>
+  <a href="https://github.com/SocialGouv/docker/releases "><img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/SocialGouv/docker?sort=semver"></a>
+</p>
+
+<br>
+<br>
+<br>
+<br>
+
+## Usage
 
 Use like this in your `.gitlab-ci.yml` :
 
