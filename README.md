@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://github.com/SocialGouv/docker/raw/master/.github/gitlab.gif" width="250"/>
+  <img src="https://github.com/SocialGouv/gitlab-ci-yml/raw/master/.github/gitlab.gif" width="250"/>
   <p align="center">.gitlab-ci.yml</p>
   <p align="center" style="font-size: 0.5em">✨✨✨✨✨✨✨✨</p>
 </h1>
