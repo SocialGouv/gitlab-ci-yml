@@ -62,7 +62,7 @@ An extend to build and publish some docker image.
 
 ---
 include:
-  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/github-deployments.yml"
+  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_sementic_release_stage.yml"
   # or
   # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_sementic_release_stage.yml"
 
