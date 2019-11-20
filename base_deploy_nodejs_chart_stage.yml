@@ -12,7 +12,7 @@
     - helm just render ${CONTEXT} nodejs
         --set image.tag=${IMAGE_TAG}
         --set ingress.annotations."certmanager\.k8s\.io/cluster-issuer"=${LETSENCRYPT_ISSUER}
-        --set ingress.hosts[0].host=${FRONTEND_HOST}
-        --set ingress.tls[0].hosts[0]=${FRONTEND_HOST}
+        --set ingress.hosts[0].host=${HOST}
+        --set ingress.tls[0].hosts[0]=${HOST}
         --values ./values.yaml
     - helm just apply ${CONTEXT}
