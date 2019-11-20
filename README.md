@@ -80,6 +80,52 @@ Create namespace:
   
 ```
 
+# [.base_deploy_nodejs_chart_stage](./base_deploy_nodejs_chart_stage.yml)
+
+## Usage
+
+```yaml
+include:
+  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_deploy_nodejs_chart_stage.yml"
+  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_docker_helm_image_stage.yml"
+  # or
+  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_deploy_nodejs_chart_stage.yml"
+  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_docker_helm_image_stage.yml"
+
+#
+
+
+.deploy_myapp_stage: &deploy_myapp_stage
+  dependencies: []
+  stage: Deploy
+  extends: .base_deploy_nodejs_chart_stage
+  variables:
+    CONTEXT: app
+    VALUES_FILE: ./.k8s/app.values.yml
+  before_script:
+    - K8S_NAMESPACE=my-namespace
+    - LETSENCRYPT_ISSUER=staging
+    - HOST=myapp.dev.factory.social.gouv.fr
+
+#
+
+Deploy myapp (dev):
+  <<: *deploy_myapp_stage
+  only:
+    - branches
+  except:
+    - master
+  environment:
+    name: $DEV_ENVIRONMENT_NAME
+
+Deploy myapp (prod):
+  <<: *deploy_myapp_stage
+  only:
+    - master
+  environment:
+    name: $PROD_ENVIRONMENT_NAME
+```
+
 # [.base_docker_helm_image_stage](./base_docker_helm_image_stage.yml)
 
 ## Usage 

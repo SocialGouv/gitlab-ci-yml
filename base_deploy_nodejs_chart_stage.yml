@@ -1,0 +1,18 @@
+#
+
+.base_deploy_nodejs_chart_stage:
+  extends: .base_docker_helm_image_stage
+  script:
+    - helm init --client-only
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v2.7.0/helm-just-linux-2.7.0.tgz | tar -C $(helm home) -xzv
+    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v2.7.0
+    - helm just fetch "socialgouv/nodejs#2.7.0"
+    - envsubst < $VALUES_FILE > ./values.yaml
+    - helm just render ${CONTEXT} nodejs
+        --set image.tag=${IMAGE_TAG}
+        --set ingress.annotations."certmanager\.k8s\.io/cluster-issuer"=${LETSENCRYPT_ISSUER}
+        --set ingress.hosts[0].host=${FRONTEND_HOST}
+        --set ingress.tls[0].hosts[0]=${FRONTEND_HOST}
+        --values ./values.yaml
+    - helm just apply ${CONTEXT}
