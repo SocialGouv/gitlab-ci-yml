@@ -1,7 +1,7 @@
 #
 
 .base_create_namespace_stage: &base_create_namespace_stage
-  extends: .base_docker_kube_image_stage
+  extends: .base_docker_kubectl_image_stage
   stage: "Registration"
   environment:
     name: factory-dev
