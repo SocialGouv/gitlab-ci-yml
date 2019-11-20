@@ -1,0 +1,5 @@
+#
+
+.base_docker_helm_image_stage:
+  extends: .base_docker_kube_image_stage
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/helm:0.13.0

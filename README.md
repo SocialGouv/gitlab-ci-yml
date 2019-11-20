@@ -54,13 +54,71 @@ An extend to build and publish some docker image.
 | CONTEXT           | packages/api                          |
 | DOCKER_BUILD_ARGS | --build-arg SENTRY_DSN=https://sentry |
 
+# [.base_create_namespace_stage](./base_create_namespace_stage.yml)
+
+## Usage 
+
+```yaml
+include:
+  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_docker_kubectl_image_stage.yml"
+  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_create_namespace_stage.yml"
+  # or
+  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_docker_kubectl_image_stage.yml"
+  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_create_namespace_stage.yml"
+
+#
+
+Create namespace:
+  extends: .base_create_namespace_stage
+  environment: factory-dev
+  script:
+    - echo "Namespace "${K8S_NAMESPACE}" created"
+  
+```
+
+# [.base_docker_helm_image_stage](./base_docker_helm_image_stage.yml)
+
+## Usage 
+
+```yaml
+include:
+  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_docker_kubectl_image_stage.yml"
+  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_docker_helm_image_stage.yml"
+  # or
+  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_docker_kubectl_image_stage.yml"
+  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_docker_helm_image_stage.yml"
+
+#
+
+Helm job:
+  extends: .base_docker_helm_image_stage
+  script:
+    - helm version --client-only
+```
+
+# [.base_docker_kubectl_image_stage](./base_docker_kubectl_image_stage.yml)
+
+## Usage 
+
+```yaml
+include:
+  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_docker_kubectl_image_stage.yml"
+  # or
+  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_docker_kubectl_image_stage.yml"
+
+#
+
+Kubectl job:
+  extends: .base_docker_kubectl_image_stage
+  script:
+    - kubectl version --client 
+```
+
 # [.base_semantic_release_stage](./base_semantic_release_stage.yml)
 
 ## Usage 
 
 ```yaml
-
----
 include:
   - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_sementic_release_stage.yml"
   # or
