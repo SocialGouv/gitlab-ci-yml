@@ -70,9 +70,13 @@ include:
 
 Create namespace:
   extends: .base_create_namespace_stage
-  environment: factory-dev
-  script:
-    - echo "Namespace "${K8S_NAMESPACE}" created"
+  variables:
+    # The rancher project where the namespaces will be created
+    RANCHER_PROJECT_ID: <rancher_project_id>
+  before_script:
+    - K8S_NAMESPACE=my-namespace
+    # (re)create to ensure a new namespaces will be created
+    # - kubectl delete namespaces ${K8S_NAMESPACE} || true
   
 ```
 
