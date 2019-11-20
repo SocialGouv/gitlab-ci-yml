@@ -1,7 +1,7 @@
 ---
 
 include:
-  - /base_sementic_release_stage.yml
+  - /base_semantic_release_stage.yml
 
 stages:
   - Release

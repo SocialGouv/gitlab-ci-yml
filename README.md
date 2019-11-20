@@ -124,9 +124,9 @@ Kubectl job:
 
 ```yaml
 include:
-  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_sementic_release_stage.yml"
+  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_semantic_release_stage.yml"
   # or
-  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_sementic_release_stage.yml"
+  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_semantic_release_stage.yml"
 
 #
 
