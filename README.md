@@ -53,3 +53,29 @@ An extend to build and publish some docker image.
 | IMAGE_NAME        | cdtn/api                              |
 | CONTEXT           | packages/api                          |
 | DOCKER_BUILD_ARGS | --build-arg SENTRY_DSN=https://sentry |
+
+# [.base_semantic_release_stage](./base_semantic_release_stage.yml)
+
+## Usage 
+
+```yaml
+
+---
+include:
+  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/github-deployments.yml"
+  # or
+  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_sementic_release_stage.yml"
+
+#
+
+Release:
+  extends: .base_semantic_release_stage
+
+# or
+
+Release:
+  extends: .base_semantic_release_stage
+  variables:
+    SEMANTIC_RELEASE_PLUGINS: "@semantic-release/changelog @semantic-release/git"
+  
+```
