@@ -2,6 +2,11 @@
 
 .base_deploy_nodejs_chart_stage:
   extends: .base_docker_helm_image_stage
+  variables:
+    HELM_RENDER_ARGS: |
+      --set image.tag=${IMAGE_TAG}
+      --set ingress.hosts[0].host=${HOST}
+      --set ingress.tls[0].hosts[0]=${HOST}
   script:
     - helm init --client-only
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
@@ -10,9 +15,6 @@
     - helm just fetch "socialgouv/nodejs#2.7.0"
     - envsubst < $VALUES_FILE > ./values.yaml
     - helm just render ${CONTEXT} nodejs
-        --set image.tag=${IMAGE_TAG}
-        --set ingress.annotations."certmanager\.k8s\.io/cluster-issuer"=${LETSENCRYPT_ISSUER}
-        --set ingress.hosts[0].host=${HOST}
-        --set ingress.tls[0].hosts[0]=${HOST}
+        ${HELM_RENDER_ARGS}
         --values ./values.yaml
     - helm just apply ${CONTEXT}
