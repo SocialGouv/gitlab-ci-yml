@@ -104,8 +104,18 @@ include:
     VALUES_FILE: ./.k8s/app.values.yml
   before_script:
     - K8S_NAMESPACE=my-namespace
-    - LETSENCRYPT_ISSUER=staging
     - HOST=myapp.dev.factory.social.gouv.fr
+    - HELM_RENDER_ARGS="
+      --set ingress.hosts[0].host=${HOST}
+      --set ingress.tls[0].hosts[0]=${HOST}
+      ${HELM_RENDER_ARGS}"
+
+    # In production
+    # - HELM_RENDER_ARGS="
+    #   --set ingress.annotations."certmanager\.k8s\.io/cluster-issuer"=letsencrypt-prod
+    #   --set ingress.annotations."kubernetes\.io/tls-acme"=true
+    #   --set ingress.tls[0].secretName=${PROJECT}-certificate
+    #   ${HELM_RENDER_ARGS}"
 
 #
 
