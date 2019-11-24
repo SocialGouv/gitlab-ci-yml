@@ -1,3 +1,38 @@
+# [2.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v1.5.0...v2.0.0) (2019-11-24)
+
+
+### Features
+
+* **nodejs_chart:** empty HELM_RENDER_ARGS ([e335c1c](https://github.com/SocialGouv/gitlab-ci-yml/commit/e335c1c9f59f2868e2f34730800e87bf8fa1c5e0))
+
+
+### BREAKING CHANGES
+
+* **nodejs_chart:** **feat(nodejs_chart)**: empty HELM_RENDER_ARGS
+  - No args are given by default (expect the `--values`)
+    We recommend that in your project, you at least set :
+
+    ```yaml
+    .deploy_job:
+      extends: .base_deploy_nodejs_chart_stage
+      # [...]
+      before_script:
+        - *resolve_env_domain
+        - HOST=${FRONTEND_HOST}
+        - HELM_RENDER_ARGS="
+            --set image.tag=${CI_COMMIT_SHA}
+            --set ingress.hosts[0].host=${HOST}
+            --set ingress.tls[0].hosts[0]=${HOST}"
+        - |
+          if [[ "${BRANCH_NAME}" = "master" ]]; then
+            HELM_RENDER_ARGS="
+              ${HELM_RENDER_ARGS}
+              --set ingress.annotations."certmanager\.k8s\.io/cluster-issuer"=letsencrypt-prod
+              --set ingress.annotations."kubernetes\.io/tls-acme"=true
+              --set ingress.tls[0].secretName=${PROJECT}-certificate"
+          fi
+    ```
+
 # [1.5.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v1.4.0...v1.5.0) (2019-11-24)
 
 
