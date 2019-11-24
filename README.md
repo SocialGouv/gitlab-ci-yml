@@ -116,8 +116,8 @@ include:
       if [[ "${BRANCH_NAME}" = "master" ]]; then
         HELM_RENDER_ARGS="
           ${HELM_RENDER_ARGS}
-          --set ingress.annotations."certmanager\.k8s\.io/cluster-issuer"=letsencrypt-prod
-          --set ingress.annotations."kubernetes\.io/tls-acme"=true
+          --set ingress.annotations.\"certmanager\.k8s\.io/cluster-issuer\"="letsencrypt-prod"
+          --set ingress.annotations.\"kubernetes\.io/tls-acme\"="true"
           --set ingress.tls[0].secretName=${PROJECT}-certificate"
       fi
 
