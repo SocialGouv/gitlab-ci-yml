@@ -3,8 +3,7 @@
 .base_deploy_nodejs_chart_stage:
   extends: .base_docker_helm_image_stage
   variables:
-    HELM_RENDER_ARGS: >-
-      --set image.tag=${IMAGE_TAG}
+    HELM_RENDER_ARGS: ""
   script:
     - helm init --client-only
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
