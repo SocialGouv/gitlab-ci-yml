@@ -81,6 +81,22 @@ Create namespace:
   
 ```
 
+# [.base_delete_useless_k8s_ns_stage](./base_delete_useless_k8s_ns_stage.yml)
+
+## Usage
+
+```yaml
+include:
+  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_delete_useless_k8s_ns_stage.yml"
+  # or
+  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_delete_useless_k8s_ns_stage.yml"
+
+#
+
+Delete useless k8s namespaces:
+  extends: .base_delete_useless_k8s_ns_stage
+```
+
 # [.base_deploy_nodejs_chart_stage](./base_deploy_nodejs_chart_stage.yml)
 
 ## Usage
