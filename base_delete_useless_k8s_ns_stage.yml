@@ -1,0 +1,15 @@
+#
+
+.base_delete_useless_k8s_ns_stage:
+  stage: Notify Finished Deployment
+  dependencies: []
+  allow_failure: true
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/k8s-ns-killer:0.13.0
+  environment: fabrique-dev
+  script:
+    - git remote set-url origin https://github.com/${CI_PROJECT_PATH}.git
+    # - k8s-ns-killer ${PROJECT}-feature
+    # Debug mode
+    - sh -x /bin/k8s-ns-killer ${PROJECT}-feature
+  only:
+    - master
