@@ -1,6 +1,6 @@
 #
 
-.base_create_namespace_stage: &base_create_namespace_stage
+.base_create_namespace_stage:
   extends: .base_docker_kubectl_image_stage
   stage: "Registration"
   environment:
@@ -12,9 +12,8 @@
     #
     - kubectl create namespace ${K8S_NAMESPACE}
     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/projectId=${RANCHER_PROJECT_ID}
+    - kubectl label ns ${K8S_NAMESPACE} cert=wildcard --overwrite
     #
     # Fake rancher namespace creation
-    - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/containerDefaultResourceLimit='{}'
     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/creatorId=gitlab
-    # Link the namespace to a git branch
-    - kubectl annotate namespace ${K8S_NAMESPACE} git/branch=${CI_COMMIT_REF_NAME}
+    - kubectl label namespace ${K8S_NAMESPACE} git/branch=${CI_COMMIT_REF_NAME}

@@ -12,7 +12,7 @@
   stage: "Registration"
   extends: .base_docker_image_stage
   before_script:
-    - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
+    - docker login $CI_REGISTRY -u gitlab-ci-token -p $CI_JOB_TOKEN # TODO: why echo "$CI_JOB_TOKEN"?
   script:
     - >
       if [[ -n "${CI_COMMIT_TAG}" ]]; then
@@ -23,7 +23,7 @@
     #
     - docker pull $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA || true
     - docker pull $IMAGE_NAME:$TAG || true
-    - docker pull $IMAGE_NAME:master || true
+    - docker pull $IMAGE_NAME:master || true # TODO: Demander true ? Pourquoi 3 version images ?
     - echo "> docker build $DOCKER_BUILD_ARGS --cache-from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA --cache-from $IMAGE_NAME:$TAG --cache-from $IMAGE_NAME:master -t $IMAGE_NAME:$CI_COMMIT_SHA -t $IMAGE_NAME:$TAG $CONTEXT"
     - docker build $DOCKER_BUILD_ARGS --cache-from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA --cache-from $IMAGE_NAME:$TAG --cache-from $IMAGE_NAME:master -t $IMAGE_NAME:$CI_COMMIT_SHA -t $IMAGE_NAME:$TAG $CONTEXT
     - docker push $IMAGE_NAME:$CI_COMMIT_SHA
