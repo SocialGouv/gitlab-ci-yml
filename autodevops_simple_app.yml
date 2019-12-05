@@ -16,49 +16,49 @@ include:
   - remote: "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/boni/base_yarn_stage.yml"
 
 before_script:
+  - echo "toto"
+  - sh -x
+  - export BRANCH_NAME=${BRANCH_NAME:=$CI_COMMIT_REF_SLUG}
+  - export HASH_SIZE=${HASH_SIZE:=7}
+  - export K8S_PROJECT=${K8S_PROJECT:=$PROJECT}
+  - BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
+  - export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
+  - export K8S_NAMESPACE="${PROJECT}-feature-${BRANCH_HASH}"
   - >
-    echo "toto"
-    sh -x
-    export BRANCH_NAME=${BRANCH_NAME:=$CI_COMMIT_REF_SLUG}
-    export HASH_SIZE=${HASH_SIZE:=7}
-    export K8S_PROJECT=${K8S_PROJECT:=$PROJECT}
-    BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
-    export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
-    export K8S_NAMESPACE="${PROJECT}-feature-${BRANCH_HASH}"
     if [[ "${BRANCH_NAME}" = "master" ]]; then
-    export BRANCH_HASH=prod
-    export K8S_NAMESPACE="${PROJECT}-${BRANCH_HASH}"
-    export DOMAIN="${PROJECT}.fabrique.social.gouv.fr"
+      export BRANCH_HASH=prod
+      export K8S_NAMESPACE="${PROJECT}-${BRANCH_HASH}"
+      export DOMAIN="${PROJECT}.fabrique.social.gouv.fr"
     else
-    export DOMAIN="${BRANCH_HASH}-${PROJECT}.dev.fabrique.social.gouv.fr"
+      export DOMAIN="${BRANCH_HASH}-${PROJECT}.dev.fabrique.social.gouv.fr"
     fi
-    export FRONTEND_HOST="${DOMAIN}"
-    export FRONTEND_URL="https://${FRONTEND_HOST}"
+  - export FRONTEND_HOST="${DOMAIN}"
+  - export FRONTEND_URL="https://${FRONTEND_HOST}"
 
 
-Quality tests:
-  extends: .base_yarn_quality
-  stage: Code Quality
-
-Build:
-  extends: .base_yarn_build
-  stage: Code Quality
-
-Release:
-  extends: .base_semantic_release_stage
-  stage: Registration
-
-Register image:
-  extends: .base_register_stage
-  stage: Registration
-  dependencies:
-  - Build
-  needs:
-  - Build
-  variables:
-    CONTEXT: .
-    DOCKERFILE_PATH: Dockerfile
-    IMAGE_NAME: $CI_REGISTRY_IMAGE
+#Quality tests:
+#  extends: .base_yarn_quality
+#  stage: Code Quality
+#
+#Build:
+#  extends: .base_yarn_build
+#  stage: Code Quality
+#
+#Release:
+#  extends: .base_semantic_release_stage
+#  stage: Registration
+#
+#Register image:
+#  extends: .base_register_stage
+#  stage: Registration
+#  dependencies:
+#  - Build
+#  needs:
+#  - Build
+#  variables:
+#    CONTEXT: .
+#    DOCKERFILE_PATH: Dockerfile
+#    IMAGE_NAME: $CI_REGISTRY_IMAGE
 
 Create namespace:
   extends: .base_create_namespace_stage
@@ -70,30 +70,30 @@ Create namespace:
       - tags
       - master
 
-.deploy_sample-next-app_stage: &deploy_sample-next-app_stage
-  stage: Deploy
-  extends: .base_deploy_nodejs_chart_stage
-  dependencies: []
-  variables:
-    REGISTRY: $CI_REGISTRY_IMAGE
-    IMAGE_TAG: $CI_COMMIT_SHA
-    CONTEXT: app
-
-Deploy @sample-next-app (dev):
-  <<: *deploy_sample-next-app_stage
-  only:
-  - branches
-  except:
-  - master
-  environment:
-    name: $DEV_ENVIRONMENT_NAME
-
-Deploy @sample-next-app (prod):
-  <<: *deploy_sample-next-app_stage
-  only:
-  - master
-  environment:
-    name: $PROD_ENVIRONMENT_NAME
-
-Delete useless k8s namespaces:
-  extends: .base_delete_useless_k8s_ns_stage
+#.deploy_sample-next-app_stage: &deploy_sample-next-app_stage
+#  stage: Deploy
+#  extends: .base_deploy_nodejs_chart_stage
+#  dependencies: []
+#  variables:
+#    REGISTRY: $CI_REGISTRY_IMAGE
+#    IMAGE_TAG: $CI_COMMIT_SHA
+#    CONTEXT: app
+#
+#Deploy @sample-next-app (dev):
+#  <<: *deploy_sample-next-app_stage
+#  only:
+#  - branches
+#  except:
+#  - master
+#  environment:
+#    name: $DEV_ENVIRONMENT_NAME
+#
+#Deploy @sample-next-app (prod):
+#  <<: *deploy_sample-next-app_stage
+#  only:
+#  - master
+#  environment:
+#    name: $PROD_ENVIRONMENT_NAME
+#
+#Delete useless k8s namespaces:
+#  extends: .base_delete_useless_k8s_ns_stage
