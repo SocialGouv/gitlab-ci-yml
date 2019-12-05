@@ -4,6 +4,6 @@
     ":automergeAll"
   ],
   "gitlabci": {
-    "fileMatch": ["(^|/)[^/]*\\.yaml$"]
+    "fileMatch": ["(^|/)[^/]*\\.ya?ml$"]
   }
 }
