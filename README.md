@@ -98,6 +98,8 @@ Create namespace:
   variables:
     # The rancher project where the namespaces will be created
     RANCHER_PROJECT_ID: <rancher_project_id>
+    # Optional
+    REMOTE_URL: "https://github.com/${CI_PROJECT_PATH}.git"
   before_script:
     - K8S_NAMESPACE=my-namespace
     # (re)create to ensure a new namespaces will be created
