@@ -11,7 +11,7 @@ Lint:
   stage: Code Quality
   image: node:12-alpine
   script:
-    - npx yaml-lint **/*.(yaml|yml)
+    - npx yaml-lint *.yml
 
 Release:
   extends: .base_semantic_release_stage
