@@ -97,8 +97,73 @@ Delete useless k8s namespaces:
   extends: .base_delete_useless_k8s_ns_stage
 ```
 
+# [.base_deploy_hpa_chart_stage](./base_deploy_hpa_chart_stage.yml)
+
+## Usage
+
+```yaml
+include:
+  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_deploy_hpa_chart_stage.yml"
+  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_docker_helm_image_stage.yml"
+  # or
+  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_deploy_hpa_chart_stage.yml"
+  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_docker_helm_image_stage.yml"
+
+#
+
+
+.deploy_myapp_stage: &deploy_myapp_stage
+  dependencies: []
+  stage: Deploy
+  extends: .base_deploy_hpa_chart_stage
+  variables:
+    CONTEXT: app
+    VALUES_FILE: ./.k8s/app.values.yml
+  before_script:
+    - K8S_NAMESPACE=my-namespace
+    - HOST=myapp.dev.factory.social.gouv.fr
+    #
+    - HELM_RENDER_ARGS="
+        --set image.tag=${IMAGE_TAG}
+        --set ingress.hosts[0].host=${HOST}
+        --set ingress.tls[0].hosts[0]=${HOST}"
+    # In production (if the master branch is your production)
+    - |
+      if [[ "${BRANCH_NAME}" = "master" ]]; then
+        HELM_RENDER_ARGS="
+          ${HELM_RENDER_ARGS}
+          --set ingress.annotations.\"certmanager\.k8s\.io/cluster-issuer\"="letsencrypt-prod"
+          --set ingress.annotations.\"kubernetes\.io/tls-acme\"="true"
+          --set ingress.tls[0].secretName=${PROJECT}-certificate"
+      fi
+
+#
+
+Deploy myapp (dev):
+  <<: *deploy_myapp_stage
+  only:
+    - branches
+  except:
+    - master
+  environment:
+    name: $DEV_ENVIRONMENT_NAME
+
+Deploy myapp (prod):
+  <<: *deploy_myapp_stage
+  only:
+    - master
+  environment:
+    name: $PROD_ENVIRONMENT_NAME
+    
+```
+
+
 # [.base_deploy_nodejs_chart_stage](./base_deploy_nodejs_chart_stage.yml)
 
+## Note
+
+Please consider using `base_deploy_hpa_chart_stage` block instead.
+ 
 ## Usage
 
 ```yaml
