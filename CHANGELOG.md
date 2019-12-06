@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v2.2.0...v2.2.1) (2019-12-06)
+
+
+### Bug Fixes
+
+* bump to socialgouv/docker/*:0.18.0 ([1301272](https://github.com/SocialGouv/gitlab-ci-yml/commit/13012721ee3429f9464605fb36db70276308e235))
+
 # [2.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v2.1.0...v2.2.0) (2019-11-27)
 
 
