@@ -12,8 +12,10 @@
   stage: "Registration"
   extends: .base_docker_image_stage
   before_script:
-    - docker login $CI_REGISTRY -u gitlab-ci-token -p $CI_JOB_TOKEN # TODO: why echo "$CI_JOB_TOKEN"?
   script:
+    # NOTE(douglasduteil): use echo "$CI_JOB_TOKEN" to remove docker login warning.
+    # `WARNING! Using --password via the CLI is insecure. Use --password-stdin`
+    - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
     - >
       if [[ -n "${CI_COMMIT_TAG}" ]]; then
         export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")
