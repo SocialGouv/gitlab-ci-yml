@@ -23,10 +23,34 @@
         export TAG=$CI_COMMIT_REF_SLUG
       fi
     #
-    - docker pull $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA || true
-    - docker pull $IMAGE_NAME:$TAG || true
-    - docker pull $IMAGE_NAME:master || true # TODO: Demander true ? Pourquoi 3 version images ?
-    - echo "> docker build $DOCKER_BUILD_ARGS --cache-from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA --cache-from $IMAGE_NAME:$TAG --cache-from $IMAGE_NAME:master -t $IMAGE_NAME:$CI_COMMIT_SHA -t $IMAGE_NAME:$TAG $CONTEXT"
-    - docker build $DOCKER_BUILD_ARGS --cache-from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA --cache-from $IMAGE_NAME:$TAG --cache-from $IMAGE_NAME:master -t $IMAGE_NAME:$CI_COMMIT_SHA -t $IMAGE_NAME:$TAG $CONTEXT
+    # NOTE(douglasduteil): aggressive caching strategy.
+    # As we don't know which image is the closest to the one we are registering
+    # we pull all the images that can help.
+    # From the previous commit, to the current branch or the master branch, the
+    # first to be defined will be our cache :)
+    - docker pull $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA &&
+        export CACHE_TAG=$CI_COMMIT_BEFORE_SHA || true
+    - [[ -n $CACHE_TAG ]] ||
+        docker pull $IMAGE_NAME:$TAG &&
+        export CACHE_TAG=$TAG || true
+    - [[ -n $CACHE_TAG ]] ||
+        docker pull $IMAGE_NAME:master &&
+        export CACHE_TAG=master || true
+    #
+    - echo "
+      docker build
+      --cache-from $IMAGE_NAME:$CACHE_TAG
+      -t $IMAGE_NAME:$CI_COMMIT_SHA
+      -t $IMAGE_NAME:$TAG
+      $DOCKER_BUILD_ARGS
+      $CONTEXT"
+    - docker build
+      --cache-from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA
+      --cache-from $IMAGE_NAME:$TAG
+      --cache-from $IMAGE_NAME:master
+      -t $IMAGE_NAME:$CI_COMMIT_SHA
+      -t $IMAGE_NAME:$TAG
+      $DOCKER_BUILD_ARGS
+      $CONTEXT
     - docker push $IMAGE_NAME:$CI_COMMIT_SHA
     - docker push $IMAGE_NAME:$TAG
