@@ -22,12 +22,8 @@ Use like this in your `.gitlab-ci.yml` :
 ```yml
 ---
 include:
-  - project: SocialGouv/gitlab-ci-yml
-    file: /master/deployments.yml
-    ref: boni
-  - project: SocialGouv/gitlab-ci-yml
-    file: /master/stage.yml
-    ref: boni
+  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/github-deployments.yml"
+  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/register-stage.yml"
 ```
 
 ## github-deployments-feature.yml
