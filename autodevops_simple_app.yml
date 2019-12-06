@@ -5,15 +5,35 @@ stages:
   - Notify Finished Deployment
 
 include:
-  - remote: "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/boni/base_create_namespace_stage.yml"
-  - remote: "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/boni/base_delete_useless_k8s_ns_stage.yml"
-  - remote: "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/boni/base_deploy_nodejs_chart_stage.yml"
-  - remote: "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/boni/base_docker_helm_image_stage.yml"
-  - remote: "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/boni/base_docker_kubectl_image_stage.yml"
-  - remote: "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/boni/base_notify_github_stage.yml"
-  - remote: "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/boni/base_register_stage.yml"
-  - remote: "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/boni/base_semantic_release_stage.yml"
-  - remote: "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/boni/base_yarn_stage.yml"
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_create_namespace_stage.yml
+    ref: boni
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_delete_useless_k8s_ns_stage.yml
+    ref: boni
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_deploy_nodejs_chart_stage.yml
+    ref: boni
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_docker_helm_image_stage.yml
+    ref: boni
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_docker_kubectl_image_stage.yml
+    ref: boni
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_notify_github_stage.yml
+    ref: boni
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_register_stage.yml
+    ref: boni
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_semantic_release_stage.yml
+    ref: boni
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_yarn_stage.yml
+    ref: boni
+
+#
 
 before_script:
   - sh -x

@@ -16,3 +16,5 @@ Lint:
 
 Release:
   extends: .base_semantic_release_stage
+  variables:
+    SEMANTIC_RELEASE_PLUGINS: "@semantic-release/changelog @semantic-release/exec @semantic-release/git"
