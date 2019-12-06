@@ -1,26 +1,26 @@
 .base_yarn_quality:
   image: node:12-alpine
   before_script:
-  - yarn --frozen-lockfile
+    - yarn --frozen-lockfile
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
-    - node_modules
+      - node_modules
   script:
-  - yarn lint
-  - yarn test
+    - yarn lint
+    - yarn test
 
 .base_yarn_build:
   image: node:12-alpine
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
-    - node_modules
+      - node_modules
   before_script:
-  - yarn --frozen-lockfile
+    - yarn --frozen-lockfile
   script:
-  - yarn build
+    - yarn build
   artifacts:
     expire_in: 30 minutes
     paths:
-    - .next
+      - .next

@@ -12,6 +12,7 @@ Lint:
   image: node:12-alpine
   script:
     - npx yaml-lint *.yml
+    - npx prettier --check *.yml
 
 Release:
   extends: .base_semantic_release_stage

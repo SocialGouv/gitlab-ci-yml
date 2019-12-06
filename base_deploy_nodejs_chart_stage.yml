@@ -29,8 +29,6 @@
       fi
 
     - helm just render ${CONTEXT} nodejs
-        ${HELM_RENDER_ARGS}
-        --values ./values.yaml
+      ${HELM_RENDER_ARGS}
+      --values ./values.yaml
     - helm just apply ${CONTEXT}
-
-

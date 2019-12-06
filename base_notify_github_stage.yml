@@ -11,16 +11,16 @@
 .base_notify_pending_stage:
   <<: *notify_stage
   script:
-  #
-  - create-deployment
-  - cat /tmp/deploy_payload.json
-  #
-  - extract-deploy-id
-  - echo "GitHub deployment id '$(cat DEPLOY_ID)'"
+    #
+    - create-deployment
+    - cat /tmp/deploy_payload.json
+    #
+    - extract-deploy-id
+    - echo "GitHub deployment id '$(cat DEPLOY_ID)'"
   artifacts:
     expire_in: 1 hour
     paths:
-    - DEPLOY_ID
+      - DEPLOY_ID
 
 .resolve_deploy_environment: &resolve_deploy_environment |
   set -x
@@ -36,29 +36,12 @@
   allow_failure: true
   when: on_failure
   script:
-  - *resolve_deploy_environment
-  - update-deployment $(cat DEPLOY_ID) "${FRONTEND_URL}" failure
+    - *resolve_deploy_environment
+    - update-deployment $(cat DEPLOY_ID) "${FRONTEND_URL}" failure
 
 .base_notify_success_stage:
   <<: *notify_stage
   when: on_success
   script:
-  - *resolve_deploy_environment
-  - update-deployment $(cat DEPLOY_ID) "${FRONTEND_URL}" success
-#
-
-Notify Starting Deployment:
-  extends: .base_notify_pending_stage
-  stage: Deploy
-
-Notify Fail:
-  extends: .base_notify_fail_stage
-  stage: Notify Finished Deployment
-  dependencies:
-  - Notify Starting Deployment
-
-Notify Success:
-  extends: .base_notify_success_stage
-  stage: Notify Finished Deployment
-  dependencies:
-  - Notify Starting Deployment
+    - *resolve_deploy_environment
+    - update-deployment $(cat DEPLOY_ID) "${FRONTEND_URL}" success
