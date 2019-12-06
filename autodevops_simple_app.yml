@@ -34,6 +34,8 @@ before_script:
   - export FRONTEND_HOST="${DOMAIN}"
   - export FRONTEND_URL="https://${FRONTEND_HOST}"
 
+#
+
 Quality tests:
   extends: .base_yarn_quality
   stage: Code Quality
@@ -42,9 +44,13 @@ Build:
   extends: .base_yarn_build
   stage: Code Quality
 
+#
+
 Release:
   extends: .base_semantic_release_stage
   stage: Registration
+
+#
 
 Register image:
   extends: .base_register_stage
@@ -57,6 +63,8 @@ Register image:
     CONTEXT: .
     DOCKERFILE_PATH: Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE
+
+#
 
 Create namespace:
   extends: .base_create_namespace_stage
