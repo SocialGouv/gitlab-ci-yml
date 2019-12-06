@@ -4,7 +4,14 @@ include:
   - /base_semantic_release_stage.yml
 
 stages:
+  - Code Quality
   - Release
+
+Lint:
+  stage: Code Quality
+  image: node:12-alpine
+  script:
+    - npx yaml-lint *.yml
 
 Release:
   extends: .base_semantic_release_stage

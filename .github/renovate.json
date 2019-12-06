@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "github>SocialGouv/renovate-config",
+    ":automergeAll"
+  ],
+  "gitlabci": {
+    "fileMatch": ["(^|/)[^/]*\\.ya?ml$"]
+  }
+}
