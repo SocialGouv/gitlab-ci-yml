@@ -29,14 +29,8 @@
     # first to be defined will be our cache :)
     - docker pull $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA &&
         export CACHE_TAG=$CI_COMMIT_BEFORE_SHA || true
-    - >-
-      [[ -n $CACHE_TAG ]] ||
-        docker pull $IMAGE_NAME:$TAG &&
-        export CACHE_TAG=$TAG || true
-    - >-
-      [[ -n $CACHE_TAG ]] ||
-        docker pull $IMAGE_NAME:master &&
-        export CACHE_TAG=master || true
+    - "[[ -n $CACHE_TAG ]] && echo 'Use '$CACHE_TAG' as cache' || docker pull $IMAGE_NAME:$TAG && export CACHE_TAG=$TAG || true"
+    - "[[ -n $CACHE_TAG ]] && echo 'Use '$CACHE_TAG' as cache' || docker pull $IMAGE_NAME:master && export CACHE_TAG=master || true"
     #
     - echo "
       docker build
