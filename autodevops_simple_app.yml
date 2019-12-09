@@ -6,6 +6,15 @@ stages:
 
 include:
   - /base_create_namespace_stage.yml
+  - /base_delete_useless_k8s_ns_stage.yml
+  - /base_deploy_nodejs_chart_stage.yml
+  - /base_docker_helm_image_stage.yml
+  - /base_docker_kubectl_image_stage.yml
+  - /base_notify_github_stage.yml
+  - /base_register_stage.yml
+  - /base_semantic_release_stage.yml
+  - /base_yarn_stage.yml
+
 #
 
 before_script:
