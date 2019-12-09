@@ -18,7 +18,8 @@ include:
 #
 
 before_script:
-  - sh -x
+  - >-
+    sh -x
 
     export BRANCH_NAME=${BRANCH_NAME:=$CI_COMMIT_REF_SLUG}
     export HASH_SIZE=${HASH_SIZE:=7}
