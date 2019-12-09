@@ -5,13 +5,7 @@ stages:
   - Notify Finished Deployment
 
 include:
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_create_namespace_stage.yml
-    ref: boni
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_docker_kubectl_image_stage.yml
-    ref: boni
-
+  - /base_create_namespace_stage.yml
 #
 
 before_script:
