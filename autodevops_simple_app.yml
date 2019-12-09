@@ -39,6 +39,8 @@ before_script:
     export FRONTEND_HOST="${DOMAIN}"
     export FRONTEND_URL="https://${FRONTEND_HOST}"
 
+    set +x
+
 #
 
 Quality tests:
