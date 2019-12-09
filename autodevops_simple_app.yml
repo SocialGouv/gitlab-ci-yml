@@ -25,7 +25,7 @@ before_script:
   - BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
   - export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
   - export K8S_NAMESPACE="${PROJECT}-feature-${BRANCH_HASH}"
-  - >
+  - >-
     if [[ "${BRANCH_NAME}" = "master" ]]; then
       export BRANCH_HASH=prod
       export K8S_NAMESPACE="${PROJECT}-${BRANCH_HASH}"
