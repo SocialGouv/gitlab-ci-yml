@@ -11,7 +11,6 @@
 .base_register_stage:
   stage: "Registration"
   extends: .base_docker_image_stage
-  before_script:
   script:
     # NOTE(douglasduteil): use echo "$CI_JOB_TOKEN" to remove docker login warning.
     # `WARNING! Using --password via the CLI is insecure. Use --password-stdin`
