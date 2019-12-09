@@ -27,11 +27,21 @@
     # we pull all the images that can help.
     # From the previous commit, to the current branch or the master branch, the
     # first to be defined will be our cache :)
-    - docker pull $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA &&
-        export CACHE_TAG=$CI_COMMIT_BEFORE_SHA || true
-    - "[[ -n $CACHE_TAG ]] && echo 'Use '$CACHE_TAG' as cache' || docker pull $IMAGE_NAME:$TAG && export CACHE_TAG=$TAG || true"
-    - "[[ -n $CACHE_TAG ]] && echo 'Use '$CACHE_TAG' as cache' || docker pull $IMAGE_NAME:master && export CACHE_TAG=master || true"
-    #
+    - |
+      [[ "$TRACE" ]] && set -x
+
+      function set_cache_image() {
+        if docker pull $IMAGE_NAME:$1 ; then
+          export CACHE_TAG=$1
+          echo 'Use '$IMAGE_NAME':'$CACHE_TAG' as cache'
+        fi
+      }
+
+      true &&
+        set_cache_image $CI_COMMIT_BEFORE_SHA ||
+        set_cache_image $TAG ||
+        set_cache_image master
+
     - echo "
       docker build
       --cache-from $IMAGE_NAME:$CACHE_TAG

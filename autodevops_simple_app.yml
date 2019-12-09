@@ -19,13 +19,14 @@ include:
 
 before_script:
   - sh -x
-  - export BRANCH_NAME=${BRANCH_NAME:=$CI_COMMIT_REF_SLUG}
-  - export HASH_SIZE=${HASH_SIZE:=7}
-  - export K8S_PROJECT=${K8S_PROJECT:=$PROJECT}
-  - BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
-  - export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
-  - export K8S_NAMESPACE="${PROJECT}-feature-${BRANCH_HASH}"
-  - >-
+
+    export BRANCH_NAME=${BRANCH_NAME:=$CI_COMMIT_REF_SLUG}
+    export HASH_SIZE=${HASH_SIZE:=7}
+    export K8S_PROJECT=${K8S_PROJECT:=$PROJECT}
+    BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
+    export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
+    export K8S_NAMESPACE="${PROJECT}-feature-${BRANCH_HASH}"
+
     if [[ "${BRANCH_NAME}" = "master" ]]; then
       export BRANCH_HASH=prod
       export K8S_NAMESPACE="${PROJECT}-${BRANCH_HASH}"
@@ -33,8 +34,9 @@ before_script:
     else
       export DOMAIN="${BRANCH_HASH}-${PROJECT}.dev.fabrique.social.gouv.fr"
     fi
-  - export FRONTEND_HOST="${DOMAIN}"
-  - export FRONTEND_URL="https://${FRONTEND_HOST}"
+
+    export FRONTEND_HOST="${DOMAIN}"
+    export FRONTEND_URL="https://${FRONTEND_HOST}"
 
 #
 
