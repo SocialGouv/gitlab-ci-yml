@@ -19,7 +19,6 @@ include:
 
 before_script:
   - >-
-    # Auto DevOps variables and functions
     set -x
 
     export BRANCH_NAME=${BRANCH_NAME:=$CI_COMMIT_REF_SLUG}
