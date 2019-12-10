@@ -1,3 +1,10 @@
+## [3.0.3](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.0.2...v3.0.3) (2019-12-10)
+
+
+### Bug Fixes
+
+* **nodejs:** allow HOST overwrite ([1ae8f22](https://github.com/SocialGouv/gitlab-ci-yml/commit/1ae8f22e7d89837840c3677afdc5f7aa748858a7))
+
 ## [3.0.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.0.1...v3.0.2) (2019-12-10)
 
 
