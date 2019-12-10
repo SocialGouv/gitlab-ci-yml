@@ -1,3 +1,18 @@
+# [3.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v2.2.1...v3.0.0) (2019-12-10)
+
+
+### Features
+
+* **autodevops:** level 1 simple apps ([#9](https://github.com/SocialGouv/gitlab-ci-yml/issues/9)) ([cfef1ee](https://github.com/SocialGouv/gitlab-ci-yml/commit/cfef1ee932f26c75ef613a1185ff5c90587ab7ac))
+* **hpa:** add ability to use horizontal pod autoscaler ([#10](https://github.com/SocialGouv/gitlab-ci-yml/issues/10)) ([8fffcd8](https://github.com/SocialGouv/gitlab-ci-yml/commit/8fffcd8cd8f64294d55cce5af2b01caedc7b0e67))
+
+
+### BREAKING CHANGES
+
+* **autodevops:** feat(autodevops): level 1 simple apps
+  - Might break namespace creation
+  - Might break register jobs
+
 ## [2.2.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v2.2.0...v2.2.1) (2019-12-06)
 
 
