@@ -8,6 +8,8 @@ plugins:
   - "@semantic-release/changelog"
   - - "@semantic-release/git"
     - assets:
+        - autodevops_simple_app.yml
         - CHANGELOG.md
+        - README.md
       message: "chore(release): version ${nextRelease.version}\n\n${nextRelease.notes}"
   - "@semantic-release/github"
