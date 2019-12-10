@@ -1,3 +1,10 @@
+## [3.0.7](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.0.6...v3.0.7) (2019-12-10)
+
+
+### Bug Fixes
+
+* **autodevops:** explicit return true in PRODUCTION var ([f14a2c4](https://github.com/SocialGouv/gitlab-ci-yml/commit/f14a2c42a8e78a877d82a4c3896bc67558f98395))
+
 ## [3.0.6](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.0.5...v3.0.6) (2019-12-10)
 
 
