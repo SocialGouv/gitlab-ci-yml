@@ -17,31 +17,30 @@ include:
 
 #
 
-.resolve_env: &resolve_env
-  - |-
-    set -x
+.resolve_env: &resolve_env |-
+  set -x
 
-    export BRANCH_NAME=${BRANCH_NAME:=$CI_COMMIT_REF_SLUG}
-    export HASH_SIZE=${HASH_SIZE:=7}
-    export K8S_PROJECT=${K8S_PROJECT:=$PROJECT}
-    BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
-    export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
-    export K8S_NAMESPACE="${PROJECT}-feature-${BRANCH_HASH}"
+  export BRANCH_NAME=${BRANCH_NAME:=$CI_COMMIT_REF_SLUG}
+  export HASH_SIZE=${HASH_SIZE:=7}
+  export K8S_PROJECT=${K8S_PROJECT:=$PROJECT}
+  BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
+  export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
+  export K8S_NAMESPACE="${PROJECT}-feature-${BRANCH_HASH}"
 
-    export PRODUCTION=$( [ "${BRANCH_NAME}" = "master" ] ; echo $? )
+  export PRODUCTION=$( [ "${BRANCH_NAME}" = "master" ] ; echo $? )
 
-    if $PRODUCTION; then
-      export BRANCH_HASH=prod
-      export K8S_NAMESPACE="${PROJECT}-${BRANCH_HASH}"
-      export DOMAIN="${PROJECT}.fabrique.social.gouv.fr"
-    else
-      export DOMAIN="${BRANCH_HASH}-${PROJECT}.dev.fabrique.social.gouv.fr"
-    fi
+  if $PRODUCTION; then
+    export BRANCH_HASH=prod
+    export K8S_NAMESPACE="${PROJECT}-${BRANCH_HASH}"
+    export DOMAIN="${PROJECT}.fabrique.social.gouv.fr"
+  else
+    export DOMAIN="${BRANCH_HASH}-${PROJECT}.dev.fabrique.social.gouv.fr"
+  fi
 
-    export FRONTEND_HOST="${DOMAIN}"
-    export FRONTEND_URL="https://${FRONTEND_HOST}"
+  export FRONTEND_HOST="${DOMAIN}"
+  export FRONTEND_URL="https://${FRONTEND_HOST}"
 
-    set +x
+  set +x
 
 before_script:
   - *resolve_env
