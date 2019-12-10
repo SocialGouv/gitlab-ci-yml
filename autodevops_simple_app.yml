@@ -27,7 +27,7 @@ include:
   export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
   export K8S_NAMESPACE="${PROJECT}-feature-${BRANCH_HASH}"
 
-  export PRODUCTION=$( [ "${BRANCH_NAME}" = "master" ] ; echo $? )
+  export PRODUCTION=$( [ "${BRANCH_NAME}" = "master" ] && echo true )
 
   if $PRODUCTION; then
     export BRANCH_HASH=prod
