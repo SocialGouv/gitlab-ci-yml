@@ -17,7 +17,7 @@ include:
 
 #
 
-before_script:
+.resolve_env: &resolve_env
   - |-
     set -x
 
@@ -42,6 +42,9 @@ before_script:
     export FRONTEND_URL="https://${FRONTEND_HOST}"
 
     set +x
+
+before_script:
+  - *resolve_env
 
 #
 
@@ -96,6 +99,7 @@ Create namespace:
     IMAGE_TAG: $CI_COMMIT_SHA
     CONTEXT: app
   before_script:
+    - *resolve_env
     - HOST=${FRONTEND_HOST}
 
 Deploy app (dev):
