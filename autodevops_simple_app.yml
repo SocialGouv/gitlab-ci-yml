@@ -85,7 +85,7 @@ Create namespace:
 
 #
 
-.deploy_sample-next-app_stage: &deploy_sample-next-app_stage
+.deploy_app_stage: &deploy_app_stage
   stage: Deploy
   extends: .base_deploy_nodejs_chart_stage
   dependencies: []
@@ -94,21 +94,21 @@ Create namespace:
     IMAGE_TAG: $CI_COMMIT_SHA
     CONTEXT: app
 
-Deploy @sample-next-app (dev):
-  <<: *deploy_sample-next-app_stage
+Deploy app (dev):
+  <<: *deploy_app_stage
   only:
     - branches
   except:
     - master
   environment:
-    name: $DEV_ENVIRONMENT_NAME
+    name: fabrique-dev
 
-Deploy @sample-next-app (prod):
-  <<: *deploy_sample-next-app_stage
+Deploy app (prod):
+  <<: *deploy_app_stage
   only:
     - master
   environment:
-    name: $PROD_ENVIRONMENT_NAME
+    name: prod
 
 #
 

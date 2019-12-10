@@ -68,8 +68,6 @@ include:
 variables:
   PROJECT: "sample-next-app"
   RANCHER_PROJECT_ID: "c-gsm8d:p-pwpk6" # "default" project id here
-  DEV_ENVIRONMENT_NAME: "fabrique-dev"
-  PROD_ENVIRONMENT_NAME: "prod"
   PORT: 8080
   VALUES_FILE: ./.k8s/app.values.yml # Your values
 ```
@@ -166,14 +164,14 @@ Deploy myapp (dev):
   except:
     - master
   environment:
-    name: $DEV_ENVIRONMENT_NAME
+    name: fabrique-dev
 
 Deploy myapp (prod):
   <<: *deploy_myapp_stage
   only:
     - master
   environment:
-    name: $PROD_ENVIRONMENT_NAME
+    name: prod
 ```
 
 # [.base_docker_helm_image_stage](./base_docker_helm_image_stage.yml)
