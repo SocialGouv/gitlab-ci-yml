@@ -2,13 +2,11 @@ plugins:
   - "@semantic-release/commit-analyzer"
   - - "@semantic-release/exec"
     - prepareCmd: |-
-        sed -i -e 's/ref: .*/ref: ${nextRelease.version}/g' autodevops_simple_app.yml
-        sed -i -e 's/ref: .*/ref: ${nextRelease.version}/g' README.md
+        sed -i -e 's/ref: .*/ref: v${nextRelease.version}/g' README.md
   - "@semantic-release/release-notes-generator"
   - "@semantic-release/changelog"
   - - "@semantic-release/git"
     - assets:
-        - autodevops_simple_app.yml
         - CHANGELOG.md
         - README.md
       message: "chore(release): version ${nextRelease.version}\n\n${nextRelease.notes}"
