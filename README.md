@@ -205,20 +205,6 @@ include:
   before_script:
     - K8S_NAMESPACE=my-namespace
     - HOST=myapp.dev.factory.social.gouv.fr
-    #
-    - HELM_RENDER_ARGS="
-      --set image.tag=${IMAGE_TAG}
-      --set ingress.hosts[0].host=${HOST}
-      --set ingress.tls[0].hosts[0]=${HOST}"
-    # In production (if the master branch is your production)
-    - |
-      if [[ "${BRANCH_NAME}" = "master" ]]; then
-        HELM_RENDER_ARGS="
-          ${HELM_RENDER_ARGS}
-          --set ingress.annotations.\"certmanager\.k8s\.io/cluster-issuer\"="letsencrypt-prod"
-          --set ingress.annotations.\"kubernetes\.io/tls-acme\"="true"
-          --set ingress.tls[0].secretName=${PROJECT}-certificate"
-      fi
 
 #
 
