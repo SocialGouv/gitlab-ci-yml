@@ -63,7 +63,7 @@ An extend to build and publish some docker image.
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops_simple_app.yml
-    ref: 3.0.1
+    ref: v3.0.2
 
 variables:
   PROJECT: "sample-next-app"
@@ -80,10 +80,10 @@ variables:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: 3.0.1
+    ref: v3.0.2
   - project: SocialGouv/gitlab-ci-yml
     file: /base_create_namespace_stage.yml
-    ref: 3.0.1
+    ref: v3.0.2
 
 #
 
@@ -108,7 +108,7 @@ Create namespace:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_delete_useless_k8s_ns_stage.yml
-    ref: 3.0.1
+    ref: v3.0.2
 #
 
 Delete useless k8s namespaces:
@@ -188,10 +188,10 @@ Please consider using `base_deploy_hpa_chart_stage` block instead.
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_deploy_nodejs_chart_stage.yml
-    ref: 3.0.1
+    ref: v3.0.2
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: 3.0.1
+    ref: v3.0.2
 
 #
 
@@ -247,10 +247,10 @@ Deploy myapp (prod):
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: 3.0.1
+    ref: v3.0.2
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: 3.0.1
+    ref: v3.0.2
 
 #
 
@@ -268,7 +268,7 @@ Helm job:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: 3.0.1
+    ref: v3.0.2
 #
 
 Kubectl job:
@@ -285,7 +285,7 @@ Kubectl job:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_semantic_release_stage.yml
-    ref: 3.0.1
+    ref: v3.0.2
 #
 
 Release:
