@@ -1,3 +1,10 @@
+## [3.0.4](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.0.3...v3.0.4) (2019-12-10)
+
+
+### Bug Fixes
+
+* **nodejs:** allow PRODUCTION value to be self defined ([84250eb](https://github.com/SocialGouv/gitlab-ci-yml/commit/84250eb259937c71390e4a4fa2b9e2bb622b304b))
+
 ## [3.0.3](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.0.2...v3.0.3) (2019-12-10)
 
 
