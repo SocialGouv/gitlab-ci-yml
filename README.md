@@ -205,6 +205,7 @@ include:
   before_script:
     - K8S_NAMESPACE=my-namespace
     - HOST=myapp.dev.factory.social.gouv.fr
+    - PRODUCTION=$( [ "${CI_COMMIT_REF_SLUG}" = "master" ] ; echo $? )
 
 #
 

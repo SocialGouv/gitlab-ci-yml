@@ -19,7 +19,7 @@
         --set ingress.tls[0].hosts[0]=${HOST}"
     # Set own certificate when deploying in prod environment
     - |-
-      if [[ "${BRANCH_NAME}" = "master" ]]; then
+      if [[ -n "${PRODUCTION+x}" ]]; then
         HELM_RENDER_ARGS=" \
           ${HELM_RENDER_ARGS} \
           --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod \

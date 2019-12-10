@@ -28,7 +28,9 @@ before_script:
     export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
     export K8S_NAMESPACE="${PROJECT}-feature-${BRANCH_HASH}"
 
-    if [[ "${BRANCH_NAME}" = "master" ]]; then
+    export PRODUCTION=$( [ "${BRANCH_NAME}" = "master" ] ; echo $? )
+
+    if $PRODUCTION; then
       export BRANCH_HASH=prod
       export K8S_NAMESPACE="${PROJECT}-${BRANCH_HASH}"
       export DOMAIN="${PROJECT}.fabrique.social.gouv.fr"
