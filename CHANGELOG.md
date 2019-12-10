@@ -1,3 +1,10 @@
+## [3.0.6](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.0.5...v3.0.6) (2019-12-10)
+
+
+### Bug Fixes
+
+* **autodevops:** before_script should be an array of strings ([1eaa21e](https://github.com/SocialGouv/gitlab-ci-yml/commit/1eaa21ed1f624173b156a6971aeb4ae27fbcea74))
+
 ## [3.0.5](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.0.4...v3.0.5) (2019-12-10)
 
 
