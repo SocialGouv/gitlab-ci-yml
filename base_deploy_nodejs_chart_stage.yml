@@ -12,7 +12,6 @@
     - helm just fetch "socialgouv/nodejs#2.8.0"
     - envsubst < $VALUES_FILE > ./values.yaml
     # Set own wildcard when deploying in dev environment
-    - HOST=${FRONTEND_HOST}
     - >-
       HELM_RENDER_ARGS="
         --set image.tag=${IMAGE_TAG}

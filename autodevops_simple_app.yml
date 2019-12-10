@@ -93,6 +93,8 @@ Create namespace:
     REGISTRY: $CI_REGISTRY_IMAGE
     IMAGE_TAG: $CI_COMMIT_SHA
     CONTEXT: app
+  before_script:
+    - HOST=${FRONTEND_HOST}
 
 Deploy app (dev):
   <<: *deploy_app_stage
