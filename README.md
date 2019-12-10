@@ -55,17 +55,35 @@ An extend to build and publish some docker image.
 | CONTEXT           | packages/api                          |
 | DOCKER_BUILD_ARGS | --build-arg SENTRY_DSN=https://sentry |
 
-# [.base_create_namespace_stage](./base_create_namespace_stage.yml)
+# [.autodevops_simple_app](./autodevops_simple_app.yml)
 
-## Usage 
+## Usage
 
 ```yaml
 include:
-  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_docker_kubectl_image_stage.yml"
-  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_create_namespace_stage.yml"
-  # or
-  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_docker_kubectl_image_stage.yml"
-  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_create_namespace_stage.yml"
+  - project: SocialGouv/gitlab-ci-yml
+    file: /autodevops_simple_app.yml
+    ref: boni
+
+variables:
+  PROJECT: "sample-next-app"
+  RANCHER_PROJECT_ID: "c-gsm8d:p-pwpk6" # "default" project id here
+  PORT: 8080
+  VALUES_FILE: ./.k8s/app.values.yml # Your values
+```
+
+# [.base_create_namespace_stage](./base_create_namespace_stage.yml)
+
+## Usage
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_docker_kubectl_image_stage.yml
+    ref: boni
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_create_namespace_stage.yml
+    ref: boni
 
 #
 
@@ -74,11 +92,12 @@ Create namespace:
   variables:
     # The rancher project where the namespaces will be created
     RANCHER_PROJECT_ID: <rancher_project_id>
+    # Optional
+    REMOTE_URL: "https://github.com/${CI_PROJECT_PATH}.git"
   before_script:
     - K8S_NAMESPACE=my-namespace
     # (re)create to ensure a new namespaces will be created
     # - kubectl delete namespaces ${K8S_NAMESPACE} || true
-  
 ```
 
 # [.base_delete_useless_k8s_ns_stage](./base_delete_useless_k8s_ns_stage.yml)
@@ -87,10 +106,9 @@ Create namespace:
 
 ```yaml
 include:
-  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_delete_useless_k8s_ns_stage.yml"
-  # or
-  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_delete_useless_k8s_ns_stage.yml"
-
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_delete_useless_k8s_ns_stage.yml
+    ref: boni
 #
 
 Delete useless k8s namespaces:
@@ -168,14 +186,14 @@ Please consider using `base_deploy_hpa_chart_stage` block instead.
 
 ```yaml
 include:
-  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_deploy_nodejs_chart_stage.yml"
-  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_docker_helm_image_stage.yml"
-  # or
-  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_deploy_nodejs_chart_stage.yml"
-  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_docker_helm_image_stage.yml"
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_deploy_nodejs_chart_stage.yml
+    ref: boni
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_docker_helm_image_stage.yml
+    ref: boni
 
 #
-
 
 .deploy_myapp_stage: &deploy_myapp_stage
   dependencies: []
@@ -189,9 +207,9 @@ include:
     - HOST=myapp.dev.factory.social.gouv.fr
     #
     - HELM_RENDER_ARGS="
-        --set image.tag=${IMAGE_TAG}
-        --set ingress.hosts[0].host=${HOST}
-        --set ingress.tls[0].hosts[0]=${HOST}"
+      --set image.tag=${IMAGE_TAG}
+      --set ingress.hosts[0].host=${HOST}
+      --set ingress.tls[0].hosts[0]=${HOST}"
     # In production (if the master branch is your production)
     - |
       if [[ "${BRANCH_NAME}" = "master" ]]; then
@@ -211,27 +229,28 @@ Deploy myapp (dev):
   except:
     - master
   environment:
-    name: $DEV_ENVIRONMENT_NAME
+    name: fabrique-dev
 
 Deploy myapp (prod):
   <<: *deploy_myapp_stage
   only:
     - master
   environment:
-    name: $PROD_ENVIRONMENT_NAME
+    name: prod
 ```
 
 # [.base_docker_helm_image_stage](./base_docker_helm_image_stage.yml)
 
-## Usage 
+## Usage
 
 ```yaml
 include:
-  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_docker_kubectl_image_stage.yml"
-  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_docker_helm_image_stage.yml"
-  # or
-  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_docker_kubectl_image_stage.yml"
-  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_docker_helm_image_stage.yml"
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_docker_kubectl_image_stage.yml
+    ref: boni
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_docker_helm_image_stage.yml
+    ref: boni
 
 #
 
@@ -243,32 +262,30 @@ Helm job:
 
 # [.base_docker_kubectl_image_stage](./base_docker_kubectl_image_stage.yml)
 
-## Usage 
+## Usage
 
 ```yaml
 include:
-  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_docker_kubectl_image_stage.yml"
-  # or
-  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_docker_kubectl_image_stage.yml"
-
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_docker_kubectl_image_stage.yml
+    ref: boni
 #
 
 Kubectl job:
   extends: .base_docker_kubectl_image_stage
   script:
-    - kubectl version --client 
+    - kubectl version --client
 ```
 
 # [.base_semantic_release_stage](./base_semantic_release_stage.yml)
 
-## Usage 
+## Usage
 
 ```yaml
 include:
-  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_semantic_release_stage.yml"
-  # or
-  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_semantic_release_stage.yml"
-
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_semantic_release_stage.yml
+    ref: boni
 #
 
 Release:
@@ -280,5 +297,5 @@ Release:
   extends: .base_semantic_release_stage
   variables:
     SEMANTIC_RELEASE_PLUGINS: "@semantic-release/changelog @semantic-release/git"
-  
+
 ```

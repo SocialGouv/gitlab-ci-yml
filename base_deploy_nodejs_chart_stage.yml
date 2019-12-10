@@ -11,7 +11,24 @@
     - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v2.8.0
     - helm just fetch "socialgouv/nodejs#2.8.0"
     - envsubst < $VALUES_FILE > ./values.yaml
+    # Set own wildcard when deploying in dev environment
+    - HOST=${FRONTEND_HOST}
+    - >-
+      HELM_RENDER_ARGS="
+        --set image.tag=${IMAGE_TAG}
+        --set ingress.hosts[0].host=${HOST}
+        --set ingress.tls[0].hosts[0]=${HOST}"
+    # Set own certificate when deploying in prod environment
+    - |-
+      if [[ "${BRANCH_NAME}" = "master" ]]; then
+        HELM_RENDER_ARGS=" \
+          ${HELM_RENDER_ARGS} \
+          --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod \
+          --set-string ingress.annotations.kubernetes\.io/tls-acme=true \
+          --set ingress.tls[0].secretName=${PROJECT}-certificate"
+      fi
+
     - helm just render ${CONTEXT} nodejs
-        ${HELM_RENDER_ARGS}
-        --values ./values.yaml
+      ${HELM_RENDER_ARGS}
+      --values ./values.yaml
     - helm just apply ${CONTEXT}

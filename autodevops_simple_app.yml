@@ -1,0 +1,134 @@
+stages:
+  - Code Quality
+  - Registration
+  - Deploy
+  - Notify Finished Deployment
+
+include:
+  - /base_create_namespace_stage.yml
+  - /base_delete_useless_k8s_ns_stage.yml
+  - /base_deploy_nodejs_chart_stage.yml
+  - /base_docker_helm_image_stage.yml
+  - /base_docker_kubectl_image_stage.yml
+  - /base_notify_github_stage.yml
+  - /base_register_stage.yml
+  - /base_semantic_release_stage.yml
+  - /base_yarn_stage.yml
+
+#
+
+before_script:
+  - |-
+    set -x
+
+    export BRANCH_NAME=${BRANCH_NAME:=$CI_COMMIT_REF_SLUG}
+    export HASH_SIZE=${HASH_SIZE:=7}
+    export K8S_PROJECT=${K8S_PROJECT:=$PROJECT}
+    BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
+    export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
+    export K8S_NAMESPACE="${PROJECT}-feature-${BRANCH_HASH}"
+
+    if [[ "${BRANCH_NAME}" = "master" ]]; then
+      export BRANCH_HASH=prod
+      export K8S_NAMESPACE="${PROJECT}-${BRANCH_HASH}"
+      export DOMAIN="${PROJECT}.fabrique.social.gouv.fr"
+    else
+      export DOMAIN="${BRANCH_HASH}-${PROJECT}.dev.fabrique.social.gouv.fr"
+    fi
+
+    export FRONTEND_HOST="${DOMAIN}"
+    export FRONTEND_URL="https://${FRONTEND_HOST}"
+
+    set +x
+
+#
+
+Quality tests:
+  extends: .base_yarn_quality
+  stage: Code Quality
+
+Build:
+  extends: .base_yarn_build
+  stage: Code Quality
+
+#
+
+Release:
+  extends: .base_semantic_release_stage
+  stage: Registration
+
+#
+
+Register image:
+  extends: .base_register_stage
+  stage: Registration
+  dependencies:
+    - Build
+  needs:
+    - Build
+  variables:
+    CONTEXT: .
+    DOCKERFILE_PATH: Dockerfile
+    IMAGE_NAME: $CI_REGISTRY_IMAGE
+
+#
+
+Create namespace:
+  extends: .base_create_namespace_stage
+  only:
+    refs:
+      - branches
+  except:
+    refs:
+      - tags
+      - master
+
+#
+
+.deploy_app_stage: &deploy_app_stage
+  stage: Deploy
+  extends: .base_deploy_nodejs_chart_stage
+  dependencies: []
+  variables:
+    REGISTRY: $CI_REGISTRY_IMAGE
+    IMAGE_TAG: $CI_COMMIT_SHA
+    CONTEXT: app
+
+Deploy app (dev):
+  <<: *deploy_app_stage
+  only:
+    - branches
+  except:
+    - master
+  environment:
+    name: fabrique-dev
+
+Deploy app (prod):
+  <<: *deploy_app_stage
+  only:
+    - master
+  environment:
+    name: prod
+
+#
+
+Delete useless k8s namespaces:
+  extends: .base_delete_useless_k8s_ns_stage
+
+#
+
+Notify Starting Deployment:
+  extends: .base_notify_pending_stage
+  stage: Deploy
+
+Notify Fail:
+  extends: .base_notify_fail_stage
+  stage: Notify Finished Deployment
+  dependencies:
+    - Notify Starting Deployment
+
+Notify Success:
+  extends: .base_notify_success_stage
+  stage: Notify Finished Deployment
+  dependencies:
+    - Notify Starting Deployment
