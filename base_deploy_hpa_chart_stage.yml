@@ -12,6 +12,6 @@
     - helm just fetch "socialgouv/hpa#2.9.0"
     - envsubst < $VALUES_FILE > ./values.yaml
     - helm just render ${CONTEXT} hpa
-        ${HELM_RENDER_ARGS}
-        --values ./values.yaml
+      ${HELM_RENDER_ARGS}
+      --values ./values.yaml
     - helm just apply ${CONTEXT}
