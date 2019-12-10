@@ -1,3 +1,10 @@
+## [3.0.5](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.0.4...v3.0.5) (2019-12-10)
+
+
+### Bug Fixes
+
+* **autodevops:** share resolve env ([8401939](https://github.com/SocialGouv/gitlab-ci-yml/commit/8401939dfafcf3c64c93bb7face8be27b1ecbdb8))
+
 ## [3.0.4](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.0.3...v3.0.4) (2019-12-10)
 
 
