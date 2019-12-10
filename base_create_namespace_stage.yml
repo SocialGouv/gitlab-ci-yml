@@ -16,6 +16,7 @@
     #
     # Add git metadata to be able to auto destroy that namespaces
     # see https://github.com/SocialGouv/docker/tree/v0.18.0/k8s-ns-killer
+    - echo ${REMOTE_URL}
     - kubectl label namespace ${K8S_NAMESPACE} git/remote=${REMOTE_URL}
     - kubectl label namespace ${K8S_NAMESPACE} git/branch=${CI_COMMIT_REF_NAME}
     #
