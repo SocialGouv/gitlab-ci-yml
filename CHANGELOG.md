@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.0.0...v3.0.1) (2019-12-10)
+
+
+### Bug Fixes
+
+* test new release process ([d98640a](https://github.com/SocialGouv/gitlab-ci-yml/commit/d98640a52e418817711a23889fe885015ec49ed5))
+
 # [3.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v2.2.1...v3.0.0) (2019-12-10)
 
 
