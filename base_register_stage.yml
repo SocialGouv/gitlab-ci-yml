@@ -39,8 +39,6 @@
       }
 
       echo ""
-      echo "DEBUG X"
-      echo ""
       echo "Checking last commit (${CI_COMMIT_BEFORE_SHA}) cache"
       set_cache_image "${CI_COMMIT_BEFORE_SHA}"
 
