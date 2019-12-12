@@ -35,7 +35,7 @@
       function set_cache_image() {
         if docker pull ${IMAGE_NAME}:$1; then
           export CACHE_TAG=$1
-          echo 'Use '${IMAGE_NAME}':'$CACHE_TAG' as cache'
+          echo 'CACHE_TAG set to '${CACHE_TAG}'
         fi
       }
 
