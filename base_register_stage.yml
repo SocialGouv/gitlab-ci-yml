@@ -54,6 +54,7 @@
       fi
 
       if [[ $? -ne 0 ]]; then
+        echo ""
         echo 'unset CACHE_TAG'
         unset CACHE_TAG
       fi
