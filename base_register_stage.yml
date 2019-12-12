@@ -42,12 +42,13 @@
       echo "Checking last commit (${CI_COMMIT_BEFORE_SHA}) cache" &&
         set_cache_image ${CI_COMMIT_BEFORE_SHA} ||
 
-      echo "Checking current branch/tag (${TAG}) cache" &&
+      echo "\nChecking current branch/tag (${TAG}) cache" &&
         set_cache_image ${TAG} ||
 
-      echo "Checking default branch (${CI_DEFAULT_BRANCH}) cache" &&
+      echo "\nChecking default branch (${CI_DEFAULT_BRANCH}) cache" &&
         set_cache_image ${CI_DEFAULT_BRANCH}
 
+      echo ""
       if [[ -n "${CACHE_TAG}" ]] ; then
         echo "Using ${CACHE_TAG} tag as cache"
       else
