@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.0.7...v3.1.0) (2019-12-12)
+
+
+### Features
+
+* **register:** improve register code ([#12](https://github.com/SocialGouv/gitlab-ci-yml/issues/12)) ([e605bba](https://github.com/SocialGouv/gitlab-ci-yml/commit/e605bbacb263eae172568f426db2a93370bf607a))
+
 ## [3.0.7](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.0.6...v3.0.7) (2019-12-10)
 
 
