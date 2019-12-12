@@ -33,10 +33,9 @@
       [[ -n "${TRACE}" ]] && set -x
 
       function set_cache_image() {
-        if docker pull ${IMAGE_NAME}:$1; then
-          export CACHE_TAG=$1
-          echo 'CACHE_TAG set to '${CACHE_TAG}'
-        fi
+        echo 'CACHE_TAG set to '${1}'
+        export CACHE_TAG=${1}
+        docker pull ${IMAGE_NAME}:${CACHE_TAG}
       }
 
       echo "Checking last commit (${CI_COMMIT_BEFORE_SHA}) cache"
@@ -52,6 +51,11 @@
         echo ""
         echo "Checking default branch (${CI_DEFAULT_BRANCH}) cache"
         set_cache_image ${CI_DEFAULT_BRANCH}
+      fi
+
+      if [[ $? -ne 0 ]]; then
+        echo 'unset CACHE_TAG'
+        unset CACHE_TAG
       fi
 
       echo ""
