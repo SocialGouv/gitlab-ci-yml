@@ -39,22 +39,6 @@ These jobs sends the feature-branch deployed environment url and status to GitHu
 | -------------------- | ------------------ |
 | DEV_ENVIRONMENT_NAME | gitlab environment |
 
-## register-stage.yml
-
-An extend to build and publish some docker image.
-
-`extends .base_register_stage`
-
-| Stage        | usage                 |
-| ------------ | --------------------- |
-| Registration | register docker image |
-
-| Env var           | example                               |
-| ----------------- | ------------------------------------- |
-| IMAGE_NAME        | cdtn/api                              |
-| CONTEXT           | packages/api                          |
-| DOCKER_BUILD_ARGS | --build-arg SENTRY_DSN=https://sentry |
-
 # [.autodevops_simple_app](./autodevops_simple_app.yml)
 
 ## Usage
@@ -264,6 +248,25 @@ Kubectl job:
     - kubectl version --client
 ```
 
+## [.base_register_stage](./base_register_stage.yml)
+
+## Usage
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_register_stage.yml
+    ref: v3.0.7
+
+Register myapp image:
+  extends: .base_register_stage
+  variables:
+    CONTEXT: . # The folder where the Dockerfile is
+    IMAGE_NAME: $CI_REGISTRY_IMAGE # The image name
+    # optional
+    DOCKER_BUILD_ARGS: "--build-arg SENTRY_DSN=https://sentry"
+```
+
 # [.base_semantic_release_stage](./base_semantic_release_stage.yml)
 
 ## Usage
@@ -273,6 +276,7 @@ include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_semantic_release_stage.yml
     ref: v3.0.7
+
 #
 
 Release:
