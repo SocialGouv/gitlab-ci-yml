@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.0.0...v4.0.1) (2019-12-13)
+
+
+### Bug Fixes
+
+* **node_chart:** unexpected EOF while looking for matching `"' ([7298ebb](https://github.com/SocialGouv/gitlab-ci-yml/commit/7298ebbad50e330482ff81e6f2e9625f524b00cb))
+
 # [4.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.2.0...v4.0.0) (2019-12-13)
 
 
