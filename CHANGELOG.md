@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.1.1...v3.2.0) (2019-12-13)
+
+
+### Features
+
+* **nodejs_chart:** force the wildcard-crt if not in production ([#13](https://github.com/SocialGouv/gitlab-ci-yml/issues/13)) ([ec5a613](https://github.com/SocialGouv/gitlab-ci-yml/commit/ec5a6137f9847975c7c92c6928880e8069143699))
+
 ## [3.1.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.1.0...v3.1.1) (2019-12-13)
 
 
