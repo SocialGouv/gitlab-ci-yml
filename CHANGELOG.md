@@ -1,3 +1,16 @@
+# [4.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.2.0...v4.0.0) (2019-12-13)
+
+
+### Features
+
+* **nodejs_chart:** force the wildcard-crt if not in production ([#13](https://github.com/SocialGouv/gitlab-ci-yml/issues/13)) ([dedc550](https://github.com/SocialGouv/gitlab-ci-yml/commit/dedc55024e5e40f48415e820bfeffa4925a41296))
+
+
+### BREAKING CHANGES
+
+* **nodejs_chart:** feat(nodejs_chart): force the wildcard-crt if not in production
+    - **.base_deploy_nodejs_chart_stage**: The job is now forcing `--set ingress.tls[0].secretName=wildcard-crt` if not in production mode.
+
 # [3.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.1.1...v3.2.0) (2019-12-13)
 
 
