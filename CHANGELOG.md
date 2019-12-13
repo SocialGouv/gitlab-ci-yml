@@ -1,3 +1,10 @@
+## [3.1.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.1.0...v3.1.1) (2019-12-13)
+
+
+### Bug Fixes
+
+* **autodevops:** change auto PRODUCTION condition ([2e9946b](https://github.com/SocialGouv/gitlab-ci-yml/commit/2e9946b96836c247910115c2f702cd002d12e544))
+
 # [3.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v3.0.7...v3.1.0) (2019-12-12)
 
 
