@@ -27,9 +27,9 @@ include:
   export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
   export K8S_NAMESPACE="${PROJECT}-feature-${BRANCH_HASH}"
 
-  export PRODUCTION=$( [ "${BRANCH_NAME}" = "master" ] && echo true )
+  [[ "${BRANCH_NAME}" = "master" ]] && export PRODUCTION=true
 
-  if $PRODUCTION; then
+  if [[ -n $PRODUCTION ]]; then
     export BRANCH_HASH=prod
     export K8S_NAMESPACE="${PROJECT}-${BRANCH_HASH}"
     export DOMAIN="${PROJECT}.fabrique.social.gouv.fr"
