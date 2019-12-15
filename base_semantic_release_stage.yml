@@ -2,7 +2,7 @@
 
 .base_semantic_release_stage:
   stage: "Release"
-  image: node:12
+  image: node:13
   only:
     refs:
       - branches
