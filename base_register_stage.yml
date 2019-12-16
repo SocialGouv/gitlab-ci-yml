@@ -4,7 +4,9 @@
 #
 
 .base_docker_image_stage:
-  image: docker:$DOCKER_VERSION
+  image:
+    name: docker:$DOCKER_VERSION
+    pull: if-not-present
   services:
     - docker:$DOCKER_VERSION-dind
 

@@ -4,7 +4,9 @@
   stage: Notify Finished Deployment
   dependencies: []
   allow_failure: true
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/k8s-ns-killer:0.19.0
+  image:
+    name: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/k8s-ns-killer:0.19.0
+    pull: if-not-present
   environment: fabrique-dev
   script:
     - git remote set-url origin https://github.com/${CI_PROJECT_PATH}.git
