@@ -1,3 +1,12 @@
+# [4.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.0.1...v4.1.0) (2019-12-19)
+
+
+### Features
+
+* **notify:** change production ENVIRONMENT test ([7165ca5](https://github.com/SocialGouv/gitlab-ci-yml/commit/7165ca56bd253d82b085e9f1ef6941eb16a3650c))
+* **notify:** rename update url to HOST ([56c418c](https://github.com/SocialGouv/gitlab-ci-yml/commit/56c418cfb985fb5c7a17155c3e6f9ef8d79d8623))
+* update hpa helm version from 2.9.0 to 2.10.0 ([#20](https://github.com/SocialGouv/gitlab-ci-yml/issues/20)) ([d01cbec](https://github.com/SocialGouv/gitlab-ci-yml/commit/d01cbec58d38cbad1766da9abd38ffa0c6e89c9e))
+
 ## [4.0.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.0.0...v4.0.1) (2019-12-13)
 
 
