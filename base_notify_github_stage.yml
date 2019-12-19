@@ -25,10 +25,10 @@
 .resolve_deploy_environment: &resolve_deploy_environment |
   set -x
 
-  if [[ "${BRANCH_NAME}" = "master" ]]; then
+  if [[ -n "${PRODUCTION+x}" ]]; then
     export ENVIRONMENT="production"
   else
-    export ENVIRONMENT="staging"
+    export ENVIRONMENT=${ENVIRONMENT:-"staging"}
   fi
 
 .base_notify_fail_stage:
