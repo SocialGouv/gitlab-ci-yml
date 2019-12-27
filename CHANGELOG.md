@@ -1,3 +1,10 @@
+# [4.3.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.2.0...v4.3.0) (2019-12-27)
+
+
+### Features
+
+* add ssl to hpa chart ([#25](https://github.com/SocialGouv/gitlab-ci-yml/issues/25)) ([343d00d](https://github.com/SocialGouv/gitlab-ci-yml/commit/343d00d20866d835fc66940e79bab3c36d42f89e))
+
 # [4.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.1.0...v4.2.0) (2019-12-19)
 
 
