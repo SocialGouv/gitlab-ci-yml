@@ -1,3 +1,10 @@
+## [4.4.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.4.0...v4.4.1) (2019-12-30)
+
+
+### Bug Fixes
+
+* **nodejs:** extra "l" typo ([2638243](https://github.com/SocialGouv/gitlab-ci-yml/commit/2638243facd9a1e22d1fa996e7a0d2b5a44a9d18))
+
 # [4.4.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.3.0...v4.4.0) (2019-12-30)
 
 
