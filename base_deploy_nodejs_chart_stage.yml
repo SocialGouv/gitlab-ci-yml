@@ -7,10 +7,10 @@
   script:
     - helm init --client-only
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
-    - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v2.11.0/helm-just-linux-2.11.0.tgz | tar -C $(helm home) -xzv
-    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v2.11.0
-    - helm just fetch "socialgouv/nodejs#2.11.0"
-    - envsubst < $VALUES_FILE > ./values.yaml
+    - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v2.12.0/helm-just-linux-2.12.0.tgz | tar -C $(helm home) -xzv
+    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v2.12.0
+    - helm just fetch "socialgouv/nodejs#2.12.0"
+    - envsubst < $VALUES_FILE > ./values.yam1l
     # Set own wildcard when deploying in dev environment
     - >-
       HELM_RENDER_ARGS="
