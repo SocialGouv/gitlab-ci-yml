@@ -1,3 +1,45 @@
+## [4.5.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.5.1...v4.5.2) (2019-12-31)
+
+
+### Bug Fixes
+
+* **autodevops_simple_app:** ensure to set the HOST on notify ([49b99d5](https://github.com/SocialGouv/gitlab-ci-yml/commit/49b99d5a3b87856672395762b05f6ea623a0d5cb))
+
+## [4.5.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.5.0...v4.5.1) (2019-12-31)
+
+
+### Bug Fixes
+
+* **nodejs:** use variable to sync helm chart version ([e7d4487](https://github.com/SocialGouv/gitlab-ci-yml/commit/e7d44879aed0cbbeae054c29a06fe0210f834949))
+
+# [4.5.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.4.1...v4.5.0) (2019-12-31)
+
+
+### Features
+
+* **nodejs:** use helm chart version 2.13.0 ([b368202](https://github.com/SocialGouv/gitlab-ci-yml/commit/b368202553167b9757467ccea1fea104c113fdde))
+
+## [4.4.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.4.0...v4.4.1) (2019-12-30)
+
+
+### Bug Fixes
+
+* **nodejs:** extra "l" typo ([2638243](https://github.com/SocialGouv/gitlab-ci-yml/commit/2638243facd9a1e22d1fa996e7a0d2b5a44a9d18))
+
+# [4.4.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.3.0...v4.4.0) (2019-12-30)
+
+
+### Features
+
+* **nodejs:** use helm chart version 2.12.0 ([34bc606](https://github.com/SocialGouv/gitlab-ci-yml/commit/34bc606f433c166f6fdaa63bf692acee6bd1aefd))
+
+# [4.3.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.2.0...v4.3.0) (2019-12-27)
+
+
+### Features
+
+* add ssl to hpa chart ([#25](https://github.com/SocialGouv/gitlab-ci-yml/issues/25)) ([343d00d](https://github.com/SocialGouv/gitlab-ci-yml/commit/343d00d20866d835fc66940e79bab3c36d42f89e))
+
 # [4.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.1.0...v4.2.0) (2019-12-19)
 
 

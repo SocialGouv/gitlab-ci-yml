@@ -26,9 +26,10 @@
           --set-string ingress.annotations.kubernetes\.io/tls-acme=true"
       else
         HELM_RENDER_ARGS=" \
-          ${HELM_RENDER_ARGS} \ 
+          ${HELM_RENDER_ARGS} \
           --set ingress.tls[0].secretName=wildcard-crt"
       fi
+
     - helm just render ${CONTEXT} hpa
       ${HELM_RENDER_ARGS}
       --values ./values.yaml
