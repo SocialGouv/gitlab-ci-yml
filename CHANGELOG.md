@@ -1,3 +1,10 @@
+## [4.5.3](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.5.2...v4.5.3) (2019-12-31)
+
+
+### Bug Fixes
+
+* **autodevops_simple_app:** use full url as HOST in notify ([f6ef651](https://github.com/SocialGouv/gitlab-ci-yml/commit/f6ef6519ac2ce907bcad4de1426e9ec0ab336861))
+
 ## [4.5.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.5.1...v4.5.2) (2019-12-31)
 
 
