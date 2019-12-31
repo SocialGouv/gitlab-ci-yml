@@ -1,3 +1,10 @@
+## [4.5.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.5.1...v4.5.2) (2019-12-31)
+
+
+### Bug Fixes
+
+* **autodevops_simple_app:** ensure to set the HOST on notify ([49b99d5](https://github.com/SocialGouv/gitlab-ci-yml/commit/49b99d5a3b87856672395762b05f6ea623a0d5cb))
+
 ## [4.5.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.5.0...v4.5.1) (2019-12-31)
 
 
