@@ -1,3 +1,10 @@
+## [4.5.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.5.0...v4.5.1) (2019-12-31)
+
+
+### Bug Fixes
+
+* **nodejs:** use variable to sync helm chart version ([e7d4487](https://github.com/SocialGouv/gitlab-ci-yml/commit/e7d44879aed0cbbeae054c29a06fe0210f834949))
+
 # [4.5.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.4.1...v4.5.0) (2019-12-31)
 
 
