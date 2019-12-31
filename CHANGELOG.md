@@ -1,3 +1,10 @@
+## [4.5.4](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.5.3...v4.5.4) (2019-12-31)
+
+
+### Bug Fixes
+
+* **autodevops:** wrong production var check ([#26](https://github.com/SocialGouv/gitlab-ci-yml/issues/26)) ([dbb4c47](https://github.com/SocialGouv/gitlab-ci-yml/commit/dbb4c47dcc08eb07ad27f0507b1ae7413d1b2c0a))
+
 ## [4.5.3](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.5.2...v4.5.3) (2019-12-31)
 
 
