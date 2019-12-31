@@ -29,7 +29,7 @@ include:
 
   [[ "${BRANCH_NAME}" = "master" ]] && export PRODUCTION=true
 
-  if [[ -n $PRODUCTION ]]; then
+  if [[ -n "${PRODUCTION+x}" ]]; then
     export BRANCH_HASH=prod
     export K8S_NAMESPACE="${PROJECT}-${BRANCH_HASH}"
     export DOMAIN="${PROJECT}.fabrique.social.gouv.fr"
