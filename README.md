@@ -26,19 +26,6 @@ include:
   - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/register-stage.yml"
 ```
 
-## github-deployments-feature.yml
-
-These jobs sends the feature-branch deployed environment url and status to GitHub API so it appears in the GitHub PR.
-
-| Stage                        | usage                    |
-| ---------------------------- | ------------------------ |
-| Prepare                      | get github deployment id |
-| Send Url to GitHub (feature) | send deployment url      |
-
-| Env var              | example            |
-| -------------------- | ------------------ |
-| DEV_ENVIRONMENT_NAME | gitlab environment |
-
 # [.autodevops_simple_app](./autodevops_simple_app.yml)
 
 ## Usage
@@ -113,7 +100,6 @@ include:
 
 #
 
-
 .deploy_myapp_stage: &deploy_myapp_stage
   dependencies: []
   stage: Deploy
@@ -126,9 +112,9 @@ include:
     - HOST=myapp.dev.factory.social.gouv.fr
     #
     - HELM_RENDER_ARGS="
-        --set image.tag=${IMAGE_TAG}
-        --set ingress.hosts[0].host=${HOST}
-        --set ingress.tls[0].hosts[0]=${HOST}"
+      --set image.tag=${IMAGE_TAG}
+      --set ingress.hosts[0].host=${HOST}
+      --set ingress.tls[0].hosts[0]=${HOST}"
     # In production (if the master branch is your production)
     - |
       if [[ "${BRANCH_NAME}" = "master" ]]; then
@@ -156,16 +142,14 @@ Deploy myapp (prod):
     - master
   environment:
     name: $PROD_ENVIRONMENT_NAME
-    
 ```
-
 
 # [.base_deploy_nodejs_chart_stage](./base_deploy_nodejs_chart_stage.yml)
 
 ## Note
 
 Please consider using `base_deploy_hpa_chart_stage` block instead.
- 
+
 ## Usage
 
 ```yaml
@@ -246,6 +230,46 @@ Kubectl job:
   extends: .base_docker_kubectl_image_stage
   script:
     - kubectl version --client
+```
+
+## [.base_notify_github_stage](./base_notify_github_stage.yml)
+
+use [@SocialGouv/azure-db](https://github.com/SocialGouv/docker/tree/master/azure-db) docker image
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_notify_github_stage.yml
+    ref: v4.0.1
+#
+
+Notify Starting Deployment:
+  extends: .base_notify_pending_stage
+  stage: Deploy
+  except:
+    - /^renovate/*
+
+Notify Fail:
+  extends: .base_notify_fail_stage
+  stage: Notify Finished Deployment
+  except:
+    - /^renovate/*
+  dependencies:
+    - Notify Starting Deployment
+  before_script:
+    - source ./.gitlab-ci/env.sh
+    - HOST=${FRONTEND_URL}
+
+Notify Success:
+  extends: .base_notify_success_stage
+  stage: Notify Finished Deployment
+  except:
+    - /^renovate/*
+  dependencies:
+    - Notify Starting Deployment
+  before_script:
+    - source ./.gitlab-ci/env.sh
+    - HOST=${FRONTEND_URL}
 ```
 
 ## [.base_register_stage](./base_register_stage.yml)
