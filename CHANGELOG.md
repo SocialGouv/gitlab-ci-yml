@@ -1,3 +1,10 @@
+# [4.6.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.5.4...v4.6.0) (2020-01-09)
+
+
+### Features
+
+* use helm chart version 2.14.0 ([#32](https://github.com/SocialGouv/gitlab-ci-yml/issues/32)) ([93609ec](https://github.com/SocialGouv/gitlab-ci-yml/commit/93609ec618f01a54ab3dff826992a37b347b8b80))
+
 ## [4.5.4](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.5.3...v4.5.4) (2019-12-31)
 
 
