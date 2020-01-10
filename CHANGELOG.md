@@ -1,3 +1,10 @@
+## [4.6.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.6.0...v4.6.1) (2020-01-10)
+
+
+### Reverts
+
+* Revert "feat: use helm chart version 2.14.0 (#32)" ([590a4ff](https://github.com/SocialGouv/gitlab-ci-yml/commit/590a4ff09983bf2fe8470ee3a114d47f04f26e2f)), closes [#32](https://github.com/SocialGouv/gitlab-ci-yml/issues/32)
+
 # [4.6.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.5.4...v4.6.0) (2020-01-09)
 
 
