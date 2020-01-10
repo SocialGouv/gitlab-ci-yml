@@ -1,3 +1,15 @@
+# [5.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.6.1...v5.0.0) (2020-01-10)
+
+
+* feat(deps)!: update SocialGouv/helm-charts to v3.0.0 (#33) ([0916b56](https://github.com/SocialGouv/gitlab-ci-yml/commit/0916b56822adcd413c3bb3612a0795dbdee1e9a6)), closes [#33](https://github.com/SocialGouv/gitlab-ci-yml/issues/33) [#32](https://github.com/SocialGouv/gitlab-ci-yml/issues/32)
+
+
+### BREAKING CHANGES
+
+* update SocialGouv/helm-charts to v3.0.0
+
+See https://github.com/SocialGouv/helm-charts/releases/tag/v3.0.0
+
 ## [4.6.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.6.0...v4.6.1) (2020-01-10)
 
 
