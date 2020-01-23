@@ -239,7 +239,7 @@ Kubectl job:
     - kubectl version --client
 ```
 
-## [.base_register_stage](./base_register_stage.yml)
+# [.base_register_stage](./base_register_stage.yml)
 
 ## Usage
 
@@ -252,6 +252,7 @@ include:
 Register myapp image:
   extends: .base_register_stage
   variables:
+    DOCKER_VERSION: stable
     CONTEXT: . # The folder where the Dockerfile is
     IMAGE_NAME: $CI_REGISTRY_IMAGE # The image name
     # optional
