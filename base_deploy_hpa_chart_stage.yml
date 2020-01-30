@@ -4,12 +4,8 @@
   extends: .base_docker_helm_image_stage
   variables:
     HELM_RENDER_ARGS: ""
-    HELM_CHART_VERSION: "3.0.0"
   script:
-    - helm init --client-only
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
-    - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}/helm-just-linux-${HELM_CHART_VERSION}.tgz | tar -C $(helm home) -xzv
-    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}
     - helm just fetch "socialgouv/hpa#${HELM_CHART_VERSION}"
     - envsubst < $VALUES_FILE > ./values.yaml
     # Set own wildcard when deploying in dev environment
