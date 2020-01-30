@@ -4,7 +4,6 @@
   extends: .base_docker_helm_image_stage
   variables:
     HELM_RENDER_ARGS: ""
-    HELM_CHART_VERSION: "3.0.0"
   script:
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     - helm just fetch "socialgouv/nodejs#${HELM_CHART_VERSION}"
