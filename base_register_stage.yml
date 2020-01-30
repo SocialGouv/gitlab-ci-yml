@@ -5,6 +5,8 @@
 
 .base_docker_image_stage:
   image: docker:$DOCKER_VERSION
+  variables:
+    DOCKER_VERSION: stable
   services:
     - docker:$DOCKER_VERSION-dind
 
