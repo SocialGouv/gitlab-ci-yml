@@ -252,7 +252,6 @@ include:
 Register myapp image:
   extends: .base_register_stage
   variables:
-    DOCKER_VERSION: stable
     CONTEXT: . # The folder where the Dockerfile is
     IMAGE_NAME: $CI_REGISTRY_IMAGE # The image name
     # optional
