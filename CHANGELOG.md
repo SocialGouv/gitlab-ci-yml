@@ -1,3 +1,10 @@
+# [6.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v6.0.0...v6.1.0) (2020-01-30)
+
+
+### Features
+
+* **helm:** install helm just and socialgouv repo by default([#37](https://github.com/SocialGouv/gitlab-ci-yml/issues/37)) ([097b187](https://github.com/SocialGouv/gitlab-ci-yml/commit/097b187ce96f6fb43a807dd29dc5fb0db7a355c6))
+
 # [6.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v5.0.0...v6.0.0) (2020-01-30)
 
 
