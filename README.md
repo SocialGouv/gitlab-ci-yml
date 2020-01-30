@@ -239,7 +239,7 @@ Kubectl job:
     - kubectl version --client
 ```
 
-## [.base_register_stage](./base_register_stage.yml)
+# [.base_register_stage](./base_register_stage.yml)
 
 ## Usage
 
