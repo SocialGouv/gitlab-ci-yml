@@ -1,3 +1,14 @@
+# [6.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v5.0.0...v6.0.0) (2020-01-30)
+
+
+* feat(base_register_stage)!: add `DOCKER_VERSION` default variable (#34) ([cf874c2](https://github.com/SocialGouv/gitlab-ci-yml/commit/cf874c27945184f795dc2f9825ace96949cd288a)), closes [#34](https://github.com/SocialGouv/gitlab-ci-yml/issues/34)
+
+
+### BREAKING CHANGES
+
+* feat(base_register_stage)!: add default DOCKER_VERSION value
+  - might not be compatible with our current gitlab.factory.social.gouv.fr runners
+
 # [5.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v4.6.1...v5.0.0) (2020-01-10)
 
 
