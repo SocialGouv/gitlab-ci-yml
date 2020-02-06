@@ -122,7 +122,7 @@ Deploy app (dev):
   variables:
     HOST: $CI_PROJECT_PATH_SLUG-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
   environment:
-    name: review/$CI_COMMIT_REF_NAME
+    name: review/${CI_COMMIT_REF_NAME}-dev
     url: http://$CI_PROJECT_ID-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
     on_stop: Stop review
   only:
@@ -145,7 +145,7 @@ Stop review:
     - auto-deploy initialize_tiller
     - auto-deploy delete
   environment:
-    name: review/$CI_COMMIT_REF_NAME
+    name: review/${CI_COMMIT_REF_NAME}-dev
     action: stop
   when: manual
   allow_failure: true

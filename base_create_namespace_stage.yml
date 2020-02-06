@@ -10,6 +10,7 @@
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_ID}.${KUBE_INGRESS_BASE_DOMAIN}
   dependencies: []
   script:
+    - echo "kubectl get namespace ${KUBE_NAMESPACE}"
     # Skip the job if the namespace exists
     - "[[ $(kubectl get namespace ${KUBE_NAMESPACE}) ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
     #
