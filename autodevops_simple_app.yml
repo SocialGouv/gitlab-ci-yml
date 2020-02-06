@@ -124,7 +124,7 @@ Deploy app (dev):
   environment:
     name: review/$CI_COMMIT_REF_NAME
     url: http://$CI_PROJECT_ID-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
-    on_stop: stop_review
+    on_stop: Stop review
   only:
     refs:
       - branches
@@ -136,7 +136,7 @@ Deploy app (dev):
     variables:
       - $REVIEW_DISABLED
 
-Stop review env:
+Stop review:
   image: registry.gitlab.com/gitlab-org/cluster-integration/auto-deploy-image:v0.8.3
   stage: Clean Up
   variables:
@@ -159,7 +159,6 @@ Stop review env:
       - master
     variables:
       - $REVIEW_DISABLED
-
 
 Deploy app (prod):
   extends:
