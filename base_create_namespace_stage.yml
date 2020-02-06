@@ -6,7 +6,7 @@
     REMOTE_URL: "https://github.com/${CI_PROJECT_PATH}.git"
   stage: "Registration"
   environment:
-    name: review/${CI_COMMIT_REF_NAME}
+    name: review/${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_ID}.${KUBE_INGRESS_BASE_DOMAIN}
   dependencies: []
   script:
