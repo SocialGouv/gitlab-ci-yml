@@ -30,6 +30,3 @@ Test AutoDevOps on SocialGouv/sample-next-app:
         --form ref="douglasduteil/autodevops-pr-39-test"
         --form token="${CI_JOB_TOKEN}"
         "${CI_API_V4_URL}/projects/${SOCIAL_GOUV_SAMPLE_NEXT_APP_PROJECT_ID}/trigger/pipeline"
-  only:
-    refs:
-      - master
