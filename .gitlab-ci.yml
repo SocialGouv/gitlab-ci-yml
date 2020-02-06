@@ -18,3 +18,13 @@ Release:
   extends: .base_semantic_release_stage
   variables:
     SEMANTIC_RELEASE_PLUGINS: "@semantic-release/changelog @semantic-release/exec @semantic-release/git"
+
+Test AutoDevOps on SocialGouv/sample-next-app:
+  stage: Code Quality
+  variables:
+    SOCIAL_GOUV_SAMPLE_NEXT_APP_PROJECT_ID: "85"
+  script:
+    - curl --request POST
+        --form ref="autodevops-master"
+        --form token="${CI_JOB_TOKEN}"
+        ${CI_API_V4_URL}/projects/${SOCIAL_GOUV_SAMPLE_NEXT_APP_PROJECT_ID}/trigger/pipeline
