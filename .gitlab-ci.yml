@@ -21,6 +21,7 @@ Release:
 
 Test AutoDevOps on SocialGouv/sample-next-app:
   stage: Code Quality
+  image: curlimages/curl:7.67.0
   variables:
     SOCIAL_GOUV_SAMPLE_NEXT_APP_PROJECT_ID: "85"
   script:
