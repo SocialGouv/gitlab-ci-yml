@@ -119,10 +119,6 @@ Create namespace:
 Deploy app (dev):
   extends:
     - .deploy_app_stage
-  only:
-    - branches
-  except:
-    - master
   variables:
     HOST: $CI_PROJECT_PATH_SLUG-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
   environment:
