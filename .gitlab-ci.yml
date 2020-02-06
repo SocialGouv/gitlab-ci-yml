@@ -23,7 +23,7 @@ Test AutoDevOps on SocialGouv/sample-next-app:
   stage: Code Quality
   image: curlimages/curl:7.67.0
   script:
-    - [[ -z "${SOCIAL_GOUV_SAMPLE_NEXT_APP_PROJECT_ID}" ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
+    - "[[ -z ${SOCIAL_GOUV_SAMPLE_NEXT_APP_PROJECT_ID} ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
     - curl --request POST
         --form ref="autodevops-master"
         --form token="${CI_JOB_TOKEN}"
