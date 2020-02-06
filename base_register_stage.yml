@@ -4,11 +4,9 @@
 #
 
 .base_docker_image_stage:
-  image: docker:$DOCKER_VERSION
-  variables:
-    DOCKER_VERSION: stable
+  image: docker:19
   services:
-    - docker:$DOCKER_VERSION-dind
+    - docker:19-dind
 
 .base_register_stage:
   stage: "Registration"

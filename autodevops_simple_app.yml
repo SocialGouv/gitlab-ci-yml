@@ -1,8 +1,10 @@
 stages:
+  - Install
   - Code Quality
   - Registration
   - Deploy
   - Notify Finished Deployment
+  - Clean Up
 
 include:
   - /base_create_namespace_stage.yml
@@ -17,43 +19,47 @@ include:
 
 #
 
-.resolve_env: &resolve_env |-
-  set -x
-
-  export BRANCH_NAME=${BRANCH_NAME:=$CI_COMMIT_REF_SLUG}
-  export HASH_SIZE=${HASH_SIZE:=7}
-  export K8S_PROJECT=${K8S_PROJECT:=$PROJECT}
-  BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
-  export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
-  export K8S_NAMESPACE="${PROJECT}-feature-${BRANCH_HASH}"
-
-  [[ "${BRANCH_NAME}" = "master" ]] && export PRODUCTION=true
-
-  if [[ -n "${PRODUCTION+x}" ]]; then
-    export BRANCH_HASH=prod
-    export K8S_NAMESPACE="${PROJECT}-${BRANCH_HASH}"
-    export DOMAIN="${PROJECT}.fabrique.social.gouv.fr"
-  else
-    export DOMAIN="${BRANCH_HASH}-${PROJECT}.dev.fabrique.social.gouv.fr"
-  fi
-
-  export FRONTEND_HOST="${DOMAIN}"
-  export FRONTEND_URL="https://${FRONTEND_HOST}"
-
-  set +x
-
-before_script:
-  - *resolve_env
-
-#
+Install:
+  extends: .base_yarn_quality
+  stage: Install
+  image: node:13-alpine
+  cache:
+    key: "$CI_COMMIT_REF_NAME-$CI_JOB_NAME"
+    paths:
+      - .yarn
+      - node_modules
+  script:
+    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
+    - yarn --frozen-lockfile
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - node_modules
 
 Quality tests:
-  extends: .base_yarn_quality
+  dependencies:
+    - Install
+  image: node:13-alpine
   stage: Code Quality
+  script:
+    - yarn lint
+    - yarn test
 
 Build:
-  extends: .base_yarn_build
   stage: Code Quality
+  image: node:13-alpine
+  dependencies:
+    - Install
+  cache:
+    key: "$CI_COMMIT_REF_NAME-$CI_JOB_NAME"
+    paths:
+      - .next/cache
+  script:
+    - yarn build
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - .next
 
 #
 
@@ -89,29 +95,79 @@ Create namespace:
 
 #
 
-.deploy_app_stage: &deploy_app_stage
+.deploy_app_stage:
   stage: Deploy
   extends: .base_deploy_nodejs_chart_stage
+  image: registry.gitlab.com/gitlab-org/cluster-integration/auto-deploy-image:v0.8.3
   dependencies: []
+  before_script:
+    #
+    - auto-deploy check_kube_domain
+    - auto-deploy ensure_namespace
+    - auto-deploy initialize_tiller
+    - auto-deploy create_secret
+    #
+    # NOTE(douglasduteil): ensure to have `envsubst`
+    - apk add gettext
   variables:
+    REMOTE_URL: "https://github.com/${CI_PROJECT_PATH}.git"
+    K8S_NAMESPACE: $KUBE_NAMESPACE
     REGISTRY: $CI_REGISTRY_IMAGE
     IMAGE_TAG: $CI_COMMIT_SHA
     CONTEXT: app
-  before_script:
-    - *resolve_env
-    - HOST=${FRONTEND_HOST}
 
 Deploy app (dev):
-  <<: *deploy_app_stage
+  extends:
+    - .deploy_app_stage
   only:
     - branches
   except:
     - master
+  variables:
+    HOST: $CI_PROJECT_PATH_SLUG-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
   environment:
-    name: fabrique-dev
+    name: review/$CI_COMMIT_REF_NAME
+    url: http://$CI_PROJECT_ID-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+    on_stop: stop_review
+  only:
+    refs:
+      - branches
+      - tags
+    kubernetes: active
+  except:
+    refs:
+      - master
+    variables:
+      - $REVIEW_DISABLED
+
+Stop review env:
+  image: registry.gitlab.com/gitlab-org/cluster-integration/auto-deploy-image:v0.8.3
+  stage: Clean Up
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - auto-deploy initialize_tiller
+    - auto-deploy delete
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    action: stop
+  when: manual
+  allow_failure: true
+  only:
+    refs:
+      - branches
+      - tags
+    kubernetes: active
+  except:
+    refs:
+      - master
+    variables:
+      - $REVIEW_DISABLED
+
 
 Deploy app (prod):
-  <<: *deploy_app_stage
+  extends:
+    - .deploy_app_stage
   only:
     - master
   environment:
@@ -134,8 +190,7 @@ Notify Fail:
   dependencies:
     - Notify Starting Deployment
   before_script:
-    - *resolve_env
-    - HOST=${FRONTEND_URL}
+    - HOST=https://$CI_PROJECT_PATH_SLUG-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
 
 Notify Success:
   extends: .base_notify_success_stage
@@ -143,5 +198,4 @@ Notify Success:
   dependencies:
     - Notify Starting Deployment
   before_script:
-    - *resolve_env
-    - HOST=${FRONTEND_URL}
+    - HOST=https://$CI_PROJECT_PATH_SLUG-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
