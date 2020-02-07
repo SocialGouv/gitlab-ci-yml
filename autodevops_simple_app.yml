@@ -125,16 +125,6 @@ Deploy app (dev):
     name: review/${CI_COMMIT_REF_NAME}-dev
     url: http://$CI_PROJECT_ID-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
     on_stop: Stop review
-  only:
-    refs:
-      - branches
-      - tags
-    kubernetes: active
-  except:
-    refs:
-      - master
-    variables:
-      - $REVIEW_DISABLED
 
 Stop review:
   image: registry.gitlab.com/gitlab-org/cluster-integration/auto-deploy-image:v0.8.3
@@ -149,16 +139,6 @@ Stop review:
     action: stop
   when: manual
   allow_failure: true
-  only:
-    refs:
-      - branches
-      - tags
-    kubernetes: active
-  except:
-    refs:
-      - master
-    variables:
-      - $REVIEW_DISABLED
 
 Deploy app (prod):
   extends:
