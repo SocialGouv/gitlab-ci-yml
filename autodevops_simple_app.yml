@@ -120,10 +120,10 @@ Deploy app (dev):
   extends:
     - .deploy_app_stage
   variables:
-    HOST: ${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}.${KUBE_INGRESS_BASE_DOMAIN}
+    HOST: ${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   environment:
     name: review/${CI_COMMIT_REF_NAME}-dev
-    url: https://${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}.${KUBE_INGRESS_BASE_DOMAIN}
+    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
     on_stop: Stop review
 
 Stop review:
@@ -165,7 +165,7 @@ Notify Fail:
   dependencies:
     - Notify Starting Deployment
   before_script:
-    - HOST=https://${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}.${KUBE_INGRESS_BASE_DOMAIN}
+    - HOST=https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
 Notify Success:
   extends: .base_notify_success_stage
@@ -173,4 +173,4 @@ Notify Success:
   dependencies:
     - Notify Starting Deployment
   before_script:
-    - HOST=https://${CI_PROJECT_NAME}-${CI_ENVIRONMENT_SLUG}.${KUBE_INGRESS_BASE_DOMAIN}
+    - HOST=https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
