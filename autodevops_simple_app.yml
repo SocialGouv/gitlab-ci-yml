@@ -127,18 +127,19 @@ Deploy app (dev):
     on_stop: Stop review
 
 Stop review:
-  image: registry.gitlab.com/gitlab-org/cluster-integration/auto-deploy-image:v0.8.3
+  extends: .base_docker_kubectl_image_stage
   stage: Clean Up
-  variables:
-    GIT_STRATEGY: none
-  script:
-    - auto-deploy initialize_tiller
-    - auto-deploy delete
   environment:
     name: review/${CI_COMMIT_REF_NAME}-dev
     action: stop
   when: manual
   allow_failure: true
+  dependencies: []
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - echo "kubectl delete namespace ${KUBE_NAMESPACE}"
+    - kubectl delete namespace "${KUBE_NAMESPACE}"
 
 Deploy app (prod):
   extends:
