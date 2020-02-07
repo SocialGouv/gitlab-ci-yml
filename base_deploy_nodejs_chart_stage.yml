@@ -7,7 +7,8 @@
     HELM_CHART_VERSION: "3.0.0"
   script:
     - helm init --client-only
-    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    - echo "kubectl config set-context --current --namespace=${KUBE_NAMESPACE}"
+    - kubectl config set-context --current --namespace=${KUBE_NAMESPACE}
     - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}/helm-just-linux-${HELM_CHART_VERSION}.tgz | tar -C $(helm home) -xzv
     - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}
     - helm just fetch "socialgouv/nodejs#${HELM_CHART_VERSION}"
@@ -30,6 +31,8 @@
           ${HELM_RENDER_ARGS} \
           --set ingress.tls[0].secretName=wildcard-crt"
       fi
+
+    - echo "$ helm just render ${CONTEXT} nodejs ${HELM_RENDER_ARGS} --values ./values.yaml"
 
     - helm just render ${CONTEXT} nodejs
       ${HELM_RENDER_ARGS}
