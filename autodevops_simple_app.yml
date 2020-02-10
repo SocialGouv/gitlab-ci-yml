@@ -177,7 +177,7 @@ Notify Fail (review):
     name: review/${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   before_script:
-    - HOST="${CI_ENVIRONMENT_URL}"
+    - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
 
 Notify Success (review):
   extends: .base_notify_success_stage
@@ -192,7 +192,7 @@ Notify Success (review):
     name: review/${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   before_script:
-    - HOST="${CI_ENVIRONMENT_URL}"
+    - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
 
 Notify Fail (prod):
   extends: .base_notify_fail_stage
@@ -206,7 +206,7 @@ Notify Fail (prod):
     name: prod
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   before_script:
-    - HOST="${CI_ENVIRONMENT_URL}"
+    - HOST="https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
 
 Notify Success (prod):
   extends: .base_notify_success_stage
@@ -220,4 +220,4 @@ Notify Success (prod):
     name: prod
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   before_script:
-    - HOST="${CI_ENVIRONMENT_URL}"
+    - HOST="https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
