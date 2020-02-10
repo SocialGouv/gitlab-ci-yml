@@ -145,7 +145,8 @@ Deploy app (prod):
   extends:
     - .deploy_app_stage
   only:
-    - master
+    refs:
+      - master
   variables:
     HOST: ${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   environment:
@@ -166,6 +167,10 @@ Notify Starting Deployment:
 Notify Fail (review):
   extends: .base_notify_fail_stage
   stage: Notify Finished Deployment
+  except:
+    refs:
+      - tags
+      - master
   dependencies:
     - Notify Starting Deployment
   environment:
@@ -177,10 +182,43 @@ Notify Fail (review):
 Notify Success (review):
   extends: .base_notify_success_stage
   stage: Notify Finished Deployment
+  except:
+    refs:
+      - tags
+      - master
   dependencies:
     - Notify Starting Deployment
   environment:
     name: review/${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+  variables:
+    HOST: ${CI_ENVIRONMENT_URL}
+
+
+Notify Fail (prod):
+  extends: .base_notify_fail_stage
+  stage: Notify Finished Deployment
+  only:
+    refs:
+      - master
+  dependencies:
+    - Notify Starting Deployment
+  environment:
+    name: prod
+    url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+  variables:
+    HOST: ${CI_ENVIRONMENT_URL}
+
+Notify Success (prod):
+  extends: .base_notify_success_stage
+  stage: Notify Finished Deployment
+  only:
+    refs:
+      - master
+  dependencies:
+    - Notify Starting Deployment
+  environment:
+    name: prod
+    url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   variables:
     HOST: ${CI_ENVIRONMENT_URL}
