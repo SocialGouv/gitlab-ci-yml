@@ -176,8 +176,8 @@ Notify Fail (review):
   environment:
     name: review/${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
-  variables:
-    HOST: ${CI_ENVIRONMENT_URL}
+  before_script:
+    - HOST="${CI_ENVIRONMENT_URL}"
 
 Notify Success (review):
   extends: .base_notify_success_stage
@@ -191,8 +191,8 @@ Notify Success (review):
   environment:
     name: review/${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
-  variables:
-    HOST: ${CI_ENVIRONMENT_URL}
+  before_script:
+    - HOST="${CI_ENVIRONMENT_URL}"
 
 Notify Fail (prod):
   extends: .base_notify_fail_stage
@@ -205,8 +205,8 @@ Notify Fail (prod):
   environment:
     name: prod
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
-  variables:
-    HOST: ${CI_ENVIRONMENT_URL}
+  before_script:
+    - HOST="${CI_ENVIRONMENT_URL}"
 
 Notify Success (prod):
   extends: .base_notify_success_stage
@@ -219,5 +219,5 @@ Notify Success (prod):
   environment:
     name: prod
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
-  variables:
-    HOST: ${CI_ENVIRONMENT_URL}
+  before_script:
+    - HOST="${CI_ENVIRONMENT_URL}"
