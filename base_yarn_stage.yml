@@ -21,6 +21,6 @@
   script:
     - yarn build
   artifacts:
-    expire_in: 30 minutes
+    expire_in: 1 day
     paths:
       - .next

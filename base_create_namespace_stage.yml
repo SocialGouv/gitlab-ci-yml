@@ -6,22 +6,25 @@
     REMOTE_URL: "https://github.com/${CI_PROJECT_PATH}.git"
   stage: "Registration"
   environment:
-    name: factory-dev
+    name: review/${CI_COMMIT_REF_NAME}-dev
+    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_ID}.${KUBE_INGRESS_BASE_DOMAIN}
   dependencies: []
   script:
+    - echo "kubectl get namespace ${KUBE_NAMESPACE}"
     # Skip the job if the namespace exists
-    - "[[ $(kubectl get namespace ${K8S_NAMESPACE}) ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
+    - "[[ $(kubectl get namespace ${KUBE_NAMESPACE}) ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
     #
-    - kubectl create namespace ${K8S_NAMESPACE}
+    - kubectl create namespace ${KUBE_NAMESPACE}
+    #
+    # Use wildcard certificate
+    - kubectl label namespace ${KUBE_NAMESPACE} cert=wildcard
     #
     # Add git metadata to be able to auto destroy that namespaces
     # see https://github.com/SocialGouv/docker/tree/v0.18.0/k8s-ns-killer
-    - kubectl annotate namespace ${K8S_NAMESPACE} git/remote=${REMOTE_URL}
-    - kubectl annotate namespace ${K8S_NAMESPACE} git/branch=${CI_COMMIT_REF_NAME}
+    - kubectl annotate namespace ${KUBE_NAMESPACE} git/remote=${REMOTE_URL}
+    - kubectl annotate namespace ${KUBE_NAMESPACE} git/branch=${CI_COMMIT_REF_NAME}
     #
     # Fake rancher namespace creation
-    - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/projectId=${RANCHER_PROJECT_ID}
-    - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/creatorId=gitlab
-    #
-    # Use wildcard certificate
-    - kubectl label namespace ${K8S_NAMESPACE} cert=wildcard
+    - "[[ -z ${RANCHER_PROJECT_ID} ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
+    - kubectl annotate namespace ${KUBE_NAMESPACE} field.cattle.io/projectId=${RANCHER_PROJECT_ID}
+    - kubectl annotate namespace ${KUBE_NAMESPACE} field.cattle.io/creatorId=gitlab
