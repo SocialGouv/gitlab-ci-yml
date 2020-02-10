@@ -146,8 +146,11 @@ Deploy app (prod):
     - .deploy_app_stage
   only:
     - master
+  variables:
+    HOST: ${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   environment:
     name: prod
+    url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
 #
 
