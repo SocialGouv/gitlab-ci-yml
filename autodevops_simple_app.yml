@@ -163,18 +163,24 @@ Notify Starting Deployment:
   extends: .base_notify_pending_stage
   stage: Deploy
 
-Notify Fail:
+Notify Fail (review):
   extends: .base_notify_fail_stage
   stage: Notify Finished Deployment
   dependencies:
     - Notify Starting Deployment
-  before_script:
-    - HOST=https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+  environment:
+    name: review/${CI_COMMIT_REF_NAME}-dev
+    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+  variables:
+    HOST: ${CI_ENVIRONMENT_URL}
 
-Notify Success:
+Notify Success (review):
   extends: .base_notify_success_stage
   stage: Notify Finished Deployment
   dependencies:
     - Notify Starting Deployment
-  before_script:
-    - HOST=https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+  environment:
+    name: review/${CI_COMMIT_REF_NAME}-dev
+    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+  variables:
+    HOST: ${CI_ENVIRONMENT_URL}
