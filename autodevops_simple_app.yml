@@ -194,7 +194,6 @@ Notify Success (review):
   variables:
     HOST: ${CI_ENVIRONMENT_URL}
 
-
 Notify Fail (prod):
   extends: .base_notify_fail_stage
   stage: Notify Finished Deployment
