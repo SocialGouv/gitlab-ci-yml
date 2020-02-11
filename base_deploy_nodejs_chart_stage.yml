@@ -1,10 +1,12 @@
 #
 
+variables:
+  HELM_CHART_VERSION: "3.0.0"
+
 .base_deploy_nodejs_chart_stage:
   extends: .base_docker_helm_image_stage
   variables:
     CI_DEBUG_TRACE: "true"
-    HELM_CHART_VERSION: "3.0.0"
   script:
     - helm init --client-only
     - echo "kubectl config set-context --current --namespace=${KUBE_NAMESPACE}"
