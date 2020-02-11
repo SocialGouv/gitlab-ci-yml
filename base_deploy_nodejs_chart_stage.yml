@@ -3,7 +3,7 @@
 .base_deploy_nodejs_chart_stage:
   extends: .base_docker_helm_image_stage
   variables:
-    HELM_RENDER_ARGS: ""
+    HELM_RENDER_ARGS: "--set ingress.enabled false"
     CI_DEBUG_TRACE: "true"
     HELM_CHART_VERSION: "3.0.0"
   script:
