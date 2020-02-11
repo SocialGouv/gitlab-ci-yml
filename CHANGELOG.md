@@ -1,3 +1,10 @@
+# [7.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.0.1...v7.1.0) (2020-02-11)
+
+
+### Features
+
+* **nodejs:** allow user HELM_RENDER_ARGS ([#43](https://github.com/SocialGouv/gitlab-ci-yml/issues/43)) ([792131f](https://github.com/SocialGouv/gitlab-ci-yml/commit/792131f8569c1a264366cc5acd8cae9fe375561d))
+
 ## [7.0.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.0.0...v7.0.1) (2020-02-11)
 
 
