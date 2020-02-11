@@ -176,6 +176,8 @@ include:
   variables:
     CONTEXT: app
     VALUES_FILE: ./.k8s/app.values.yml
+    # optional
+    HELM_RENDER_ARGS: "--set deployment.port 8080"
   before_script:
     - K8S_NAMESPACE=my-namespace
     - HOST=myapp.dev.factory.social.gouv.fr

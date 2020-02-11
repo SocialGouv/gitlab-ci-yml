@@ -1,10 +1,10 @@
 #
 
+variables:
+  HELM_CHART_VERSION: "3.0.0"
+
 .base_deploy_nodejs_chart_stage:
   extends: .base_docker_helm_image_stage
-  variables:
-    HELM_RENDER_ARGS: ""
-    HELM_CHART_VERSION: "3.0.0"
   script:
     - helm init --client-only
     - echo "kubectl config set-context --current --namespace=${KUBE_NAMESPACE}"
@@ -18,18 +18,19 @@
       HELM_RENDER_ARGS="
         --set image.tag=${IMAGE_TAG}
         --set ingress.hosts[0].host=${HOST}
-        --set ingress.tls[0].hosts[0]=${HOST}"
+        --set ingress.tls[0].hosts[0]=${HOST}
+        ${HELM_RENDER_ARGS}"
     # Set own certificate when deploying in prod environment
     - |-
       if [[ -n "${PRODUCTION+x}" ]]; then
         HELM_RENDER_ARGS=" \
-          ${HELM_RENDER_ARGS} \
           --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod \
-          --set-string ingress.annotations.kubernetes\.io/tls-acme=true"
+          --set-string ingress.annotations.kubernetes\.io/tls-acme=true \
+          ${HELM_RENDER_ARGS}"
       else
         HELM_RENDER_ARGS=" \
-          ${HELM_RENDER_ARGS} \
-          --set ingress.tls[0].secretName=wildcard-crt"
+          --set ingress.tls[0].secretName=wildcard-crt \
+          ${HELM_RENDER_ARGS}"
       fi
 
     - echo "$ helm just render ${CONTEXT} nodejs ${HELM_RENDER_ARGS} --values ./values.yaml"
