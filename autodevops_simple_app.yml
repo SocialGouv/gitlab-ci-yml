@@ -119,6 +119,10 @@ Create namespace:
 Deploy app (dev):
   extends:
     - .deploy_app_stage
+  except:
+    refs:
+      - tags
+      - master
   variables:
     HOST: ${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   environment:
@@ -129,6 +133,10 @@ Deploy app (dev):
 Stop review:
   extends: .base_docker_kubectl_image_stage
   stage: Clean Up
+  except:
+    refs:
+      - tags
+      - master
   environment:
     name: review/${CI_COMMIT_REF_NAME}-dev
     action: stop
