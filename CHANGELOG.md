@@ -1,3 +1,10 @@
+## [7.0.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.0.0...v7.0.1) (2020-02-11)
+
+
+### Bug Fixes
+
+* **autodevops:**  do no deploy review env on master and tags ([7783410](https://github.com/SocialGouv/gitlab-ci-yml/commit/7783410364da4a2c6b5947abd94500d0cf823371))
+
 # [7.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v6.1.0...v7.0.0) (2020-02-10)
 
 
