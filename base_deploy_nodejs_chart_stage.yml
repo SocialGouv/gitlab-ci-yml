@@ -2,16 +2,21 @@
 
 variables:
   HELM_CHART_VERSION: "3.0.0"
+  K8S_NAMESPACE: "${KUBE_NAMESPACE}"
 
 .base_deploy_nodejs_chart_stage:
   extends: .base_docker_helm_image_stage
   script:
+    - echo "kubectl config set-context --current --namespace=${K8S_NAMESPACE}"
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    #
     - helm init --client-only
-    - echo "kubectl config set-context --current --namespace=${KUBE_NAMESPACE}"
-    - kubectl config set-context --current --namespace=${KUBE_NAMESPACE}
     - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}/helm-just-linux-${HELM_CHART_VERSION}.tgz | tar -C $(helm home) -xzv
     - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}
+
+    - echo "helm just fetch socialgouv/nodejs#${HELM_CHART_VERSION}"
     - helm just fetch "socialgouv/nodejs#${HELM_CHART_VERSION}"
+
     - envsubst < $VALUES_FILE > ./values.yaml
     # Set own wildcard when deploying in dev environment
     - >-
