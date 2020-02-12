@@ -1,30 +1,32 @@
 #
 
+variables:
+  K8S_NAMESPACE: "${KUBE_NAMESPACE}"
+  REMOTE_URL: "https://github.com/${CI_PROJECT_PATH}.git"
+
 .base_create_namespace_stage:
   extends: .base_docker_kubectl_image_stage
-  variables:
-    REMOTE_URL: "https://github.com/${CI_PROJECT_PATH}.git"
   stage: "Registration"
   environment:
     name: review/${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_ID}.${KUBE_INGRESS_BASE_DOMAIN}
   dependencies: []
   script:
-    - echo "kubectl get namespace ${KUBE_NAMESPACE}"
+    - echo "kubectl get namespace ${K8S_NAMESPACE}"
     # Skip the job if the namespace exists
-    - "[[ $(kubectl get namespace ${KUBE_NAMESPACE}) ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
+    - "[[ $(kubectl get namespace ${K8S_NAMESPACE}) ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
     #
-    - kubectl create namespace ${KUBE_NAMESPACE}
+    - kubectl create namespace ${K8S_NAMESPACE}
     #
     # Use wildcard certificate
-    - kubectl label namespace ${KUBE_NAMESPACE} cert=wildcard
+    - kubectl label namespace ${K8S_NAMESPACE} cert=wildcard
     #
     # Add git metadata to be able to auto destroy that namespaces
     # see https://github.com/SocialGouv/docker/tree/v0.18.0/k8s-ns-killer
-    - kubectl annotate namespace ${KUBE_NAMESPACE} git/remote=${REMOTE_URL}
-    - kubectl annotate namespace ${KUBE_NAMESPACE} git/branch=${CI_COMMIT_REF_NAME}
+    - kubectl annotate namespace ${K8S_NAMESPACE} git/remote=${REMOTE_URL}
+    - kubectl annotate namespace ${K8S_NAMESPACE} git/branch=${CI_COMMIT_REF_NAME}
     #
     # Fake rancher namespace creation
     - "[[ -z ${RANCHER_PROJECT_ID} ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
-    - kubectl annotate namespace ${KUBE_NAMESPACE} field.cattle.io/projectId=${RANCHER_PROJECT_ID}
-    - kubectl annotate namespace ${KUBE_NAMESPACE} field.cattle.io/creatorId=gitlab
+    - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/projectId=${RANCHER_PROJECT_ID}
+    - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/creatorId=gitlab
