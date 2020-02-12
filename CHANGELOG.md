@@ -1,3 +1,12 @@
+# [7.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.1.0...v7.2.0) (2020-02-12)
+
+
+### Features
+
+* **hpa:** prefer using global variables ([#45](https://github.com/SocialGouv/gitlab-ci-yml/issues/45)) ([476997b](https://github.com/SocialGouv/gitlab-ci-yml/commit/476997b3c821a7336b337c66dd9be21aab3ee80d))
+* **namespaces:** prefer using global variables ([#44](https://github.com/SocialGouv/gitlab-ci-yml/issues/44)) ([107165c](https://github.com/SocialGouv/gitlab-ci-yml/commit/107165c09346698657b5cee4345e1cb55b739e17))
+* **namespaces:** prefer using global variables ([#46](https://github.com/SocialGouv/gitlab-ci-yml/issues/46)) ([fc460b1](https://github.com/SocialGouv/gitlab-ci-yml/commit/fc460b1e66907dda4a01f24e96f97f47ccb67f05))
+
 # [7.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.0.1...v7.1.0) (2020-02-11)
 
 
