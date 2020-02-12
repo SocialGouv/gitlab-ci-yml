@@ -1,0 +1,12 @@
+#
+
+.base_delete_useless_managed_postgresql_stage:
+  stage: Notify Finished Deployment
+  dependencies: []
+  allow_failure: true
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/pg-cleaner:0.22.0
+  environment: fabrique-dev
+  script:
+    - python /bin/pg-cleaner.py
+  only:
+    - master
