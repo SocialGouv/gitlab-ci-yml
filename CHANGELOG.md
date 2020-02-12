@@ -1,3 +1,10 @@
+# [7.3.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.2.0...v7.3.0) (2020-02-12)
+
+
+### Features
+
+* add postgresql cleaner stage ([#47](https://github.com/SocialGouv/gitlab-ci-yml/issues/47)) ([afc57dc](https://github.com/SocialGouv/gitlab-ci-yml/commit/afc57dc44eed1338d232d88e5f47cda73bade4b2))
+
 # [7.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.1.0...v7.2.0) (2020-02-12)
 
 
