@@ -98,7 +98,7 @@ Create namespace:
 .deploy_app_stage:
   stage: Deploy
   extends: .base_deploy_nodejs_chart_stage
-  image: registry.gitlab.com/gitlab-org/cluster-integration/auto-deploy-image:v0.9.3
+  image: registry.gitlab.com/gitlab-org/cluster-integration/auto-deploy-image:v0.9.4
   dependencies: []
   before_script:
     #
