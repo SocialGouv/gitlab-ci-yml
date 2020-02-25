@@ -1,3 +1,10 @@
+## [7.3.3](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.3.2...v7.3.3) (2020-02-25)
+
+
+### Bug Fixes
+
+* **delete:** update default namespace filter ([#57](https://github.com/SocialGouv/gitlab-ci-yml/issues/57)) ([e3dfd7a](https://github.com/SocialGouv/gitlab-ci-yml/commit/e3dfd7a41d4a8d7f3d87ef48ce8ed31acd74a042))
+
 ## [7.3.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.3.1...v7.3.2) (2020-02-25)
 
 
