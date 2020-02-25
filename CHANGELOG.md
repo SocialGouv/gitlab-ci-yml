@@ -1,3 +1,10 @@
+## [7.3.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.3.0...v7.3.1) (2020-02-25)
+
+
+### Bug Fixes
+
+* **autodevops:** remove the gitlab project id on the namespace in prod ([25fb5ec](https://github.com/SocialGouv/gitlab-ci-yml/commit/25fb5ec897958a0087b813b4454a52d5d1619850))
+
 # [7.3.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.2.0...v7.3.0) (2020-02-12)
 
 
