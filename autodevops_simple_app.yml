@@ -157,6 +157,7 @@ Deploy app (prod):
       - master
   variables:
     HOST: ${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+    K8S_NAMESPACE: ${CI_PROJECT_NAME}
   environment:
     name: prod
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
