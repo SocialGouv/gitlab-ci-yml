@@ -1,5 +1,8 @@
 #
 
+variables:
+  K8S_NAMESPACE_PREFIX: "${PROJECT}-feature"
+
 .base_delete_useless_k8s_ns_stage:
   stage: Notify Finished Deployment
   dependencies: []
@@ -8,8 +11,9 @@
   environment: fabrique-dev
   script:
     - git remote set-url origin https://github.com/${CI_PROJECT_PATH}.git
-    # - k8s-ns-killer ${PROJECT}-feature
+    - echo "k8s-ns-killer ${K8S_NAMESPACE_PREFIX}"
+    # - k8s-ns-killer ${K8S_NAMESPACE_PREFIX}
     # Debug mode
-    - sh -x /bin/k8s-ns-killer ${PROJECT}-feature
+    - sh -x /bin/k8s-ns-killer ${K8S_NAMESPACE_PREFIX}
   only:
     - master

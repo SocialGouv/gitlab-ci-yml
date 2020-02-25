@@ -97,6 +97,10 @@ include:
 
 Delete useless k8s namespaces:
   extends: .base_delete_useless_k8s_ns_stage
+  variables:
+    # Optional
+    # Filter the namespaces to check for suppression
+    K8S_NAMESPACE_PREFIX: "${PROJECT}-${CI_PROJECT_ID}-review"
 ```
 
 # [.base_deploy_hpa_chart_stage](./base_deploy_hpa_chart_stage.yml)
