@@ -167,6 +167,8 @@ Deploy app (prod):
 
 Delete useless k8s namespaces:
   extends: .base_delete_useless_k8s_ns_stage
+  variables:
+    K8S_NAMESPACE_PREFIX: "${PROJECT}-${CI_PROJECT_ID}-review"
 
 #
 
