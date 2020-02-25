@@ -1,3 +1,10 @@
+## [7.3.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.3.1...v7.3.2) (2020-02-25)
+
+
+### Bug Fixes
+
+* **autodevops:** ensure that prod deploy has PRODUCTION set ([#56](https://github.com/SocialGouv/gitlab-ci-yml/issues/56)) ([6e3eb7e](https://github.com/SocialGouv/gitlab-ci-yml/commit/6e3eb7ebcc6eec81b922c8a65e73b163a94e354d))
+
 ## [7.3.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.3.0...v7.3.1) (2020-02-25)
 
 
