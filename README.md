@@ -54,6 +54,7 @@ variables:
   RANCHER_PROJECT_ID: "c-gsm8d:p-pwpk6" # "default" project id here
   PORT: 8080
   VALUES_FILE: ./.k8s/app.values.yml # Your values
+  ENABLE_AZURE_POSTGRES: 1 # enable postgres deployment using [azure-db](https://github.com/SocialGouv/docker/tree/master/azure-db)
 ```
 
 # [.base_create_namespace_stage](./base_create_namespace_stage.yml)
@@ -117,7 +118,6 @@ include:
 
 #
 
-
 .deploy_myapp_stage: &deploy_myapp_stage
   dependencies: []
   stage: Deploy
@@ -131,7 +131,6 @@ include:
     #
     # In production (if the master branch is your production)
     - [[ "${BRANCH_NAME}" = "master" ]] && export PRODUCTION=true
-
 
 #
 
@@ -150,16 +149,14 @@ Deploy myapp (prod):
     - master
   environment:
     name: $PROD_ENVIRONMENT_NAME
-    
 ```
-
 
 # [.base_deploy_nodejs_chart_stage](./base_deploy_nodejs_chart_stage.yml)
 
 ## Note
 
 Please consider using `base_deploy_hpa_chart_stage` block instead.
- 
+
 ## Usage
 
 ```yaml

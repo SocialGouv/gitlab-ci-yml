@@ -165,6 +165,59 @@ Deploy app (prod):
 
 #
 
+.base_azure_db: &base_azure_db
+  image: "registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:0.24.0"
+  only:
+    refs:
+      - branches
+    variables:
+      - $ENABLE_AZURE_POSTGRES
+  except:
+    refs:
+      - master
+  variables:
+    NEW_DB_NAME: db_${CI_COMMIT_SHORT_SHA}
+    NEW_USER: user_${CI_COMMIT_SHORT_SHA}@${PGHOST}
+    NEW_PASSWORD: pass_${CI_COMMIT_SHORT_SHA}
+    DROP_DATABASE: db_${CI_COMMIT_SHORT_SHA}
+    DROP_USER: user_${CI_COMMIT_SHORT_SHA}@${PGHOST}
+
+Create Azure DB (dev):
+  <<: *base_azure_db
+  stage: "Deploy"
+  allow_failure: true
+  script:
+    - create-db-user
+
+Drop Azure DB (dev):
+  <<: *base_azure_db
+  stage: "Clean Up"
+  when: manual
+  allow_failure: true
+  environment:
+    name: review/${CI_COMMIT_REF_NAME}-dev
+    action: stop
+  script:
+    - drop-db-user
+
+Migrate Azure DB:
+  stage: Notify Finished Deployment
+  image: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}
+  variables:
+    NODE_ENV: development
+    DATABASE_URL: postgres://user_${CI_COMMIT_SHORT_SHA}%40${PGHOST}:pass_${CI_COMMIT_SHORT_SHA}@${PGHOST}/db_${CI_COMMIT_SHORT_SHA}?ssl=true
+  needs:
+    - Build
+    - Register image
+    - Create Azure DB (dev)
+    - Deploy app (dev)
+  script:
+    - cd /app
+    - yarn run migrate:latest
+    - yarn run seed:run
+
+#
+
 Delete useless k8s namespaces:
   extends: .base_delete_useless_k8s_ns_stage
   variables:
