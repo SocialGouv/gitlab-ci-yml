@@ -47,7 +47,7 @@ These jobs sends the feature-branch deployed environment url and status to GitHu
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops_simple_app.yml
-    ref: v7.3.3
+    ref: v8.0.0
 
 variables:
   PROJECT: "sample-next-app"
@@ -65,10 +65,10 @@ variables:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v7.3.3
+    ref: v8.0.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_create_namespace_stage.yml
-    ref: v7.3.3
+    ref: v8.0.0
 
 #
 
@@ -93,7 +93,7 @@ Create namespace:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_delete_useless_k8s_ns_stage.yml
-    ref: v7.3.3
+    ref: v8.0.0
 #
 
 Delete useless k8s namespaces:
@@ -163,10 +163,10 @@ Please consider using `base_deploy_hpa_chart_stage` block instead.
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_deploy_nodejs_chart_stage.yml
-    ref: v7.3.3
+    ref: v8.0.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v7.3.3
+    ref: v8.0.0
 
 #
 
@@ -212,10 +212,10 @@ Deploy myapp (prod):
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v7.3.3
+    ref: v8.0.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v7.3.3
+    ref: v8.0.0
 
 #
 
@@ -233,7 +233,7 @@ Helm job:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v7.3.3
+    ref: v8.0.0
 #
 
 Kubectl job:
@@ -250,7 +250,7 @@ Kubectl job:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_register_stage.yml
-    ref: v7.3.3
+    ref: v8.0.0
 
 Register myapp image:
   extends: .base_register_stage
@@ -269,7 +269,7 @@ Register myapp image:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_semantic_release_stage.yml
-    ref: v7.3.3
+    ref: v8.0.0
 
 #
 

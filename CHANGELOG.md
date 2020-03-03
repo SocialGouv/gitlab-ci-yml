@@ -1,3 +1,19 @@
+# [8.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.3.3...v8.0.0) (2020-03-03)
+
+
+### Bug Fixes
+
+* **autodevops:** use extends ([cab8f37](https://github.com/SocialGouv/gitlab-ci-yml/commit/cab8f377525c7e73fe6c508ac30c30d2bd27b832))
+
+
+* feat(autodevops)!: add PG deployment with ENABLE_AZURE_POSTGRES (#69) ([badff1e](https://github.com/SocialGouv/gitlab-ci-yml/commit/badff1ec7b9721bdae4558e600229ed0d3cded9a)), closes [#69](https://github.com/SocialGouv/gitlab-ci-yml/issues/69)
+
+
+### BREAKING CHANGES
+
+* add PG deployment with ENABLE_AZURE_POSTGRES
+    - We can now add `ENABLE_AZURE_POSTGRES` to enable postgres deployment using [azure-db](https://github.com/SocialGouv/docker/tree/master/azure-db)
+
 ## [7.3.3](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.3.2...v7.3.3) (2020-02-25)
 
 
