@@ -165,7 +165,7 @@ Deploy app (prod):
 
 #
 
-.base_azure_db: &base_azure_db
+.base_azure_db:
   image: "registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:0.24.0"
   only:
     refs:
@@ -183,14 +183,16 @@ Deploy app (prod):
     DROP_USER: user_${CI_COMMIT_SHORT_SHA}@${PGHOST}
 
 Create Azure DB (dev):
-  <<: *base_azure_db
+  extends:
+    - .base_azure_db
   stage: "Deploy"
   allow_failure: true
   script:
     - create-db-user
 
 Drop Azure DB (dev):
-  <<: *base_azure_db
+  extends:
+    - .base_azure_db
   stage: "Clean Up"
   when: manual
   allow_failure: true
@@ -201,6 +203,8 @@ Drop Azure DB (dev):
     - drop-db-user
 
 Migrate Azure DB:
+  extends:
+    - .base_azure_db
   stage: Notify Finished Deployment
   image: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}
   variables:
