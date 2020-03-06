@@ -9,7 +9,7 @@
 #
 
 f1_version() {
-  command printf %s "${F1_VERSION:-"v8.0.0"}"
+  command printf %s "${F1_VERSION:-"douglasduteil/feat-f1-add-f1-script"}"
 }
 
 f1_do_install() {

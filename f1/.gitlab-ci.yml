@@ -30,3 +30,14 @@ F1 test:
     - apk add curl
     #
     - ./urchin f1/test
+
+F1 installation:
+  stage: Code Quality
+  image: alpine:3.11
+  interruptible: true
+  variables:
+    F1_VERSION: ${CI_COMMIT_SHA}
+  script:
+    #
+    - sh -x ./f1/install.sh
+    - type f1

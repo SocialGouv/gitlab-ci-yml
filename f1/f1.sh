@@ -2,6 +2,12 @@
 
 { # this ensures the entire script is downloaded #
 
+f1() {
+  echo "f1 scripts :)"
+}
+
+#
+
 f1_echo() {
   command printf %s\\n "$*" 2>/dev/null
 }
@@ -29,7 +35,6 @@ f1_reset() {
 
 #
 
-[ "_${F1_ENV}" = "_testing" ] || f1_cache_dir
 
 } # this ensures the entire script is downloaded #
 
