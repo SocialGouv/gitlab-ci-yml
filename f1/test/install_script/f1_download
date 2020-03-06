@@ -18,13 +18,11 @@ f1_download "$SOURCE" > "$DEST" || die 'f1_download with curl exist with error :
 [ -f "$DEST" ] || die "f1_download with curl should create $DEST file"
 tar tf "$DEST" > /dev/null || die "f1_download with curl should download a valid tar archive"
 
-#backup old f1_has to _f1_has
-eval "`type f1_has | tail -n +2 | sed '1s/.*/_&/'`"
-
 # f1_download with no curl should use wget
 f1_has() {
   [ "_$1" = "_curl" ] && return 1
-  _f1_has $1
+  [ "_$1" = "_wget" ] && return 0
+  return 1
 }
 
 f1_download "$SOURCE" > "$DEST" || die 'f1_download with wget exist with error :('

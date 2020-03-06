@@ -66,22 +66,10 @@ f1_install_from_tarball() {
   # Ensure that the install folder exists
   mkdir -p ${INSTALL_DIR}
 
-  sleep 1s || {
-    echo >&2 "Failed to download ???"
-    return 1
-  } &
-
-  f1_download ${F1_SOURCE_LOCAL} | \
-    tar -xz -C ${INSTALL_DIR} || {
+  f1_download ${F1_SOURCE_LOCAL} | tar -xz -C ${INSTALL_DIR} || {
     echo >&2 "Failed to download or extract '$F1_SOURCE_LOCAL'"
     return 1
-  } &
-
-  # Wait for all sources to be downloaded
-  for job in $(jobs -p | command sort)
-  do
-    wait "$job" || return $?
-  done
+  }
 }
 
 #
