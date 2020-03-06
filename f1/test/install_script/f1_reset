@@ -1,0 +1,44 @@
+#!/bin/sh
+
+cleanup () {
+  unset -f safe_type die cleanup
+}
+die () { echo "$@" ; cleanup ; exit 1; }
+
+safe_type() {
+  type "$1"
+}
+
+# precondition: the names should be unset
+! safe_type f1_do_install || die 'f1_do_install is still available'
+#
+! safe_type f1_has || die 'f1_has is still available'
+! safe_type f1_download || die 'f1_download is still available'
+! safe_type f1_install_dir || die 'f1_install_dir is still available'
+! safe_type f1_install_from_tarball || die 'f1_install_from_tarball is still available'
+! safe_type f1_source || die 'f1_source is still available'
+! safe_type f1_version || die 'f1_version is still available'
+#
+! safe_type f1_reset || die 'f1_reset is still available'
+
+F1_ENV=testing \. ../../install.sh
+
+# Check f1_reset exists
+safe_type f1_reset || die 'f1_reset is not available'
+
+# Apply f1_reset
+f1_reset || die 'f1_reset failed'
+
+# The names should be unset
+! safe_type f1_do_install || die 'f1_do_install is still available'
+#
+! safe_type f1_has || die 'f1_has is still available'
+! safe_type f1_download || die 'f1_download is still available'
+! safe_type f1_install_dir || die 'f1_install_dir is still available'
+! safe_type f1_install_from_tarball || die 'f1_install_from_tarball is still available'
+! safe_type f1_source || die 'f1_source is still available'
+! safe_type f1_version || die 'f1_version is still available'
+#
+! safe_type f1_reset || die 'f1_reset is still available'
+
+cleanup

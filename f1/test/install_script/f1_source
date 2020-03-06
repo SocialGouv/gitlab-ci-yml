@@ -1,0 +1,8 @@
+#!/bin/sh
+
+die () { echo "$@" ; exit 1; }
+
+F1_ENV=testing \. ../../install.sh
+
+echo $(f1_source) | grep "^https://github.com/SocialGouv/gitlab-ci-yml/archive/v[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\.tar.gz$" > /dev/null ||
+  die "f1_source should return the location of the git repo taball"

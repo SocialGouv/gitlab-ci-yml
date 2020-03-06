@@ -4,6 +4,8 @@ MINIO=${MINIO:="https://minio.fabrique.social.gouv.fr/minio"}
 BUCKET=${BUCKET:="gitlab-runner"}
 
 function tokenS3() {
+  test -z "${S3KEY}" && echo "⛔ Missin S3KEY variable" && exit 42
+  test -z "${S3SECRET}" && echo "⛔ Missin S3SECRET variable" && exit 42
 
   curl -Ss \
     -H 'Content-Type: application/json' \

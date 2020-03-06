@@ -1,0 +1,45 @@
+#!/bin/sh
+
+cleanup () {
+  rm -rf /tmp/f1_test_download.tar.gz.*
+
+  unset -f die cleanup
+  unset SOURCE DEST out _f1_has
+}
+die () { echo "$@" ; exit 1; }
+
+F1_ENV=testing \. ../../install.sh
+
+SOURCE=https://github.com/SocialGouv/gitlab-ci-yml/archive/v1.0.0.tar.gz
+DEST=$(mktemp -u /tmp/f1_test_download.tar.gz.XXXXXX)
+
+# f1_download with curl as default
+f1_download "$SOURCE" > "$DEST" || die 'f1_download with curl exist with error :('
+[ -f "$DEST" ] || die "f1_download with curl should create $DEST file"
+tar tf "$DEST" > /dev/null || die "f1_download with curl should download a valid tar archive"
+
+#backup old f1_has to _f1_has
+eval "`type f1_has | tail -n +2 | sed '1s/.*/_&/'`"
+
+# f1_download with no curl should use wget
+f1_has() {
+  [ "_$1" = "_curl" ] && return 1
+  _f1_has $1
+}
+
+f1_download "$SOURCE" > "$DEST" || die 'f1_download with wget exist with error :('
+[ -f "$DEST" ] || die "f1_download with wget should create $DEST file"
+[ -f "$DEST" ] || die "f1_download with wget should create $DEST file"
+tar tf "$DEST" > /dev/null || die "f1_download with wget should download a valid tar archive"
+
+# f1_download with no wget or curl errors out and exits
+f1_has() {
+  return 1
+}
+
+f1_download 2> /dev/null && die "f1_download with no curl nor wget should exit"
+out=$(f1_download 2>&1 >/dev/null) || : #Saving the process here
+[ -z "$out" ] && die "f1_download with no curl nor wget should error out"
+
+#
+cleanup

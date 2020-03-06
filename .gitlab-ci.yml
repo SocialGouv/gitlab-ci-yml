@@ -2,6 +2,8 @@
 
 include:
   - /base_semantic_release_stage.yml
+  #
+  - /f1/.gitlab-ci.yml
 
 stages:
   - Code Quality

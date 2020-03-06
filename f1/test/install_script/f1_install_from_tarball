@@ -1,0 +1,42 @@
+#!/bin/sh
+
+cleanup () {
+  rm -rf /tmp/f1_test_install_from_tarball_*
+
+  unset -f die cleanup
+  unset SOURCE DEST
+}
+die () { echo "$@" ; exit 1; }
+
+F1_ENV=testing \. ../../install.sh
+
+SOURCE=$(mktemp -du /tmp/f1_test_install_from_tarball_XXXXXX)
+tar czf ${SOURCE}.tar.gz ../..
+
+#
+F1_ENV=testing \. ../../install.sh
+
+# f1_install_from_tarball should install f1 from tarbal in /temp
+
+## Given
+f1_install_dir() {
+  echo ${SOURCE}
+}
+
+f1_source() {
+  echo "${SOURCE}.tar.gz"
+}
+
+f1_download() {
+  cat "${SOURCE}.tar.gz"
+}
+
+## When
+f1_install_from_tarball
+
+## Then
+[ -d "${SOURCE}" ] || die "f1_install_from_tarball should create ${SOURCE} directory"
+[ -f "${SOURCE}/f1.sh" ] || \
+  die "f1_install_from_tarball should have the f1 script in the ${SOURCE} directory"
+
+cleanup

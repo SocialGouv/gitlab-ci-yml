@@ -1,0 +1,14 @@
+#!/bin/sh
+
+die () { echo "$@" ; exit 1; }
+
+F1_ENV=testing \. ../../install.sh
+
+f1_has cat && type cat > /dev/null || die 'f1_has locates "cat" properly'
+
+[ "~$(f1_has foobarbaz 2>&1)" = "~" ] || die "f1_has does not suppress error output"
+
+! f1_has foobarbaz && ! type foobarbaz >/dev/null 2>&1 || \
+  die "f1_has does not return a nonzero exit code when not found"
+
+unset -f die
