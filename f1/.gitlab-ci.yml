@@ -75,12 +75,10 @@ F1 midway test:
     #
     - sh ./f1/install.sh
     - source "${F1_DIR}/f1.sh" # This loads f1 scripts
-    - >-
-      type f1 || die "f1/install should install f1"
+    - type f1 || die "f1/install should install f1"
     #
     - f1 pit-stop # alias for init
-    - >-
-      [ -d ./.f1 ] || die "f1 pit-stop should create a .f1 folder"
+    - test -d ./.f1 || die "f1 pit-stop should create a .f1 folder"
     #
     - f1 pull ${F1_PACKAGES_FOLDER}
     - >-
@@ -90,8 +88,7 @@ F1 midway test:
         echo "Changes detected."
       fi
     - f1 pull ${F1_CACHE_FOLDER}
-    - >-
-      [ -d ./.f1 ] || die "f1 pit-stop should create a .f1 folder"
+    - test -d ./.f1 || die "f1 pit-stop should create a .f1 folder"
     #
     # Fake installation
     - head -c 42m < /dev/urandom > fake_cache
@@ -133,7 +130,7 @@ F1 e2e big test:
       fi
     # - f1 pull ${F1_CACHE_FOLDER}
     #
-    - set -x
+    # - set -x
     - >-
       if [[ -z "${CREATE_FAKE_FILES}" ]]; then
         head -c 1024m < /dev/urandom > fake_cache
@@ -144,4 +141,4 @@ F1 e2e big test:
       fi
 
     #
-    - set +x
+    # - set +x
