@@ -31,15 +31,119 @@ F1 test:
     #
     - ./urchin f1/test
 
-F1 installation:
+F1 e2e classic test:
   stage: Code Quality
   image: alpine:3.11
   interruptible: true
   variables:
     F1_VERSION: ${CI_COMMIT_SHA}
-    F1_DIR: ${HOME}/.f1
+    F1_DIR: /root/.f1
+    #
+    CONTEXT: f1_e2e_classic_test
+    F1_PACKAGES_FOLDER: fake_packages
+    F1_CACHE_FOLDER: fake_cache
+    F1_CHECK_FILES: f1/.gitkeep
   script:
     #
-    - sh -x ./f1/install.sh
+    - ./f1/install.sh
     - source "${F1_DIR}/f1.sh" # This loads f1 scripts
-    - type f1
+    #
+    - f1 pit-stop
+    - f1 pulling ${F1_PACKAGES_FOLDER}
+    #
+    # Fake installation
+    - head -c 10m < /dev/urandom > fake_cache
+    - head -c 20m < /dev/urandom > fake_packages
+    #
+    - f1 push ${F1_PACKAGES_FOLDER}
+
+F1 midway test:
+  stage: Code Quality
+  image: alpine:3.11
+  interruptible: true
+  variables:
+    F1_VERSION: ${CI_COMMIT_SHA}
+    F1_DIR: /root/.f1
+    #
+    CONTEXT: f1_e2e_midway_test
+    F1_PACKAGES_FOLDER: fake_packages
+    F1_CACHE_FOLDER: fake_cache
+    F1_CHECK_FILES: f1/.gitkeep
+  script:
+    - >-
+      die () { echo "$@" ; exit 1; }
+    #
+    - ./f1/install.sh
+    - source "${F1_DIR}/f1.sh" # This loads f1 scripts
+    - >-
+      type f1 || die "f1/install should install f1"
+    #
+    - f1 pit-stop # alias for init
+    - >-
+      [ -d ./.f1 ] || die "f1 pit-stop should create a .f1 folder"
+    #
+    - f1 pull ${F1_PACKAGES_FOLDER}
+    - >-
+      if f1 diff ${F1_CHECK_FILES} ; then
+        echo "No changes detected."
+      else
+        echo "Changes detected."
+      fi
+    - f1 pull ${F1_CACHE_FOLDER}
+    - >-
+      [ -d ./.f1 ] || die "f1 pit-stop should create a .f1 folder"
+    #
+    # Fake installation
+    - head -c 1G < /dev/urandom > fake_cache
+    - head -c 1G < /dev/urandom > fake_packages
+    #
+    #
+    - f1 push ${F1_PACKAGES_FOLDER}
+    - f1 push ${F1_CACHE_FOLDER}
+    #
+    - >-
+      [ -f fake_cache ] || die "f1 scripts should create a SHA file"
+      [ -f fake_packages ] || die "f1 scripts should create a SHA file"
+      [ -f SHA ] || die "f1 scripts should create a SHA file"
+
+F1 e2e big test:
+  stage: Code Quality
+  image: alpine:3.11
+  interruptible: true
+  variables:
+    F1_VERSION: ${CI_COMMIT_SHA}
+    F1_DIR: /root/.f1
+    #
+    CONTEXT: f1_e2e_big_test
+    F1_PACKAGES_FOLDER: fake_packages
+    F1_CACHE_FOLDER: fake_cache
+    F1_CHECK_FILES: f1/.gitkeep
+  script:
+    #
+    - ./f1/install.sh
+    - source "${F1_DIR}/f1.sh"
+    #
+    - f1 pit-stop
+    - f1 pull ${F1_PACKAGES_FOLDER}
+    - >-
+      if f1 diff ${F1_CHECK_FILES} ; then
+        echo "No changes detected."
+      else
+        export CREATE_FAKE_FILES=true
+        echo "Changes detected."
+      fi
+    # - f1 pull ${F1_CACHE_FOLDER}
+    #
+    - >-
+      if [[ -z "${CREATE_FAKE_FILES}" ]]; then
+        # head -c 1G < /dev/urandom > fake_cache
+        head -c 1G < /dev/urandom > fake_packages
+
+        f1 push ${F1_PACKAGES_FOLDER}
+        # f1 push ${F1_CACHE_FOLDER}
+      fi
+    #
+    - >-
+      [ -f fake_cache ] || die "f1 scripts should create a SHA file"
+      [ -f fake_packages ] || die "f1 scripts should create a SHA file"
+      [ -f .f1/SHA ] || die "f1 scripts should create a .f1/SHA file"
