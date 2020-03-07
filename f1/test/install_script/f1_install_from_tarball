@@ -11,7 +11,8 @@ die () { echo "$@" ; exit 1; }
 F1_ENV=testing \. ../../install.sh
 
 SOURCE=$(mktemp -du /tmp/f1_test_install_from_tarball_XXXXXX)
-cd ../.. && tar czf ${SOURCE}.tar.gz . ; cd -
+# Faking github archive
+cd ../../../.. && tar --exclude=.git -czf ${SOURCE}.tar.gz gitlab-ci-yml ; cd -
 
 #
 F1_ENV=testing \. ../../install.sh

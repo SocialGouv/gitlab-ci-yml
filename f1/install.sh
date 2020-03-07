@@ -9,7 +9,7 @@
 #
 
 f1_version() {
-  command printf %s "${F1_VERSION:-"douglasduteil/feat-f1-add-f1-script"}"
+  command printf %s "${F1_VERSION:-"v8.0.0"}"
 }
 
 f1_do_install() {
@@ -66,7 +66,7 @@ f1_install_from_tarball() {
   # Ensure that the install folder exists
   mkdir -p ${INSTALL_DIR}
 
-  f1_download ${F1_SOURCE_LOCAL} | tar -xz -C ${INSTALL_DIR} || {
+  f1_download ${F1_SOURCE_LOCAL} | tar -xz --strip-components 2 -C ${INSTALL_DIR} || {
     echo >&2 "Failed to download or extract '$F1_SOURCE_LOCAL'"
     return 1
   }
