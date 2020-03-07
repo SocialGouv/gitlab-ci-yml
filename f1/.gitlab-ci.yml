@@ -136,8 +136,8 @@ F1 e2e big test:
     #
     - >-
       if [[ -z "${CREATE_FAKE_FILES}" ]]; then
-        head -c 1g < /dev/urandom > fake_cache
-        head -c 1g < /dev/urandom > fake_packages
+        head -c 1024m < /dev/urandom > fake_cache
+        head -c 1024m < /dev/urandom > fake_packages
 
         f1 push ${F1_PACKAGES_FOLDER}
         f1 push ${F1_CACHE_FOLDER}
