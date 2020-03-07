@@ -11,7 +11,7 @@ cleanup () {
 actual="$(f1 --help)"
 expected="🏎️"
 
-[[ "$actual" =~ "$expected" ]] || \
+echo $actual |grep "$expected" || \
 die "'--help' should display help message" \
   "expected '$expected', got '$actual'"
 
