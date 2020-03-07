@@ -1,19 +1,17 @@
 #!/bin/sh
 
-set -ex
-
 die () { echo "$@" ; cleanup ; exit 1; }
 cleanup () {
   unset -f die cleanup
   unset actual expected
 }
 
-\. ../../f1.sh
+\. ../../../f1.sh
 
 actual="$(f1 --help)"
-expected="If --reinstall-packages-from is provided, it must point to an installed version of node."
+expected="🏎️"
 
-[ "~$actual" = "~$expected" ] || \
+[[ "$actual" =~ "$expected" ]] || \
 die "'--help' should display help message" \
   "expected '$expected', got '$actual'"
 
