@@ -6,7 +6,7 @@ cleanup () {
   unset -f die cleanup
   unset SOURCE DEST
 }
-die () { echo "$@" ; exit 1; }
+die () { echo "$@"; cleanup; exit 1; }
 
 F1_ENV=testing \. ../../install.sh
 
