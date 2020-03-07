@@ -143,8 +143,7 @@ F1 e2e big test:
         f1 push ${F1_CACHE_FOLDER}
       fi
     #
+
     - test -f fake_cache || die "f1 scripts should create a SHA file";
-    - >-
-      [ -f fake_cache ] || die "f1 scripts should create a SHA file";
-      [ -f fake_packages ] || die "f1 scripts should create a SHA file";
-      [ -f .f1/SHA ] || die "f1 scripts should create a .f1/SHA file";
+    - test -f fake_packages || die "f1 scripts should create a SHA file";
+    - test -f .f1/SHA || die "f1 scripts should create a .f1/SHA file";
