@@ -135,6 +135,7 @@ F1 e2e big test:
     # - f1 pull ${F1_CACHE_FOLDER}
     #
     - >-
+      set -x
       if [[ -z "${CREATE_FAKE_FILES}" ]]; then
         head -c 1024m < /dev/urandom > fake_cache
         head -c 1024m < /dev/urandom > fake_packages
@@ -142,8 +143,9 @@ F1 e2e big test:
         f1 push ${F1_PACKAGES_FOLDER}
         f1 push ${F1_CACHE_FOLDER}
       fi
+      set +x
     #
-
+    - echo
     - test -f fake_cache || die "f1 scripts should create a SHA file";
     - test -f fake_packages || die "f1 scripts should create a SHA file";
     - test -f .f1/SHA || die "f1 scripts should create a .f1/SHA file";
