@@ -94,8 +94,8 @@ F1 midway test:
       [ -d ./.f1 ] || die "f1 pit-stop should create a .f1 folder"
     #
     # Fake installation
-    - head -c 1G < /dev/urandom > fake_cache
-    - head -c 1G < /dev/urandom > fake_packages
+    - head -c 42m < /dev/urandom > fake_cache
+    - head -c 24m < /dev/urandom > fake_packages
     #
     #
     - f1 push ${F1_PACKAGES_FOLDER}
@@ -136,11 +136,11 @@ F1 e2e big test:
     #
     - >-
       if [[ -z "${CREATE_FAKE_FILES}" ]]; then
-        # head -c 1G < /dev/urandom > fake_cache
+        head -c 1G < /dev/urandom > fake_cache
         head -c 1G < /dev/urandom > fake_packages
 
         f1 push ${F1_PACKAGES_FOLDER}
-        # f1 push ${F1_CACHE_FOLDER}
+        f1 push ${F1_CACHE_FOLDER}
       fi
     #
     - >-

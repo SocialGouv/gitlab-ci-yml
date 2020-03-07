@@ -35,6 +35,5 @@ f1_reset() {
 
 #
 
-
 } # this ensures the entire script is downloaded #
 
