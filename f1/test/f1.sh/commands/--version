@@ -1,0 +1,28 @@
+#!/bin/sh
+
+die () { echo "$@" ; cleanup ; exit 1; }
+cleanup () {
+  unset -f die cleanup
+  unset actual expected
+}
+
+\. ../../../f1.sh
+
+#
+
+f1_version() {
+  echo "vX.Y.Z"
+}
+
+#
+
+actual="$(f1 --version)"
+expected="vX.Y.Z"
+
+[[ "$actual" =~ "$expected" ]] || \
+die "'--version' should display current f1 version" \
+  "expected '$expected', got '$actual'"
+
+#
+
+cleanup

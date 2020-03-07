@@ -3,6 +3,8 @@ plugins:
   - - "@semantic-release/exec"
     - prepareCmd: |-
         sed -i -e 's/ref: .*/ref: v${nextRelease.version}/g' README.md
+        sed -i -e 's/echo "v.*"/echo "v${nextRelease.version}"/g' f1/f1.sh
+        sed -i -e 's/\${F1_VERSION:-".*"}/${F1_VERSION:-"v${nextRelease.version}"}/g' f1/install.sh
   - "@semantic-release/release-notes-generator"
   - "@semantic-release/changelog"
   - - "@semantic-release/git"

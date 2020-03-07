@@ -16,6 +16,9 @@ f1() {
     'help' | '--help')
       f1_help
     ;;
+    'version' | '--version')
+      f1_version
+    ;;
     *)
       >&2 nvm --help
       return 127
@@ -56,7 +59,7 @@ f1_help() {
 }
 
 f1_version() {
-  echo "X.X.X"
+  echo "v8.0.0"
 }
 
 #
