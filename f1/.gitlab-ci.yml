@@ -37,7 +37,9 @@ F1 installation:
   interruptible: true
   variables:
     F1_VERSION: ${CI_COMMIT_SHA}
+    F1_DIR: ${HOME}/.f1
   script:
     #
     - sh -x ./f1/install.sh
+    - source "${F1_DIR}/f1.sh" # This loads f1 scripts
     - type f1
