@@ -45,7 +45,7 @@ F1 e2e classic test:
     F1_CHECK_FILES: f1/.gitkeep
   script:
     #
-    - ./f1/install.sh
+    - sh ./f1/install.sh
     - source "${F1_DIR}/f1.sh" # This loads f1 scripts
     #
     - f1 pit-stop
@@ -73,7 +73,7 @@ F1 midway test:
     - >-
       die () { echo "$@" ; exit 1; }
     #
-    - ./f1/install.sh
+    - sh ./f1/install.sh
     - source "${F1_DIR}/f1.sh" # This loads f1 scripts
     - >-
       type f1 || die "f1/install should install f1"
@@ -120,7 +120,7 @@ F1 e2e big test:
     F1_CHECK_FILES: f1/.gitkeep
   script:
     #
-    - ./f1/install.sh
+    - sh ./f1/install.sh
     - source "${F1_DIR}/f1.sh"
     #
     - f1 pit-stop
