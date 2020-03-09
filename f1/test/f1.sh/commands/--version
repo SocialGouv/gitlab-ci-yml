@@ -19,7 +19,7 @@ f1_version() {
 actual="$(f1 --version)"
 expected="vX.Y.Z"
 
-[[ "$actual" = "$expected" ]] || \
+[[ "_$actual" = "_$expected" ]] || \
 die "'--version' should display current f1 version" \
   "expected '$expected', got '$actual'"
 
