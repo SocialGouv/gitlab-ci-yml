@@ -244,6 +244,11 @@ Kubectl job:
 
 # [.base_migrate_azure_db](./base_migrate_azure_db.yml)
 
+This will run the two following scripts for feature-branches deployments :
+
+  - yarn run migrate:latest
+  - yarn run seed:run
+    
 ## Usage
 
 ```yaml
@@ -251,6 +256,10 @@ include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_migrate_azure_db.yml
     ref: v8.0.0
+
+DB Migrate job:
+  extends: .base_migrate_azure_db
+
 ```
 
 # [.base_register_stage](./base_register_stage.yml)
