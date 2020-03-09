@@ -11,6 +11,8 @@
     - yarn run seed:run
 
 Migrate Azure DB (dev):
+  extends:
+    - .base_migrate_azure_db
   needs:
     - Build
     - Register image
