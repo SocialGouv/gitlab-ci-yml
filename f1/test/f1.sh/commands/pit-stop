@@ -1,0 +1,32 @@
+#!/bin/sh
+
+die () { echo "$@" ; cleanup ; exit 1; }
+cleanup () {
+  rm -rf /tmp/f1_test_pitstop_*
+
+  unset -f die cleanup
+  unset actual expected
+}
+
+\. ../../../f1.sh
+
+#
+
+CWD=$(mktemp -u /tmp/f1_test_pitstop_XXXXXX)
+
+cd $CWD
+actual="$(f1 pit-stop)"
+cd -
+
+expected "Initialized empty Git repository in ${CWD}/.f1/"
+
+[[ -d ${CWD}/.f1 ]] || \
+die "'pit-stop' should create an empty ${CWD}/.f1 folder"
+
+[[ "_$actual" = "_$expected" ]] || \
+die "'pit-stop' should output init message" \
+  "expected '$expected', got '$actual'"
+
+#
+
+cleanup
