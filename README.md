@@ -26,19 +26,6 @@ include:
   - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/register-stage.yml"
 ```
 
-## github-deployments-feature.yml
-
-These jobs sends the feature-branch deployed environment url and status to GitHub API so it appears in the GitHub PR.
-
-| Stage                        | usage                    |
-| ---------------------------- | ------------------------ |
-| Prepare                      | get github deployment id |
-| Send Url to GitHub (feature) | send deployment url      |
-
-| Env var              | example            |
-| -------------------- | ------------------ |
-| DEV_ENVIRONMENT_NAME | gitlab environment |
-
 # [.autodevops_simple_app](./autodevops_simple_app.yml)
 
 ## Usage
