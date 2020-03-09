@@ -1,0 +1,21 @@
+#
+
+.base_migrate_azure_db:
+  extends:
+    - .base_azure_db
+  stage: Notify Finished Deployment
+  image: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}
+  script:
+    - cd /app
+    - yarn run migrate:latest
+    - yarn run seed:run
+
+Migrate Azure DB (dev):
+  needs:
+    - Build
+    - Register image
+    - Create Azure DB (dev)
+    - Deploy app (dev)
+  variables:
+    NODE_ENV: development
+    DATABASE_URL: postgres://user_${CI_COMMIT_SHORT_SHA}%40${PGHOST}:pass_${CI_COMMIT_SHORT_SHA}@${PGHOST}/db_${CI_COMMIT_SHORT_SHA}?ssl=true

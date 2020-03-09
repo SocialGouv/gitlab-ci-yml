@@ -242,6 +242,17 @@ Kubectl job:
     - kubectl version --client
 ```
 
+# [.base_migrate_azure_db](./base_migrate_azure_db.yml)
+
+## Usage
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_migrate_azure_db.yml
+    ref: v8.0.0
+```
+
 # [.base_register_stage](./base_register_stage.yml)
 
 ## Usage
