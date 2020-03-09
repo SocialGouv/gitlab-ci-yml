@@ -1,3 +1,22 @@
+# [9.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v8.0.0...v9.0.0) (2020-03-09)
+
+
+* refactor(autodevops)!: move manual azure db migration to a separate base ([997333b](https://github.com/SocialGouv/gitlab-ci-yml/commit/997333bab3214e70c884c49801d0a4ed4e5f9574))
+
+
+### BREAKING CHANGES
+
+* move manual azure db migration to a separate base
+
+    You now need to include the base migrate to have the `Migrate Azure DB (dev)` set
+
+    ```yml
+    include:
+      - project: SocialGouv/gitlab-ci-yml
+        file: /base_migrate_azure_db.yml
+        ref: v8.0.0
+    ```
+
 # [8.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v7.3.3...v8.0.0) (2020-03-03)
 
 
