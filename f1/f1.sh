@@ -4,7 +4,7 @@
 
 f1() {
   if [ $# -lt 1 ]; then
-    nvm --help
+    f1 --help
     return
   fi
 
