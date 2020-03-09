@@ -170,13 +170,27 @@ Deploy app (prod):
     NEW_PASSWORD: pass_${CI_COMMIT_SHORT_SHA}
     DROP_DATABASE: db_${CI_COMMIT_SHORT_SHA}
     DROP_USER: user_${CI_COMMIT_SHORT_SHA}@${PGHOST}
+  before_script:
+    - >-
+      function export_from_k8s_secret() {
+        kubectl get secret $@ -o json | jq '.data | map_values(@base64d) | to_entries | map("\(.key)=\(.value|tostring)") | .[]'
+      }
+    - >-
+      for secret in $(export_from_k8s_secret azure-pg-admin-user -n ${CI_PROJECT_NAME}-secret); do *
+        echo "exporting ${secret/=*}";
+        export "${secret}";
+      done
 
 Create Azure DB (dev):
   extends:
     - .base_azure_db
   stage: "Deploy"
   allow_failure: true
+  environment:
+    name: review/${CI_COMMIT_REF_NAME}-dev
   script:
+    - export PGUSER="${ADMIN_PG_USER}"
+    - export PGPASSWORD="${PGPASSWORD}"
     - create-db-user
 
 Drop Azure DB (dev):
@@ -189,6 +203,8 @@ Drop Azure DB (dev):
     name: review/${CI_COMMIT_REF_NAME}-dev
     action: stop
   script:
+    - export PGUSER="${ADMIN_PG_USER}"
+    - export PGPASSWORD="${PGPASSWORD}"
     - drop-db-user
 
 #
