@@ -3,10 +3,6 @@
 include:
   - /base_semantic_release_stage.yml
 
-
-variables:
-  CI_DEBUG_TRACE: "true"
-
 stages:
   - Code Quality
   - Release
@@ -16,7 +12,7 @@ workflow:
     # Don't run when tagging a commit
     - if: $RELEASE
       when: never
-    - if: $CI_MERGE_REQUEST_ID
+    - if: $CI_PIPELINE_SOURCE == 'external_pull_request_event'
       when: never
     - if: $CI_COMMIT_BRANCH
 
