@@ -64,8 +64,8 @@ variables:
     # Only the root package.json dependencies will be installed
     - find packages -maxdepth 1 -type d | tail -n +2 |
       xargs -I {} sh -c "[[ -f "{}/package.json" ]] || exit 0 ; {
-        rm {}/package.json ;
-        jq 'del(.dependencies) | del(.devDependencies)' > {}/package.json
+      rm {}/package.json ;
+      jq 'del(.dependencies) | del(.devDependencies)' > {}/package.json
       ; } < {}/package.json"
 
     # Use local yarn cache

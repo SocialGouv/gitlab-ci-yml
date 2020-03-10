@@ -70,7 +70,6 @@ Build:
 
 #
 
-
 Trigger release:
   extends:
     - .base_stage
