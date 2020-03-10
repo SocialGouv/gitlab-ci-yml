@@ -1,3 +1,10 @@
+## [9.1.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v9.1.0...v9.1.1) (2020-03-10)
+
+
+### Bug Fixes
+
+* **deps:** update registry.gitlab.factory.social.gouv.fr/social… ([#94](https://github.com/SocialGouv/gitlab-ci-yml/issues/94)) ([172eed8](https://github.com/SocialGouv/gitlab-ci-yml/commit/172eed8928521d9a5a059dbbf229f5c9b36e07e1))
+
 # [9.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v9.0.0...v9.1.0) (2020-03-10)
 
 
