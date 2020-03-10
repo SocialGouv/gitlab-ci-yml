@@ -24,3 +24,38 @@
     expire_in: 1 day
     paths:
       - .next
+
+.base_yarn:
+  stage: Install
+  image: node:13-alpine
+  cache:
+    key: ${CI_COMMIT_REF_NAME}-${CI_JOB_NAME}
+    paths:
+      - yarn
+      - node_modules
+  script:
+    - yarn config set cache-folder $CI_PROJECT_DIR/yarn
+    - yarn --frozen-lockfile
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - node_modules
+
+.base_yarn_script:
+  stage: Code Quality
+  image: node:13-alpine
+
+.base_yarn_build_next:
+  extends: .base_yarn_script
+  stage: Code Quality
+  image: node:13-alpine
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - .next/cache
+  script:
+    - yarn build
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - .next

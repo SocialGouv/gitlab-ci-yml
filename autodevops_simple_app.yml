@@ -20,51 +20,38 @@ include:
 #
 
 Install:
-  extends: .base_yarn_quality
-  stage: Install
-  image: node:13-alpine
-  cache:
-    key: "$CI_COMMIT_REF_NAME-$CI_JOB_NAME"
-    paths:
-      - .yarn
-      - node_modules
-  script:
-    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
-    - yarn --frozen-lockfile
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - node_modules
+  extends: .base_yarn
 
-Quality tests:
+Lint:
+  extends: .base_yarn_script
   dependencies:
     - Install
-  image: node:13-alpine
-  stage: Code Quality
+  needs:
+    - Install
   script:
     - yarn lint
+
+Test:
+  extends: .base_yarn_script
+  dependencies:
+    - Install
+  needs:
+    - Install
+  script:
     - yarn test
 
 Build:
-  stage: Code Quality
-  image: node:13-alpine
+  extends: .base_yarn_build_next
   dependencies:
     - Install
-  cache:
-    key: "$CI_COMMIT_REF_NAME-$CI_JOB_NAME"
-    paths:
-      - .next/cache
-  script:
-    - yarn build
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - .next
+  needs:
+    - Install
 
 #
 
 Release:
   extends: .base_semantic_release_stage
+  dependencies: []
   stage: Registration
 
 #
@@ -78,7 +65,6 @@ Register image:
     - Build
   variables:
     CONTEXT: .
-    DOCKERFILE_PATH: Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE
 
 #
@@ -167,6 +153,7 @@ Deploy app (prod):
 
 .base_azure_db:
   image: "registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:0.24.0"
+  dependencies: []
   only:
     refs:
       - branches
@@ -176,6 +163,8 @@ Deploy app (prod):
     refs:
       - master
   variables:
+    GIT_STRATEGY: none
+    #
     NEW_DB_NAME: db_${CI_COMMIT_SHORT_SHA}
     NEW_USER: user_${CI_COMMIT_SHORT_SHA}@${PGHOST}
     NEW_PASSWORD: pass_${CI_COMMIT_SHORT_SHA}
