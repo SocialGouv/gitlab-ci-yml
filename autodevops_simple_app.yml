@@ -152,7 +152,7 @@ Deploy app (prod):
 #
 
 .base_azure_db:
-  image: "registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:0.24.0"
+  image: "registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:0.27.0"
   dependencies: []
   only:
     refs:
@@ -171,15 +171,9 @@ Deploy app (prod):
     DROP_DATABASE: db_${CI_COMMIT_SHORT_SHA}
     DROP_USER: user_${CI_COMMIT_SHORT_SHA}@${PGHOST}
   before_script:
-    - >-
-      function export_from_k8s_secret() {
-        kubectl get secret $@ -o json | jq '.data | map_values(@base64d) | to_entries | map("\(.key)=\(.value|tostring)") | .[]'
-      }
-    - >-
-      for secret in $(export_from_k8s_secret azure-pg-admin-user -n ${CI_PROJECT_NAME}-secret); do *
-        echo "exporting ${secret/=*}";
-        export "${secret}";
-      done
+    - kubectl get secret azure-pg-admin-user -n ${CI_PROJECT_NAME}-secret -o json
+    - kubectl get secret azure-pg-admin-user -n ${CI_PROJECT_NAME}-secret -o json | export_from_k8s_secret
+    - \. <(kubectl get secret azure-pg-admin-user -n ${CI_PROJECT_NAME}-secret -o json | export_from_k8s_secret)
 
 Create Azure DB (dev):
   extends:
@@ -190,7 +184,7 @@ Create Azure DB (dev):
     name: review/${CI_COMMIT_REF_NAME}-dev
   script:
     - export PGUSER="${ADMIN_PG_USER}"
-    - export PGPASSWORD="${PGPASSWORD}"
+    - export PGPASSWORD="${ADMIN_PG_PASSWORD}"
     - create-db-user
 
 Drop Azure DB (dev):
@@ -204,7 +198,7 @@ Drop Azure DB (dev):
     action: stop
   script:
     - export PGUSER="${ADMIN_PG_USER}"
-    - export PGPASSWORD="${PGPASSWORD}"
+    - export PGPASSWORD="${ADMIN_PG_PASSWORD}"
     - drop-db-user
 
 #
