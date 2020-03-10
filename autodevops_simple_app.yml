@@ -171,8 +171,6 @@ Deploy app (prod):
     DROP_DATABASE: db_${CI_COMMIT_SHORT_SHA}
     DROP_USER: user_${CI_COMMIT_SHORT_SHA}@${PGHOST}
   before_script:
-    - kubectl get secret azure-pg-admin-user -n ${CI_PROJECT_NAME}-secret -o json
-    - kubectl get secret azure-pg-admin-user -n ${CI_PROJECT_NAME}-secret -o json | export_from_k8s_secret
     - \. <(kubectl get secret azure-pg-admin-user -n ${CI_PROJECT_NAME}-secret -o json | export_from_k8s_secret)
 
 Create Azure DB (dev):
