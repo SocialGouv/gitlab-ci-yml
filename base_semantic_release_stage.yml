@@ -42,9 +42,9 @@ variables:
     LERNA_ARGS: --force-publish --yes
     #
     GIT_DEPTH: 4242
-  only:
-    variables:
-      - $RELEASE
+  rules:
+    - if: $RELEASE
+      when: always
   cache:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
     paths:
