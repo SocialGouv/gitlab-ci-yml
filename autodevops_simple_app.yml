@@ -7,6 +7,7 @@ stages:
   - Clean Up
 
 include:
+  - /base_azure_db_stage.yml
   - /base_create_namespace_stage.yml
   - /base_delete_useless_k8s_ns_stage.yml
   - /base_deploy_nodejs_chart_stage.yml
@@ -151,54 +152,13 @@ Deploy app (prod):
 
 #
 
-.base_azure_db:
-  image: "registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:0.27.0"
-  dependencies: []
-  only:
-    refs:
-      - branches
-    variables:
-      - $ENABLE_AZURE_POSTGRES
-  except:
-    refs:
-      - master
-  variables:
-    GIT_STRATEGY: none
-    #
-    NEW_DB_NAME: db_${CI_COMMIT_SHORT_SHA}
-    NEW_USER: user_${CI_COMMIT_SHORT_SHA}@${PGHOST}
-    NEW_PASSWORD: pass_${CI_COMMIT_SHORT_SHA}
-    DROP_DATABASE: db_${CI_COMMIT_SHORT_SHA}
-    DROP_USER: user_${CI_COMMIT_SHORT_SHA}@${PGHOST}
-  before_script:
-    - \. <(kubectl get secret azure-pg-admin-user -n ${CI_PROJECT_NAME}-secret -o json | export_from_k8s_secret)
-    - export PGHOST="${PG_HOST}"
-
 Create Azure DB (dev):
   extends:
-    - .base_azure_db
-  stage: "Deploy"
-  allow_failure: true
-  environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
-  script:
-    - export PGUSER="${ADMIN_PG_USER}"
-    - export PGPASSWORD="${ADMIN_PG_PASSWORD}"
-    - create-db-user
+    - .base_create_azure_db
 
 Drop Azure DB (dev):
   extends:
-    - .base_azure_db
-  stage: "Clean Up"
-  when: manual
-  allow_failure: true
-  environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
-    action: stop
-  script:
-    - export PGUSER="${ADMIN_PG_USER}"
-    - export PGPASSWORD="${ADMIN_PG_PASSWORD}"
-    - drop-db-user
+    - .base_drop_azure_db
 
 #
 
