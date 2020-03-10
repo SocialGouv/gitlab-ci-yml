@@ -3,6 +3,10 @@
 include:
   - /base_semantic_release_stage.yml
 
+
+variables:
+  CI_DEBUG_TRACE: "true"
+
 stages:
   - Code Quality
   - Release
