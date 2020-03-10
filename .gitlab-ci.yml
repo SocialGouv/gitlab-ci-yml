@@ -13,6 +13,8 @@ workflow:
     - if: $RELEASE
       when: never
     - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - if: $CI_COMMIT_BRANCH
 
 Lint:
   stage: Code Quality
