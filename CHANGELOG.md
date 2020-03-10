@@ -1,3 +1,11 @@
+# [9.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v9.0.0...v9.1.0) (2020-03-10)
+
+
+### Features
+
+* **autodevops:** aggresive install-build-register speed ([#85](https://github.com/SocialGouv/gitlab-ci-yml/issues/85)) ([d6e529c](https://github.com/SocialGouv/gitlab-ci-yml/commit/d6e529c4d62cc4372ac053b8d99bafdc309a0f26))
+* **autodevops:** get pg admin cred from k8s secret ([#91](https://github.com/SocialGouv/gitlab-ci-yml/issues/91)) ([d0c1cc9](https://github.com/SocialGouv/gitlab-ci-yml/commit/d0c1cc9ae1aa244266094801fe215d9501a536d7))
+
 # [9.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v8.0.0...v9.0.0) (2020-03-09)
 
 
