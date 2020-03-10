@@ -79,7 +79,6 @@ Trigger release:
 
 Release:
   extends: .base_semantic_release_stage
-  dependencies: []
   stage: Install
 
 #

@@ -7,6 +7,12 @@ stages:
   - Code Quality
   - Release
 
+default:
+  except:
+    variables:
+      # Don't run when tagging a commit
+      - $RELEASE
+
 Lint:
   stage: Code Quality
   image: node:13-alpine
@@ -14,8 +20,15 @@ Lint:
     - npx yaml-lint *.yml
     - npx prettier --check *.yml
 
+Trigger release:
+  stage: Code Quality
+  extends:
+    - .base_trigger_release_stage
+
 Release:
-  extends: .base_semantic_release_stage
+  stage: Release
+  extends:
+    - .base_semantic_release_stage
   variables:
     SEMANTIC_RELEASE_PLUGINS: "@semantic-release/changelog @semantic-release/exec @semantic-release/git"
 
