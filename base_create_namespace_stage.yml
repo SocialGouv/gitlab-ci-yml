@@ -14,7 +14,7 @@ variables:
   script:
     - echo "kubectl get namespace ${K8S_NAMESPACE}"
     # Skip the job if the namespace exists
-    - "[[ $(kubectl get namespace ${K8S_NAMESPACE}) ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
+    - "[[ $(kubectl get namespace ${K8S_NAMESPACE} ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
     #
     - kubectl create namespace ${K8S_NAMESPACE}
     #
