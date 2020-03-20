@@ -47,8 +47,6 @@
 
 .base_yarn_build_next:
   extends: .base_yarn_script
-  stage: Code Quality
-  image: node:13-alpine
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
