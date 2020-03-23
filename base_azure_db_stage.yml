@@ -21,7 +21,6 @@
     DROP_USER: user_${CI_COMMIT_SHORT_SHA}@${PGHOST}
   before_script:
     - \. <(kubectl get secret azure-pg-admin-user -n ${CI_PROJECT_NAME}-secret -o json | export_from_k8s_secret)
-    - export PGHOST="${PG_HOST}"
 
 .base_create_azure_db:
   extends:
@@ -31,8 +30,6 @@
   environment:
     name: review/${CI_COMMIT_REF_NAME}-dev
   script:
-    - export PGUSER="${ADMIN_PG_USER}"
-    - export PGPASSWORD="${ADMIN_PG_PASSWORD}"
     - create-db-user
 
 .base_drop_azure_db:
@@ -45,6 +42,4 @@
     name: review/${CI_COMMIT_REF_NAME}-dev
     action: stop
   script:
-    - export PGUSER="${ADMIN_PG_USER}"
-    - export PGPASSWORD="${ADMIN_PG_PASSWORD}"
     - drop-db-user
