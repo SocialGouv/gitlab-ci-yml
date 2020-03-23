@@ -25,6 +25,9 @@ Install:
 
 Lint:
   extends: .base_yarn_script
+  except:
+    variables:
+      - $CODE_QUALITY_DISABLED
   dependencies:
     - Install
   needs:
@@ -34,6 +37,9 @@ Lint:
 
 Test:
   extends: .base_yarn_script
+  except:
+    variables:
+      - $TEST_DISABLED
   dependencies:
     - Install
   needs:
