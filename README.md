@@ -48,6 +48,8 @@ Standard @socialgouv pipeline using [@socialgouv/helm-charts/app](https://github
 
 Customize `app.values.yml` with the [default helm chart values.yml](https://github.com/SocialGouv/helm-charts/blob/master/charts/app/values.yaml).
 
+If you `ENABLE_AZURE_DB`, you need a secret `azure-pg-admin-user` in your cluster namespace `[app.name]-secret`
+
 # [.base_create_namespace_stage](./base_create_namespace_stage.yml)
 
 ## Usage
