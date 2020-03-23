@@ -44,6 +44,8 @@ variables:
   ENABLE_AZURE_POSTGRES: 1 # enable postgres deployment using [azure-db](https://github.com/SocialGouv/docker/tree/master/azure-db)
 ```
 
+Customize `app.values.yml` with the [default helm chart values.yml](https://github.com/SocialGouv/helm-charts/blob/master/charts/app/values.yaml)
+
 # [.base_create_namespace_stage](./base_create_namespace_stage.yml)
 
 ## Usage
