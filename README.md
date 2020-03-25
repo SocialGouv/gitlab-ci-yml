@@ -28,6 +28,8 @@ include:
 
 # [.autodevops_simple_app](./autodevops_simple_app.yml)
 
+Standard @socialgouv pipeline using [@socialgouv/helm-charts/app](https://github.com/SocialGouv/helm-charts/blob/master/charts/app) for deployment.
+
 ## Usage
 
 ```yaml
@@ -41,14 +43,22 @@ variables:
   RANCHER_PROJECT_ID: "c-gsm8d:p-pwpk6" # "default" project id here
   PORT: 8080
   VALUES_FILE: ./.k8s/app.values.yml # Your values
-  ENABLE_AZURE_POSTGRES: 1 # enable postgres deployment using [azure-db](https://github.com/SocialGouv/docker/tree/master/azure-db)
+  ENABLE_AZURE_POSTGRES: 1
 ```
-
-Standard @socialgouv pipeline using [@socialgouv/helm-charts/app](https://github.com/SocialGouv/helm-charts/blob/master/charts/app) for deployment.
 
 Customize `app.values.yml` with the [default helm chart values.yml](https://github.com/SocialGouv/helm-charts/blob/master/charts/app/values.yaml).
 
+You can also set these in gitlab-ci.yml `variables` :
+
+| var                   | usage                                                                                                |
+| --------------------- | ---------------------------------------------------------------------------------------------------- |
+| ENABLE_AZURE_DB       | enable Azure PG database using [azure-db](https://github.com/SocialGouv/docker/tree/master/azure-db) |
+| TEST_DISABLED         | disable test job                                                                                     |
+| CODE_QUALITY_DISABLED | disable lint job                                                                                     |
+
 If you `ENABLE_AZURE_DB`, you need a secret `azure-pg-admin-user` in your cluster namespace `[app.name]-secret`
+
+Disabling test and lint is for debugging purposes
 
 # [.base_create_namespace_stage](./base_create_namespace_stage.yml)
 
