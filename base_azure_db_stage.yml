@@ -1,45 +1,40 @@
 #
 
-.base_azure_db:
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:0.29.0
-  dependencies: []
-  only:
-    refs:
-      - branches
-    variables:
-      - $ENABLE_AZURE_POSTGRES
-  except:
-    refs:
-      - master
+variables:
+  HELM_CHART_VERSION: "3.0.0"
+  K8S_NAMESPACE: "${KUBE_NAMESPACE}"
+
+.base_managed_pg:
+  environment:
+    name: fabrique-dev
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/helm:0.25.0
+  script:
+    - echo "kubectl config set-context --current --namespace=${K8S_NAMESPACE}"
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    #
+    - helm init --client-only
+    - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}/helm-just-linux-${HELM_CHART_VERSION}.tgz | tar -C $(helm home) -xzv
+    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}
+    #
+    - echo "helm just fetch socialgouv/managed-pg#${HELM_CHART_VERSION}"
+    - helm just fetch "socialgouv/managed-pg#${HELM_CHART_VERSION}"
+    #
+    - echo "$ helm just render ${CONTEXT} managed-pg ${HELM_RENDER_ARGS}"
+    - helm just render ${CONTEXT} managed-pg ${HELM_RENDER_ARGS}
+    #
+    
+    - echo "$ helm just apply ${CONTEXT} ${HELM_APPLY_ARGS} "
+    - helm just apply ${CONTEXT} ${HELM_APPLY_ARGS}
+    
+.base_create_db_user:
+  extends:
+    - .base_managed_pg
   variables:
     GIT_STRATEGY: none
     #
-    NEW_DB_NAME: db_${CI_COMMIT_SHORT_SHA}
-    NEW_USER: user_${CI_COMMIT_SHORT_SHA}@${PGHOST}
-    NEW_PASSWORD: pass_${CI_COMMIT_SHORT_SHA}
-    DROP_DATABASE: db_${CI_COMMIT_SHORT_SHA}
-    DROP_USER: user_${CI_COMMIT_SHORT_SHA}@${PGHOST}
-  before_script:
-    - \. <(kubectl get secret azure-pg-admin-user -n ${CI_PROJECT_NAME}-secret -o json | export_from_k8s_secret)
-
-.base_create_azure_db:
-  extends:
-    - .base_azure_db
-  stage: Registration
-  allow_failure: true
-  environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
-  script:
-    - create-db-user
-
-.base_drop_azure_db:
-  extends:
-    - .base_azure_db
-  stage: "Clean Up"
-  when: manual
-  allow_failure: true
-  environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
-    action: stop
-  script:
-    - drop-db-user
+    HELM_RENDER_ARGS:
+      --set db.name=db_${CI_COMMIT_REF_SLUG}
+      --set db.password=pass_${CI_COMMIT_REF_SLUG}
+      --set db.user=user_${CI_COMMIT_REF_SLUG}
+    HELM_APPLY_ARGS: >-
+      -l app=create-db-user
