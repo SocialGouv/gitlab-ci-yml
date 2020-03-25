@@ -1,3 +1,18 @@
+# [10.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v9.1.1...v10.0.0) (2020-03-25)
+
+
+### Bug Fixes
+
+* **yarn:** remove extra stage, image ([#108](https://github.com/SocialGouv/gitlab-ci-yml/issues/108)) ([2a567f5](https://github.com/SocialGouv/gitlab-ci-yml/commit/2a567f5f1de9e8795750b76d38d8d5471873c44e))
+
+
+* feat(charts)!: update to socialgouv/helm-chats@4.0.1 (#101) ([368ce63](https://github.com/SocialGouv/gitlab-ci-yml/commit/368ce6305d61b66c39363c5fcfee32126a1d31ef)), closes [#101](https://github.com/SocialGouv/gitlab-ci-yml/issues/101) [/github.com/SocialGouv/helm-charts/blob/master/CHANGELOG.md#400-2020-03-03](https://github.com//github.com/SocialGouv/helm-charts/blob/master/CHANGELOG.md/issues/400-2020-03-03)
+
+
+### BREAKING CHANGES
+
+* update to socialgouv/helm-chats@4.0.1
+
 ## [9.1.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v9.1.0...v9.1.1) (2020-03-10)
 
 
