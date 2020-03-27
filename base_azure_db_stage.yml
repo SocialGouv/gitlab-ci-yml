@@ -1,42 +1,72 @@
 #
 
-variables:
-  HELM_CHART_VERSION: "3.0.0"
-  K8S_NAMESPACE: "${KUBE_NAMESPACE}"
-
 .base_managed_pg:
+  variables:
+    HELM_CHART_VERSION: "v6.1.0-alpha.1"
+    K8S_NAMESPACE: "${KUBE_NAMESPACE}"
+    CONTEXT: "${CI_PROJECT_NAME}-${CI_PIPELINE_ID}" # context should be < 63 chars for k8s labels
   environment:
-    name: fabrique-dev
+    name: review/${CI_COMMIT_REF_NAME}-dev
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/helm:0.25.0
+  only:
+    refs:
+      - branches
+    variables:
+      - $ENABLE_AZURE_POSTGRES
+  except:
+    refs:
+      - master
   script:
+    - echo "=== [JOB] base_managed_pg"
+    - echo "=== Set k8s context namespace=${K8S_NAMESPACE} ==="
     - echo "kubectl config set-context --current --namespace=${K8S_NAMESPACE}"
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
     - helm init --client-only
-    - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}/helm-just-linux-${HELM_CHART_VERSION}.tgz | tar -C $(helm home) -xzv
-    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}
+    - echo "=== Install just plugin@2.8.0 ==="
+    - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v2.8.0/helm-just-linux-2.8.0.tgz | tar -C $(helm home) -xzv
     #
-    - echo "helm just fetch socialgouv/managed-pg#${HELM_CHART_VERSION}"
-    - helm just fetch "socialgouv/managed-pg#${HELM_CHART_VERSION}"
+    - echo "=== Checkout socialgouv/helm-charts@${HELM_CHART_VERSION} ==="
+    - helm repo add socialgouv https://raw.githubusercontent.com/socialgouv/helm-charts/${HELM_CHART_VERSION}
     #
+    - echo "=== Fetch socialgouv/managed-pg@${HELM_CHART_VERSION} helm chart ==="
+    - helm just fetch socialgouv/managed-pg#${HELM_CHART_VERSION}
+    #
+    - echo "=== Render socialgouv/managed-pg in context ${CONTEXT} with \"${HELM_RENDER_ARGS}\""
     - echo "$ helm just render ${CONTEXT} managed-pg ${HELM_RENDER_ARGS}"
     - helm just render ${CONTEXT} managed-pg ${HELM_RENDER_ARGS}
     #
-
+    - echo "=== Apply socialgouv/managed-pg in context ${CONTEXT} with \"${HELM_APPLY_ARGS}\""
     - echo "$ helm just apply ${CONTEXT} ${HELM_APPLY_ARGS} "
     - helm just apply ${CONTEXT} ${HELM_APPLY_ARGS}
 
-.base_create_db_user:
-  stage: Registration
-  allow_failure: true
+.base_create_azure_db:
   extends:
     - .base_managed_pg
+  stage: Registration
+  allow_failure: true
   variables:
-    NEW_DB_EXTENSIONS: pgcrypto
     GIT_STRATEGY: none
     #
-    HELM_RENDER_ARGS: --set db.name=db_${CI_COMMIT_REF_SLUG}
-      --set db.password=pass_${CI_COMMIT_REF_SLUG}
-      --set db.user=user_${CI_COMMIT_REF_SLUG}
+    HELM_RENDER_ARGS: --set db.name=db_${CI_PIPELINE_ID}
+      --set db.password=pass_${CI_PIPELINE_ID}
+      --set db.user=user_${CI_PIPELINE_ID}
+      --set env[0].name=NEW_DB_EXTENSIONS
+      --set env[0].value=pgcrypto
     HELM_APPLY_ARGS: >-
       -l app=create-db-user
+
+.base_drop_azure_db:
+  extends:
+    - .base_managed_pg
+  stage: "Clean Up"
+  when: manual
+  allow_failure: true
+  variables:
+    GIT_STRATEGY: none
+    #
+    HELM_RENDER_ARGS: --set db.name=db_${CI_PIPELINE_ID}
+      --set db.password=pass_${CI_PIPELINE_ID}
+      --set db.user=user_${CI_PIPELINE_ID}
+    HELM_APPLY_ARGS: >-
+      -l app=drop-db-user
