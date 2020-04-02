@@ -44,6 +44,7 @@ variables:
 
     - helm just render ${CONTEXT} app
       ${HELM_RENDER_ARGS}
+      --debug
       --values /tmp/values.socialgouv.yaml
       --values ./values.yaml
     - helm just apply ${CONTEXT}
