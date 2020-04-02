@@ -6,6 +6,7 @@ variables:
 
 .base_deploy_app_chart_stage:
   extends: .base_docker_helm_image_stage
+  dependencies: []
   script:
     - echo "kubectl config set-context --current --namespace=${K8S_NAMESPACE}"
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
