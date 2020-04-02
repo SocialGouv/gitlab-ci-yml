@@ -108,7 +108,7 @@ Deploy app (dev):
   variables:
     HOST: ${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   environment:
-    name: ${CI_COMMIT_REF_NAME}-dev
+    name: review/${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
     on_stop: Stop review
 
@@ -120,7 +120,7 @@ Stop review:
       - tags
       - master
   environment:
-    name: ${CI_COMMIT_REF_NAME}-dev
+    name: review/${CI_COMMIT_REF_NAME}-dev
     action: stop
   when: manual
   allow_failure: true
@@ -178,7 +178,7 @@ Notify Fail (review):
   dependencies:
     - Notify Starting Deployment
   environment:
-    name: ${CI_COMMIT_REF_NAME}-dev
+    name: review/${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   before_script:
     - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
@@ -193,7 +193,7 @@ Notify Success (review):
   dependencies:
     - Notify Starting Deployment
   environment:
-    name: ${CI_COMMIT_REF_NAME}-dev
+    name: review/${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   before_script:
     - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
