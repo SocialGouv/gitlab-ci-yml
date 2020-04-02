@@ -29,7 +29,7 @@
   stage: Registration
   allow_failure: true
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: ${CI_COMMIT_REF_NAME}-dev
   script:
     - export PGUSER="${ADMIN_PG_USER}"
     - export PGPASSWORD="${ADMIN_PG_PASSWORD}"
@@ -42,7 +42,7 @@
   when: manual
   allow_failure: true
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: ${CI_COMMIT_REF_NAME}-dev
     action: stop
   script:
     - export PGUSER="${ADMIN_PG_USER}"
