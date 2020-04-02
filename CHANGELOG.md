@@ -1,3 +1,27 @@
+# [11.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v10.0.0...v11.0.0) (2020-04-02)
+
+
+* feat(autodevops)!: use .base_deploy_app_chart_stage (#117) ([05fb547](https://github.com/SocialGouv/gitlab-ci-yml/commit/05fb5475663aa6830bbcaaedb0de62c9df4db277)), closes [#117](https://github.com/SocialGouv/gitlab-ci-yml/issues/117)
+* feat(deploy)!: introduce new deploy app chart (#116) ([981167a](https://github.com/SocialGouv/gitlab-ci-yml/commit/981167a98f6c6d446513fa37386799ef822ed555)), closes [#116](https://github.com/SocialGouv/gitlab-ci-yml/issues/116)
+
+
+### Features
+
+* **autodevops:** make lint and test jobs optional ([#112](https://github.com/SocialGouv/gitlab-ci-yml/issues/112)) ([c7dcc7b](https://github.com/SocialGouv/gitlab-ci-yml/commit/c7dcc7b714609d7521638cb92c10f58982c2ed7a))
+
+
+### BREAKING CHANGES
+
+* **autodevops**: use .base_deploy_app_chart_stage
+    - We are now using the fusion of the hpa and nodejs chart as in deployment. This new chart can drastically reduce what you need to put in your k8s values file. see https://github.com/SocialGouv/helm-charts/tree/v5.2.2/charts/app
+* introduce new deploy app chart
+    - We replaced `base_deploy_hpa_chart_stage` and `base_deploy_nodejs_chart_stage` by one `base_deploy_app_chart_stage`
+    that does the same as both.
+    - The `base_deploy_app_chart_stage` is using the new [socialgouv/app helm chart](https://github.com/SocialGouv/helm-charts/releases/tag/v5.0.0)
+    - The `base_deploy_app_chart_stage` has a new [values.socialgouv.yaml](https://github.com/SocialGouv/helm-charts/blob/v5.0.0/charts/app/values.socialgouv.yaml)
+    that provides some common SocialGouv production values.
+    You can override them through the `HELM_RENDER_ARGS` env variable.
+
 # [10.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v9.1.1...v10.0.0) (2020-03-25)
 
 
