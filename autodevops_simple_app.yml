@@ -10,7 +10,7 @@ include:
   - /base_azure_db_stage.yml
   - /base_create_namespace_stage.yml
   - /base_delete_useless_k8s_ns_stage.yml
-  - /base_deploy_nodejs_chart_stage.yml
+  - /base_deploy_app_chart_stage.yml
   - /base_docker_helm_image_stage.yml
   - /base_docker_kubectl_image_stage.yml
   - /base_notify_github_stage.yml
@@ -90,24 +90,13 @@ Create namespace:
 
 .deploy_app_stage:
   stage: Deploy
-  extends: .base_deploy_nodejs_chart_stage
-  image: registry.gitlab.com/gitlab-org/cluster-integration/auto-deploy-image:v0.13.0
-  dependencies: []
-  before_script:
-    #
-    - auto-deploy check_kube_domain
-    - auto-deploy ensure_namespace
-    - auto-deploy initialize_tiller
-    - auto-deploy create_secret
-    #
-    # NOTE(douglasduteil): ensure to have `envsubst`
-    - apk add gettext
+  extends: .base_deploy_app_chart_stage
   variables:
     REMOTE_URL: "https://github.com/${CI_PROJECT_PATH}.git"
     K8S_NAMESPACE: $KUBE_NAMESPACE
     REGISTRY: $CI_REGISTRY_IMAGE
     IMAGE_TAG: $CI_COMMIT_SHA
-    CONTEXT: app
+    CONTEXT: ${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}
 
 Deploy app (dev):
   extends:
