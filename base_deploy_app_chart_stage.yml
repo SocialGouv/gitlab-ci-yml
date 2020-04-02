@@ -1,10 +1,10 @@
 #
 
 variables:
-  HELM_CHART_VERSION: "4.0.1"
+  HELM_CHART_VERSION: "5.0.0"
   K8S_NAMESPACE: "${KUBE_NAMESPACE}"
 
-.base_deploy_nodejs_chart_stage:
+.base_deploy_app_chart_stage:
   extends: .base_docker_helm_image_stage
   script:
     - echo "kubectl config set-context --current --namespace=${K8S_NAMESPACE}"
@@ -14,16 +14,15 @@ variables:
     - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}/helm-just-linux-${HELM_CHART_VERSION}.tgz | tar -C $(helm home) -xzv
     - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}
 
-    - echo "helm just fetch socialgouv/nodejs#${HELM_CHART_VERSION}"
-    - helm just fetch "socialgouv/nodejs#${HELM_CHART_VERSION}"
+    - echo "helm just fetch socialgouv/app#${HELM_CHART_VERSION}"
+    - helm just fetch "socialgouv/app#${HELM_CHART_VERSION}"
 
+    - envsubst < ./.charts/app/values.socialgouv.yaml > /tmp/values.socialgouv.yaml
     - envsubst < $VALUES_FILE > ./values.yaml
     # Set own wildcard when deploying in dev environment
     - >-
       HELM_RENDER_ARGS="
         --set image.tag=${IMAGE_TAG}
-        --set ingress.hosts[0].host=${HOST}
-        --set ingress.tls[0].hosts[0]=${HOST}
         ${HELM_RENDER_ARGS}"
     # Set own certificate when deploying in prod environment
     - |-
@@ -35,12 +34,15 @@ variables:
       else
         HELM_RENDER_ARGS=" \
           --set ingress.tls[0].secretName=wildcard-crt \
+          --set ingress.hosts[0].host=${HOST} \
+          --set ingress.tls[0].hosts[0]=${HOST} \
           ${HELM_RENDER_ARGS}"
       fi
 
-    - echo "$ helm just render ${CONTEXT} nodejs ${HELM_RENDER_ARGS} --values ./values.yaml"
+    - echo "$ helm just render ${CONTEXT} app ${HELM_RENDER_ARGS} --values /tmp/values.socialgouv.yaml --values ./values.yaml"
 
-    - helm just render ${CONTEXT} nodejs
+    - helm just render ${CONTEXT} app
       ${HELM_RENDER_ARGS}
+      --values /tmp/values.socialgouv.yaml
       --values ./values.yaml
     - helm just apply ${CONTEXT}

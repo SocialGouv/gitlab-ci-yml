@@ -107,104 +107,57 @@ Delete useless k8s namespaces:
     K8S_NAMESPACE_PREFIX: "${PROJECT}-${CI_PROJECT_ID}-review"
 ```
 
-# [.base_deploy_hpa_chart_stage](./base_deploy_hpa_chart_stage.yml)
+# [.base_deploy_app_chart_stage](./base_deploy_app_chart_stage.yml)
 
 ## Usage
 
 ```yaml
 include:
-  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_deploy_hpa_chart_stage.yml"
-  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/base_docker_helm_image_stage.yml"
-  # or
-  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_deploy_hpa_chart_stage.yml"
-  # - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/<version>/base_docker_helm_image_stage.yml"
-
-#
-
-.deploy_myapp_stage: &deploy_myapp_stage
-  dependencies: []
-  stage: Deploy
-  extends: .base_deploy_hpa_chart_stage
-  variables:
-    CONTEXT: app
-    VALUES_FILE: ./.k8s/app.values.yml
-  before_script:
-    - K8S_NAMESPACE=my-namespace
-    - HOST=myapp.dev.factory.social.gouv.fr
-    #
-    # In production (if the master branch is your production)
-    - [[ "${BRANCH_NAME}" = "master" ]] && export PRODUCTION=true
-
-#
-
-Deploy myapp (dev):
-  <<: *deploy_myapp_stage
-  only:
-    - branches
-  except:
-    - master
-  environment:
-    name: $DEV_ENVIRONMENT_NAME
-
-Deploy myapp (prod):
-  <<: *deploy_myapp_stage
-  only:
-    - master
-  environment:
-    name: $PROD_ENVIRONMENT_NAME
-```
-
-# [.base_deploy_nodejs_chart_stage](./base_deploy_nodejs_chart_stage.yml)
-
-## Note
-
-Please consider using `base_deploy_hpa_chart_stage` block instead.
-
-## Usage
-
-```yaml
-include:
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_deploy_nodejs_chart_stage.yml
-    ref: v10.0.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
     ref: v10.0.0
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_deploy_app_chart_stage.yml
+    ref: v10.0.0
 
 #
 
-.deploy_myapp_stage: &deploy_myapp_stage
+.deploy_myapp_stage:
   dependencies: []
   stage: Deploy
-  extends: .base_deploy_nodejs_chart_stage
+  extends:
+    - .base_deploy_app_chart_stage
   variables:
     CONTEXT: app
     VALUES_FILE: ./.k8s/app.values.yml
     # optional
     HELM_RENDER_ARGS: "--set deployment.port 8080"
-  before_script:
-    - K8S_NAMESPACE=my-namespace
-    - HOST=myapp.dev.factory.social.gouv.fr
-    # In production (if the master branch is your production)
-    - [[ "${BRANCH_NAME}" = "master" ]] && export PRODUCTION=true
 
 #
 
 Deploy myapp (dev):
-  <<: *deploy_myapp_stage
-  only:
-    - branches
+  extends:
+    - .deploy_myapp_stage
   except:
     - master
+  variables:
+    HOST: ${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   environment:
-    name: fabrique-dev
+    name: ${CI_COMMIT_REF_NAME}-dev
+    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
-Deploy myapp (prod):
-  <<: *deploy_myapp_stage
+Deploy app (prod):
+  extends:
+    - .deploy_myapp_stage
   only:
     - master
+  variables:
+    HOST: ${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+    K8S_NAMESPACE: ${CI_PROJECT_NAME}
+    PRODUCTION: "true"
   environment:
     name: prod
+    url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 ```
 
 # [.base_docker_helm_image_stage](./base_docker_helm_image_stage.yml)
