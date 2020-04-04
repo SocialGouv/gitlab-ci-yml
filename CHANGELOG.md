@@ -1,3 +1,10 @@
+# [11.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v11.0.0...v11.1.0) (2020-04-04)
+
+
+### Features
+
+* add NOTIFY_DISABLED variable ([#118](https://github.com/SocialGouv/gitlab-ci-yml/issues/118)) ([35f1e98](https://github.com/SocialGouv/gitlab-ci-yml/commit/35f1e98a373333462e3f494efe79a8ad48a23dab))
+
 # [11.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v10.0.0...v11.0.0) (2020-04-02)
 
 
