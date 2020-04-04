@@ -28,6 +28,8 @@
     - .base_azure_db
   stage: Registration
   allow_failure: true
+  variables:
+    NEW_DB_EXTENSIONS: pgcrypto
   environment:
     name: review/${CI_COMMIT_REF_NAME}-dev
   script:
