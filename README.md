@@ -55,6 +55,7 @@ You can also set these in gitlab-ci.yml `variables` :
 | ENABLE_AZURE_DB       | enable Azure PG database using [azure-db](https://github.com/SocialGouv/docker/tree/master/azure-db) |
 | TEST_DISABLED         | disable test job                                                                                     |
 | CODE_QUALITY_DISABLED | disable lint job                                                                                     |
+| NOTIFY_DISABLED       | disable GitHub environment notifications                                                             |
 
 If you `ENABLE_AZURE_DB`, you need a secret `azure-pg-admin-user` in your cluster namespace `[app.name]-secret`
 
