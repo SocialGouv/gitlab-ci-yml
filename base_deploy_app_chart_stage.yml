@@ -44,7 +44,7 @@ variables:
     - echo "$ helm just render ${CONTEXT} app ${HELM_RENDER_ARGS} --values /tmp/values.socialgouv.yaml --values ./values.yaml"
 
     - helm just render ${CONTEXT} app
-      ${HELM_RENDER_ARGS}
       --values /tmp/values.socialgouv.yaml
       --values ./values.yaml
+      ${HELM_RENDER_ARGS}
     - helm just apply ${CONTEXT}
