@@ -1,3 +1,40 @@
+# [12.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v11.1.0...v12.0.0) (2020-04-06)
+
+
+* feat(deps)!: update socialgouv/app github release tag to v6.0.0 (#120) ([90cfd3c](https://github.com/SocialGouv/gitlab-ci-yml/commit/90cfd3c73c12fb7f5640233879a7c373a7ad3e63)), closes [#120](https://github.com/SocialGouv/gitlab-ci-yml/issues/120)
+
+
+### BREAKING CHANGES
+
+* **Update socialgouv/app github release tag to v6.0.0**
+
+    A `PORT` variable is now required
+
+    Before
+
+    ```yaml
+    Deploy myapp:
+      extends:
+        - .base_deploy_app_chart_stage
+      variables:
+        CONTEXT: app
+        VALUES_FILE: ./.k8s/app.values.yml
+    ```
+
+    After
+
+    ```yaml
+    Deploy myapp:
+      extends:
+        - .base_deploy_app_chart_stage
+      variables:
+        PORT: 8080
+        CONTEXT: app
+        VALUES_FILE: ./.k8s/app.values.yml
+    ```
+
+see https://github.com/SocialGouv/helm-charts/releases/tag/v6.0.0
+
 # [11.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v11.0.0...v11.1.0) (2020-04-04)
 
 
