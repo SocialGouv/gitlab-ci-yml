@@ -1,3 +1,10 @@
+# [13.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v13.0.0...v13.1.0) (2020-04-07)
+
+
+### Features
+
+* **azure-db:** add pgcrypto ([#119](https://github.com/SocialGouv/gitlab-ci-yml/issues/119)) ([fc07f72](https://github.com/SocialGouv/gitlab-ci-yml/commit/fc07f726e567aba69d8d28d4006d1c3735b3b05c))
+
 # [13.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v12.0.0...v13.0.0) (2020-04-07)
 
 
