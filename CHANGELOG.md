@@ -1,3 +1,19 @@
+# [13.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v12.0.0...v13.0.0) (2020-04-07)
+
+
+### Bug Fixes
+
+* **deploy-app:** move HELM_RENDER_ARGS at end of the render cmd ([#123](https://github.com/SocialGouv/gitlab-ci-yml/issues/123)) ([004ce05](https://github.com/SocialGouv/gitlab-ci-yml/commit/004ce0514eed42af790e636e5b0332f58b9bc676))
+
+
+* feat(deploy-app)!: force set certificate from $CONTEXT (#122) ([0b402dd](https://github.com/SocialGouv/gitlab-ci-yml/commit/0b402dd30f0f88331f46187003a4d111ada0143a)), closes [#122](https://github.com/SocialGouv/gitlab-ci-yml/issues/122)
+
+
+### BREAKING CHANGES
+
+* force set certificate from $CONTEXT  
+    Might break existing certificates in production !
+
 # [12.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v11.1.0...v12.0.0) (2020-04-06)
 
 
