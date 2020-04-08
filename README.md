@@ -257,3 +257,22 @@ Release:
     SEMANTIC_RELEASE_PLUGINS: "@semantic-release/changelog @semantic-release/git"
 
 ```
+
+# [.base_snyk_scan](./base_snyk_scan.yml)
+
+A manual job to run a [Snyk.io](https://snyk.io) scan on the main repo docker image.
+
+You'll need to have a `SNYK_TOKEN` CI variable.
+
+## Usage
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_snyk_scan.yml
+    ref: v13.1.0
+
+Scan:
+  stage: Deploy
+  extends: .base_snyk_scan
+```
