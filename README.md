@@ -272,7 +272,7 @@ include:
     file: /base_snyk_scan.yml
     ref: v13.1.0
 
-Scan:
+Snyk Scan:
   stage: Deploy
   extends: .base_snyk_scan
 ```
