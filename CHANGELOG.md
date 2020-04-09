@@ -1,3 +1,14 @@
+# [14.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v13.2.0...v14.0.0) (2020-04-09)
+
+
+* fix(app)!: do not override set production values (#126) ([339d794](https://github.com/SocialGouv/gitlab-ci-yml/commit/339d79434813c7d890bb3304be60a98db639c3c8)), closes [#126](https://github.com/SocialGouv/gitlab-ci-yml/issues/126)
+
+
+### BREAKING CHANGES
+
+* **app** do not override set production values  
+    As we use the production ready values in `values.socialgouv.yaml` of https://github.com/SocialGouv/helm-charts/tree/v6.0.0/charts/app, we only need to override the render when not in production
+
 # [13.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v13.1.0...v13.2.0) (2020-04-09)
 
 
