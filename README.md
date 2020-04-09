@@ -199,13 +199,38 @@ Kubectl job:
     - kubectl version --client
 ```
 
+# [.base_notify_mattermost](./base_notify_mattermost.yml)
+
+Send a mattermost notification on pipeline success/failure
+
+You'll need a `MATTERMOST_WEBHOOK` variable in your CI.
+
+## Usage
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_notify_mattermost.yml
+    ref: v13.1.0
+
+Notify fail:
+  extends: .base_notify_fail_mattermost
+  variables:
+    MATTERMOST_CHANNEL: notifications
+
+Notify success:
+  extends: .base_notify_success_mattermost
+  variables:
+    MATTERMOST_CHANNEL: notifications
+```
+
 # [.base_migrate_azure_db](./base_migrate_azure_db.yml)
 
 This will run the two following scripts for feature-branches deployments :
 
-  - yarn run migrate:latest
-  - yarn run seed:run
-    
+- yarn run migrate:latest
+- yarn run seed:run
+
 ## Usage
 
 ```yaml
