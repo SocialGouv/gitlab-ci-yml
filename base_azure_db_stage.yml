@@ -1,7 +1,7 @@
 #
 
 .base_azure_db:
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:0.29.0
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:1.3.0
   dependencies: []
   only:
     refs:
