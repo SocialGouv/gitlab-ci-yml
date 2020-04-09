@@ -1,6 +1,5 @@
 #
-# feature-branches deployments
-# these jobs interact with the GitHub API to post the deployment URL and status to the pull-request
+# these jobs send pipeline notifications to mattermost
 #
 
 .base_notify_mattermost:
@@ -9,8 +8,27 @@
   stage: Notify Finished Deployment
   variables:
     MATTERMOST_CHANNEL: ${MATTERMOST_CHANNEL:-gitlab/notifications}
+
+.notify_mattermost_dev:
+  except:
+    refs:
+      - tags
+      - master
+  environment:
+    name: review/${CI_COMMIT_REF_NAME}-dev
+  variables:
+    MATTERMOST_CHANNEL: ${MATTERMOST_CHANNEL:-gitlab/notifications}
+
+.notify_mattermost_prod:
+  only:
+    refs:
+      - master
+  environment:
+    name: prod
+  variables:
+    MATTERMOST_CHANNEL: ${MATTERMOST_CHANNEL:-gitlab/notifications}
   before_script:
-    - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
+    - HOST="https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
 
 .base_notify_success_mattermost:
   extends: .base_notify_mattermost

@@ -213,15 +213,25 @@ include:
     file: /base_notify_mattermost.yml
     ref: v14.0.0
 
-Notify fail:
-  extends: .base_notify_fail_mattermost
-  variables:
-    MATTERMOST_CHANNEL: notifications
+Notify Mattermost fail (dev):
+  extends:
+    - .base_notify_fail_mattermost
+    - .notify_mattermost_dev
 
-Notify success:
-  extends: .base_notify_success_mattermost
-  variables:
-    MATTERMOST_CHANNEL: notifications
+Notify Mattermost success (dev):
+  extends:
+    - .base_notify_success_mattermost
+    - .notify_mattermost_dev
+
+Notify Mattermost fail (prod):
+  extends:
+    - .base_notify_fail_mattermost
+    - .notify_mattermost_prod
+
+Notify Mattermost success (prod):
+  extends:
+    - .base_notify_success_mattermost
+    - .notify_mattermost_prod
 ```
 
 # [.base_migrate_azure_db](./base_migrate_azure_db.yml)
