@@ -3,7 +3,6 @@
 # these jobs interact with the GitHub API to post the deployment URL and status to the pull-request
 #
 
-#
 .base_notify_mattermost:
   image: curlimages/curl
   dependencies: []
@@ -21,7 +20,7 @@
       curl -i -X POST --data-urlencode 'payload={"channel": "'${MATTERMOST_CHANNEL}'", "username":"AutoDevOpsBot", "icon_url":"https://avatars2.githubusercontent.com/u/45039513", "text": ":tada: Deployment ready for '${CI_PROJECT_NAME}' : '${HOST}'"}' ${MATTERMOST_WEBHOOK}
 
 .base_notify_fail_mattermost:
-  <<: *base_notify_mattermost
+  extends: .base_notify_mattermost
   when: on_failure
   script:
     - |
