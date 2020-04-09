@@ -18,7 +18,9 @@
     name: review/${CI_COMMIT_REF_NAME}-dev
   variables:
     MATTERMOST_CHANNEL: ${MATTERMOST_CHANNEL:-gitlab/notifications}
-
+  before_script:
+    - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
+    
 .notify_mattermost_prod:
   only:
     refs:
