@@ -2,6 +2,15 @@
 # these jobs send pipeline notifications to mattermost
 #
 
+.resolve_deploy_environment: &resolve_deploy_environment |
+  set -x
+
+  if [[ -n "${PRODUCTION+x}" ]]; then
+    export ENVIRONMENT="production"
+  else
+    export ENVIRONMENT=${ENVIRONMENT:-"staging"}
+  fi
+
 .base_notify_mattermost:
   image: curlimages/curl
   dependencies: []
@@ -18,9 +27,7 @@
     name: review/${CI_COMMIT_REF_NAME}-dev
   variables:
     MATTERMOST_CHANNEL: ${MATTERMOST_CHANNEL:-gitlab/notifications}
-  before_script:
-    - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
-    
+
 .notify_mattermost_prod:
   only:
     refs:
@@ -29,13 +36,13 @@
     name: prod
   variables:
     MATTERMOST_CHANNEL: ${MATTERMOST_CHANNEL:-gitlab/notifications}
-  before_script:
-    - HOST="https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
 
 .base_notify_success_mattermost:
   extends: .base_notify_mattermost
   when: on_success
   script:
+    - *resolve_deploy_environment
+    - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
     - |
       curl -i -X POST --data-urlencode 'payload={"channel": "'${MATTERMOST_CHANNEL}'", "username":"AutoDevOpsBot", "icon_url":"https://avatars2.githubusercontent.com/u/45039513", "text": ":tada: Deployment ready for '${CI_PROJECT_NAME}' : '${HOST}'"}' ${MATTERMOST_WEBHOOK}
 
@@ -43,5 +50,7 @@
   extends: .base_notify_mattermost
   when: on_failure
   script:
+    - *resolve_deploy_environment
+    - HOST="https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
     - |
       curl -i -X POST --data-urlencode 'payload={"channel": "'${MATTERMOST_CHANNEL}'", "username":"AutoDevOpsBot", "icon_url":"https://avatars2.githubusercontent.com/u/45039513", "text": ":sob: Deployment failed for '${CI_PROJECT_NAME}' : '${HOST}'"}' ${MATTERMOST_WEBHOOK}
