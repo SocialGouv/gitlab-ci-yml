@@ -15,6 +15,5 @@
     IMAGE: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}"
   script:
     - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
-    - echo $IMAGE
     - docker pull $IMAGE
     - snyk test --org=socialgouv --docker $IMAGE --file=./Dockerfile
