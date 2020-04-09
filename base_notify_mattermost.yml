@@ -4,7 +4,7 @@
 #
 
 #
-.base_notify_mattermost: &base_notify_mattermost
+.base_notify_mattermost:
   image: curlimages/curl
   dependencies: []
   stage: Notify Finished Deployment
@@ -14,7 +14,7 @@
     - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
 
 .base_notify_success_mattermost:
-  <<: *base_notify_mattermost
+  extends: .base_notify_mattermost
   when: on_success
   script:
     - |
