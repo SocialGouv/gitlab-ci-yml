@@ -36,7 +36,7 @@ Standard @socialgouv pipeline using [@socialgouv/helm-charts/app](https://github
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops_simple_app.yml
-    ref: v13.1.0
+    ref: v13.2.0
 
 variables:
   PROJECT: "sample-next-app"
@@ -69,10 +69,10 @@ Disabling test and lint is for debugging purposes
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v13.1.0
+    ref: v13.2.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_create_namespace_stage.yml
-    ref: v13.1.0
+    ref: v13.2.0
 
 #
 
@@ -97,7 +97,7 @@ Create namespace:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_delete_useless_k8s_ns_stage.yml
-    ref: v13.1.0
+    ref: v13.2.0
 #
 
 Delete useless k8s namespaces:
@@ -116,10 +116,10 @@ Delete useless k8s namespaces:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v13.1.0
+    ref: v13.2.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_deploy_app_chart_stage.yml
-    ref: v13.1.0
+    ref: v13.2.0
 
 #
 
@@ -169,10 +169,10 @@ Deploy app (prod):
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v13.1.0
+    ref: v13.2.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v13.1.0
+    ref: v13.2.0
 
 #
 
@@ -190,7 +190,7 @@ Helm job:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v13.1.0
+    ref: v13.2.0
 #
 
 Kubectl job:
@@ -211,7 +211,7 @@ You'll need a `MATTERMOST_WEBHOOK` variable in your CI.
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_notify_mattermost.yml
-    ref: v13.1.0
+    ref: v13.2.0
 
 Notify fail:
   extends: .base_notify_fail_mattermost
@@ -237,7 +237,7 @@ This will run the two following scripts for feature-branches deployments :
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_migrate_azure_db.yml
-    ref: v13.1.0
+    ref: v13.2.0
 ```
 
 # [.base_register_stage](./base_register_stage.yml)
@@ -248,7 +248,7 @@ include:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_register_stage.yml
-    ref: v13.1.0
+    ref: v13.2.0
 
 Register myapp image:
   extends: .base_register_stage
@@ -267,7 +267,7 @@ Register myapp image:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_semantic_release_stage.yml
-    ref: v13.1.0
+    ref: v13.2.0
 
 #
 
@@ -295,7 +295,7 @@ You'll need to have a `SNYK_TOKEN` CI variable.
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_snyk_scan.yml
-    ref: v13.1.0
+    ref: v13.2.0
 
 Snyk Scan:
   stage: Deploy

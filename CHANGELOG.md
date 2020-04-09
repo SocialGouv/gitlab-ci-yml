@@ -1,3 +1,11 @@
+# [13.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v13.1.0...v13.2.0) (2020-04-09)
+
+
+### Features
+
+* add mattermost notification base job ([#125](https://github.com/SocialGouv/gitlab-ci-yml/issues/125)) ([a456b95](https://github.com/SocialGouv/gitlab-ci-yml/commit/a456b95151ed0046229d1dc97a6bba4bdef3ba76))
+* **snyk_scan:** add snyk.io docker image scan ([#124](https://github.com/SocialGouv/gitlab-ci-yml/issues/124)) ([1fff932](https://github.com/SocialGouv/gitlab-ci-yml/commit/1fff932dad61e94e5e8e1a47d60980f59332a122))
+
 # [13.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v13.0.0...v13.1.0) (2020-04-07)
 
 
