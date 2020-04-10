@@ -78,6 +78,9 @@ Register image:
 
 Create namespace:
   extends: .base_create_namespace_stage
+  environment:
+    name: review/${CI_COMMIT_REF_NAME}-dev
+    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_ID}.${KUBE_INGRESS_BASE_DOMAIN}
   only:
     refs:
       - branches
@@ -150,15 +153,22 @@ Deploy app (prod):
 Create Azure DB (dev):
   extends:
     - .base_create_azure_db
+  environment:
+    name: review/${CI_COMMIT_REF_NAME}-dev
 
 Drop Azure DB (dev):
   extends:
     - .base_drop_azure_db
+  environment:
+    name: review/${CI_COMMIT_REF_NAME}-dev
+    action: stop
 
 #
 
 Delete useless k8s namespaces:
   extends: .base_delete_useless_k8s_ns_stage
+  environment:
+    name: review/${CI_COMMIT_REF_NAME}-dev
   variables:
     K8S_NAMESPACE_PREFIX: "${PROJECT}-${CI_PROJECT_ID}-review"
 
