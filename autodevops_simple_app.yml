@@ -79,7 +79,7 @@ Register image:
 Create namespace:
   extends: .base_create_namespace_stage
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: review/${CI_COMMIT_REF_NAME}-tmp
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_ID}.${KUBE_INGRESS_BASE_DOMAIN}
   only:
     refs:
@@ -111,7 +111,7 @@ Deploy app (dev):
   variables:
     HOST: ${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: review/${CI_COMMIT_REF_NAME}-tmp
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
     on_stop: Stop review
 
@@ -123,7 +123,7 @@ Stop review:
       - tags
       - master
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: review/${CI_COMMIT_REF_NAME}-tmp
     action: stop
   when: manual
   allow_failure: true
@@ -154,13 +154,13 @@ Create Azure DB (dev):
   extends:
     - .base_create_azure_db
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: review/${CI_COMMIT_REF_NAME}-tmp
 
 Drop Azure DB (dev):
   extends:
     - .base_drop_azure_db
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: review/${CI_COMMIT_REF_NAME}-tmp
     action: stop
 
 #
@@ -168,7 +168,7 @@ Drop Azure DB (dev):
 Delete useless k8s namespaces:
   extends: .base_delete_useless_k8s_ns_stage
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: review/${CI_COMMIT_REF_NAME}-tmp
   variables:
     K8S_NAMESPACE_PREFIX: "${PROJECT}-${CI_PROJECT_ID}-review"
 
@@ -193,7 +193,7 @@ Notify Fail (review):
   dependencies:
     - Notify Starting Deployment
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: review/${CI_COMMIT_REF_NAME}-tmp
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   before_script:
     - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
@@ -210,7 +210,7 @@ Notify Success (review):
   dependencies:
     - Notify Starting Deployment
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: review/${CI_COMMIT_REF_NAME}-tmp
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   before_script:
     - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
