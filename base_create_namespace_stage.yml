@@ -7,9 +7,6 @@ variables:
 .base_create_namespace_stage:
   extends: .base_docker_kubectl_image_stage
   stage: "Registration"
-  environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
-    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_ID}.${KUBE_INGRESS_BASE_DOMAIN}
   dependencies: []
   script:
     - echo "kubectl get namespace ${K8S_NAMESPACE}"

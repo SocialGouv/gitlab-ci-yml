@@ -30,8 +30,6 @@
   allow_failure: true
   variables:
     NEW_DB_EXTENSIONS: pgcrypto
-  environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
   script:
     - export PGUSER="${ADMIN_PG_USER}"
     - export PGPASSWORD="${ADMIN_PG_PASSWORD}"
@@ -43,9 +41,6 @@
   stage: "Clean Up"
   when: manual
   allow_failure: true
-  environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
-    action: stop
   script:
     - export PGUSER="${ADMIN_PG_USER}"
     - export PGPASSWORD="${ADMIN_PG_PASSWORD}"

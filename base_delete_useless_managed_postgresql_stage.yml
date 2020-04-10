@@ -5,7 +5,6 @@
   dependencies: []
   allow_failure: true
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/pg-cleaner:1.4.0
-  environment: fabrique-dev
   script:
     - python /bin/pg-cleaner.py
   only:
