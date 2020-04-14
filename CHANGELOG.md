@@ -1,3 +1,47 @@
+# [15.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v14.0.0...v15.0.0) (2020-04-14)
+
+
+* feat(autodevops)!: allow existing jobs extend (#148) ([f189b17](https://github.com/SocialGouv/gitlab-ci-yml/commit/f189b17c1878ef58e34441f432e60e7f9551151f)), closes [#148](https://github.com/SocialGouv/gitlab-ci-yml/issues/148)
+* feat(autodevops)!: centralize environment in autodevops file (#145) ([f9560ec](https://github.com/SocialGouv/gitlab-ci-yml/commit/f9560ec699a14da49343312b8a7929d6fc9e8538)), closes [#145](https://github.com/SocialGouv/gitlab-ci-yml/issues/145)
+
+
+### BREAKING CHANGES
+
+* **feat(autodevops)!: allow existing jobs extend**
+
+This might be a breaking change.
+* **feat(autodevops)!: centralize environment in autodevops file**
+
+Our autodevops now drives the environment info.
+
+```diff
+
+Azure db stage:
+  extends: .base_azure_db_stage
++  environment:
++    name: ${CI_COMMIT_REF_NAME}-dev
+
+Drop azure db:
+  extends: .base_drop_azure_db
++  environment:
++    name: ${CI_COMMIT_REF_NAME}-dev
+
+Create namespace stage:
+  extends: .base_create_namespace_stage
++  environment:
++    name: ${CI_COMMIT_REF_NAME}-dev
+
+Delete useless k8s ns stage:
+  extends: .base_delete_useless_k8s_ns_stage
++  environment:
++    name: ${CI_COMMIT_REF_NAME}-dev
+
+Delete useless managed postgresql:
+  extends: .base_delete_useless_managed_postgresql_stage
++  environment:
++    name: ${CI_COMMIT_REF_NAME}-dev
+```
+
 # [14.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v13.2.0...v14.0.0) (2020-04-09)
 
 
