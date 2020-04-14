@@ -20,10 +20,14 @@ include:
 
 #
 
-Install:
+.autodevops_install:
   extends: .base_yarn
+Install:
+  extends: .autodevops_install
 
-Lint:
+#
+
+.autodevops_lint:
   extends: .base_yarn_script
   except:
     variables:
@@ -34,8 +38,12 @@ Lint:
     - Install
   script:
     - yarn lint
+Lint:
+  extends: .autodevops_lint
 
-Test:
+#
+
+.autodevops_test:
   extends: .base_yarn_script
   except:
     variables:
@@ -46,24 +54,32 @@ Test:
     - Install
   script:
     - yarn test
+Test:
+  extends: .autodevops_test
 
-Build:
+#
+
+.autodevops_build:
   extends: .base_yarn_build_next
   dependencies:
     - Install
   needs:
     - Install
+Build:
+  extends: .autodevops_build
 
 #
 
-Release:
+.autodevops_release:
   extends: .base_semantic_release_stage
   dependencies: []
   stage: Registration
+Release:
+  extends: .autodevops_release
 
 #
 
-Register image:
+.autodevops_register_image:
   extends: .base_register_stage
   stage: Registration
   dependencies:
@@ -73,10 +89,12 @@ Register image:
   variables:
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE
+Register image:
+  extends: .autodevops_register_image
 
 #
 
-Create namespace:
+.autodevops_create_namespace:
   extends: .base_create_namespace_stage
   environment:
     name: review/${CI_COMMIT_REF_NAME}-dev
@@ -88,6 +106,8 @@ Create namespace:
     refs:
       - tags
       - master
+Create namespace:
+  extends: .autodevops_create_namespace
 
 #
 
@@ -101,7 +121,9 @@ Create namespace:
     IMAGE_TAG: $CI_COMMIT_SHA
     CONTEXT: ${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}
 
-Deploy app (dev):
+#
+
+.autodevops_deploy_app_dev:
   extends:
     - .deploy_app_stage
   except:
@@ -114,8 +136,12 @@ Deploy app (dev):
     name: review/${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
     on_stop: Stop review
+Deploy app (dev):
+  extends: .autodevops_deploy_app_dev
 
-Stop review:
+#
+
+.autodevops_stop_review:
   extends: .base_docker_kubectl_image_stage
   stage: Clean Up
   except:
@@ -133,8 +159,12 @@ Stop review:
   script:
     - echo "kubectl delete namespace ${KUBE_NAMESPACE}"
     - kubectl delete namespace "${KUBE_NAMESPACE}"
+Stop review:
+  extends: .autodevops_stop_review
 
-Deploy app (prod):
+#
+
+.autodevops_deploy_app_prod:
   extends:
     - .deploy_app_stage
   only:
@@ -147,104 +177,110 @@ Deploy app (prod):
   environment:
     name: prod
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+Deploy app (prod):
+  extends: .autodevops_deploy_app_prod
 
 #
 
-Create Azure DB (dev):
+.autodevops_create_azure_db_dev:
   extends:
     - .base_create_azure_db
   environment:
     name: review/${CI_COMMIT_REF_NAME}-dev
+Create Azure DB (dev):
+  extends: .autodevops_create_azure_db_dev
 
-Drop Azure DB (dev):
+#
+
+.autodevops_drop_azure_db_dev:
   extends:
     - .base_drop_azure_db
   environment:
     name: review/${CI_COMMIT_REF_NAME}-dev
     action: stop
+Drop Azure DB (dev):
+  extends: .autodevops_drop_azure_db_dev
 
 #
 
-Delete useless k8s namespaces:
+.autodevops_delete_useless_k8s_namespaces:
   extends: .base_delete_useless_k8s_ns_stage
   environment:
     name: review/${CI_COMMIT_REF_NAME}-dev
   variables:
     K8S_NAMESPACE_PREFIX: "${PROJECT}-${CI_PROJECT_ID}-review"
+Delete useless k8s namespaces:
+  extends: .autodevops_delete_useless_k8s_namespaces
 
 #
 
-Notify Starting Deployment:
+.autodevops_notify_starting_deployment:
   extends: .base_notify_pending_stage
   stage: Deploy
   except:
     variables:
       - $NOTIFY_DISABLED
+Notify Starting Deployment:
+  extends: .autodevops_notify_starting_deployment
 
+#
+
+.notify_review:
+  stage: Notify Finished Deployment
+  dependencies:
+    - Notify Starting Deployment
+  except:
+    refs:
+      - tags
+      - master
+    variables:
+      - $NOTIFY_DISABLED
+  environment:
+    name: review/${CI_COMMIT_REF_NAME}-dev
+    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+  before_script:
+    - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
+
+.notify_prod:
+  stage: Notify Finished Deployment
+  only:
+    refs:
+      - master
+  except:
+    variables:
+      - $NOTIFY_DISABLED
+  dependencies:
+    - Notify Starting Deployment
+  environment:
+    name: prod
+    url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+  before_script:
+    - HOST="https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
+
+.autodevops_notify_fail_review:
+  extends:
+    - .base_notify_fail_stage
+    - .notify_review
 Notify Fail (review):
-  extends: .base_notify_fail_stage
-  stage: Notify Finished Deployment
-  except:
-    refs:
-      - tags
-      - master
-    variables:
-      - $NOTIFY_DISABLED
-  dependencies:
-    - Notify Starting Deployment
-  environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
-    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
-  before_script:
-    - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
+  extends: .autodevops_notify_fail_review
 
+.autodevops_notify_success_review:
+  extends:
+    - .base_notify_success_stage
+    - .notify_review
 Notify Success (review):
-  extends: .base_notify_success_stage
-  stage: Notify Finished Deployment
-  except:
-    refs:
-      - tags
-      - master
-    variables:
-      - $NOTIFY_DISABLED
-  dependencies:
-    - Notify Starting Deployment
-  environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
-    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
-  before_script:
-    - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
+  extends: .autodevops_notify_success_review
 
+.autodevops_notify_fail_prod:
+  extends:
+    - .base_notify_fail_stage
+    - .notify_prod
 Notify Fail (prod):
-  extends: .base_notify_fail_stage
-  stage: Notify Finished Deployment
-  only:
-    refs:
-      - master
-  except:
-    variables:
-      - $NOTIFY_DISABLED
-  dependencies:
-    - Notify Starting Deployment
-  environment:
-    name: prod
-    url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
-  before_script:
-    - HOST="https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
+  extends: .autodevops_notify_fail_prod
 
+.autodevops_notify_success_prod:
+  extends:
+    - .base_notify_success_stage
+    - .notify_prod
 Notify Success (prod):
-  extends: .base_notify_success_stage
-  stage: Notify Finished Deployment
-  only:
-    refs:
-      - master
-  except:
-    variables:
-      - $NOTIFY_DISABLED
-  dependencies:
-    - Notify Starting Deployment
-  environment:
-    name: prod
-    url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
-  before_script:
-    - HOST="https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
+  extends: .autodevops_notify_success_prod

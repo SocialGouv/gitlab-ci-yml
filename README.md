@@ -61,6 +61,84 @@ If you `ENABLE_AZURE_DB`, you need a secret `azure-pg-admin-user` in your cluste
 
 Disabling test and lint is for debugging purposes
 
+### Override existing jobs
+
+All gitlab jobs are overridable. You can or extend them or completely replace them.
+
+#### Extends existing job
+
+All autodevops jobs are using a `.autodevops_*` definition you can extend.
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /autodevops_simple_app.yml
+    ref: v14.0.0
+
+variables:
+  PORT: 8080
+  VALUES_FILE: ./.k8s.app.values.yml
+
+# Same name as the "Build" job defined in the autodevops_simple_app file
+# Override https://github.com/SocialGouv/gitlab-ci-yml/blob/v14.0.0/autodevops_simple_app.yml#L50
+Build:
+  extends:
+    - .autodevops_build
+  script:
+    - yarn build
+    - yarn export
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - out
+
+# Same name as the "Deploy app (prod)" job defined in the autodevops_simple_app file
+# Override https://github.com/SocialGouv/gitlab-ci-yml/blob/v14.0.0/autodevops_simple_app.yml#L137
+Deploy app (prod):
+  extends:
+    - .autodevops_deploy_app_prod
+  before_script:
+    - envsubst < ./.k8s.app.values.prod.yaml > /tmp/values.prod.yaml
+  variables:
+    HELM_RENDER_ARGS: >-
+      --values /tmp/values.prod.yaml
+```
+
+#### Replace existing job
+
+As the gitlab yaml parser is working, defining a job **with the same name** will replace the last defined one. You can replace any autodevops jobs by naming it :
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /autodevops_simple_app.yml
+    ref: v14.0.0
+
+variables:
+  PORT: 8080
+  VALUES_FILE: ./.k8s.app.values.yml
+
+# Same name as the "Build" job defined in the autodevops_simple_app file
+# Override https://github.com/SocialGouv/gitlab-ci-yml/blob/v14.0.0/autodevops_simple_app.yml#L50
+Build:
+  extends:
+    - .base_yarn_build_next
+  dependencies:
+    - Install
+  needs:
+    - Install
+  variables:
+    VERSION: ${CI_COMMIT_SHORT_SHA}
+    MY_API_URL: "%%MY_API_URL%%"
+  script:
+    - yarn build
+    - yarn export
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - out
+```
+
 # [.base_create_namespace_stage](./base_create_namespace_stage.yml)
 
 ## Usage
