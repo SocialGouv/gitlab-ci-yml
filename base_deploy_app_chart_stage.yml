@@ -11,10 +11,6 @@ variables:
     - echo "kubectl config set-context --current --namespace=${K8S_NAMESPACE}"
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
-    - helm init --client-only
-    - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}/helm-just-linux-${HELM_CHART_VERSION}.tgz | tar -C $(helm home) -xzv
-    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}
-
     - echo "helm just fetch socialgouv/app#${HELM_CHART_VERSION}"
     - helm just fetch "socialgouv/app#${HELM_CHART_VERSION}"
 
