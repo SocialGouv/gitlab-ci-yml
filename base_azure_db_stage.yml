@@ -29,7 +29,7 @@
   stage: Registration
   allow_failure: true
   variables:
-    NEW_DB_EXTENSIONS: pgcrypto
+    NEW_DB_EXTENSIONS: "pgcrypto hstore"
   script:
     - export PGUSER="${ADMIN_PG_USER}"
     - export PGPASSWORD="${ADMIN_PG_PASSWORD}"
