@@ -6,4 +6,11 @@
   "gitlabci": {
     "fileMatch": ["(^|/)[^/]*\\.ya?ml$"]
   }
+  "packageRules": [
+    {
+      "depTypeList": ["final", "stage"],
+      "updateTypes": ["major", "minor"],
+      "semanticCommitType": "feat"
+    }
+  ]
 }
