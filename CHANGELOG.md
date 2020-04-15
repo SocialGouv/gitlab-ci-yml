@@ -1,3 +1,11 @@
+## [15.0.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.0.0...v15.0.1) (2020-04-15)
+
+
+### Bug Fixes
+
+* **deploy_app:** helm just is already part of socialgouv/docker/helm ([a168dcd](https://github.com/SocialGouv/gitlab-ci-yml/commit/a168dcdf16fae79fedbf53bf6e87fe66e3f2741f))
+* **deps:** update socialgouv/docker/kubectl docker tag to v1.5.0 ([ee13d70](https://github.com/SocialGouv/gitlab-ci-yml/commit/ee13d70fdbb9aef893e45287831f2e565cd24a69))
+
 # [15.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v14.0.0...v15.0.0) (2020-04-14)
 
 

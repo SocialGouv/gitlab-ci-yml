@@ -36,7 +36,7 @@ Standard @socialgouv pipeline using [@socialgouv/helm-charts/app](https://github
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops_simple_app.yml
-    ref: v15.0.0
+    ref: v15.0.1
 
 variables:
   PROJECT: "sample-next-app"
@@ -73,7 +73,7 @@ All autodevops jobs are using a `.autodevops_*` definition you can extend.
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops_simple_app.yml
-    ref: v15.0.0
+    ref: v15.0.1
 
 variables:
   PORT: 8080
@@ -112,7 +112,7 @@ As the gitlab yaml parser is working, defining a job **with the same name** will
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops_simple_app.yml
-    ref: v15.0.0
+    ref: v15.0.1
 
 variables:
   PORT: 8080
@@ -147,10 +147,10 @@ Build:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v15.0.0
+    ref: v15.0.1
   - project: SocialGouv/gitlab-ci-yml
     file: /base_create_namespace_stage.yml
-    ref: v15.0.0
+    ref: v15.0.1
 
 #
 
@@ -175,7 +175,7 @@ Create namespace:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_delete_useless_k8s_ns_stage.yml
-    ref: v15.0.0
+    ref: v15.0.1
 #
 
 Delete useless k8s namespaces:
@@ -194,10 +194,10 @@ Delete useless k8s namespaces:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v15.0.0
+    ref: v15.0.1
   - project: SocialGouv/gitlab-ci-yml
     file: /base_deploy_app_chart_stage.yml
-    ref: v15.0.0
+    ref: v15.0.1
 
 #
 
@@ -247,10 +247,10 @@ Deploy app (prod):
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v15.0.0
+    ref: v15.0.1
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v15.0.0
+    ref: v15.0.1
 
 #
 
@@ -268,7 +268,7 @@ Helm job:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v15.0.0
+    ref: v15.0.1
 #
 
 Kubectl job:
@@ -289,7 +289,7 @@ You'll need a `MATTERMOST_WEBHOOK` variable in your CI.
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_notify_mattermost.yml
-    ref: v15.0.0
+    ref: v15.0.1
 
 Notify fail:
   extends: .base_notify_fail_mattermost
@@ -315,7 +315,7 @@ This will run the two following scripts for feature-branches deployments :
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_migrate_azure_db.yml
-    ref: v15.0.0
+    ref: v15.0.1
 ```
 
 # [.base_register_stage](./base_register_stage.yml)
@@ -326,7 +326,7 @@ include:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_register_stage.yml
-    ref: v15.0.0
+    ref: v15.0.1
 
 Register myapp image:
   extends: .base_register_stage
@@ -345,7 +345,7 @@ Register myapp image:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_semantic_release_stage.yml
-    ref: v15.0.0
+    ref: v15.0.1
 
 #
 
@@ -373,7 +373,7 @@ You'll need to have a `SNYK_TOKEN` CI variable.
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_snyk_scan.yml
-    ref: v15.0.0
+    ref: v15.0.1
 
 Snyk Scan:
   stage: Deploy
