@@ -8,7 +8,7 @@
   },
   "packageRules": [
     {
-      "depTypeList": ["final", "stage", "image-name"],
+      "depTypeList": ["final", "stage", "image-name", "image"],
       "updateTypes": ["major", "minor"],
       "semanticCommitType": "feat"
     }
