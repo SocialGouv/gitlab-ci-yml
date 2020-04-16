@@ -5,7 +5,7 @@
   ],
   "gitlabci": {
     "fileMatch": ["(^|/)[^/]*\\.ya?ml$"]
-  }
+  },
   "packageRules": [
     {
       "depTypeList": ["final", "stage"],
