@@ -1,3 +1,11 @@
+# [15.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.0.1...v15.1.0) (2020-04-16)
+
+
+### Features
+
+* **deps:** update socialgouv/docker/helm docker tag to v1.8.0 ([#167](https://github.com/SocialGouv/gitlab-ci-yml/issues/167)) ([417fa0c](https://github.com/SocialGouv/gitlab-ci-yml/commit/417fa0c466a2f305ab67a150340b5ae77b4d9f8e))
+* **deps:** update socialgouv/docker/k8s-ns-killer docker tag to v1.8.0 ([#168](https://github.com/SocialGouv/gitlab-ci-yml/issues/168)) ([452fd5b](https://github.com/SocialGouv/gitlab-ci-yml/commit/452fd5b2c62db9c697de7a36dc8f9cf072506978))
+
 ## [15.0.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.0.0...v15.0.1) (2020-04-15)
 
 
