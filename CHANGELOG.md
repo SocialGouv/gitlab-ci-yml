@@ -1,3 +1,17 @@
+# [15.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.1.0...v15.2.0) (2020-04-20)
+
+
+### Features
+
+* **azure-db:** enable hstore extension ([#156](https://github.com/SocialGouv/gitlab-ci-yml/issues/156)) ([9695754](https://github.com/SocialGouv/gitlab-ci-yml/commit/9695754230606460ee4375effef2196b3ae9bbe6))
+* **deps:** update registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db docker tag to v1.9.0 ([#171](https://github.com/SocialGouv/gitlab-ci-yml/issues/171)) ([5bafb42](https://github.com/SocialGouv/gitlab-ci-yml/commit/5bafb428bfb1c99eba606193d10efb1fc52bb666))
+* **deps:** update registry.gitlab.factory.social.gouv.fr/socialgouv/docker/git-deploy docker tag to v1.9.0 ([#172](https://github.com/SocialGouv/gitlab-ci-yml/issues/172)) ([647eb54](https://github.com/SocialGouv/gitlab-ci-yml/commit/647eb54ce91cf06ad85a8ea3adce9053d0cade09))
+* **deps:** update registry.gitlab.factory.social.gouv.fr/socialgouv/docker/helm docker tag to v1.9.0 ([#173](https://github.com/SocialGouv/gitlab-ci-yml/issues/173)) ([72b2d60](https://github.com/SocialGouv/gitlab-ci-yml/commit/72b2d608bc7337470c28609f9d8046e727feb42d))
+* **deps:** update registry.gitlab.factory.social.gouv.fr/socialgouv/docker/k8s-ns-killer docker tag to v1.9.0 ([#174](https://github.com/SocialGouv/gitlab-ci-yml/issues/174)) ([ec64086](https://github.com/SocialGouv/gitlab-ci-yml/commit/ec640861f2b35d2a462d8f016269aae57d77c662))
+* **deps:** update registry.gitlab.factory.social.gouv.fr/socialgouv/docker/kubectl docker tag to v1.9.0 ([#176](https://github.com/SocialGouv/gitlab-ci-yml/issues/176)) ([b390ca3](https://github.com/SocialGouv/gitlab-ci-yml/commit/b390ca3cc4519a6747313febb09cf406afa3b196))
+* **deps:** update registry.gitlab.factory.social.gouv.fr/socialgouv/docker/pg-cleaner docker tag to v1.9.0 ([#175](https://github.com/SocialGouv/gitlab-ci-yml/issues/175)) ([f42ef2c](https://github.com/SocialGouv/gitlab-ci-yml/commit/f42ef2c0d0820f9d2e359b2b5f5093e6cfb0c93a))
+* **deps:** update snyk/snyk-cli docker tag to v1.306.0 ([#177](https://github.com/SocialGouv/gitlab-ci-yml/issues/177)) ([e347f5f](https://github.com/SocialGouv/gitlab-ci-yml/commit/e347f5fc69c004b9418e66e8a04df4e5df1e5044))
+
 # [15.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.0.1...v15.1.0) (2020-04-16)
 
 
