@@ -1,3 +1,13 @@
+# [15.3.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.2.0...v15.3.0) (2020-04-20)
+
+
+### Features
+
+* **deps:** update socialgouv/docker/azure-db docker tag to v1.10.0 ([#179](https://github.com/SocialGouv/gitlab-ci-yml/issues/179)) ([392333b](https://github.com/SocialGouv/gitlab-ci-yml/commit/392333b516321f97b8ea014273f39ce4c91be996))
+* **deps:** update socialgouv/docker/git-deploy docker tag to v1.10.0 ([#180](https://github.com/SocialGouv/gitlab-ci-yml/issues/180)) ([1ea7fd2](https://github.com/SocialGouv/gitlab-ci-yml/commit/1ea7fd218430546acb945687be86006ba33ce1e4))
+* **deps:** update socialgouv/docker/helm docker tag to v1.10.0 ([#181](https://github.com/SocialGouv/gitlab-ci-yml/issues/181)) ([896f3a7](https://github.com/SocialGouv/gitlab-ci-yml/commit/896f3a7d99008fb20515df0422fa6f92a5c63eca))
+* **deps:** update socialgouv/docker/k8s-ns-killer docker tag to v1.10.0 ([#182](https://github.com/SocialGouv/gitlab-ci-yml/issues/182)) ([eb0adaa](https://github.com/SocialGouv/gitlab-ci-yml/commit/eb0adaa77da2aef13300552f89469667593b8f53))
+
 # [15.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.1.0...v15.2.0) (2020-04-20)
 
 
