@@ -7,13 +7,15 @@
   "gitlabci": {
     "fileMatch": ["(^|/)[^/]*\\.ya?ml$"]
   },
-  "packageRules": [
-    {
-      "depTypeList": ["final", "stage", "image-name", "image"],
-      "updateTypes": ["major", "minor"],
-      "semanticCommitType": "feat"
-    }
-  ],
+  "major": {
+    "semanticCommitType": "feat"
+  },
+  "minor": {
+    "semanticCommitType": "feat"
+  },
+  "patch": {
+    "semanticCommitType": "fix"
+  },
   "regexManagers": [
     {
       "fileMatch": ["(^|/)[^/]*\\.ya?ml$"],
