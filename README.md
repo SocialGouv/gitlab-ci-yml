@@ -257,7 +257,7 @@ include:
 Helm job:
   extends: .base_docker_helm_image_stage
   script:
-    - helm version --client-only
+    - helm version --client
 ```
 
 # [.base_docker_kubectl_image_stage](./base_docker_kubectl_image_stage.yml)
