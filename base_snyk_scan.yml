@@ -5,7 +5,7 @@
 #
 
 .base_snyk_scan:
-  image: snyk/snyk-cli:1.314.0-docker
+  image: snyk/snyk-cli:1.315.0-docker
   services:
     - docker:$DOCKER_VERSION-dind
   dependencies: []
