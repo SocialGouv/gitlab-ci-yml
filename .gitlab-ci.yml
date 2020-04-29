@@ -21,7 +21,7 @@ Release:
 
 Test AutoDevOps on SocialGouv/sample-next-app:
   stage: Code Quality
-  image: curlimages/curl:7.69.1
+  image: curlimages/curl:7.70.0
   variables:
     GIT_STRATEGY: none
   script:
