@@ -30,6 +30,8 @@ include:
 
 Standard @socialgouv pipeline using [@socialgouv/helm-charts/app](https://github.com/SocialGouv/helm-charts/blob/master/charts/app) for deployment.
 
+This pipeline produces review deployments on branches and production deployment when you merge on master.
+
 ## Usage
 
 ```yaml
