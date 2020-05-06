@@ -325,7 +325,7 @@ see https://github.com/SocialGouv/helm-charts/releases/tag/v6.0.0
 * ci(gitlab)!: make it gitlab.com compatible
 
     - We are manly using the `environment:name` and `environment:url` to make gitlab guess the linked pod environment in the k8s cluster.
-    - We recommend that review environments are prefixed `review` : `name: review/${CI_COMMIT_REF_NAME}-dev`
+    - We recommend that review environments are prefixed `review` : `name: ${CI_COMMIT_REF_NAME}-dev`
     - You might want to prefixed `preprod` you preprod : `name: preprod/${CI_COMMIT_TAG}-dev`
     - URL are can be generated from the environment name.
     - To fully enjoy the GitLab environments link with the k8s you should additional annotations and labels to your pods

@@ -222,7 +222,7 @@ Deploy myapp (dev):
   variables:
     HOST: ${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: ${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
 Deploy app (prod):

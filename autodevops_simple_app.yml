@@ -97,7 +97,7 @@ Register image:
 .autodevops_create_namespace:
   extends: .base_create_namespace_stage
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: ${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_ID}.${KUBE_INGRESS_BASE_DOMAIN}
   only:
     refs:
@@ -133,7 +133,7 @@ Create namespace:
   variables:
     HOST: ${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: ${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
     on_stop: Stop review
 Deploy app (dev):
@@ -149,7 +149,7 @@ Deploy app (dev):
       - tags
       - master
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: ${CI_COMMIT_REF_NAME}-dev
     action: stop
   when: manual
   allow_failure: true
@@ -186,7 +186,7 @@ Deploy app (prod):
   extends:
     - .base_create_azure_db
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: ${CI_COMMIT_REF_NAME}-dev
 Create Azure DB (dev):
   extends: .autodevops_create_azure_db_dev
 
@@ -196,7 +196,7 @@ Create Azure DB (dev):
   extends:
     - .base_drop_azure_db
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: ${CI_COMMIT_REF_NAME}-dev
     action: stop
 Drop Azure DB (dev):
   extends: .autodevops_drop_azure_db_dev
@@ -206,7 +206,7 @@ Drop Azure DB (dev):
 .autodevops_delete_useless_k8s_namespaces:
   extends: .base_delete_useless_k8s_ns_stage
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: ${CI_COMMIT_REF_NAME}-dev
   variables:
     K8S_NAMESPACE_PREFIX: "${PROJECT}-${CI_PROJECT_ID}-review"
 Delete useless k8s namespaces:
@@ -236,7 +236,7 @@ Notify Starting Deployment:
     variables:
       - $NOTIFY_DISABLED
   environment:
-    name: review/${CI_COMMIT_REF_NAME}-dev
+    name: ${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   before_script:
     - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
