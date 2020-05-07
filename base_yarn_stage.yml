@@ -32,7 +32,6 @@
     key: ${CI_COMMIT_REF_NAME}-${CI_JOB_NAME}
     paths:
       - yarn
-      - node_modules
   script:
     - yarn config set cache-folder $CI_PROJECT_DIR/yarn
     - yarn --frozen-lockfile
