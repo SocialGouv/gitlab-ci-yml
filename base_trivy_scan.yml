@@ -4,6 +4,8 @@
   stage: Deploy
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:1.14.0
   allow_failure: true
+  variables:
+    IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
   script:
     # Build report
     - trivy --exit-code 0 --cache-dir .trivycache/ --no-progress --format template --template "@contrib/gitlab.tpl" -o gl-container-scanning-report.json $IMAGE
