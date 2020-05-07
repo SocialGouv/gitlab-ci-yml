@@ -381,3 +381,19 @@ Snyk Scan:
   stage: Deploy
   extends: .base_snyk_scan
 ```
+
+# [.base_trivy_scan](./base_trivy_scan.yml)
+
+A manual job to run a [trivy](https://github.com/aquasecurity/trivy) security scan on the main repo docker image.
+
+## Usage
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_trivy_scan.yml
+    ref: v15.3.0
+
+Trivy Scan:
+  extends: .base_trivy_scan
+```

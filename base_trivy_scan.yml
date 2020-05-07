@@ -1,0 +1,20 @@
+# https://github.com/aquasecurity/trivy#gitlab-ci
+
+.base_trivy_scan:
+  stage: Deploy
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:1.14.0
+  allow_failure: true
+  script:
+    # Build report
+    - trivy --exit-code 0 --cache-dir .trivycache/ --no-progress --format template --template "@contrib/gitlab.tpl" -o gl-container-scanning-report.json $IMAGE
+    # Print report
+    - trivy --exit-code 0 --cache-dir .trivycache/ --no-progress --severity HIGH $IMAGE
+    # Fail on high and critical vulnerabilities
+    - trivy --exit-code 1 --cache-dir .trivycache/ --severity CRITICAL --no-progress $IMAGE
+  cache:
+    paths:
+      - .trivycache/
+  # Enables https://docs.gitlab.com/ee/user/application_security/container_scanning/ (Container Scanning report is available on GitLab EE Ultimate or GitLab.com Gold)
+  artifacts:
+    reports:
+      container_scanning: gl-container-scanning-report.json
