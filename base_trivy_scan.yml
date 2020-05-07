@@ -2,7 +2,7 @@
 
 .base_trivy_scan:
   stage: Deploy
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:d3b86937b6b250bfb43b75a192c30c122460c934
   allow_failure: true
   script:
     # Build report
