@@ -12,7 +12,7 @@ variables:
 
 .base_semantic_release_stage:
   stage: "Release"
-  image: node:13
+  image: node:14
   only:
     refs:
       - branches
