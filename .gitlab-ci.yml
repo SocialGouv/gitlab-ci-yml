@@ -9,7 +9,7 @@ stages:
 
 Lint:
   stage: Code Quality
-  image: node:13-alpine
+  image: node:14-alpine
   script:
     - npx yaml-lint *.yml
     - npx prettier --check *.yml
