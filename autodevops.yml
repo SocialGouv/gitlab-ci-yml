@@ -1,0 +1,221 @@
+#
+
+include:
+  - /base_azure_db_stage.yml
+  - /base_create_namespace_stage.yml
+  - /base_delete_useless_k8s_ns_stage.yml
+  - /base_deploy_app_chart_stage.yml
+  - /base_deploy_kosko_stage.yml
+  - /base_docker_helm_image_stage.yml
+  - /base_docker_kubectl_image_stage.yml
+  - /base_notify_github_stage.yml
+  - /base_register_stage.yml
+  - /base_semantic_release_stage.yml
+  - /base_trigger_stage.yml
+  - /base_yarn_stage.yml
+
+#
+
+stages:
+  - Install
+  - Code Quality
+  - Registration
+  - Release
+  - Deploy
+
+#
+
+variables:
+  GIT_STRATEGY: fetch
+  GIT_DEPTH: 5
+  #
+  # To activate the auto release
+  # AUTO_DEVOPS_RELEASE_AUTO: true
+
+#
+#
+#
+
+.autodevops_base_rules:
+  rules:
+    - if: "$PRODUCTION"
+      when: never
+    - if: "$RELEASE"
+      when: never
+    - when: on_success
+
+#
+#
+#
+
+.autodevops_trigger_release:
+  extends:
+    - .base_trigger_release_stage
+    - .autodevops_base_rules
+  stage: Install
+  rules:
+    - if: "$PRODUCTION"
+      when: never
+    - if: "$RELEASE"
+      when: never
+    - if: "$AUTO_DEVOPS_RELEASE_AUTO"
+      when: always
+    - when: manual
+
+Trigger Release:
+  extends: .autodevops_trigger_release
+
+.autodevops_release:
+  extends:
+    - .base_semantic_release_stage
+    - .autodevops_base_rules
+  rules:
+    - if: "$RELEASE"
+  variables:
+    GIT_DEPTH: 4242
+    SEMANTIC_RELEASE_ARGS: "--dry-run"
+  stage: Release
+
+Release:
+  extends: .autodevops_release
+
+#
+
+.autodevops_trigger_production:
+  stage: .post
+  rules:
+    - if: "$CI_COMMIT_TAG"
+  extends: .base_trigger_production_stage
+
+Trigger Production:
+  extends: .autodevops_trigger_production
+
+#
+
+.autodevops_install:
+  extends:
+    - .base_yarn
+    - .autodevops_base_rules
+  interruptible: true
+
+Install:
+  extends:
+    - .autodevops_install
+
+#
+#
+#
+
+#
+#
+#
+
+.autodevops_lint:
+  extends:
+    - .base_yarn_script
+    - .autodevops_base_rules
+  needs:
+    - job: Install
+      artifacts: true
+  script:
+    - yarn lint
+
+Lint:
+  extends: .autodevops_lint
+
+#
+
+.autodevops_test:
+  extends:
+    - .base_yarn_script
+    - .autodevops_base_rules
+  needs:
+    - job: Install
+      artifacts: true
+  script:
+    - yarn test
+
+Test:
+  extends: .autodevops_test
+
+#
+
+.autodevops_build:
+  extends:
+    - .base_yarn_build_next
+    - .autodevops_base_rules
+  needs:
+    - job: Install
+      artifacts: true
+
+Build:
+  extends: .autodevops_build
+
+#
+#
+#
+
+#
+#
+#
+
+.autodevops_register_image:
+  extends:
+    - .base_register_stage
+    - .autodevops_base_rules
+  stage: Registration
+  needs:
+    - job: Build
+      artifacts: true
+  variables:
+    CONTEXT: .
+    IMAGE_NAME: $CI_REGISTRY_IMAGE
+Register image:
+  extends: .autodevops_register_image
+
+#
+#
+#
+
+#
+#
+#
+
+.deploy_stage:
+  stage: Deploy
+  extends:
+    - .base_deploy_kosko_stage
+  # variables:
+    # IMAGE_TAG: $CI_COMMIT_SHA
+    # REMOTE_URL: "https://github.com/${CI_PROJECT_PATH}.git"
+    # K8S_NAMESPACE: $KUBE_NAMESPACE
+    # REGISTRY: $CI_REGISTRY_IMAGE
+    # CONTEXT: $CI_PROJECT_NAME
+
+#
+
+Review:
+  extends:
+    - .autodevops_base_rules
+    - .deploy_stage
+  needs:
+    - job: Register image
+      artifacts: false
+  variables:
+    KOSKO_GENERATE_ARGS: >-
+      --dev
+  environment:
+    name: ${CI_COMMIT_REF_NAME}-dev
+    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+
+Production:
+  extends:
+    - .deploy_stage
+  rules:
+    - if: "$PRODUCTION && $CI_COMMIT_TAG"
+  variables:
+    KOSKO_GENERATE_ARGS: >-
+      --prod
+  environment:
+    name: prod
+    url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}

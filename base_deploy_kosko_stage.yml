@@ -1,0 +1,29 @@
+#
+
+variables:
+  K8S_FOLDER: ${CI_PROJECT_DIR}/.k8s
+  KOSKO_GENERATE_ARGS: ""
+
+.base_deploy_kosko_stage:
+  stage: Deploy
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/kosko:1.15.0
+  dependencies: []
+  cache:
+    key:
+      files:
+        - ${K8S_FOLDER}/yarn.lock
+      prefix: ${CI_JOB_NAME}
+    paths:
+      - ${CI_PROJECT_DIR}/.cache
+      - ${K8S_FOLDER}/node_modules
+  script:
+    - yarn config set cache-folder ${CI_PROJECT_DIR}/.cache/yarn
+    - cd ${K8S_FOLDER}
+    - yarn --frozen-lockfile --prefer-offline --link-duplicates
+    - echo "kosko generate --gitlab ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml"
+    - kosko generate --gitlab ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml
+    - kubectl apply -f ${CI_PROJECT_DIR}/manifest.yaml
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - manifest.yaml
