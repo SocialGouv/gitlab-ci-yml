@@ -1,3 +1,11 @@
+# [15.6.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.5.0...v15.6.0) (2020-05-13)
+
+
+### Features
+
+* **deploy_app_chart:** archive the manifest ([#247](https://github.com/SocialGouv/gitlab-ci-yml/issues/247)) ([3de0b21](https://github.com/SocialGouv/gitlab-ci-yml/commit/3de0b214db903110e15ee384cc2df95b91a22f13))
+* **deps:** update snyk/snyk-cli docker tag to v1.320.2 ([#246](https://github.com/SocialGouv/gitlab-ci-yml/issues/246)) ([55e5cbf](https://github.com/SocialGouv/gitlab-ci-yml/commit/55e5cbfa80b241c952d3f8ed09d47e709943a220))
+
 # [15.5.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.4.0...v15.5.0) (2020-05-11)
 
 
