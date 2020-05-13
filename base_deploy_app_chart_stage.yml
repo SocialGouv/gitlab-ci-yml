@@ -41,3 +41,7 @@ variables:
       --values ./values.yaml
       ${HELM_RENDER_ARGS}
     - helm just apply ${CONTEXT}
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - .manifest
