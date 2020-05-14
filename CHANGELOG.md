@@ -1,3 +1,15 @@
+# [15.7.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.6.0...v15.7.0) (2020-05-14)
+
+
+### Bug Fixes
+
+* **autodevops:** change the default delete K8S namespace filter ([e8be537](https://github.com/SocialGouv/gitlab-ci-yml/commit/e8be537c3ec9fa5c9ff6e83b7e0db9bb06a4d36e))
+
+
+### Features
+
+* **deps:** update snyk/snyk-cli docker tag to v1.320.3 ([#248](https://github.com/SocialGouv/gitlab-ci-yml/issues/248)) ([23fd39b](https://github.com/SocialGouv/gitlab-ci-yml/commit/23fd39bf68a0e3a120c55d1f0c6c5287ae109c68))
+
 # [15.6.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.5.0...v15.6.0) (2020-05-13)
 
 
