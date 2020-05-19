@@ -226,8 +226,6 @@ Notify Starting Deployment:
 #
 
 .notify_review:
-  extends:
-    - .autodevops_base_rules
   stage: .post
   dependencies:
     - Notify Starting Deployment
@@ -240,12 +238,19 @@ Notify Starting Deployment:
   extends:
     - .base_notify_fail_stage
     - .notify_review
+  rules:
+    - if: "$PRODUCTION"
+      when: never
+    - if: "$RELEASE"
+      when: never
+    - when: on_failure
 Notify Fail (review):
   extends: .autodevops_notify_fail_review
 
 .autodevops_notify_success_review:
   extends:
     - .base_notify_success_stage
+    - .autodevops_base_rules
     - .notify_review
 Notify Success (review):
   extends: .autodevops_notify_success_review
@@ -254,8 +259,6 @@ Notify Success (review):
 
 .notify_prod:
   stage: .post
-  rules:
-    - if: "$PRODUCTION && $CI_COMMIT_TAG"
   dependencies:
     - Notify Starting Deployment
   environment:
@@ -267,6 +270,9 @@ Notify Success (review):
   extends:
     - .base_notify_fail_stage
     - .notify_prod
+  rules:
+    - if: "$PRODUCTION && $CI_COMMIT_TAG"
+      when: on_failure
 Notify Fail (prod):
   extends: .autodevops_notify_fail_prod
 
@@ -274,5 +280,8 @@ Notify Fail (prod):
   extends:
     - .base_notify_success_stage
     - .notify_prod
+  rules:
+    - if: "$PRODUCTION && $CI_COMMIT_TAG"
+      when: on_success
 Notify Success (prod):
   extends: .autodevops_notify_success_prod
