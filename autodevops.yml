@@ -249,3 +249,30 @@ Notify Fail (review):
     - .notify_review
 Notify Success (review):
   extends: .autodevops_notify_success_review
+
+#
+
+.notify_prod:
+  stage: .post
+  rules:
+    - if: "$PRODUCTION && $CI_COMMIT_TAG"
+  dependencies:
+    - Notify Starting Deployment
+  environment:
+    name: prod
+  before_script:
+    - HOST="https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
+
+.autodevops_notify_fail_prod:
+  extends:
+    - .base_notify_fail_stage
+    - .notify_prod
+Notify Fail (prod):
+  extends: .autodevops_notify_fail_prod
+
+.autodevops_notify_success_prod:
+  extends:
+    - .base_notify_success_stage
+    - .notify_prod
+Notify Success (prod):
+  extends: .autodevops_notify_success_prod
