@@ -216,12 +216,16 @@ Production:
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
 #
+#
+#
 
 .autodevops_notify_starting_deployment:
   extends:
     - .base_notify_pending_stage
-    - .autodevops_base_rules
   stage: Deploy
+  needs:
+    - job: Register image
+      artifacts: false
   rules:
     - if: $RELEASE
       when: never
@@ -233,8 +237,11 @@ Notify Starting Deployment:
 
 .notify_review:
   stage: .post
-  dependencies:
-    - Notify Starting Deployment
+  needs:
+    - job: Review
+      artifacts: false
+    - job: Notify Starting Deployment
+      artifacts: true
   environment:
     name: ${CI_COMMIT_REF_NAME}-dev
   before_script:
@@ -262,8 +269,11 @@ Notify Success (review):
 
 .notify_prod:
   stage: .post
-  dependencies:
-    - Notify Starting Deployment
+  needs:
+    - job: Production
+      artifacts: false
+    - job: Notify Starting Deployment
+      artifacts: true
   environment:
     name: prod
   before_script:

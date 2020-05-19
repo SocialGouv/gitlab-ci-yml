@@ -29,8 +29,7 @@ Test AutoDevOps on SocialGouv/sample-next-app:
   extends: .base_trigger_stage
   variables:
     TRIGGER_ARGS: >-
-      --form ref="${CI_COMMIT_REF_NAME}"
-    # --form ref="ci-test-autodevops-${CI_COMMIT_REF_NAME}"
+      --form ref="ci-test-autodevops-${CI_COMMIT_REF_NAME}"
     TRIGGER_PROJECT_ID: "${SOCIAL_GOUV_SAMPLE_NEXT_APP_PROJECT_ID}"
 
 #
