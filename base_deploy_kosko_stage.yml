@@ -18,13 +18,13 @@ variables:
       - ${K8S_FOLDER}/node_modules
   script:
     - printenv | grep
-        -e "^CI_COMMIT_"
-        -e "^CI_ENVIRONMENT_"
-        -e "^CI_PROJECT_"
-        -e "^CI_REGISTRY_"
-        -e "^KUBE_INGRESS_BASE_DOMAIN"
-        -e "^KUBE_NAMESPACE"
-        -e "^RANCHER_PROJECT_ID"
+      -e "^CI_COMMIT_"
+      -e "^CI_ENVIRONMENT_"
+      -e "^CI_PROJECT_"
+      -e "^CI_REGISTRY_"
+      -e "^KUBE_INGRESS_BASE_DOMAIN"
+      -e "^KUBE_NAMESPACE"
+      -e "^RANCHER_PROJECT_ID"
     #
     - yarn config set cache-folder ${CI_PROJECT_DIR}/.cache/yarn
     - cd ${K8S_FOLDER}
