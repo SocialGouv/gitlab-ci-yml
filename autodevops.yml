@@ -30,7 +30,7 @@ variables:
   GIT_DEPTH: 5
   #
   # To activate the auto release
-  # AUTO_DEVOPS_RELEASE_AUTO: true
+  # AUTO_DEVOPS_RELEASE_AUTO: "true"
 
 #
 #
