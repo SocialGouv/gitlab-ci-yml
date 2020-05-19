@@ -22,8 +22,7 @@ variables:
       -e "^CI_ENVIRONMENT_"
       -e "^CI_PROJECT_"
       -e "^CI_REGISTRY_"
-      -e "^KUBE_INGRESS_BASE_DOMAIN"
-      -e "^KUBE_NAMESPACE"
+      -e "^KUBE_"
       -e "^RANCHER_PROJECT_ID" | sort
     #
     - yarn config set cache-folder ${CI_PROJECT_DIR}/.cache/yarn
