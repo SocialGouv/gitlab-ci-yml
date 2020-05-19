@@ -1,5 +1,4 @@
 ---
-
 workflow:
   rules:
     # Skip GitHub pull requests pipelines
@@ -37,5 +36,7 @@ Test AutoDevOps on SocialGouv/sample-next-app:
 
 Release:
   extends: .base_semantic_release_stage
+  rules:
+    - if: $CI_PROJECT_URL =~ /^https://gitlab.factory.social.gouv.fr/
   variables:
     SEMANTIC_RELEASE_PLUGINS: "@semantic-release/changelog @semantic-release/exec @semantic-release/git"
