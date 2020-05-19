@@ -1,0 +1,33 @@
+#
+
+variables:
+  TRIGGER_PROJECT_ID: "${CI_PROJECT_ID}"
+  TRIGGER_ARGS: ""
+
+.base_trigger_stage:
+  image: curlimages/curl:7.67.0
+  dependencies: []
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - echo "curl ${TRIGGER_ARGS} ${CI_API_V4_URL}/projects/${TRIGGER_PROJECT_ID}/trigger/pipeline"
+    - curl --request POST
+      --form token="${CI_JOB_TOKEN}"
+      ${TRIGGER_ARGS}
+      ${CI_API_V4_URL}/projects/${TRIGGER_PROJECT_ID}/trigger/pipeline
+
+.base_trigger_release_stage:
+  extends:
+    - .base_trigger_stage
+  variables:
+    TRIGGER_ARGS: >-
+      --form ref="${CI_COMMIT_REF_NAME}"
+      --form variables[RELEASE]="true"
+
+.base_trigger_production_stage:
+  extends:
+    - .base_trigger_stage
+  variables:
+    TRIGGER_ARGS: >-
+      --form ref="${CI_COMMIT_REF_NAME}"
+      --form variables[PRODUCTION]="true"

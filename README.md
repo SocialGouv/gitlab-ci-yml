@@ -241,6 +241,54 @@ Deploy app (prod):
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 ```
 
+# [.base_deploy_kosko_stage](./base_deploy_kosko_stage.yml)
+
+## Usage
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_deploy_kosko_stage.yml
+    ref: v15.4.0
+
+#
+
+.deploy_myapp_stage:
+  dependencies: []
+  stage: Deploy
+  extends:
+    - .base_deploy_kosko_stage
+  variables:
+    # optional
+    K8S_FOLDER: ${CI_PROJECT_DIR}/.k8s
+
+#
+
+Deploy myapp (dev):
+  extends:
+    - .deploy_myapp_stage
+  except:
+    - master
+  variables:
+    KOSKO_GENERATE_ARGS: >-
+      --dev
+  environment:
+    name: ${CI_COMMIT_REF_NAME}-dev
+    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+
+Deploy app (prod):
+  extends:
+    - .deploy_myapp_stage
+  only:
+    - master
+  variables:
+    KOSKO_GENERATE_ARGS: >-
+      --prod
+  environment:
+    name: prod
+    url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+```
+
 # [.base_docker_helm_image_stage](./base_docker_helm_image_stage.yml)
 
 ## Usage
@@ -380,6 +428,38 @@ include:
 Snyk Scan:
   stage: Deploy
   extends: .base_snyk_scan
+```
+
+# [.base_trigger_stage](./base_trigger_stage.yml)
+
+Will trigger a gitlab pipeline
+
+## Usage
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_trigger_stage.yml
+    ref: v15.4.0
+
+Trigger FOO:
+  stage: .post
+  extends: .base_trigger_stage
+  variables:
+    TRIGGER_ARGS: >-
+      --form ref="${CI_COMMIT_REF_NAME}"
+      --form variables[FOO]="true"
+    # optional
+    TRIGGER_PROJECT_ID: "${CI_PROJECT_ID}"
+
+# Common triggers
+
+Trigger Release:
+  stage: .post
+  extends: .base_trigger_release_stage
+Trigger Production:
+  stage: .post
+  extends: .base_trigger_production_stage
 ```
 
 # [.base_trivy_scan](./base_trivy_scan.yml)
