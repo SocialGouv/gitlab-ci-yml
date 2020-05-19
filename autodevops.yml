@@ -38,9 +38,7 @@ variables:
 
 .autodevops_base_rules:
   rules:
-    - if: "$PRODUCTION"
-      when: never
-    - if: "$RELEASE"
+    - if: "$PRODUCTION || $RELEASE"
       when: never
     - when: on_success
 
