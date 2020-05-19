@@ -237,7 +237,7 @@ Notify Starting Deployment:
   stage: .post
   needs:
     - job: Notify Starting Deployment
-      artifacts: false
+      artifacts: true
   environment:
     name: ${CI_COMMIT_REF_NAME}-dev
   before_script:
@@ -267,7 +267,7 @@ Notify Success (review):
   stage: .post
   needs:
     - job: Notify Starting Deployment
-      artifacts: false
+      artifacts: true
   environment:
     name: prod
   before_script:
