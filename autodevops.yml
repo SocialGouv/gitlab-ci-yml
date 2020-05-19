@@ -213,3 +213,39 @@ Production:
   environment:
     name: prod
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+
+#
+
+.autodevops_notify_starting_deployment:
+  extends:
+    - .base_notify_pending_stage
+  stage: Deploy
+Notify Starting Deployment:
+  extends: .autodevops_notify_starting_deployment
+
+#
+
+.notify_review:
+  extends:
+    - .autodevops_base_rules
+  stage: .post
+  dependencies:
+    - Notify Starting Deployment
+  environment:
+    name: ${CI_COMMIT_REF_NAME}-dev
+  before_script:
+    - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
+
+.autodevops_notify_fail_review:
+  extends:
+    - .base_notify_fail_stage
+    - .notify_review
+Notify Fail (review):
+  extends: .autodevops_notify_fail_review
+
+.autodevops_notify_success_review:
+  extends:
+    - .base_notify_success_stage
+    - .notify_review
+Notify Success (review):
+  extends: .autodevops_notify_success_review
