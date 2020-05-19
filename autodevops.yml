@@ -38,7 +38,8 @@ variables:
 
 .autodevops_base_rules:
   rules:
-    - if: "$PRODUCTION || $RELEASE"
+    - &autodevops_global_skip_case
+      if: "$PRODUCTION || $RELEASE"
       when: never
     - when: on_success
 
@@ -52,10 +53,7 @@ variables:
     - .autodevops_base_rules
   stage: Install
   rules:
-    - if: "$PRODUCTION"
-      when: never
-    - if: "$RELEASE"
-      when: never
+    - <<: *autodevops_global_skip_case
     - if: "$AUTO_DEVOPS_RELEASE_AUTO"
       when: always
     - when: manual
@@ -217,6 +215,7 @@ Production:
 .autodevops_notify_starting_deployment:
   extends:
     - .base_notify_pending_stage
+    - .autodevops_base_rules
   stage: Deploy
 Notify Starting Deployment:
   extends: .autodevops_notify_starting_deployment
@@ -237,10 +236,7 @@ Notify Starting Deployment:
     - .base_notify_fail_stage
     - .notify_review
   rules:
-    - if: "$PRODUCTION"
-      when: never
-    - if: "$RELEASE"
-      when: never
+    - <<: *autodevops_global_skip_case
     - when: on_failure
 Notify Fail (review):
   extends: .autodevops_notify_fail_review
