@@ -25,16 +25,17 @@ Lint:
     - npx yaml-lint *.yml
     - npx prettier --check *.yml
 
-Release:
-  extends: .base_semantic_release_stage
-  when: manual
-  variables:
-    SEMANTIC_RELEASE_PLUGINS: "@semantic-release/changelog @semantic-release/exec @semantic-release/git"
-
 Test AutoDevOps on SocialGouv/sample-next-app:
   stage: Code Quality
   extends: .base_trigger_stage
   variables:
     TRIGGER_ARGS: >-
-      --form ref="test-SocialGouv-gitlab-ci-yml-pull-244"
+      --form ref="${CI_COMMIT_REF_NAME}"
     TRIGGER_PROJECT_ID: "${SOCIAL_GOUV_SAMPLE_NEXT_APP_PROJECT_ID}"
+
+#
+
+Release:
+  extends: .base_semantic_release_stage
+  variables:
+    SEMANTIC_RELEASE_PLUGINS: "@semantic-release/changelog @semantic-release/exec @semantic-release/git"
