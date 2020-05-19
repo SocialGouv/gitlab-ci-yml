@@ -215,7 +215,7 @@ Production:
     - if: "$PRODUCTION && $CI_COMMIT_TAG"
   variables:
     KOSKO_GENERATE_ARGS: >-
-      --prod
+      --prod "!(_*)"
   environment:
     name: prod
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
