@@ -216,6 +216,8 @@ Production:
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
 #
+#
+#
 
 .autodevops_notify_starting_deployment:
   extends:
@@ -236,6 +238,8 @@ Notify Starting Deployment:
 .notify_review:
   stage: .post
   needs:
+    - job: Review
+      artifacts: false
     - job: Notify Starting Deployment
       artifacts: true
   environment:
@@ -266,6 +270,8 @@ Notify Success (review):
 .notify_prod:
   stage: .post
   needs:
+    - job: Production
+      artifacts: false
     - job: Notify Starting Deployment
       artifacts: true
   environment:
