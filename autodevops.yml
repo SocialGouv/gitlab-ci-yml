@@ -74,7 +74,7 @@ Trigger Release:
     - if: "$RELEASE"
   variables:
     GIT_DEPTH: 4242
-    SEMANTIC_RELEASE_ARGS: "--dry-run"
+    SEMANTIC_RELEASE_ARGS: ""
   stage: Release
 
 Release:
