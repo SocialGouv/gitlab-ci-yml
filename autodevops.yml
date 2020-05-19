@@ -220,12 +220,7 @@ Production:
 .autodevops_notify_starting_deployment:
   extends:
     - .base_notify_pending_stage
-    - .autodevops_base_rules
   stage: Deploy
-  rules:
-    - if: $RELEASE
-      when: never
-    - when: on_success
 Notify Starting Deployment:
   extends: .autodevops_notify_starting_deployment
 
