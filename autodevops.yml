@@ -197,7 +197,7 @@ Review:
       artifacts: false
   variables:
     KOSKO_GENERATE_ARGS: >-
-      --dev
+      --env dev
   environment:
     name: ${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
@@ -209,7 +209,7 @@ Production:
     - if: "$PRODUCTION && $CI_COMMIT_TAG"
   variables:
     KOSKO_GENERATE_ARGS: >-
-      --prod "!(_*)"
+      --env prod "!(_*)"
   environment:
     name: prod
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
