@@ -26,6 +26,8 @@ variables:
     # Use local yarn cache
     - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
     # Install semantic-release
+    - echo "yarn global add semantic-release $SEMANTIC_RELEASE_PLUGINS"
     - yarn global add semantic-release $SEMANTIC_RELEASE_PLUGINS
     # Run semantic-release
+    - echo "semantic-release $SEMANTIC_RELEASE_ARGS"
     - semantic-release $SEMANTIC_RELEASE_ARGS
