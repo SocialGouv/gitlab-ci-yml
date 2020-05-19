@@ -44,7 +44,7 @@ variables:
 .autodevops_base_rules:
   rules:
     - &autodevops_global_skip_case
-      <<: &autodevops_trigger_rule
+      <<: *autodevops_trigger_rule
       when: never
     - when: on_success
 
@@ -207,7 +207,7 @@ Production:
   extends:
     - .deploy_stage
   rules:
-    - <<: &autodevops_production_rule
+    - <<: *autodevops_production_rule
   variables:
     KOSKO_GENERATE_ARGS: >-
       --env prod "!(_*)"
@@ -270,7 +270,7 @@ Notify Success (review):
     - .base_notify_fail_stage
     - .notify_prod
   rules:
-    - <<: &autodevops_production_rule
+    - <<: *autodevops_production_rule
       when: on_failure
 Notify Fail (prod):
   extends: .autodevops_notify_fail_prod
@@ -280,7 +280,7 @@ Notify Fail (prod):
     - .base_notify_success_stage
     - .notify_prod
   rules:
-    - <<: &autodevops_production_rule
+    - <<: *autodevops_production_rule
       when: on_success
 Notify Success (prod):
   extends: .autodevops_notify_success_prod
