@@ -1,3 +1,32 @@
+# [16.0.0-alpha.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.7.0...v16.0.0-alpha.1) (2020-05-19)
+
+
+* feat(autodevops)!: autodevops v2 (#244) ([f851fa3](https://github.com/SocialGouv/gitlab-ci-yml/commit/f851fa36a70aa797773bf582736738fd09fcb070)), closes [#244](https://github.com/SocialGouv/gitlab-ci-yml/issues/244)
+
+
+### Features
+
+* **deps:** update snyk/snyk-cli docker tag to v1.320.4 ([#249](https://github.com/SocialGouv/gitlab-ci-yml/issues/249)) ([86df4b4](https://github.com/SocialGouv/gitlab-ci-yml/commit/86df4b4866f625a04d15ff57c9c117b6fb46e48d))
+* **deps:** update snyk/snyk-cli docker tag to v1.320.5 ([#250](https://github.com/SocialGouv/gitlab-ci-yml/issues/250)) ([46e704b](https://github.com/SocialGouv/gitlab-ci-yml/commit/46e704ba58b4e2ec1205ecd2adfe5214c4af9e96))
+* **deps:** update snyk/snyk-cli docker tag to v1.321.0 ([#251](https://github.com/SocialGouv/gitlab-ci-yml/issues/251)) ([3f98252](https://github.com/SocialGouv/gitlab-ci-yml/commit/3f98252a9018c428660be01cd0961071a4e7b4a0))
+
+
+### BREAKING CHANGES
+
+* autodevops v2
+    - new autodevops.yml file
+
+    ```yaml
+    include:
+      - project: SocialGouv/gitlab-ci-yml
+        file: /autodevops.yml
+        ref: v16.0.0
+    ```
+
+    - remove autodevops_simple_app.yml
+    - use rules instead of only/expect/when
+    - use kosko for deployment
+
 # [15.7.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.6.0...v15.7.0) (2020-05-14)
 
 
