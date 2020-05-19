@@ -1,3 +1,10 @@
+# [16.0.0-alpha.4](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-alpha.3...v16.0.0-alpha.4) (2020-05-19)
+
+
+### Bug Fixes
+
+* **release:** remove hard coded dry run ([feef38f](https://github.com/SocialGouv/gitlab-ci-yml/commit/feef38ff87e19f58e1db0c3e366128981c6aa96d))
+
 # [16.0.0-alpha.3](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-alpha.2...v16.0.0-alpha.3) (2020-05-19)
 
 
