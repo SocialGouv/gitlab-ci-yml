@@ -17,7 +17,6 @@ variables:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
     paths:
       - $CI_PROJECT_DIR/.yarn
-      - node_modules
   before_script:
     # Use github as origin
     - git remote set-url origin https://${GITHUB_TOKEN}@github.com/${CI_PROJECT_PATH}.git
