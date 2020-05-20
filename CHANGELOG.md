@@ -1,3 +1,10 @@
+# [16.0.0-alpha.7](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-alpha.6...v16.0.0-alpha.7) (2020-05-20)
+
+
+### Bug Fixes
+
+* **autodevops:** do not trigger mep in mep ([858bb61](https://github.com/SocialGouv/gitlab-ci-yml/commit/858bb610e5a605b30b3f2690bb8913f380f79095))
+
 # [16.0.0-alpha.6](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-alpha.5...v16.0.0-alpha.6) (2020-05-20)
 
 
