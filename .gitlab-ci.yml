@@ -31,6 +31,7 @@ Test AutoDevOps on SocialGouv/sample-next-app:
     TRIGGER_ARGS: >-
       --form ref="ci-test-autodevops-${CI_COMMIT_REF_NAME}"
       --form variables[PRODUCTION]="true"
+      --form variables[CI_COMMIT_TAG]="v1.1.0-alpha.3"
     TRIGGER_PROJECT_ID: "${SOCIAL_GOUV_SAMPLE_NEXT_APP_PROJECT_ID}"
 
 #
