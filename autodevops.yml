@@ -227,9 +227,6 @@ Production:
   extends:
     - .base_notify_pending_stage
   stage: Deploy
-  needs:
-    - job: Register image
-      artifacts: false
   rules:
     - if: $RELEASE
       when: never
@@ -241,11 +238,6 @@ Notify Starting Deployment:
 
 .notify_review:
   stage: .post
-  needs:
-    - job: Review
-      artifacts: false
-    - job: Notify Starting Deployment
-      artifacts: true
   environment:
     name: ${CI_COMMIT_REF_NAME}-dev
   before_script:
@@ -273,11 +265,6 @@ Notify Success (review):
 
 .notify_prod:
   stage: .post
-  needs:
-    - job: Production
-      artifacts: false
-    - job: Notify Starting Deployment
-      artifacts: true
   environment:
     name: prod
   before_script:
