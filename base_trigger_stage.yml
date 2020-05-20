@@ -7,6 +7,7 @@ variables:
 .base_trigger_stage:
   image: curlimages/curl:7.67.0
   dependencies: []
+  allow_failure: true
   variables:
     GIT_STRATEGY: none
   script:
