@@ -231,6 +231,8 @@ Production:
     - if: $RELEASE
       when: never
     - when: on_success
+Notify Starting Deployment:
+  extends: .autodevops_notify_starting_deployment
 
 #
 
