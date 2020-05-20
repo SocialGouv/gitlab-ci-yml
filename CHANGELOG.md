@@ -1,3 +1,10 @@
+# [16.0.0-alpha.6](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-alpha.5...v16.0.0-alpha.6) (2020-05-20)
+
+
+### Bug Fixes
+
+* **autodevops:** Notify without extra needs ([#254](https://github.com/SocialGouv/gitlab-ci-yml/issues/254)) ([be0a9e0](https://github.com/SocialGouv/gitlab-ci-yml/commit/be0a9e01c7bebd99c4406331c3f7e620c5bd2f71))
+
 # [16.0.0-alpha.5](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-alpha.4...v16.0.0-alpha.5) (2020-05-20)
 
 
