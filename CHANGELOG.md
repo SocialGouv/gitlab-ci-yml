@@ -1,3 +1,10 @@
+# [16.0.0-alpha.5](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-alpha.4...v16.0.0-alpha.5) (2020-05-20)
+
+
+### Features
+
+* **autodevops:** add AUTO_DEVOPS_PRODUCTION_AUTO ([0a69950](https://github.com/SocialGouv/gitlab-ci-yml/commit/0a69950f528221690a474a7195f60e701f2061b1))
+
 # [16.0.0-alpha.4](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-alpha.3...v16.0.0-alpha.4) (2020-05-19)
 
 
