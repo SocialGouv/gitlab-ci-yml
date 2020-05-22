@@ -201,10 +201,8 @@ Register image:
   extends:
     - .deploy_stage
   rules:
-    - <<: *autodevops_trigger_rule
-      when: never
-    - exists:
-        - .k8s/environments/preprod
+  rules:
+    - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
       when: never
     - when: on_success
   needs:
@@ -224,11 +222,9 @@ Review:
     - .deploy_stage
     - .autodevops_review
   rules:
-    - <<: *autodevops_trigger_rule
+    - if: "$PRODUCTION || $RELEASE"
       when: never
-    - exists:
-        - .k8s/environments/preprod
-      when: on_success
+    - if: "$CI_COMMIT_TAG"
   variables:
     KOSKO_GENERATE_ARGS: >-
       --env preprod
