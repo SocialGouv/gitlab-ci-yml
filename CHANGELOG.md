@@ -1,3 +1,11 @@
+# [16.0.0-alpha.9](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-alpha.8...v16.0.0-alpha.9) (2020-05-22)
+
+
+### Bug Fixes
+
+* **autodevops:** do not preprod trigger rules ([d5c0e5f](https://github.com/SocialGouv/gitlab-ci-yml/commit/d5c0e5f4a9d6052a05462ae20d0896029cb1b7fd))
+* **autodevops:** remove duplicate rules key ([35ee388](https://github.com/SocialGouv/gitlab-ci-yml/commit/35ee388d500d9f392ec02c0edf08811ac0074151))
+
 # [16.0.0-alpha.8](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-alpha.7...v16.0.0-alpha.8) (2020-05-22)
 
 
