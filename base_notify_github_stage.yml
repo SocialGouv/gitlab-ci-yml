@@ -6,10 +6,10 @@
 #
 .notify_stage: &notify_stage
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/git-deploy:1.15.0
-  dependencies: []
 
 .base_notify_pending_stage:
-  <<: *notify_stage
+  extends:
+    - .notify_stage
   script:
     #
     - create-deployment
@@ -32,16 +32,20 @@
   fi
 
 .base_notify_fail_stage:
-  <<: *notify_stage
+  extends:
+    - .notify_stage
   allow_failure: true
-  when: on_failure
+  rules:
+    - when: on_failure
   script:
     - *resolve_deploy_environment
     - update-deployment $(cat DEPLOY_ID) "${HOST}" failure
 
 .base_notify_success_stage:
-  <<: *notify_stage
-  when: on_success
+  extends:
+    - .notify_stage
+  rules:
+    - when: on_success
   script:
     - *resolve_deploy_environment
     - update-deployment $(cat DEPLOY_ID) "${HOST}" success

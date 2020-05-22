@@ -13,24 +13,21 @@ variables:
 .base_semantic_release_stage:
   stage: "Release"
   image: node:14
-  only:
-    refs:
-      - branches
-  when: manual
   cache:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
     paths:
       - $CI_PROJECT_DIR/.yarn
-      - node_modules
   before_script:
+    # Use github as origin
+    - git remote set-url origin https://${GITHUB_TOKEN}@github.com/${CI_PROJECT_PATH}.git
   script:
     # Set git to a branch
     - git checkout ${CI_COMMIT_REF_NAME}
-    # Use github as origin
-    - git remote set-url origin https://${GITHUB_TOKEN}@github.com/${CI_PROJECT_PATH}.git
     # Use local yarn cache
     - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
     # Install semantic-release
+    - echo "yarn global add semantic-release $SEMANTIC_RELEASE_PLUGINS"
     - yarn global add semantic-release $SEMANTIC_RELEASE_PLUGINS
     # Run semantic-release
+    - echo "semantic-release $SEMANTIC_RELEASE_ARGS"
     - semantic-release $SEMANTIC_RELEASE_ARGS
