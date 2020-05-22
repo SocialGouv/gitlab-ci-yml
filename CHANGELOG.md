@@ -1,3 +1,45 @@
+# [16.0.0-beta.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.7.0...v16.0.0-beta.1) (2020-05-22)
+
+
+### Bug Fixes
+
+* **autodevops:** do not preprod trigger rules ([d5c0e5f](https://github.com/SocialGouv/gitlab-ci-yml/commit/d5c0e5f4a9d6052a05462ae20d0896029cb1b7fd))
+* **autodevops:** do not trigger mep in mep ([858bb61](https://github.com/SocialGouv/gitlab-ci-yml/commit/858bb610e5a605b30b3f2690bb8913f380f79095))
+* **autodevops:** Notify Starting Deployment do not start ([2cb2f88](https://github.com/SocialGouv/gitlab-ci-yml/commit/2cb2f88f9f467a9ff68508f210d5d6d61100a095))
+* **autodevops:** notify starting deployment do not start ([#253](https://github.com/SocialGouv/gitlab-ci-yml/issues/253)) ([a002bfb](https://github.com/SocialGouv/gitlab-ci-yml/commit/a002bfbc60265966af8c5a35323a5a184c3f0b98))
+* **autodevops:** Notify without extra needs ([#254](https://github.com/SocialGouv/gitlab-ci-yml/issues/254)) ([be0a9e0](https://github.com/SocialGouv/gitlab-ci-yml/commit/be0a9e01c7bebd99c4406331c3f7e620c5bd2f71))
+* **autodevops:** remove duplicate rules key ([35ee388](https://github.com/SocialGouv/gitlab-ci-yml/commit/35ee388d500d9f392ec02c0edf08811ac0074151))
+* **release:** remove hard coded dry run ([feef38f](https://github.com/SocialGouv/gitlab-ci-yml/commit/feef38ff87e19f58e1db0c3e366128981c6aa96d))
+
+
+### Features
+
+* **autodevops:** add AUTO_DEVOPS_PRODUCTION_AUTO ([0a69950](https://github.com/SocialGouv/gitlab-ci-yml/commit/0a69950f528221690a474a7195f60e701f2061b1))
+* **autodevops:** add unified preprod stage ([#258](https://github.com/SocialGouv/gitlab-ci-yml/issues/258)) ([c83b285](https://github.com/SocialGouv/gitlab-ci-yml/commit/c83b285b2c596fccbc2f84202abb554056a7984c))
+* **deps:** update snyk/snyk-cli docker tag to v1.320.4 ([#249](https://github.com/SocialGouv/gitlab-ci-yml/issues/249)) ([86df4b4](https://github.com/SocialGouv/gitlab-ci-yml/commit/86df4b4866f625a04d15ff57c9c117b6fb46e48d))
+* **deps:** update snyk/snyk-cli docker tag to v1.320.5 ([#250](https://github.com/SocialGouv/gitlab-ci-yml/issues/250)) ([46e704b](https://github.com/SocialGouv/gitlab-ci-yml/commit/46e704ba58b4e2ec1205ecd2adfe5214c4af9e96))
+* **deps:** update snyk/snyk-cli docker tag to v1.321.0 ([#251](https://github.com/SocialGouv/gitlab-ci-yml/issues/251)) ([3f98252](https://github.com/SocialGouv/gitlab-ci-yml/commit/3f98252a9018c428660be01cd0961071a4e7b4a0))
+
+
+* feat(autodevops)!: autodevops v2 (#244) ([f851fa3](https://github.com/SocialGouv/gitlab-ci-yml/commit/f851fa36a70aa797773bf582736738fd09fcb070)), closes [#244](https://github.com/SocialGouv/gitlab-ci-yml/issues/244)
+
+
+### BREAKING CHANGES
+
+* autodevops v2
+    - new autodevops.yml file
+
+    ```yaml
+    include:
+      - project: SocialGouv/gitlab-ci-yml
+        file: /autodevops.yml
+        ref: v16.0.0
+    ```
+
+    - remove autodevops_simple_app.yml
+    - use rules instead of only/expect/when
+    - use kosko for deployment
+
 # [16.0.0-alpha.8](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-alpha.7...v16.0.0-alpha.8) (2020-05-22)
 
 
