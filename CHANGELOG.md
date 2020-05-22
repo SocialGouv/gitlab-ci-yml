@@ -1,3 +1,13 @@
+# [16.0.0-beta.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-beta.1...v16.0.0-beta.2) (2020-05-22)
+
+
+### Features
+
+* **deps:** update snyk/snyk-cli docker tag to v1.322.0 ([#252](https://github.com/SocialGouv/gitlab-ci-yml/issues/252)) ([3927951](https://github.com/SocialGouv/gitlab-ci-yml/commit/3927951d7c4beb4ef9fe1b4033017ae456e8e5ee))
+* **deps:** update snyk/snyk-cli docker tag to v1.323.1 ([#256](https://github.com/SocialGouv/gitlab-ci-yml/issues/256)) ([88096d7](https://github.com/SocialGouv/gitlab-ci-yml/commit/88096d7af512da33d6764dcf0ff4f19496ab519a))
+* **deps:** update snyk/snyk-cli docker tag to v1.323.2 ([#257](https://github.com/SocialGouv/gitlab-ci-yml/issues/257)) ([3105682](https://github.com/SocialGouv/gitlab-ci-yml/commit/3105682c82a7574380f16ba1d4d9835eb1a3ce8a))
+* **deps:** update socialgouv/docker images docker tags to v1.16.0 ([#255](https://github.com/SocialGouv/gitlab-ci-yml/issues/255)) ([39226cf](https://github.com/SocialGouv/gitlab-ci-yml/commit/39226cf2051029258f60d439f167b9005fa5637a))
+
 # [16.0.0-beta.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.7.0...v16.0.0-beta.1) (2020-05-22)
 
 
