@@ -1,3 +1,10 @@
+# [16.0.0-alpha.8](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-alpha.7...v16.0.0-alpha.8) (2020-05-22)
+
+
+### Features
+
+* **autodevops:** add unified preprod stage ([#258](https://github.com/SocialGouv/gitlab-ci-yml/issues/258)) ([c83b285](https://github.com/SocialGouv/gitlab-ci-yml/commit/c83b285b2c596fccbc2f84202abb554056a7984c))
+
 # [16.0.0-alpha.7](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-alpha.6...v16.0.0-alpha.7) (2020-05-20)
 
 
