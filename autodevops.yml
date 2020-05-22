@@ -197,10 +197,16 @@ Register image:
 
 #
 
-Review:
+.autodevops_review:
   extends:
-    - .autodevops_base_rules
     - .deploy_stage
+  rules:
+    - <<: *autodevops_trigger_rule
+      when: never
+    - exists:
+        - .k8s/environments/preprod
+      when: never
+    - when: on_success
   needs:
     - job: Register image
       artifacts: false
@@ -210,8 +216,29 @@ Review:
   environment:
     name: ${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+Review:
+  extends: .autodevops_review
 
-Production:
+.autodevops_preprod:
+  extends:
+    - .deploy_stage
+    - .autodevops_review
+  rules:
+    - <<: *autodevops_trigger_rule
+      when: never
+    - exists:
+        - .k8s/environments/preprod
+      when: on_success
+  variables:
+    KOSKO_GENERATE_ARGS: >-
+      --env preprod
+  environment:
+    name: preprod-dev
+    url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+Preprod:
+  extends: .autodevops_preprod
+
+.autodevops_production:
   extends:
     - .deploy_stage
   rules:
@@ -222,6 +249,8 @@ Production:
   environment:
     name: prod
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+Production:
+  extends: .autodevops_production
 
 #
 #
