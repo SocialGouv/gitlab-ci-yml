@@ -201,7 +201,6 @@ Register image:
   extends:
     - .deploy_stage
   rules:
-  rules:
     - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
       when: never
     - when: on_success
