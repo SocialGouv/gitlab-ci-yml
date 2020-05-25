@@ -1,3 +1,10 @@
+# [16.0.0-beta.4](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-beta.3...v16.0.0-beta.4) (2020-05-25)
+
+
+### Bug Fixes
+
+* **autodevops:** auto deploy to production tag release ([c6f9342](https://github.com/SocialGouv/gitlab-ci-yml/commit/c6f93426e7d55b73bb4efde1232620a85a2c8339))
+
 # [16.0.0-beta.3](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-beta.2...v16.0.0-beta.3) (2020-05-25)
 
 
