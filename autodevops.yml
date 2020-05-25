@@ -266,6 +266,8 @@ Notify Starting Deployment:
 
 .notify_review:
   stage: .post
+  dependencies:
+    - Notify Starting Deployment
   environment:
     name: ${CI_COMMIT_REF_NAME}-dev
   before_script:
@@ -293,6 +295,8 @@ Notify Success (review):
 
 .notify_prod:
   stage: .post
+  dependencies:
+    - Notify Starting Deployment
   environment:
     name: prod
   before_script:
