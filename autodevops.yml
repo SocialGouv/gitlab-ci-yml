@@ -31,7 +31,7 @@ variables:
   #
   # To activate the auto release
   # AUTO_DEVOPS_RELEASE_AUTO: "true"
-  # AUTO_DEVOPS_PRODUCTION_AUTO: "^v[1-9]+\.[0-9]+\.[0-9]+$"
+  # AUTO_DEVOPS_PRODUCTION_AUTO: "true"
 
 #
 #
@@ -90,7 +90,7 @@ Release:
   rules:
     - if: "$PRODUCTION"
       when: never
-    - if: "$CI_COMMIT_TAG =~ $AUTO_DEVOPS_PRODUCTION_AUTO"
+    - if: "$AUTO_DEVOPS_PRODUCTION_AUTO && $CI_COMMIT_TAG"
       when: on_success
     - if: "$CI_COMMIT_TAG"
       when: manual
