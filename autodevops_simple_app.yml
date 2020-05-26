@@ -201,6 +201,15 @@ Create Azure DB (dev):
 Drop Azure DB (dev):
   extends: .autodevops_drop_azure_db_dev
 
+.autodevops_clean_azure_db_dev:
+  extends:
+    - .base_clean_azure_db
+  environment:
+    name: ${CI_COMMIT_REF_NAME}-dev
+    action: stop
+Clean Azure DB (dev):
+  extends: .autodevops_clean_azure_db_dev
+
 #
 
 .autodevops_delete_useless_k8s_namespaces:
