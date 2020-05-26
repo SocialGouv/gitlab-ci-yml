@@ -1,3 +1,10 @@
+# [16.0.0-beta.8](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-beta.7...v16.0.0-beta.8) (2020-05-26)
+
+
+### Bug Fixes
+
+* **autodevops:** deploy review on previous stages success ([58d186d](https://github.com/SocialGouv/gitlab-ci-yml/commit/58d186d78da77211bd6f9c963396a316adace8db))
+
 # [16.0.0-beta.7](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-beta.6...v16.0.0-beta.7) (2020-05-25)
 
 
