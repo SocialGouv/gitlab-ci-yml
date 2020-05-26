@@ -53,4 +53,5 @@
   stage: "Clean Up"
   allow_failure: true
   script:
+    - apt-get install -y git
     - clean-dbs
