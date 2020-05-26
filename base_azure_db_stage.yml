@@ -47,7 +47,6 @@
     - drop-db-user
 
 .base_clean_azure_db:
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:2c899ec261ed030dc6a53e65b0657348ba1d9959
   extends:
     - .base_azure_db
   stage: "Clean Up"
