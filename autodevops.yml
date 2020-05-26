@@ -205,9 +205,6 @@ Register image:
     - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
       when: never
     - when: on_success
-  needs:
-    - job: Register image
-      artifacts: false
   variables:
     KOSKO_GENERATE_ARGS: >-
       --env dev
