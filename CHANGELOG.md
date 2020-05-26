@@ -1,3 +1,10 @@
+# [16.0.0-beta.11](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-beta.10...v16.0.0-beta.11) (2020-05-26)
+
+
+### Bug Fixes
+
+* **autodevops:** deploying to prod2 ([2222974](https://github.com/SocialGouv/gitlab-ci-yml/commit/222297450d1ad3ced2e8ef4009af4cfc6acab7b8))
+
 # [16.0.0-beta.10](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-beta.9...v16.0.0-beta.10) (2020-05-26)
 
 
