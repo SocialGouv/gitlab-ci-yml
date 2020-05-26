@@ -1,3 +1,10 @@
+# [16.0.0-beta.10](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-beta.9...v16.0.0-beta.10) (2020-05-26)
+
+
+### Bug Fixes
+
+* **autodevops:** do not trigger release on release commit (2) ([c7b8103](https://github.com/SocialGouv/gitlab-ci-yml/commit/c7b810371e3ed76158bc88262cb5dbbc2697114a))
+
 # [16.0.0-beta.9](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-beta.8...v16.0.0-beta.9) (2020-05-26)
 
 
