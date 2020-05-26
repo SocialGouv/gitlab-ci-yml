@@ -211,7 +211,7 @@ Register image:
     KOSKO_GENERATE_ARGS: >-
       --env dev
   environment:
-    name: ${CI_COMMIT_REF_NAME}-dev
+    name: ${CI_COMMIT_REF_NAME}-dev2
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 Review:
   extends: .autodevops_review
@@ -228,7 +228,7 @@ Review:
     KOSKO_GENERATE_ARGS: >-
       --env preprod
   environment:
-    name: preprod-dev
+    name: preprod-dev2
     url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 Preprod:
   extends: .autodevops_preprod
@@ -242,7 +242,7 @@ Preprod:
     KOSKO_GENERATE_ARGS: >-
       --env prod "!(_*)"
   environment:
-    name: prod
+    name: prod2
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 Production:
   extends: .autodevops_production
@@ -269,7 +269,7 @@ Notify Starting Deployment:
   dependencies:
     - Notify Starting Deployment
   environment:
-    name: ${CI_COMMIT_REF_NAME}-dev
+    name: ${CI_COMMIT_REF_NAME}-dev2
   before_script:
     - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
 
