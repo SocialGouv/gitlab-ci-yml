@@ -54,4 +54,6 @@
   allow_failure: true
   script:
     - apt-get update && apt-get install -y git
+    - git clone $CI_REPOSITORY_URL
+    - cd $CI_PROJECT_NAME
     - clean-dbs
