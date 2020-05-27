@@ -45,3 +45,13 @@
     - export PGUSER="${ADMIN_PG_USER}"
     - export PGPASSWORD="${ADMIN_PG_PASSWORD}"
     - drop-db-user
+
+.base_clean_azure_db:
+  extends:
+    - .base_azure_db
+  stage: "Clean Up"
+  variables:
+    GIT_STRATEGY: clone
+  allow_failure: true
+  script:
+    - /bin/clean-dbs
