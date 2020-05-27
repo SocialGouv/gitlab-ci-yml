@@ -54,4 +54,4 @@
     GIT_STRATEGY: clone
   allow_failure: true
   script:
-    - clean-dbs
+    - /bin/clean-dbs
