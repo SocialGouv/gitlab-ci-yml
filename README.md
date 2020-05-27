@@ -363,25 +363,6 @@ Release:
 
 ```
 
-# [.base_snyk_scan](./base_snyk_scan.yml)
-
-A manual job to run a [Snyk.io](https://snyk.io) scan on the main repo docker image.
-
-You'll need to have a `SNYK_TOKEN` CI variable.
-
-## Usage
-
-```yaml
-include:
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_snyk_scan.yml
-    ref: v15.8.0
-
-Snyk Scan:
-  stage: Deploy
-  extends: .base_snyk_scan
-```
-
 # [.base_trivy_scan](./base_trivy_scan.yml)
 
 A manual job to run a [trivy](https://github.com/aquasecurity/trivy) security scan on the main repo docker image.
