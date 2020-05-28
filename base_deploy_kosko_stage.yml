@@ -36,3 +36,4 @@ variables:
     expire_in: 1 week
     paths:
       - manifest.yaml
+    when: always
