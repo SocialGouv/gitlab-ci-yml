@@ -56,7 +56,7 @@
   stage: "Clean Up"
   variables:
     GIT_STRATEGY: clone
-    GIT_DEPTH: 500
+    GIT_DEPTH: "500"
   allow_failure: true
   script:
     - /bin/clean-dbs
