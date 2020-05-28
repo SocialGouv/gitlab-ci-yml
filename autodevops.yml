@@ -232,7 +232,7 @@ Review:
       --env preprod
   environment:
     auto_stop_in: 6 months
-    name: preprod-dev2
+    name: preprod${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
     on_stop: Stop preprod
     url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 Preprod:
@@ -281,7 +281,7 @@ Stop review:
   extends:
     - .autodevops_stop_review
   environment:
-    name: preprod-dev2
+    name: preprod${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
     action: stop
   rules:
     - if: "$PRODUCTION || $RELEASE"
