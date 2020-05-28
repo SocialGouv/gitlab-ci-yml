@@ -1,5 +1,9 @@
 #
 
+.base_azure_db_admin_secrets:
+  before_script:
+    - \. <(kubectl get secret azure-pg-admin-user -n ${CI_PROJECT_NAME}-secret -o json | export_from_k8s_secret)
+
 .base_azure_db:
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:1.18.0
   dependencies: []
@@ -19,13 +23,11 @@
     NEW_PASSWORD: pass_${CI_COMMIT_SHORT_SHA}
     DROP_DATABASE: db_${CI_COMMIT_SHORT_SHA}
     DROP_USER: user_${CI_COMMIT_SHORT_SHA}@${PGHOST}
-  before_script:
-    - \. <(kubectl get secret azure-pg-admin-user -n ${CI_PROJECT_NAME}-secret -o json | export_from_k8s_secret)
-    - export PGHOST="${PG_HOST}"
 
 .base_create_azure_db:
   extends:
     - .base_azure_db
+    - .base_azure_db_admin_secrets
   stage: Registration
   allow_failure: true
   variables:
@@ -38,6 +40,7 @@
 .base_drop_azure_db:
   extends:
     - .base_azure_db
+    - .base_azure_db_admin_secrets
   stage: "Clean Up"
   when: manual
   allow_failure: true
@@ -49,6 +52,7 @@
 .base_clean_azure_db:
   extends:
     - .base_azure_db
+    - .base_azure_db_admin_secrets
   stage: "Clean Up"
   variables:
     GIT_STRATEGY: clone
