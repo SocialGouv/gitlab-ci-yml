@@ -231,7 +231,9 @@ Review:
     KOSKO_GENERATE_ARGS: >-
       --env preprod
   environment:
+    auto_stop_in: null
     name: preprod-dev2
+    on_stop: null
     url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 Preprod:
   extends: .autodevops_preprod
