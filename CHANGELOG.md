@@ -1,3 +1,11 @@
+## [16.0.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0...v16.0.1) (2020-05-28)
+
+
+### Bug Fixes
+
+* **azure-db:** increase GIT_DEPTH when cleanning up the db ([#276](https://github.com/SocialGouv/gitlab-ci-yml/issues/276)) ([b3dd95d](https://github.com/SocialGouv/gitlab-ci-yml/commit/b3dd95d757a264b7963d5338abf14a0eadfcf7df))
+* **azure-db:** pull all branches ([#277](https://github.com/SocialGouv/gitlab-ci-yml/issues/277)) ([f2fba70](https://github.com/SocialGouv/gitlab-ci-yml/commit/f2fba70ea03a5962518e01cfcba9aaaee903d2f9))
+
 # [16.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.9.0...v16.0.0) (2020-05-28)
 
 
