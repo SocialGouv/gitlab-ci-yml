@@ -1,3 +1,26 @@
+# [16.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.9.0...v16.0.0) (2020-05-28)
+
+
+### Bug Fixes
+
+* **azure_db:** dont always extract secrets ([#274](https://github.com/SocialGouv/gitlab-ci-yml/issues/274)) ([0bee3b2](https://github.com/SocialGouv/gitlab-ci-yml/commit/0bee3b2935f561dfcf41c8450acddc7ccb376ffa))
+
+
+### Features
+
+* **deps:** update socialgouv/docker images docker tags to v1.17.1 ([#270](https://github.com/SocialGouv/gitlab-ci-yml/issues/270)) ([a73fc5e](https://github.com/SocialGouv/gitlab-ci-yml/commit/a73fc5edce40732f52bc830f23c23307aa9197f7))
+* **deps:** update socialgouv/docker images docker tags to v1.18.0 ([#271](https://github.com/SocialGouv/gitlab-ci-yml/issues/271)) ([f060092](https://github.com/SocialGouv/gitlab-ci-yml/commit/f060092bd57d852bd89a49bbacf471c2f78ab552))
+* **deps:** update socialgouv/docker images docker tags to v1.20.0 ([#273](https://github.com/SocialGouv/gitlab-ci-yml/issues/273)) ([a32de64](https://github.com/SocialGouv/gitlab-ci-yml/commit/a32de64ea624f05086fc405cae1233b9e7ae0cd5))
+* **trivy:** use image subcommand ([#269](https://github.com/SocialGouv/gitlab-ci-yml/issues/269)) ([f59b2e6](https://github.com/SocialGouv/gitlab-ci-yml/commit/f59b2e64ef9260eb2907c28b9cf5478b2fbc8ee7))
+
+
+* feat(snyk)!: remove snyk (#267) ([2f7f068](https://github.com/SocialGouv/gitlab-ci-yml/commit/2f7f068b2b2a3c1d3ee961d986110b33686e100d)), closes [#267](https://github.com/SocialGouv/gitlab-ci-yml/issues/267)
+
+
+### BREAKING CHANGES
+
+* remove the .base_snyk_scan
+
 # [15.9.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.8.0...v15.9.0) (2020-05-27)
 
 
