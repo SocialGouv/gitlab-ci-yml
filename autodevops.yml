@@ -29,6 +29,7 @@ variables:
   GIT_STRATEGY: fetch
   GIT_DEPTH: 5
   #
+  AUTO_DEVOPS_DEV_ENVIRONMENT_NAME: "${CI_COMMIT_REF_NAME}-dev"
   # To activate the auto release
   # AUTO_DEVOPS_RELEASE_AUTO: "true"
   # AUTO_DEVOPS_PRODUCTION_AUTO: "/^v[1-9]+\\.[0-9]+\\.[0-9]+$/"
@@ -211,7 +212,7 @@ Register image:
     KOSKO_GENERATE_ARGS: >-
       --env dev
   environment:
-    name: ${CI_COMMIT_REF_NAME}-dev2
+    name: ${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 Review:
   extends: .autodevops_review
@@ -269,7 +270,7 @@ Notify Starting Deployment:
   dependencies:
     - Notify Starting Deployment
   environment:
-    name: ${CI_COMMIT_REF_NAME}-dev2
+    name: ${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
   before_script:
     - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
 
