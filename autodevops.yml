@@ -231,9 +231,9 @@ Review:
     KOSKO_GENERATE_ARGS: >-
       --env preprod
   environment:
-    auto_stop_in: null
+    auto_stop_in: 6 months
     name: preprod-dev2
-    on_stop: null
+    on_stop: Stop preprod
     url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 Preprod:
   extends: .autodevops_preprod
@@ -276,6 +276,19 @@ Production:
     - kubectl delete namespace "${KUBE_NAMESPACE}"
 Stop review:
   extends: .autodevops_stop_review
+
+.autodevops_stop_preprod:
+  extends:
+    - .autodevops_stop_review
+  environment:
+    name: preprod-dev2
+    action: stop
+  rules:
+    - if: "$PRODUCTION || $RELEASE"
+      when: never
+    - if: "$CI_COMMIT_TAG"
+Stop preprod:
+  extends: .autodevops_stop_preprod
 
 #
 #
