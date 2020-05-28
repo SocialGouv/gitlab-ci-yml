@@ -21,7 +21,7 @@
   script:
     - yarn build
   artifacts:
-    expire_in: 1 day
+    expire_in: 1 week
     paths:
       - .next
 
@@ -39,7 +39,7 @@
     - yarn config set cache-folder $CI_PROJECT_DIR/.cache/yarn
     - yarn --frozen-lockfile --prefer-offline
   artifacts:
-    expire_in: 1 day
+    expire_in: 1 week
     paths:
       - node_modules
 
@@ -56,6 +56,6 @@
   script:
     - yarn build
   artifacts:
-    expire_in: 1 day
+    expire_in: 1 week
     paths:
       - .next

@@ -19,7 +19,7 @@
     - extract-deploy-id
     - echo "GitHub deployment id '$(cat DEPLOY_ID)'"
   artifacts:
-    expire_in: 1 day
+    expire_in: 1 week
     paths:
       - DEPLOY_ID
 

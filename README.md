@@ -90,7 +90,7 @@ Build:
     - yarn build
     - yarn export
   artifacts:
-    expire_in: 1 day
+    expire_in: 1 week
     paths:
       - out
 
@@ -136,7 +136,7 @@ Build:
     - yarn build
     - yarn export
   artifacts:
-    expire_in: 1 day
+    expire_in: 1 week
     paths:
       - out
 ```

@@ -33,6 +33,6 @@ variables:
     - kosko generate ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml
     - kubectl apply -f ${CI_PROJECT_DIR}/manifest.yaml
   artifacts:
-    expire_in: 1 day
+    expire_in: 1 week
     paths:
       - manifest.yaml
