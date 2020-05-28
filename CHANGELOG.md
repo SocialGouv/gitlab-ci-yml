@@ -1,3 +1,65 @@
+# [17.0.0-beta.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0...v17.0.0-beta.1) (2020-05-28)
+
+
+### Bug Fixes
+
+* **autodevops:** auto deploy to production tag release ([c6f9342](https://github.com/SocialGouv/gitlab-ci-yml/commit/c6f93426e7d55b73bb4efde1232620a85a2c8339))
+* **autodevops:** auto deploy to production tag release (2) ([56efc94](https://github.com/SocialGouv/gitlab-ci-yml/commit/56efc9413d7bacf20c5342b373673353e7351cdc))
+* **autodevops:** auto deploy to production tag release (3) ([13da5d3](https://github.com/SocialGouv/gitlab-ci-yml/commit/13da5d3e810d7f22c7cd4f82fd06b4df58991429))
+* **autodevops:** auto deploy to production tag release (4) ([e7fada3](https://github.com/SocialGouv/gitlab-ci-yml/commit/e7fada392eb11234484b1d28d31bfc714f8c15b5))
+* **autodevops:** auto deploy to production tag release (5) ([88e9145](https://github.com/SocialGouv/gitlab-ci-yml/commit/88e9145f3281958682a76ae2c639893a9011708b))
+* **autodevops:** auto deploy to production tag release (6) ([6e86710](https://github.com/SocialGouv/gitlab-ci-yml/commit/6e86710c947bdd73fe7c2a32228e0d7b31c86510))
+* **autodevops:** auto deploy to production tag release (7) ([d41c6ed](https://github.com/SocialGouv/gitlab-ci-yml/commit/d41c6edf75bdc25712caa1372bd4075bd5767593))
+* **autodevops:** auto deploy to production tag release (8) ([db49487](https://github.com/SocialGouv/gitlab-ci-yml/commit/db49487abdf98778e9cc2be1acc43c1f3423e063))
+* **autodevops:** deploy review on previous stages success ([58d186d](https://github.com/SocialGouv/gitlab-ci-yml/commit/58d186d78da77211bd6f9c963396a316adace8db))
+* **autodevops:** deploying to prod2 ([2222974](https://github.com/SocialGouv/gitlab-ci-yml/commit/222297450d1ad3ced2e8ef4009af4cfc6acab7b8))
+* **autodevops:** do not preprod trigger rules ([d5c0e5f](https://github.com/SocialGouv/gitlab-ci-yml/commit/d5c0e5f4a9d6052a05462ae20d0896029cb1b7fd))
+* **autodevops:** do not trigger mep in mep ([858bb61](https://github.com/SocialGouv/gitlab-ci-yml/commit/858bb610e5a605b30b3f2690bb8913f380f79095))
+* **autodevops:** do not trigger release on release commit ([c8e69b3](https://github.com/SocialGouv/gitlab-ci-yml/commit/c8e69b3d45202b8ee51e54f8921ce1647fd13f15))
+* **autodevops:** do not trigger release on release commit (2) ([c7b8103](https://github.com/SocialGouv/gitlab-ci-yml/commit/c7b810371e3ed76158bc88262cb5dbbc2697114a))
+* **autodevops:** Notify Starting Deployment do not start ([2cb2f88](https://github.com/SocialGouv/gitlab-ci-yml/commit/2cb2f88f9f467a9ff68508f210d5d6d61100a095))
+* **autodevops:** notify starting deployment do not start ([#253](https://github.com/SocialGouv/gitlab-ci-yml/issues/253)) ([a002bfb](https://github.com/SocialGouv/gitlab-ci-yml/commit/a002bfbc60265966af8c5a35323a5a184c3f0b98))
+* **autodevops:** Notify without extra needs ([#254](https://github.com/SocialGouv/gitlab-ci-yml/issues/254)) ([be0a9e0](https://github.com/SocialGouv/gitlab-ci-yml/commit/be0a9e01c7bebd99c4406331c3f7e620c5bd2f71))
+* **autodevops:** remove duplicate rules key ([35ee388](https://github.com/SocialGouv/gitlab-ci-yml/commit/35ee388d500d9f392ec02c0edf08811ac0074151))
+* **azure-db:** increase GIT_DEPTH when cleanning up the db ([#276](https://github.com/SocialGouv/gitlab-ci-yml/issues/276)) ([b3dd95d](https://github.com/SocialGouv/gitlab-ci-yml/commit/b3dd95d757a264b7963d5338abf14a0eadfcf7df))
+* **notify:** remove all dependencies by default ([d159c58](https://github.com/SocialGouv/gitlab-ci-yml/commit/d159c5837d271f0a657827aaf0674d1f820e4323))
+* **release:** remove hard coded dry run ([feef38f](https://github.com/SocialGouv/gitlab-ci-yml/commit/feef38ff87e19f58e1db0c3e366128981c6aa96d))
+
+
+### Features
+
+* **autodevops:** add AUTO_DEVOPS_DEV_ENVIRONMENT_NAME ([a592291](https://github.com/SocialGouv/gitlab-ci-yml/commit/a592291c6b967b00d2a01b0955ff62f41071c4f9))
+* **autodevops:** add AUTO_DEVOPS_DEV_ENVIRONMENT_NAME (2) ([799a122](https://github.com/SocialGouv/gitlab-ci-yml/commit/799a12249cd239647e2f3343993263aaf1417514))
+* **autodevops:** add AUTO_DEVOPS_DEV_ENVIRONMENT_NAME (3) ([806772e](https://github.com/SocialGouv/gitlab-ci-yml/commit/806772e74cf5018432e904f5c099b5e23bca2e01))
+* **autodevops:** add AUTO_DEVOPS_PROD_ENVIRONMENT_NAME ([95d6178](https://github.com/SocialGouv/gitlab-ci-yml/commit/95d6178d4454f14e53cae47227a252af5bab381a))
+* **autodevops:** add AUTO_DEVOPS_PRODUCTION_AUTO ([0a69950](https://github.com/SocialGouv/gitlab-ci-yml/commit/0a69950f528221690a474a7195f60e701f2061b1))
+* **autodevops:** add unified preprod stage ([#258](https://github.com/SocialGouv/gitlab-ci-yml/issues/258)) ([c83b285](https://github.com/SocialGouv/gitlab-ci-yml/commit/c83b285b2c596fccbc2f84202abb554056a7984c))
+* **autodevops:** auto stop preprod after 6 months ([84b4245](https://github.com/SocialGouv/gitlab-ci-yml/commit/84b4245ed2068830d79c5912205b5d789fec076e))
+* **autodevops:** auto stop review after 2 weeks ([c1d2f62](https://github.com/SocialGouv/gitlab-ci-yml/commit/c1d2f62de06d32a08b45adf7ee2ddac559abcefe))
+* **autodevops:** test auto stop review ([4e7cc93](https://github.com/SocialGouv/gitlab-ci-yml/commit/4e7cc939393ac8c788c1a2dc059cb53694a86422))
+* **autodevops:** test auto stop review (2) ([bf8a504](https://github.com/SocialGouv/gitlab-ci-yml/commit/bf8a5040fd3a1e5e135c517cb62941a192676486))
+* **kosko:** always try to archive the manifest.yaml ([cc8a33e](https://github.com/SocialGouv/gitlab-ci-yml/commit/cc8a33ed1bb91b150ba733d0c9bad6fff74a7531))
+
+
+* feat(autodevops)!: autodevops v2 (#244) ([f851fa3](https://github.com/SocialGouv/gitlab-ci-yml/commit/f851fa36a70aa797773bf582736738fd09fcb070)), closes [#244](https://github.com/SocialGouv/gitlab-ci-yml/issues/244)
+
+
+### BREAKING CHANGES
+
+* autodevops v2
+    - new autodevops.yml file
+
+    ```yaml
+    include:
+      - project: SocialGouv/gitlab-ci-yml
+        file: /autodevops.yml
+        ref: v16.0.0
+    ```
+
+    - remove autodevops_simple_app.yml
+    - use rules instead of only/expect/when
+    - use kosko for deployment
+
 # [16.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v15.9.0...v16.0.0) (2020-05-28)
 
 
