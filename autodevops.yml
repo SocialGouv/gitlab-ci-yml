@@ -30,6 +30,8 @@ variables:
   GIT_DEPTH: 5
   #
   AUTO_DEVOPS_DEV_ENVIRONMENT_NAME: "-dev"
+  AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME: "-dev"
+  AUTO_DEVOPS_PROD_ENVIRONMENT_NAME: "prod"
   # To activate the auto release
   # AUTO_DEVOPS_RELEASE_AUTO: "true"
   # AUTO_DEVOPS_PRODUCTION_AUTO: "/^v[1-9]+\\.[0-9]+\\.[0-9]+$/"
@@ -232,7 +234,7 @@ Review:
       --env preprod
   environment:
     auto_stop_in: 6 months
-    name: preprod${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
+    name: preprod${AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME}
     on_stop: Stop preprod
     url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 Preprod:
@@ -247,7 +249,7 @@ Preprod:
     KOSKO_GENERATE_ARGS: >-
       --env prod "!(_*)"
   environment:
-    name: prod2
+    name: ${AUTO_DEVOPS_PROD_ENVIRONMENT_NAME}
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 Production:
   extends: .autodevops_production
@@ -281,7 +283,7 @@ Stop review:
   extends:
     - .autodevops_stop_review
   environment:
-    name: preprod${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
+    name: preprod${AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME}
     action: stop
   rules:
     - if: "$PRODUCTION || $RELEASE"
@@ -341,7 +343,7 @@ Notify Success (review):
   dependencies:
     - Notify Starting Deployment
   environment:
-    name: prod
+    name: ${AUTO_DEVOPS_PROD_ENVIRONMENT_NAME}
   before_script:
     - HOST="https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
 
