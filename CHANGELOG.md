@@ -1,3 +1,10 @@
+# [16.0.0-beta.14](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-beta.13...v16.0.0-beta.14) (2020-05-28)
+
+
+### Features
+
+* **autodevops:** test auto stop review ([4e7cc93](https://github.com/SocialGouv/gitlab-ci-yml/commit/4e7cc939393ac8c788c1a2dc059cb53694a86422))
+
 # [16.0.0-beta.13](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-beta.12...v16.0.0-beta.13) (2020-05-28)
 
 
