@@ -38,7 +38,7 @@ This pipeline produces review deployments on branches and production deployment 
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops_simple_app.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
 
 variables:
   PROJECT: "sample-next-app"
@@ -75,7 +75,7 @@ All autodevops jobs are using a `.autodevops_*` definition you can extend.
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops_simple_app.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
 
 variables:
   PORT: 8080
@@ -90,7 +90,7 @@ Build:
     - yarn build
     - yarn export
   artifacts:
-    expire_in: 1 week
+    expire_in: 1 day
     paths:
       - out
 
@@ -114,7 +114,7 @@ As the gitlab yaml parser is working, defining a job **with the same name** will
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops_simple_app.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
 
 variables:
   PORT: 8080
@@ -136,7 +136,7 @@ Build:
     - yarn build
     - yarn export
   artifacts:
-    expire_in: 1 week
+    expire_in: 1 day
     paths:
       - out
 ```
@@ -149,10 +149,10 @@ Build:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_create_namespace_stage.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
 
 #
 
@@ -177,7 +177,7 @@ Create namespace:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_delete_useless_k8s_ns_stage.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
 #
 
 Delete useless k8s namespaces:
@@ -196,10 +196,10 @@ Delete useless k8s namespaces:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_deploy_app_chart_stage.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
 
 #
 
@@ -241,54 +241,6 @@ Deploy app (prod):
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 ```
 
-# [.base_deploy_kosko_stage](./base_deploy_kosko_stage.yml)
-
-## Usage
-
-```yaml
-include:
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_deploy_kosko_stage.yml
-    ref: v16.0.0-beta.18
-
-#
-
-.deploy_myapp_stage:
-  dependencies: []
-  stage: Deploy
-  extends:
-    - .base_deploy_kosko_stage
-  variables:
-    # optional
-    K8S_FOLDER: ${CI_PROJECT_DIR}/.k8s
-
-#
-
-Deploy myapp (dev):
-  extends:
-    - .deploy_myapp_stage
-  except:
-    - master
-  variables:
-    KOSKO_GENERATE_ARGS: >-
-      --dev
-  environment:
-    name: ${CI_COMMIT_REF_NAME}-dev
-    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
-
-Deploy app (prod):
-  extends:
-    - .deploy_myapp_stage
-  only:
-    - master
-  variables:
-    KOSKO_GENERATE_ARGS: >-
-      --prod
-  environment:
-    name: prod
-    url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
-```
-
 # [.base_docker_helm_image_stage](./base_docker_helm_image_stage.yml)
 
 ## Usage
@@ -297,10 +249,10 @@ Deploy app (prod):
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
 
 #
 
@@ -318,7 +270,7 @@ Helm job:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
 #
 
 Kubectl job:
@@ -339,7 +291,7 @@ You'll need a `MATTERMOST_WEBHOOK` variable in your CI.
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_notify_mattermost.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
 
 Notify fail:
   extends: .base_notify_fail_mattermost
@@ -365,7 +317,7 @@ This will run the two following scripts for feature-branches deployments :
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_migrate_azure_db.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
 ```
 
 # [.base_register_stage](./base_register_stage.yml)
@@ -376,7 +328,7 @@ include:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_register_stage.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
 
 Register myapp image:
   extends: .base_register_stage
@@ -395,7 +347,7 @@ Register myapp image:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_semantic_release_stage.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
 
 #
 
@@ -411,57 +363,6 @@ Release:
 
 ```
 
-# [.base_snyk_scan](./base_snyk_scan.yml)
-
-A manual job to run a [Snyk.io](https://snyk.io) scan on the main repo docker image.
-
-You'll need to have a `SNYK_TOKEN` CI variable.
-
-## Usage
-
-```yaml
-include:
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_snyk_scan.yml
-    ref: v16.0.0-beta.18
-
-Snyk Scan:
-  stage: Deploy
-  extends: .base_snyk_scan
-```
-
-# [.base_trigger_stage](./base_trigger_stage.yml)
-
-Will trigger a gitlab pipeline
-
-## Usage
-
-```yaml
-include:
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_trigger_stage.yml
-    ref: v16.0.0-beta.18
-
-Trigger FOO:
-  stage: .post
-  extends: .base_trigger_stage
-  variables:
-    TRIGGER_ARGS: >-
-      --form ref="${CI_COMMIT_REF_NAME}"
-      --form variables[FOO]="true"
-    # optional
-    TRIGGER_PROJECT_ID: "${CI_PROJECT_ID}"
-
-# Common triggers
-
-Trigger Release:
-  stage: .post
-  extends: .base_trigger_release_stage
-Trigger Production:
-  stage: .post
-  extends: .base_trigger_production_stage
-```
-
 # [.base_trivy_scan](./base_trivy_scan.yml)
 
 A manual job to run a [trivy](https://github.com/aquasecurity/trivy) security scan on the main repo docker image.
@@ -472,7 +373,7 @@ A manual job to run a [trivy](https://github.com/aquasecurity/trivy) security sc
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_trivy_scan.yml
-    ref: v16.0.0-beta.18
+    ref: v16.0.0
 
 Trivy Scan:
   extends: .base_trivy_scan
