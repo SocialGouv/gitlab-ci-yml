@@ -213,7 +213,7 @@ Register image:
       --env dev
   environment:
     auto_stop_in: 1 hour
-    name: ${CI_COMMIT_REF_NAME}-dev
+    name: beta-dev
     on_stop: Stop review
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 Review:
@@ -263,7 +263,7 @@ Production:
       when: never
     - when: manual
   environment:
-    name: ${CI_COMMIT_REF_NAME}-dev
+    name: beta-dev
     action: stop
   allow_failure: true
   dependencies: []
