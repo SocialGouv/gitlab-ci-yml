@@ -263,7 +263,7 @@ Production:
       when: never
     - when: manual
   environment:
-    name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
+    name: ${CI_COMMIT_REF_NAME}-dev
     action: stop
   allow_failure: true
   dependencies: []
