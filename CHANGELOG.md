@@ -1,3 +1,10 @@
+# [16.0.0-beta.13](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-beta.12...v16.0.0-beta.13) (2020-05-28)
+
+
+### Features
+
+* **autodevops:** add AUTO_DEVOPS_DEV_ENVIRONMENT_NAME (2) ([799a122](https://github.com/SocialGouv/gitlab-ci-yml/commit/799a12249cd239647e2f3343993263aaf1417514))
+
 # [16.0.0-beta.12](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-beta.11...v16.0.0-beta.12) (2020-05-28)
 
 
