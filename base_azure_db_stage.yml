@@ -59,4 +59,5 @@
     GIT_DEPTH: "500"
   allow_failure: true
   script:
+    - git pull --all
     - /bin/clean-dbs
