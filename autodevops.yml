@@ -297,7 +297,7 @@ Notify Starting Deployment:
   dependencies:
     - Notify Starting Deployment
   environment:
-    name:  ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
+    name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
   before_script:
     - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
 
