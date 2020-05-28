@@ -1,3 +1,12 @@
+# [16.0.0-beta.16](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-beta.15...v16.0.0-beta.16) (2020-05-28)
+
+
+### Features
+
+* **autodevops:** auto stop preprod after 6 months ([84b4245](https://github.com/SocialGouv/gitlab-ci-yml/commit/84b4245ed2068830d79c5912205b5d789fec076e))
+* **autodevops:** auto stop review after 2 weeks ([c1d2f62](https://github.com/SocialGouv/gitlab-ci-yml/commit/c1d2f62de06d32a08b45adf7ee2ddac559abcefe))
+* **kosko:** always try to archive the manifest.yaml ([cc8a33e](https://github.com/SocialGouv/gitlab-ci-yml/commit/cc8a33ed1bb91b150ba733d0c9bad6fff74a7531))
+
 # [16.0.0-beta.15](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.0-beta.14...v16.0.0-beta.15) (2020-05-28)
 
 
