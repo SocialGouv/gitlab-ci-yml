@@ -5,7 +5,7 @@
 
 #
 .notify_stage: &notify_stage
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/git-deploy:1.21.18
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/git-deploy:1.21.20
   dependencies: []
 
 .base_notify_pending_stage:
