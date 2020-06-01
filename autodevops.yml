@@ -291,8 +291,6 @@ Stop review:
       when: never
     - if: "$CI_COMMIT_TAG"
       when: manual
-  variables:
-    KUBE_NAMESPACE: ${CI_PROJECT_NAME}-preprod
 Stop preprod:
   extends: .autodevops_stop_preprod
 
