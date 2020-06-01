@@ -1,3 +1,10 @@
+# [17.0.0-beta.9](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.8...v17.0.0-beta.9) (2020-06-01)
+
+
+### Bug Fixes
+
+* **k8s:** use provided KUBE_NAMESPACE as namespace in preprod (3) ([c8ee689](https://github.com/SocialGouv/gitlab-ci-yml/commit/c8ee689edc6613133e606706377d7f8b0842626e))
+
 # [17.0.0-beta.8](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.7...v17.0.0-beta.8) (2020-06-01)
 
 
