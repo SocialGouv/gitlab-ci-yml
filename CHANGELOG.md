@@ -1,3 +1,10 @@
+# [17.0.0-beta.6](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.5...v17.0.0-beta.6) (2020-06-01)
+
+
+### Bug Fixes
+
+* **autodevops:** stop preprod should be manual ([868ec34](https://github.com/SocialGouv/gitlab-ci-yml/commit/868ec348cfe672207bda90c3f3254130aa576581))
+
 # [17.0.0-beta.5](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.4...v17.0.0-beta.5) (2020-06-01)
 
 
