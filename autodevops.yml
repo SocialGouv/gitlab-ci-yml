@@ -378,6 +378,6 @@ Notify Success (prod):
   environment:
     name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
   variables:
-    K8S_NAMESPACE_PREFIX: "${PROJECT}-${CI_PROJECT_ID}-"
+    K8S_NAMESPACE_PREFIX: "${CI_PROJECT_NAME}-${CI_PROJECT_ID}-"
 Delete useless k8s namespaces:
   extends: .autodevops_delete_useless_k8s_namespaces
