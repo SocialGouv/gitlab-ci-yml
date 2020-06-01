@@ -372,13 +372,12 @@ Notify Success (prod):
 #
 
 .autodevops_delete_useless_k8s_namespaces:
-  extends: .base_delete_useless_k8s_ns_stage
+  extends:
+    - .base_delete_useless_k8s_ns_stage
+    - .autodevops_base_rules
   environment:
     name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
   variables:
     K8S_NAMESPACE_PREFIX: "${PROJECT}-${CI_PROJECT_ID}-"
-  rules:
-    - <<: *autodevops_global_skip_case
-      when: on_success
 Delete useless k8s namespaces:
   extends: .autodevops_delete_useless_k8s_namespaces
