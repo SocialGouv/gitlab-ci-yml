@@ -1,3 +1,11 @@
+# [17.0.0-beta.8](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.7...v17.0.0-beta.8) (2020-06-01)
+
+
+### Bug Fixes
+
+* trigger patch release ([a14354f](https://github.com/SocialGouv/gitlab-ci-yml/commit/a14354f851d000422da409244a8c3d3bc8b084e8))
+* trigger patch release ([05709e9](https://github.com/SocialGouv/gitlab-ci-yml/commit/05709e9dae5cd0ddc93c53307c7359b686e2bb88))
+
 # [17.0.0-beta.7](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.6...v17.0.0-beta.7) (2020-06-01)
 
 
