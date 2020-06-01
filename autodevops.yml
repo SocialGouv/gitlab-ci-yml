@@ -230,6 +230,7 @@ Review:
       when: never
     - if: "$CI_COMMIT_TAG"
   variables:
+    KUBE_NAMESPACE: ${CI_PROJECT_NAME}-preprod
     KOSKO_GENERATE_ARGS: >-
       --env preprod
   environment:
@@ -246,6 +247,7 @@ Preprod:
   rules:
     - <<: *autodevops_production_rule
   variables:
+    KUBE_NAMESPACE: ${CI_PROJECT_NAME}
     KOSKO_GENERATE_ARGS: >-
       --env prod "!(_*)"
   environment:
@@ -290,6 +292,8 @@ Stop review:
       when: never
     - if: "$CI_COMMIT_TAG"
       when: manual
+  variables:
+    KUBE_NAMESPACE: ${CI_PROJECT_NAME}-preprod
 Stop preprod:
   extends: .autodevops_stop_preprod
 
