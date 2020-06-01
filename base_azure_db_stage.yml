@@ -5,7 +5,7 @@
     - \. <(kubectl get secret azure-pg-admin-user -n ${CI_PROJECT_NAME}-secret -o json | export_from_k8s_secret)
 
 .base_azure_db:
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:1.20.0
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:1.21.23
   dependencies: []
   only:
     refs:
@@ -59,4 +59,5 @@
     GIT_DEPTH: "500"
   allow_failure: true
   script:
+    - git pull --all
     - /bin/clean-dbs
