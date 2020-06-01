@@ -38,7 +38,7 @@ This pipeline produces review deployments on branches and production deployment 
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops_simple_app.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
 
 variables:
   PROJECT: "sample-next-app"
@@ -75,7 +75,7 @@ All autodevops jobs are using a `.autodevops_*` definition you can extend.
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops_simple_app.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
 
 variables:
   PORT: 8080
@@ -114,7 +114,7 @@ As the gitlab yaml parser is working, defining a job **with the same name** will
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops_simple_app.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
 
 variables:
   PORT: 8080
@@ -149,10 +149,10 @@ Build:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
   - project: SocialGouv/gitlab-ci-yml
     file: /base_create_namespace_stage.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
 
 #
 
@@ -177,7 +177,7 @@ Create namespace:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_delete_useless_k8s_ns_stage.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
 #
 
 Delete useless k8s namespaces:
@@ -196,10 +196,10 @@ Delete useless k8s namespaces:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
   - project: SocialGouv/gitlab-ci-yml
     file: /base_deploy_app_chart_stage.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
 
 #
 
@@ -249,10 +249,10 @@ Deploy app (prod):
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
 
 #
 
@@ -270,7 +270,7 @@ Helm job:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
 #
 
 Kubectl job:
@@ -291,7 +291,7 @@ You'll need a `MATTERMOST_WEBHOOK` variable in your CI.
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_notify_mattermost.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
 
 Notify fail:
   extends: .base_notify_fail_mattermost
@@ -317,7 +317,7 @@ This will run the two following scripts for feature-branches deployments :
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_migrate_azure_db.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
 ```
 
 # [.base_register_stage](./base_register_stage.yml)
@@ -328,7 +328,7 @@ include:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_register_stage.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
 
 Register myapp image:
   extends: .base_register_stage
@@ -347,7 +347,7 @@ Register myapp image:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_semantic_release_stage.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
 
 #
 
@@ -373,7 +373,7 @@ A manual job to run a [trivy](https://github.com/aquasecurity/trivy) security sc
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_trivy_scan.yml
-    ref: v17.0.0-beta.2
+    ref: v17.0.0-beta.3
 
 Trivy Scan:
   extends: .base_trivy_scan

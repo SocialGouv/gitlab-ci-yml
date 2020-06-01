@@ -1,3 +1,10 @@
+# [17.0.0-beta.3](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.2...v17.0.0-beta.3) (2020-06-01)
+
+
+### Features
+
+* **autodevops:** add delete useless k8s namespaces ([1ac0633](https://github.com/SocialGouv/gitlab-ci-yml/commit/1ac0633eb2a05c270da2ab3da3d67c436b874a3c))
+
 # [17.0.0-beta.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.1...v17.0.0-beta.2) (2020-06-01)
 
 
