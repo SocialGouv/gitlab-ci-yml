@@ -4,7 +4,7 @@ variables:
   K8S_NAMESPACE_PREFIX: "${PROJECT}-feature"
 
 .base_delete_useless_k8s_ns_stage:
-  stage: Notify Finished Deployment
+  stage: .post
   dependencies: []
   allow_failure: true
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/k8s-ns-killer:1.21.23
@@ -14,5 +14,3 @@ variables:
     # - k8s-ns-killer ${K8S_NAMESPACE_PREFIX}
     # Debug mode
     - sh -x /bin/k8s-ns-killer ${K8S_NAMESPACE_PREFIX}
-  only:
-    - master

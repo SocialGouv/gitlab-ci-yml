@@ -6,7 +6,7 @@
 .base_notify_mattermost:
   image: curlimages/curl
   dependencies: []
-  stage: Notify Finished Deployment
+  stage: .post
   variables:
     MATTERMOST_CHANNEL: ${MATTERMOST_CHANNEL:-gitlab/notifications}
   before_script:

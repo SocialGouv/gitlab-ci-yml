@@ -6,6 +6,7 @@
 #
 .notify_stage: &notify_stage
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/git-deploy:1.21.23
+  stage: .post
   dependencies: []
 
 .base_notify_pending_stage:
