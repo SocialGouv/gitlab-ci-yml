@@ -1,3 +1,10 @@
+# [17.0.0-beta.7](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.6...v17.0.0-beta.7) (2020-06-01)
+
+
+### Bug Fixes
+
+* **autodevops:** override KUBE_NAMESPACE in prod and preprod ([2e2b39d](https://github.com/SocialGouv/gitlab-ci-yml/commit/2e2b39d9b44737507c3804613da07733d008cfb7))
+
 # [17.0.0-beta.6](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.5...v17.0.0-beta.6) (2020-06-01)
 
 
