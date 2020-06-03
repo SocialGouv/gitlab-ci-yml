@@ -1,3 +1,10 @@
+# [17.0.0-beta.10](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.9...v17.0.0-beta.10) (2020-06-03)
+
+
+### Features
+
+* **kosko:** append manifests ([b681ddd](https://github.com/SocialGouv/gitlab-ci-yml/commit/b681ddd7a59e8f5ef9c8a56ed5829175629fa3c1))
+
 # [17.0.0-beta.9](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.8...v17.0.0-beta.9) (2020-06-01)
 
 
