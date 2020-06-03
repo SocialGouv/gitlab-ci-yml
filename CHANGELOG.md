@@ -1,3 +1,10 @@
+# [17.0.0-beta.11](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.10...v17.0.0-beta.11) (2020-06-03)
+
+
+### Reverts
+
+* Revert "feat(kosko): append manifests" ([0d338a6](https://github.com/SocialGouv/gitlab-ci-yml/commit/0d338a6e7725bffe1ebd7de49ab983cbc981c26c))
+
 # [17.0.0-beta.10](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.9...v17.0.0-beta.10) (2020-06-03)
 
 
