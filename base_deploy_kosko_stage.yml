@@ -18,6 +18,7 @@ variables:
       - ${K8S_FOLDER}/node_modules
   script:
     - printenv | grep
+      -e "^APP_"
       -e "^CI_COMMIT_"
       -e "^CI_ENVIRONMENT_"
       -e "^CI_PROJECT_"
@@ -31,6 +32,8 @@ variables:
     - yarn --frozen-lockfile --prefer-offline --link-duplicates
     - echo "kosko generate ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml"
     - kosko generate ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml
+    - echo "${EXTRA_MANIFESTS}"
+    - eval "${EXTRA_MANIFESTS}" >> ${CI_PROJECT_DIR}/manifest.yaml
     - kubectl apply -f ${CI_PROJECT_DIR}/manifest.yaml
   artifacts:
     expire_in: 1 week
