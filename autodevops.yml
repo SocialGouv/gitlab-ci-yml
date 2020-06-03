@@ -213,8 +213,6 @@ Register image:
   variables:
     KOSKO_GENERATE_ARGS: >-
       --env dev
-    EXTRA_MANIFESTS: >-
-      find .k8s/environements/dev -name '*.yaml' -exec echo '---' \; -exec cat {} \; | envsubst
   environment:
     auto_stop_in: 2 weeks
     name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
