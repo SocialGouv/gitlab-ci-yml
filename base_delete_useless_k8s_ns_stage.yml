@@ -7,7 +7,7 @@ variables:
   stage: Notify Finished Deployment
   dependencies: []
   allow_failure: true
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/k8s-ns-killer:1.29.1
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/k8s-ns-killer:1.29.2
   script:
     - git remote set-url origin https://github.com/${CI_PROJECT_PATH}.git
     - echo "k8s-ns-killer ${K8S_NAMESPACE_PREFIX}"
