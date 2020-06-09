@@ -1,3 +1,10 @@
+# [17.0.0-beta.12](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.11...v17.0.0-beta.12) (2020-06-09)
+
+
+### Bug Fixes
+
+* **autodevops:** remove local delete namespace ([b62b1f0](https://github.com/SocialGouv/gitlab-ci-yml/commit/b62b1f0bcf7b01f1dad7e822e5d3cbad736e4e18))
+
 # [17.0.0-beta.11](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.10...v17.0.0-beta.11) (2020-06-03)
 
 
