@@ -1,3 +1,11 @@
+# [17.0.0-beta.21](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.20...v17.0.0-beta.21) (2020-06-10)
+
+
+### Bug Fixes
+
+* **yarn:** explicit node version (2) ([ac6b643](https://github.com/SocialGouv/gitlab-ci-yml/commit/ac6b643e3ff832c8eba18af8c2e2a85a5ef9d37b))
+* **yarn:** explicit node version (3) ([304cb7c](https://github.com/SocialGouv/gitlab-ci-yml/commit/304cb7c8d724b0e1170645682e12ec8ce84689fc))
+
 # [17.0.0-beta.15](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.14...v17.0.0-beta.15) (2020-06-10)
 
 
