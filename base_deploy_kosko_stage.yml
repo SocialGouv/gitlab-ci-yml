@@ -29,8 +29,17 @@ variables:
     - yarn config set cache-folder ${CI_PROJECT_DIR}/.cache/yarn
     - cd ${K8S_FOLDER}
     - yarn --frozen-lockfile --prefer-offline --link-duplicates
-    - echo "kosko generate ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml"
+    - echo "kosko generate ${KOSKO_GENERATE_ARGS} >> ${CI_PROJECT_DIR}/manifest.yaml"
     - kosko generate ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml
+    - |
+      if [[ -d "${KOSKO_APPEND_YAML_FROM}" ]]; then
+        echo "Append to ${CI_PROJECT_DIR}/manifest.yaml"
+        find ${KOSKO_APPEND_YAML_FROM} -name '*.yaml'
+        find ${KOSKO_APPEND_YAML_FROM} -name '*.yaml' -exec \
+          echo '---' \; -exec cat {} \; |
+          envsubst \
+        >> ${CI_PROJECT_DIR}/manifest.yaml
+      fi
     - kubectl apply -f ${CI_PROJECT_DIR}/manifest.yaml
   artifacts:
     expire_in: 1 week
