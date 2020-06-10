@@ -1,3 +1,10 @@
+# [17.0.0-beta.14](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.13...v17.0.0-beta.14) (2020-06-10)
+
+
+### Bug Fixes
+
+* **autodevops:** notify mess (2) ([c8421cf](https://github.com/SocialGouv/gitlab-ci-yml/commit/c8421cfbbb9a5317b375615571ff884ed0e97260))
+
 # [17.0.0-beta.13](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.12...v17.0.0-beta.13) (2020-06-10)
 
 
