@@ -1,3 +1,10 @@
+# [17.0.0-beta.15](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.14...v17.0.0-beta.15) (2020-06-10)
+
+
+### Bug Fixes
+
+* **autodevops:** else if is elif in bash ([467dbbb](https://github.com/SocialGouv/gitlab-ci-yml/commit/467dbbb7a1b8cd6a170a402b4e0b6fcbe0d5ad7b))
+
 # [17.0.0-beta.14](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.13...v17.0.0-beta.14) (2020-06-10)
 
 
