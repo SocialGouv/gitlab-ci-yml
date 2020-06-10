@@ -3,5 +3,5 @@
 .base_docker_helm_image_stage:
   extends: .base_docker_kubectl_image_stage
   image:
-    name: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/helm:1.21.23
+    name: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/helm:1.30.0
     entrypoint: [""]
