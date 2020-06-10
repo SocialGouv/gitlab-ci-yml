@@ -22,65 +22,105 @@ Use like this in your `.gitlab-ci.yml` :
 ```yml
 ---
 include:
-  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/github-deployments.yml"
-  - "https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/register-stage.yml"
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_semantic_release_stage.yml
+    ref: v17.0.0-beta.14
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_register_stage.yml
+    ref: v17.0.0-beta.14
 ```
 
-# [.autodevops_simple_app](./autodevops_simple_app.yml)
+<br>
+<br>
+<br>
+<br>
 
-Standard @socialgouv pipeline using [@socialgouv/helm-charts/app](https://github.com/SocialGouv/helm-charts/blob/master/charts/app) for deployment.
+# [.autodevops](./autodevops.yml)
 
-This pipeline produces review deployments on branches and production deployment when you merge on master.
+Standard @socialgouv pipeline using [@socialgouv/kosko-charts](https://github.com/SocialGouv/kosko-charts) for deployment.
+
+This pipeline produces :
+
+- review deployments on branches
+- preprod deployments on tags
+- production deployment when `PRODUCTION` env var is set.
 
 ## Usage
 
 ```yaml
 include:
   - project: SocialGouv/gitlab-ci-yml
-    file: /autodevops_simple_app.yml
+    file: /autodevops.yml
     ref: v17.0.0-beta.14
-
-variables:
-  PROJECT: "sample-next-app"
-  PORT: 8080
-  VALUES_FILE: ./.k8s/app.values.yml # Your values
-  ENABLE_AZURE_POSTGRES: 1
 ```
 
-Customize `app.values.yml` with the [default helm chart values.yml](https://github.com/SocialGouv/helm-charts/blob/master/charts/app/values.yaml).
+### Deploy
 
-You can also set these in gitlab-ci.yml `variables` :
+| Name       | Ref                         | URL                                                                 | Cluster |
+| ---------- | --------------------------- | ------------------------------------------------------------------- | ------- |
+| Reviews    | Branches                    | `https://<branch_sha>-<project_name>.dev2.fabrique.social.gouv.fr/` | `*-dev` |
+| Preprod    | Tags                        | `https://preprod-<project_name>.dev2.fabrique.social.gouv.fr/`      | `*-dev` |
+| Production | Tags with `$PRODUCTION` set | `https://<project_name>.prod2.fabrique.social.gouv.fr/`             | `prod`  |
 
-| var                   | usage                                                                                                |
-| --------------------- | ---------------------------------------------------------------------------------------------------- |
-| ENABLE_AZURE_POSTGRES | enable Azure PG database using [azure-db](https://github.com/SocialGouv/docker/tree/master/azure-db) |
-| TEST_DISABLED         | disable test job                                                                                     |
-| CODE_QUALITY_DISABLED | disable lint job                                                                                     |
-| NOTIFY_DISABLED       | disable GitHub environment notifications                                                             |
-| RANCHER_PROJECT_ID    | set Rancher project id based on environment. ex: `c-gsm8d:p-pwpk6`                                   |
-
-If you `ENABLE_AZURE_POSTGRES`, you need a secret `azure-pg-admin-user` in your cluster namespace `[app.name]-secret`. this user will create fresh databases and users for features-branches.
-
-### Override existing jobs
-
-All gitlab jobs are overridable. You can or extend them or completely replace them.
-
-#### Extends existing job
-
-All autodevops jobs are using a `.autodevops_*` definition you can extend.
+You can change the cluster target by setting one of the `AUTO_DEVOPS_*_ENVIRONMENT_NAME` variable.  
+Changing the cluster target will automatically alter the domaine as the url is following the [`$KUBE_INGRESS_BASE_DOMAIN` GitLab variable](https://docs.gitlab.com/ee/topics/autodevops/#auto-devops-base-domain).
 
 ```yaml
 include:
   - project: SocialGouv/gitlab-ci-yml
-    file: /autodevops_simple_app.yml
+    file: /autodevops.yml
     ref: v17.0.0-beta.14
 
 variables:
-  PORT: 8080
-  VALUES_FILE: ./.k8s.app.values.yml
+  AUTO_DEVOPS_DEV_ENVIRONMENT_NAME: "-tmp"
+  AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME: "-tmp2"
+  AUTO_DEVOPS_PROD_ENVIRONMENT_NAME: "fake"
+```
 
-# Same name as the "Build" job defined in the autodevops_simple_app file
-# Override https://github.com/SocialGouv/gitlab-ci-yml/blob/v14.0.0/autodevops_simple_app.yml#L50
+### Auto Release
+
+To automatically release changes on branches you can set the `AUTO_DEVOPS_RELEASE_AUTO`
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /autodevops.yml
+    ref: v17.0.0-beta.14
+
+variables:
+  AUTO_DEVOPS_RELEASE_AUTO: "🔖"
+```
+
+### Auto Ship To Production
+
+To automatically deploy releases to production you can set the `AUTO_DEVOPS_PRODUCTION_AUTO` to the regex tag you wish to deploy
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /autodevops.yml
+    ref: v17.0.0-beta.14
+
+variables:
+  # Will deploy all 1.x stable releases to production
+  AUTO_DEVOPS_PRODUCTION_AUTO: "/^v1\\.[0-9]+\\.[0-9]+$/"
+  # Will deploy any stable release (dangerous)
+  AUTO_DEVOPS_PRODUCTION_AUTO: "/^v[0-9]+\\.[0-9]+\\.[0-9]+$/"
+```
+
+### Override existing jobs
+
+All gitlab jobs are overridable. You can or extend them or completely replace them.
+Autodevops jobs are using a `.autodevops_*` definition you can extend.
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /autodevops.yml
+    ref: v17.0.0-beta.14
+
+# Same name as the "Build" job defined in the autodevops file
+# Override https://github.com/SocialGouv/gitlab-ci-yml/blob/v17.0.0/autodevops.yml#L50
 Build:
   extends:
     - .autodevops_build
@@ -92,52 +132,26 @@ Build:
     paths:
       - out
 
-# Same name as the "Deploy app (prod)" job defined in the autodevops_simple_app file
-# Override https://github.com/SocialGouv/gitlab-ci-yml/blob/v14.0.0/autodevops_simple_app.yml#L137
-Deploy app (prod):
+# Same name as the "Preprod" job defined in the autodevops file
+# Override https://github.com/SocialGouv/gitlab-ci-yml/blob/v17.0.0/autodevops.yml#L137
+Preprod:
   extends:
-    - .autodevops_deploy_app_prod
-  before_script:
-    - envsubst < ./.k8s.app.values.prod.yaml > /tmp/values.prod.yaml
+    - .autodevops_preprod
   variables:
-    HELM_RENDER_ARGS: >-
-      --values /tmp/values.prod.yaml
-```
+    KOSKO_APPEND_YAML_FROM: .k8s/environments/dev
 
-#### Replace existing job
+# Just skip the job
+Register:
+  rules:
+    - when: never
+```
 
 As the gitlab yaml parser is working, defining a job **with the same name** will replace the last defined one. You can replace any autodevops jobs by naming it :
 
-```yaml
-include:
-  - project: SocialGouv/gitlab-ci-yml
-    file: /autodevops_simple_app.yml
-    ref: v17.0.0-beta.14
-
-variables:
-  PORT: 8080
-  VALUES_FILE: ./.k8s.app.values.yml
-
-# Same name as the "Build" job defined in the autodevops_simple_app file
-# Override https://github.com/SocialGouv/gitlab-ci-yml/blob/v14.0.0/autodevops_simple_app.yml#L50
-Build:
-  extends:
-    - .base_yarn_build_next
-  dependencies:
-    - Install
-  needs:
-    - Install
-  variables:
-    VERSION: ${CI_COMMIT_SHORT_SHA}
-    MY_API_URL: "%%MY_API_URL%%"
-  script:
-    - yarn build
-    - yarn export
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - out
-```
+<br>
+<br>
+<br>
+<br>
 
 # [.base_create_namespace_stage](./base_create_namespace_stage.yml)
 
@@ -166,6 +180,11 @@ Create namespace:
     # (re)create to ensure a new namespaces will be created
     # - kubectl delete namespaces ${K8S_NAMESPACE} || true
 ```
+
+<br>
+<br>
+<br>
+<br>
 
 # [.base_delete_useless_k8s_ns_stage](./base_delete_useless_k8s_ns_stage.yml)
 
