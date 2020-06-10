@@ -345,5 +345,6 @@ Notify Fail:
   rules:
     - if: "$RELEASE"
       when: never
+    - when: on_success
 Notify Success:
   extends: .autodevops_notify_success
