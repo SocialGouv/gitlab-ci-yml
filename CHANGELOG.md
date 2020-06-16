@@ -1,3 +1,21 @@
+# [17.0.0-beta.22](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.21...v17.0.0-beta.22) (2020-06-16)
+
+
+### Bug Fixes
+
+* **azure-db:** dont autoclean ([#299](https://github.com/SocialGouv/gitlab-ci-yml/issues/299)) ([0d8630a](https://github.com/SocialGouv/gitlab-ci-yml/commit/0d8630ae770f19027786974404305a8182387144))
+* **trivy:** change arguments order ([#308](https://github.com/SocialGouv/gitlab-ci-yml/issues/308)) ([caab4d3](https://github.com/SocialGouv/gitlab-ci-yml/commit/caab4d317ae4ca9091124186a8878821deec9634))
+
+
+### Features
+
+* **deps:** update dependency socialgouv/helm-charts to v6.2.0 ([#318](https://github.com/SocialGouv/gitlab-ci-yml/issues/318)) ([a024a14](https://github.com/SocialGouv/gitlab-ci-yml/commit/a024a14373d9a0a0577a2e01a7ece7ace50fe7ed))
+* **deps:** update socialgouv/docker images docker tags to v1.30.2 ([#314](https://github.com/SocialGouv/gitlab-ci-yml/issues/314)) ([6c0ee29](https://github.com/SocialGouv/gitlab-ci-yml/commit/6c0ee29139d4326fd712652ad2b68626692c0731))
+* **deps:** update socialgouv/docker images docker tags to v1.31.0 ([#315](https://github.com/SocialGouv/gitlab-ci-yml/issues/315)) ([d24d82b](https://github.com/SocialGouv/gitlab-ci-yml/commit/d24d82b1a4ae689b13bf16db50655672b41182b6))
+* **deps:** update socialgouv/docker images docker tags to v1.31.1 ([#316](https://github.com/SocialGouv/gitlab-ci-yml/issues/316)) ([bf66242](https://github.com/SocialGouv/gitlab-ci-yml/commit/bf66242bf482adbe107141abef958cb32c9fa3b0))
+* **deps:** update socialgouv/docker images docker tags to v1.32.1 ([#317](https://github.com/SocialGouv/gitlab-ci-yml/issues/317)) ([0079931](https://github.com/SocialGouv/gitlab-ci-yml/commit/00799310fa56c896b1c9bee66f0e07d13cec21ef))
+* **deps:** update socialgouv/docker images docker tags to v1.32.2 ([#319](https://github.com/SocialGouv/gitlab-ci-yml/issues/319)) ([b9f4da0](https://github.com/SocialGouv/gitlab-ci-yml/commit/b9f4da05022d61f7796f6cab255d9dfaa9362cf8))
+
 # [16.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.0.1...v16.1.0) (2020-06-15)
 
 ### Bug Fixes
