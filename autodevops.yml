@@ -203,7 +203,9 @@ Register image:
   cache:
     key: deploy-${CI_COMMIT_REF_SLUG}
     paths:
-      - dotenv.env
+      - ${CI_PROJECT_DIR}/dotenv.env
+      - ${CI_PROJECT_DIR}/.cache
+      - ${K8S_FOLDER}/node_modules
   after_script:
     - echo "CI_ENVIRONMENT_URL=${CI_ENVIRONMENT_URL}" >> dotenv.env
 
@@ -327,7 +329,7 @@ Notify Starting Deployment:
   cache:
     key: deploy-${CI_COMMIT_REF_SLUG}
     paths:
-      - dotenv.env
+      - ${CI_PROJECT_DIR}/dotenv.env
     policy: pull
   before_script:
     - |
