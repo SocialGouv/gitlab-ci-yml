@@ -1,3 +1,10 @@
+# [17.0.0-beta.24](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.23...v17.0.0-beta.24) (2020-06-19)
+
+
+### Features
+
+* **autodevops:** go to cluster 2 by default ([8231699](https://github.com/SocialGouv/gitlab-ci-yml/commit/8231699047cd2651f3bd2917f801af49d7c25611))
+
 # [17.0.0-beta.23](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.22...v17.0.0-beta.23) (2020-06-19)
 
 
