@@ -103,8 +103,7 @@ include:
 
 variables:
   AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
-  # Will deploy any stable release
-  # AUTO_DEVOPS_PRODUCTION_AUTO: "/^v[0-9]+\\.[0-9]+\\.[0-9]+$/"
+  # Will deploy any stable release matching "/^v[0-9]+\\.[0-9]+\\.[0-9]+$/"
 ```
 
 ### Override existing jobs
