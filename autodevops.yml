@@ -200,6 +200,12 @@ Register image:
   stage: Deploy
   extends:
     - .base_deploy_kosko_stage
+  cache:
+    key: deploy-${CI_COMMIT_REF_SLUG}
+    paths:
+      - dotenv.env
+  after_script:
+    - echo "CI_ENVIRONMENT_URL=${CI_ENVIRONMENT_URL}" >> dotenv.env
 
 #
 
@@ -318,9 +324,19 @@ Notify Starting Deployment:
   stage: .post
   dependencies:
     - Notify Starting Deployment
+  cache:
+    key: deploy-${CI_COMMIT_REF_SLUG}
+    policy: pull
   before_script:
     - |
       set -x
+
+      ls
+
+      cat dotenv.env
+      echo "CI_ENVIRONMENT_URL=$CI_ENVIRONMENT_URL"
+      . dotenv.env
+      echo "CI_ENVIRONMENT_URL=$CI_ENVIRONMENT_URL"
 
       if [[ -n "${PRODUCTION+x}" ]]; then
         export HOST="https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
