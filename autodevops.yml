@@ -326,6 +326,8 @@ Notify Starting Deployment:
     - Notify Starting Deployment
   cache:
     key: deploy-${CI_COMMIT_REF_SLUG}
+    paths:
+      - dotenv.env
     policy: pull
   before_script:
     - |
