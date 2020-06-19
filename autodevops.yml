@@ -33,8 +33,8 @@ variables:
   AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME: "-dev"
   AUTO_DEVOPS_PROD_ENVIRONMENT_NAME: "prod"
   # To activate the auto release
-  # AUTO_DEVOPS_RELEASE_AUTO: "true"
-  # AUTO_DEVOPS_PRODUCTION_AUTO: "/^v[1-9]+\\.[0-9]+\\.[0-9]+$/"
+  # AUTO_DEVOPS_RELEASE_AUTO: "🔖"
+  # AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
 
 #
 #
@@ -96,7 +96,7 @@ Release:
     - if: "$PRODUCTION"
       when: never
     - if: $CI_COMMIT_TAG && $AUTO_DEVOPS_PRODUCTION_AUTO &&
-        $CI_COMMIT_TAG =~ $AUTO_DEVOPS_PRODUCTION_AUTO
+        $CI_COMMIT_TAG =~ /^v[0-9]+\\.[0-9]+\\.[0-9]+$/
       when: on_success
     - if: "$CI_COMMIT_TAG"
       when: manual

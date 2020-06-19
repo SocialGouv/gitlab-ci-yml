@@ -102,10 +102,9 @@ include:
     ref: v17.0.0-beta.21
 
 variables:
-  # Will deploy all 1.x stable releases to production
-  AUTO_DEVOPS_PRODUCTION_AUTO: "/^v1\\.[0-9]+\\.[0-9]+$/"
-  # Will deploy any stable release (dangerous)
-  AUTO_DEVOPS_PRODUCTION_AUTO: "/^v[0-9]+\\.[0-9]+\\.[0-9]+$/"
+  AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
+  # Will deploy any stable release
+  # AUTO_DEVOPS_PRODUCTION_AUTO: "/^v[0-9]+\\.[0-9]+\\.[0-9]+$/"
 ```
 
 ### Override existing jobs
