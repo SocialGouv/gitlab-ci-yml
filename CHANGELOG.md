@@ -1,3 +1,11 @@
+# [17.0.0-beta.27](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.26...v17.0.0-beta.27) (2020-06-19)
+
+
+### Features
+
+* **autodevops:** try to cache the deploy url (3) ([c62bff0](https://github.com/SocialGouv/gitlab-ci-yml/commit/c62bff0e8feb52c99b89a72885d65439a42bed6d))
+* **autodevops:** try to cache the deploy url (4) ([4c720d5](https://github.com/SocialGouv/gitlab-ci-yml/commit/4c720d55d472647ad5ccd0e198626593646a7002))
+
 # [17.0.0-beta.26](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.25...v17.0.0-beta.26) (2020-06-19)
 
 
