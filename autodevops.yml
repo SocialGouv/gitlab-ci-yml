@@ -336,7 +336,8 @@ Notify Starting Deployment:
       set -x
 
       . dotenv.env
-      export HOST=$CI_ENVIRONMENT_URL"
+
+      export HOST=$CI_ENVIRONMENT_URL
 
 .autodevops_notify_fail:
   extends:
