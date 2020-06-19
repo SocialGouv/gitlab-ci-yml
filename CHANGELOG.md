@@ -1,3 +1,11 @@
+# [17.0.0-beta.23](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.22...v17.0.0-beta.23) (2020-06-19)
+
+
+### Bug Fixes
+
+* **autodevops:** just release all stable releases ([7390692](https://github.com/SocialGouv/gitlab-ci-yml/commit/7390692ffa1249f4c3f9d193a05134d3b487f0b3))
+* **autodevops:** just release all stable releases (2) ([6d4544a](https://github.com/SocialGouv/gitlab-ci-yml/commit/6d4544a4aac26c33356b31929872f8b50a4d4ad2))
+
 # [17.0.0-beta.22](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.21...v17.0.0-beta.22) (2020-06-16)
 
 
