@@ -1,3 +1,10 @@
+# [17.0.0-beta.29](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.28...v17.0.0-beta.29) (2020-06-22)
+
+
+### Bug Fixes
+
+* **autodevops:** update auto ship regex ([42b737a](https://github.com/SocialGouv/gitlab-ci-yml/commit/42b737ae2d3b033b574a1887468df6b41cd2105f))
+
 # [17.0.0-beta.28](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.27...v17.0.0-beta.28) (2020-06-19)
 
 
