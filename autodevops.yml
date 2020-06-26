@@ -125,6 +125,10 @@ Install:
 #
 
 .autodevops_lint:
+  rules:
+    - if: "$QUALITY_DISABLED"
+      when: never
+    - when: always
   extends:
     - .base_yarn_script
     - .autodevops_base_rules
@@ -140,6 +144,10 @@ Lint:
 #
 
 .autodevops_test:
+  rules:
+    - if: "$TEST_DISABLED"
+      when: never
+    - when: always
   extends:
     - .base_yarn_script
     - .autodevops_base_rules
