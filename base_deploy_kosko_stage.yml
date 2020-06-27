@@ -41,6 +41,12 @@ variables:
         >> ${CI_PROJECT_DIR}/manifest.yaml
       fi
     - kubectl apply -f ${CI_PROJECT_DIR}/manifest.yaml
+    #
+   -  echo "\n\n▶▶▶️ ${CI_ENVIRONMENT_URL}  ◀️◀️◀️ \n\n"
+      
+    
+    
+
   artifacts:
     expire_in: 1 week
     paths:
