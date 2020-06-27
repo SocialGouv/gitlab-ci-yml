@@ -226,7 +226,7 @@ Register image:
     name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
     on_stop: Stop review
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
-Review:
+Deploy Review:
   extends: .autodevops_review
 
 .autodevops_preprod:
