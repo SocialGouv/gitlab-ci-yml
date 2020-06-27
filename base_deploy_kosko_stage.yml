@@ -42,7 +42,7 @@ variables:
       fi
     - kubectl apply -f ${CI_PROJECT_DIR}/manifest.yaml
     #
-   -  echo "\n\n▶▶▶️ ${CI_ENVIRONMENT_URL}  ◀️◀️◀️ \n\n"
+    - echo "\n\n ▶️  ${CI_ENVIRONMENT_URL:-HELLO} ◀️\n\n"
       
     
     
