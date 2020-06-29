@@ -1,3 +1,10 @@
+# [17.0.0-beta.30](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.29...v17.0.0-beta.30) (2020-06-29)
+
+
+### Features
+
+* make lint+test disablable ([#334](https://github.com/SocialGouv/gitlab-ci-yml/issues/334)) ([1c47882](https://github.com/SocialGouv/gitlab-ci-yml/commit/1c47882fc96e35d9291e2a6c0a545a1fa227c568))
+
 # [17.0.0-beta.29](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.28...v17.0.0-beta.29) (2020-06-22)
 
 
