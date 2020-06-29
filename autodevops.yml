@@ -126,7 +126,7 @@ Install:
 
 .autodevops_lint:
   rules:
-    - if: "$QUALITY_DISABLED"
+    - if: "$AUTO_DEVOPS_QUALITY_DISABLED"
       when: never
     - when: always
   extends:
