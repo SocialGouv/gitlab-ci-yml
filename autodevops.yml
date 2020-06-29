@@ -145,7 +145,7 @@ Lint:
 
 .autodevops_test:
   rules:
-    - if: "$TEST_DISABLED"
+    - if: "$AUTO_DEVOPS_TEST_DISABLED"
       when: never
     - when: always
   extends:
