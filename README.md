@@ -106,6 +106,21 @@ variables:
   # Will deploy any stable release matching "/^v[0-9]+\\.[0-9]+\\.[0-9]+$/"
 ```
 
+### Disable some jobs 
+
+You can disable test jobs with `AUTO_DEVOPS_TEST_DISABLED` and/or lint with `AUTO_DEVOPS_QUALITY_DISABLED`
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /autodevops.yml
+    ref: v17.0.0-beta.29
+
+variables:
+  AUTO_DEVOPS_TEST_DISABLED: "🛑"
+  AUTO_DEVOPS_QUALITY_DISABLED: "🛑"
+```
+
 ### Override existing jobs
 
 All gitlab jobs are overridable. You can or extend them or completely replace them.
