@@ -1,3 +1,10 @@
+# [17.0.0-beta.31](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.30...v17.0.0-beta.31) (2020-07-06)
+
+
+### Bug Fixes
+
+* **autodevops:** ensure to skip lint/test on release pipeline ([104359c](https://github.com/SocialGouv/gitlab-ci-yml/commit/104359c1e996321ee389aceb2e13941e18d45069))
+
 # [17.0.0-beta.30](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.29...v17.0.0-beta.30) (2020-06-29)
 
 
