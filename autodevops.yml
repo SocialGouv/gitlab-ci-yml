@@ -35,6 +35,9 @@ variables:
   # To activate the auto release
   # AUTO_DEVOPS_RELEASE_AUTO: "🔖"
   # AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
+  # To disable some quality check
+  # AUTO_DEVOPS_QUALITY_DISABLED: "🛑"
+  # AUTO_DEVOPS_TEST_DISABLED: "🛑"
 
 #
 #
@@ -77,7 +80,6 @@ Trigger Release:
 .autodevops_release:
   extends:
     - .base_semantic_release_stage
-    - .autodevops_base_rules
   rules:
     - if: "$RELEASE"
   variables:
@@ -126,6 +128,8 @@ Install:
 
 .autodevops_lint:
   rules:
+    - <<: *autodevops_trigger_rule
+      when: never
     - if: "$AUTO_DEVOPS_QUALITY_DISABLED"
       when: never
     - when: always
@@ -145,6 +149,8 @@ Lint:
 
 .autodevops_test:
   rules:
+    - <<: *autodevops_trigger_rule
+      when: never
     - if: "$AUTO_DEVOPS_TEST_DISABLED"
       when: never
     - when: always
