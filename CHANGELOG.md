@@ -1,3 +1,10 @@
+# [17.0.0-beta.32](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.31...v17.0.0-beta.32) (2020-07-07)
+
+
+### Features
+
+* **gitlab:** do not run ase external pull_request event ([3a6a9f7](https://github.com/SocialGouv/gitlab-ci-yml/commit/3a6a9f7e535655f059eda163f152ab0704831662))
+
 # [17.0.0-beta.31](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.30...v17.0.0-beta.31) (2020-07-06)
 
 
