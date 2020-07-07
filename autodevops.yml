@@ -236,7 +236,7 @@ Register image:
     KOSKO_GENERATE_ARGS: >-
       --env dev
   environment:
-    auto_stop_in: 2 weeks
+    auto_stop_in: 1 day
     name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
     on_stop: Stop review
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
@@ -256,7 +256,7 @@ Review:
     KOSKO_GENERATE_ARGS: >-
       --env preprod
   environment:
-    auto_stop_in: 6 months
+    auto_stop_in: 1 week
     name: preprod${AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME}
     on_stop: Stop preprod
     url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
