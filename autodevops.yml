@@ -16,6 +16,16 @@ include:
 
 #
 
+workflow:
+  rules:
+    # Skip GitHub pull requests pipelines
+    - if: $CI_PIPELINE_SOURCE == 'external_pull_request_event'
+      when: never
+    # Otherwise include the job and set to run normally
+    - when: always
+
+#
+
 stages:
   - Install
   - Code Quality
