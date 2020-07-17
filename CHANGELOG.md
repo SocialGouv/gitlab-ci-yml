@@ -1,3 +1,10 @@
+# [17.0.0-beta.35](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.34...v17.0.0-beta.35) (2020-07-17)
+
+
+### Bug Fixes
+
+* **release_stage:** not interruptible ([61c7404](https://github.com/SocialGouv/gitlab-ci-yml/commit/61c740472e311ddbd92ae549d29437b279c7b1e0))
+
 # [17.0.0-beta.34](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.33...v17.0.0-beta.34) (2020-07-17)
 
 
