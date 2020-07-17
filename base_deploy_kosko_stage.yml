@@ -31,6 +31,7 @@ variables:
     - yarn --frozen-lockfile --prefer-offline --link-duplicates
     - echo "kosko generate ${KOSKO_GENERATE_ARGS} >> ${CI_PROJECT_DIR}/manifest.yaml"
     - kosko generate ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml
+    - cd -
     - |
       if [[ -d "${KOSKO_APPEND_YAML_FROM}" ]]; then
         echo "Append to ${CI_PROJECT_DIR}/manifest.yaml"
