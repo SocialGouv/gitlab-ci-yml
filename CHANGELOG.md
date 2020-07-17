@@ -1,3 +1,48 @@
+# [17.0.0-beta.33](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.32...v17.0.0-beta.33) (2020-07-17)
+
+
+### Bug Fixes
+
+* **autodevops:** use CI_PROJECT_NAME as default ns name ([d941043](https://github.com/SocialGouv/gitlab-ci-yml/commit/d94104392a9c6720e92ec894c821cc874fa5c304))
+
+
+### Features
+
+* **deps:** update curlimages/curl docker tag to v7.71.0 ([#333](https://github.com/SocialGouv/gitlab-ci-yml/issues/333)) ([ae90508](https://github.com/SocialGouv/gitlab-ci-yml/commit/ae90508405ea62d57c5965d3879146e80b807861))
+* **deps:** update curlimages/curl docker tag to v7.71.1 ([#350](https://github.com/SocialGouv/gitlab-ci-yml/issues/350)) ([448711e](https://github.com/SocialGouv/gitlab-ci-yml/commit/448711ef7ad63ce98dbd94c7d796e482e4f64cc1))
+* **deps:** update socialgouv/docker images docker tags to v1.33.0 ([#320](https://github.com/SocialGouv/gitlab-ci-yml/issues/320)) ([a315a4a](https://github.com/SocialGouv/gitlab-ci-yml/commit/a315a4aeb43883404a32fd41e3e8a70002647a48))
+* **deps:** update socialgouv/docker images docker tags to v1.33.1 ([#321](https://github.com/SocialGouv/gitlab-ci-yml/issues/321)) ([1315021](https://github.com/SocialGouv/gitlab-ci-yml/commit/131502114bcff2392ff2ef385cf3d7318dc16838))
+* **deps:** update socialgouv/docker images docker tags to v1.33.2 ([#322](https://github.com/SocialGouv/gitlab-ci-yml/issues/322)) ([c8b1c2e](https://github.com/SocialGouv/gitlab-ci-yml/commit/c8b1c2e480a875a3dca488f84d2ea16fa06738b0))
+* **deps:** update socialgouv/docker images docker tags to v1.34.0 ([#323](https://github.com/SocialGouv/gitlab-ci-yml/issues/323)) ([8350235](https://github.com/SocialGouv/gitlab-ci-yml/commit/8350235a8ee4fc31c94fe1eb76e49b9b638d207b))
+* **deps:** update socialgouv/docker images docker tags to v1.34.1 ([#324](https://github.com/SocialGouv/gitlab-ci-yml/issues/324)) ([e4dd3fc](https://github.com/SocialGouv/gitlab-ci-yml/commit/e4dd3fcf7241193e22e656f883780599e9fe4680))
+* **deps:** update socialgouv/docker images docker tags to v1.34.2 ([#325](https://github.com/SocialGouv/gitlab-ci-yml/issues/325)) ([77695a3](https://github.com/SocialGouv/gitlab-ci-yml/commit/77695a357a312a2655002e817bcfb164cdb29301))
+* **deps:** update socialgouv/docker images docker tags to v1.35.1 ([#327](https://github.com/SocialGouv/gitlab-ci-yml/issues/327)) ([6e078e5](https://github.com/SocialGouv/gitlab-ci-yml/commit/6e078e5605e965c4e78d70674895e5fe821bfa7d))
+* **deps:** update socialgouv/docker images docker tags to v1.36.0 ([#328](https://github.com/SocialGouv/gitlab-ci-yml/issues/328)) ([976e652](https://github.com/SocialGouv/gitlab-ci-yml/commit/976e6526c93fd10484f56ce233ad5f1d4ac67a74))
+* **deps:** update socialgouv/docker images docker tags to v1.37.0 ([#329](https://github.com/SocialGouv/gitlab-ci-yml/issues/329)) ([26ab652](https://github.com/SocialGouv/gitlab-ci-yml/commit/26ab652ff9f202df22832954483d59d2897d23e4))
+* **deps:** update socialgouv/docker images docker tags to v1.37.1 ([#330](https://github.com/SocialGouv/gitlab-ci-yml/issues/330)) ([8a1131d](https://github.com/SocialGouv/gitlab-ci-yml/commit/8a1131dbeba3d69f4e72053351bd6a41d50021b2))
+* **deps:** update socialgouv/docker images docker tags to v1.37.2 ([#331](https://github.com/SocialGouv/gitlab-ci-yml/issues/331)) ([06fb6db](https://github.com/SocialGouv/gitlab-ci-yml/commit/06fb6db230a5152b7a5cfd41ca408eddfc34c6b3))
+* **deps:** update socialgouv/docker images docker tags to v1.37.3 ([#332](https://github.com/SocialGouv/gitlab-ci-yml/issues/332)) ([1dd2634](https://github.com/SocialGouv/gitlab-ci-yml/commit/1dd26343fab2826a24b0211d727453c9a97a9ed8))
+* **deps:** update socialgouv/docker images docker tags to v1.37.4 ([#335](https://github.com/SocialGouv/gitlab-ci-yml/issues/335)) ([6817526](https://github.com/SocialGouv/gitlab-ci-yml/commit/6817526b177ad73d6d899bba173f2fba8efc2cd3))
+* **deps:** update socialgouv/docker images docker tags to v1.38.0 ([#338](https://github.com/SocialGouv/gitlab-ci-yml/issues/338)) ([45a09dd](https://github.com/SocialGouv/gitlab-ci-yml/commit/45a09dd83d30c4eb5b04cdf418bd2a8a1772a248))
+* **deps:** update socialgouv/docker images docker tags to v1.38.1 ([#339](https://github.com/SocialGouv/gitlab-ci-yml/issues/339)) ([50dae35](https://github.com/SocialGouv/gitlab-ci-yml/commit/50dae3546885542039142e5c96a4fa701affa993))
+* **deps:** update socialgouv/docker images docker tags to v1.39.0 ([#340](https://github.com/SocialGouv/gitlab-ci-yml/issues/340)) ([9007338](https://github.com/SocialGouv/gitlab-ci-yml/commit/9007338e149d211fd857c31a77fbaeea9129cdcc))
+* **deps:** update socialgouv/docker images docker tags to v1.39.1 ([#341](https://github.com/SocialGouv/gitlab-ci-yml/issues/341)) ([51cc504](https://github.com/SocialGouv/gitlab-ci-yml/commit/51cc5043dcf0a5a9374c7a9c47a78913067d3d77))
+* **deps:** update socialgouv/docker images docker tags to v1.40.0 ([#343](https://github.com/SocialGouv/gitlab-ci-yml/issues/343)) ([b41df5a](https://github.com/SocialGouv/gitlab-ci-yml/commit/b41df5a2228026668576d43db5df94dae71bd110))
+* **deps:** update socialgouv/docker images docker tags to v1.40.1 ([#344](https://github.com/SocialGouv/gitlab-ci-yml/issues/344)) ([7b8a256](https://github.com/SocialGouv/gitlab-ci-yml/commit/7b8a2562461fddaf708009267bcd010444e5525e))
+* **deps:** update socialgouv/docker images docker tags to v1.41.1 ([#345](https://github.com/SocialGouv/gitlab-ci-yml/issues/345)) ([72db636](https://github.com/SocialGouv/gitlab-ci-yml/commit/72db636e132c7263e23b06c48ba399e87a025c75))
+* **deps:** update socialgouv/docker images docker tags to v1.41.2 ([#346](https://github.com/SocialGouv/gitlab-ci-yml/issues/346)) ([69fecd1](https://github.com/SocialGouv/gitlab-ci-yml/commit/69fecd131068ac529a7772a117a542e1477d03a0))
+* **deps:** update socialgouv/docker images docker tags to v1.41.3 ([#347](https://github.com/SocialGouv/gitlab-ci-yml/issues/347)) ([985035a](https://github.com/SocialGouv/gitlab-ci-yml/commit/985035a667783d5be53afbb1b1b9bcc4186dc029))
+* **deps:** update socialgouv/docker images docker tags to v1.42.0 ([#348](https://github.com/SocialGouv/gitlab-ci-yml/issues/348)) ([5287bfe](https://github.com/SocialGouv/gitlab-ci-yml/commit/5287bfec8b1a910836e03719a2dbb2d9821854ba))
+* **deps:** update socialgouv/docker images docker tags to v1.42.1 ([#349](https://github.com/SocialGouv/gitlab-ci-yml/issues/349)) ([32aae33](https://github.com/SocialGouv/gitlab-ci-yml/commit/32aae33fafcde69858265d7b56de618d87990362))
+* **deps:** update socialgouv/docker images docker tags to v1.43.0 ([#351](https://github.com/SocialGouv/gitlab-ci-yml/issues/351)) ([97c292f](https://github.com/SocialGouv/gitlab-ci-yml/commit/97c292f1ee3bf9a46f5e7ddb3cbd2e55321e6894))
+* **deps:** update socialgouv/docker images docker tags to v1.43.2 ([#352](https://github.com/SocialGouv/gitlab-ci-yml/issues/352)) ([ad9447c](https://github.com/SocialGouv/gitlab-ci-yml/commit/ad9447c8748103a4b91f12fd0c2fe110db064a92))
+* **deps:** update socialgouv/docker images docker tags to v1.44.0 ([#353](https://github.com/SocialGouv/gitlab-ci-yml/issues/353)) ([ae21a20](https://github.com/SocialGouv/gitlab-ci-yml/commit/ae21a20a8510e5bc57ff435d6ddad80fccdc2ce6))
+* **deps:** update socialgouv/docker images docker tags to v1.45.0 ([#354](https://github.com/SocialGouv/gitlab-ci-yml/issues/354)) ([5cda7a5](https://github.com/SocialGouv/gitlab-ci-yml/commit/5cda7a53250cd05d8d7b0adef26282f8c67e57f1))
+* **deps:** update socialgouv/docker images docker tags to v1.45.1 ([#355](https://github.com/SocialGouv/gitlab-ci-yml/issues/355)) ([8f61083](https://github.com/SocialGouv/gitlab-ci-yml/commit/8f610831d47763af1e7e6d0ccb65f040df5ef2ee))
+* **deps:** update socialgouv/docker images docker tags to v1.46.0 ([#356](https://github.com/SocialGouv/gitlab-ci-yml/issues/356)) ([d6bdc61](https://github.com/SocialGouv/gitlab-ci-yml/commit/d6bdc61c584f07e61cb824b0a6623b434086d1a1))
+* **deps:** update socialgouv/docker images docker tags to v1.47.0 ([#357](https://github.com/SocialGouv/gitlab-ci-yml/issues/357)) ([6c55693](https://github.com/SocialGouv/gitlab-ci-yml/commit/6c55693ee448e47b9a45cca72c5e65dd29a1fa4b))
+* **deps:** update socialgouv/docker images docker tags to v1.47.1 ([#358](https://github.com/SocialGouv/gitlab-ci-yml/issues/358)) ([4183e0e](https://github.com/SocialGouv/gitlab-ci-yml/commit/4183e0ec674f83a5f5c82b952ecf6733418ad2fb))
+
 # [16.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v16.1.0...v16.2.0) (2020-07-08)
 
 
