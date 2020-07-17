@@ -1,3 +1,10 @@
+# [17.0.0-beta.34](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.33...v17.0.0-beta.34) (2020-07-17)
+
+
+### Bug Fixes
+
+* **kosko:** ensure to come back to cwd to resolve yaml from folder ([9e05811](https://github.com/SocialGouv/gitlab-ci-yml/commit/9e058118554bbf905aa9d6b421fb7a4cd9a6ae76))
+
 # [17.0.0-beta.33](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.32...v17.0.0-beta.33) (2020-07-17)
 
 
