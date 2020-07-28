@@ -2,5 +2,5 @@
 
 .base_docker_kubectl_image_stage:
   image:
-    name: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/kubectl:1.50.0
+    name: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/kubectl:1.50.1
     entrypoint: [""]
