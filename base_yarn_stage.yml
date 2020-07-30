@@ -34,7 +34,7 @@
       - yarn
   script:
     - yarn config set cache-folder $CI_PROJECT_DIR/yarn
-    - yarn --frozen-lockfile
+    - yarn install --frozen-lockfile --prefer-offline
   artifacts:
     expire_in: 1 day
     paths:
