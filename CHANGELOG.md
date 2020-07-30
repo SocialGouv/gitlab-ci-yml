@@ -1,3 +1,10 @@
+# [17.0.0-beta.36](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.35...v17.0.0-beta.36) (2020-07-30)
+
+
+### Bug Fixes
+
+* **kosko:** log the production flag too ([fd3be78](https://github.com/SocialGouv/gitlab-ci-yml/commit/fd3be786f091496458d124b41895da1aed34a66a))
+
 # [17.0.0-beta.35](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0-beta.34...v17.0.0-beta.35) (2020-07-17)
 
 
