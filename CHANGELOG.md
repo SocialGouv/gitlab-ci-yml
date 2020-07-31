@@ -1,3 +1,10 @@
+# [17.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.1.1...v17.2.0) (2020-07-31)
+
+
+### Features
+
+* **deps:** update registry.gitlab.factory.social.gouv.fr/socialgouv/docker/kosko docker tag to v1.50.2 ([#368](https://github.com/SocialGouv/gitlab-ci-yml/issues/368)) ([d417487](https://github.com/SocialGouv/gitlab-ci-yml/commit/d417487b8ef7d05275d601d1ac1bbe2a59f1fb63))
+
 ## [17.1.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.1.0...v17.1.1) (2020-07-31)
 
 
