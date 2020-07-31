@@ -1,3 +1,10 @@
+## [17.1.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.1.0...v17.1.1) (2020-07-31)
+
+
+### Bug Fixes
+
+* **autodevops:** add manifests suffix to KOSKO_APPEND_YAML_FROM ([fa9a085](https://github.com/SocialGouv/gitlab-ci-yml/commit/fa9a085593aea58010403e67eeb84a4622749ee2))
+
 # [17.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.0.0...v17.1.0) (2020-07-31)
 
 
