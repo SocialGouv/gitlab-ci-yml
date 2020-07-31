@@ -1,0 +1,50 @@
+#
+
+variables:
+  K8S_FOLDER: ${CI_PROJECT_DIR}/.k8s
+  KOSKO_GENERATE_ARGS: ""
+
+.base_deploy_kosko_stage:
+  stage: Deploy
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/kosko:1.15.0
+  dependencies: []
+  cache:
+    key:
+      files:
+        - ${K8S_FOLDER}/yarn.lock
+      prefix: ${CI_JOB_NAME}
+    paths:
+      - ${CI_PROJECT_DIR}/.cache
+      - ${K8S_FOLDER}/node_modules
+  script:
+    - printenv | grep
+      -e "^CI_COMMIT_"
+      -e "^CI_ENVIRONMENT_"
+      -e "^CI_PROJECT_"
+      -e "^CI_REGISTRY_"
+      -e "^KUBE_INGRESS_BASE_DOMAIN"
+      -e "^KUBE_NAMESPACE"
+      -e "^PRODUCTION"
+      -e "^RANCHER_PROJECT_ID" | sort
+    #
+    - yarn config set cache-folder ${CI_PROJECT_DIR}/.cache/yarn
+    - cd ${K8S_FOLDER}
+    - yarn --frozen-lockfile --prefer-offline --link-duplicates
+    - echo "kosko generate ${KOSKO_GENERATE_ARGS} >> ${CI_PROJECT_DIR}/manifest.yaml"
+    - kosko generate ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml
+    - cd -
+    - |
+      if [[ -d "${KOSKO_APPEND_YAML_FROM}" ]]; then
+        echo "Append to ${CI_PROJECT_DIR}/manifest.yaml"
+        find ${KOSKO_APPEND_YAML_FROM} -name '*.yaml'
+        find ${KOSKO_APPEND_YAML_FROM} -name '*.yaml' -exec \
+          echo '---' \; -exec cat {} \; |
+          envsubst \
+        >> ${CI_PROJECT_DIR}/manifest.yaml
+      fi
+    - kubectl apply -f ${CI_PROJECT_DIR}/manifest.yaml
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - manifest.yaml
+    when: always

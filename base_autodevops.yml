@@ -1,0 +1,370 @@
+#
+
+include:
+  - /base_azure_db_stage.yml
+  - /base_create_namespace_stage.yml
+  - /base_delete_useless_k8s_ns_stage.yml
+  - /base_deploy_app_chart_stage.yml
+  - /base_deploy_kosko_stage.yml
+  - /base_docker_helm_image_stage.yml
+  - /base_docker_kubectl_image_stage.yml
+  - /base_notify_github_stage.yml
+  - /base_register_stage.yml
+  - /base_semantic_release_stage.yml
+  - /base_trigger_stage.yml
+  - /base_yarn_stage.yml
+
+#
+
+workflow:
+  rules:
+    # Skip GitHub pull requests pipelines
+    - if: $CI_PIPELINE_SOURCE == 'external_pull_request_event'
+      when: never
+    # Otherwise include the job and set to run normally
+    - when: always
+
+#
+
+stages:
+  - Install
+  - Code Quality
+  - Registration
+  - Release
+  - Deploy
+
+#
+
+variables:
+  GIT_STRATEGY: fetch
+  GIT_DEPTH: 5
+  #
+  AUTO_DEVOPS_DEV_ENVIRONMENT_NAME: "-dev2"
+  AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME: "-dev2"
+  AUTO_DEVOPS_PROD_ENVIRONMENT_NAME: "prod2"
+  # To activate the auto release
+  # AUTO_DEVOPS_RELEASE_AUTO: "🔖"
+  # AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
+  # To disable some quality check
+  # AUTO_DEVOPS_QUALITY_DISABLED: "🛑"
+  # AUTO_DEVOPS_TEST_DISABLED: "🛑"
+
+#
+#
+#
+
+.production_rule: &autodevops_production_rule
+  if: "$PRODUCTION && $CI_COMMIT_TAG"
+.trigger_rule: &autodevops_trigger_rule
+  if: "$PRODUCTION || $RELEASE"
+
+.autodevops_base_rules:
+  rules:
+    - &autodevops_global_skip_case
+      <<: *autodevops_trigger_rule
+      when: never
+    - when: on_success
+
+#
+#
+#
+
+.autodevops_trigger_release:
+  extends:
+    - .base_trigger_release_stage
+    - .autodevops_base_rules
+  stage: .post
+  rules:
+    - <<: *autodevops_global_skip_case
+    - if: "$CI_COMMIT_TAG"
+      when: never
+    - if: "$AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE =~ /^chore(release): version/"
+      when: never
+    - if: "$AUTO_DEVOPS_RELEASE_AUTO"
+      when: on_success
+    - when: manual
+
+Trigger Release:
+  extends: .autodevops_trigger_release
+
+.autodevops_release:
+  extends:
+    - .base_semantic_release_stage
+  rules:
+    - if: "$RELEASE"
+  variables:
+    GIT_DEPTH: 4242
+    SEMANTIC_RELEASE_ARGS: ""
+  stage: Release
+
+Release:
+  extends: .autodevops_release
+
+#
+
+.autodevops_trigger_production:
+  stage: .post
+  rules:
+    - if: "$PRODUCTION"
+      when: never
+    - if: $CI_COMMIT_TAG && $AUTO_DEVOPS_PRODUCTION_AUTO && $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/
+      when: on_success
+    - if: "$CI_COMMIT_TAG"
+      when: manual
+  extends: .base_trigger_production_stage
+
+Trigger Production:
+  extends: .autodevops_trigger_production
+
+#
+
+.autodevops_install:
+  extends:
+    - .base_yarn
+    - .autodevops_base_rules
+  interruptible: true
+
+#
+#
+#
+
+#
+#
+#
+
+.autodevops_lint:
+  rules:
+    - <<: *autodevops_trigger_rule
+      when: never
+    - if: "$AUTO_DEVOPS_QUALITY_DISABLED"
+      when: never
+    - when: always
+  extends:
+    - .base_yarn_script
+    - .autodevops_base_rules
+  needs:
+    - job: Install
+      artifacts: true
+  script:
+    - yarn lint
+
+#
+
+.autodevops_test:
+  rules:
+    - <<: *autodevops_trigger_rule
+      when: never
+    - if: "$AUTO_DEVOPS_TEST_DISABLED"
+      when: never
+    - when: always
+  extends:
+    - .base_yarn_script
+    - .autodevops_base_rules
+  needs:
+    - job: Install
+      artifacts: true
+  script:
+    - yarn test
+
+#
+
+.autodevops_build:
+  extends:
+    - .base_yarn_build_next
+    - .autodevops_base_rules
+  needs:
+    - job: Install
+      artifacts: true
+
+#
+#
+#
+
+#
+#
+#
+
+.autodevops_register_image:
+  extends:
+    - .base_register_stage
+    - .autodevops_base_rules
+  stage: Registration
+  needs:
+    - job: Build
+      artifacts: true
+  variables:
+    CONTEXT: .
+    IMAGE_NAME: $CI_REGISTRY_IMAGE
+
+#
+#
+#
+
+#
+#
+#
+
+.deploy_stage:
+  stage: Deploy
+  extends:
+    - .base_deploy_kosko_stage
+  cache:
+    key: deploy-${CI_COMMIT_REF_SLUG}
+    paths:
+      - ${CI_PROJECT_DIR}/dotenv.env
+      - ${CI_PROJECT_DIR}/.cache
+      - ${K8S_FOLDER}/node_modules
+  after_script:
+    - echo "CI_ENVIRONMENT_URL=${CI_ENVIRONMENT_URL}" >> dotenv.env
+
+#
+
+.autodevops_review:
+  extends:
+    - .deploy_stage
+  rules:
+    - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
+      when: never
+    - when: on_success
+  variables:
+    KOSKO_APPEND_YAML_FROM: .k8s/environments/dev
+    KOSKO_GENERATE_ARGS: >-
+      --env dev
+  environment:
+    auto_stop_in: 1 day
+    name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
+    on_stop: Stop review
+    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+Review:
+  extends: .autodevops_review
+
+.autodevops_preprod:
+  extends:
+    - .deploy_stage
+    - .autodevops_review
+  rules:
+    - if: "$PRODUCTION || $RELEASE"
+      when: never
+    - if: "$CI_COMMIT_TAG"
+  variables:
+    KOSKO_APPEND_YAML_FROM: .k8s/environments/preprod
+    KOSKO_GENERATE_ARGS: >-
+      --env preprod
+  environment:
+    auto_stop_in: 1 week
+    name: preprod${AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME}
+    on_stop: Stop preprod
+    url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+Preprod:
+  extends: .autodevops_preprod
+
+.autodevops_production:
+  extends:
+    - .deploy_stage
+  rules:
+    - <<: *autodevops_production_rule
+  variables:
+    KOSKO_APPEND_YAML_FROM: .k8s/environments/prod
+    KUBE_NAMESPACE: ${CI_PROJECT_NAME}
+    KOSKO_GENERATE_ARGS: >-
+      --env prod "!(_*)"
+  environment:
+    name: ${AUTO_DEVOPS_PROD_ENVIRONMENT_NAME}
+    url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+Production:
+  extends: .autodevops_production
+
+#
+#
+#
+
+.autodevops_stop_review:
+  extends:
+    - .base_docker_kubectl_image_stage
+  stage: .post
+  rules:
+    - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
+      when: never
+    - when: manual
+  environment:
+    name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
+    action: stop
+  allow_failure: true
+  dependencies: []
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - echo "kubectl delete namespace ${KUBE_NAMESPACE}"
+    - kubectl delete namespace "${KUBE_NAMESPACE}"
+Stop review:
+  extends: .autodevops_stop_review
+
+.autodevops_stop_preprod:
+  extends:
+    - .autodevops_stop_review
+  environment:
+    name: preprod${AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME}
+    action: stop
+  rules:
+    - if: "$PRODUCTION || $RELEASE"
+      when: never
+    - if: "$CI_COMMIT_TAG"
+      when: manual
+Stop preprod:
+  extends: .autodevops_stop_preprod
+
+#
+#
+#
+
+.autodevops_notify_starting_deployment:
+  extends:
+    - .base_notify_pending_stage
+  stage: Deploy
+  rules:
+    - if: $RELEASE
+      when: never
+    - when: on_success
+Notify Starting Deployment:
+  extends: .autodevops_notify_starting_deployment
+
+#
+
+.notify:
+  stage: .post
+  dependencies:
+    - Notify Starting Deployment
+  cache:
+    key: deploy-${CI_COMMIT_REF_SLUG}
+    paths:
+      - ${CI_PROJECT_DIR}/dotenv.env
+    policy: pull
+  before_script:
+    - |
+      set -x
+
+      . dotenv.env
+
+      export HOST=$CI_ENVIRONMENT_URL
+
+.autodevops_notify_fail:
+  extends:
+    - .base_notify_fail_stage
+    - .notify
+  rules:
+    - if: "$RELEASE"
+      when: never
+    - when: on_failure
+Notify Fail:
+  extends: .autodevops_notify_fail
+
+.autodevops_notify_success:
+  extends:
+    - .base_notify_success_stage
+    - .notify
+  rules:
+    - if: "$RELEASE"
+      when: never
+    - when: on_success
+Notify Success:
+  extends: .autodevops_notify_success

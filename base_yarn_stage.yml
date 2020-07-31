@@ -1,5 +1,5 @@
 .base_yarn_quality:
-  image: node:14-alpine
+  image: node:14.4.0-alpine3.12
   before_script:
     - yarn --frozen-lockfile
   cache:
@@ -11,7 +11,7 @@
     - yarn test
 
 .base_yarn_build:
-  image: node:14-alpine
+  image: node:14.4.0-alpine3.12
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
@@ -21,38 +21,41 @@
   script:
     - yarn build
   artifacts:
-    expire_in: 1 day
+    expire_in: 1 week
     paths:
       - .next
 
 .base_yarn:
   stage: Install
-  image: node:14-alpine
+  image: node:14.4.0-alpine3.12
   cache:
-    key: ${CI_COMMIT_REF_NAME}-${CI_JOB_NAME}
+    key:
+      files:
+        - yarn.lock
+      prefix: ${CI_JOB_NAME}
     paths:
-      - yarn
+      - .cache
   script:
-    - yarn config set cache-folder $CI_PROJECT_DIR/yarn
+    - yarn config set cache-folder $CI_PROJECT_DIR/.cache/yarn
     - yarn install --frozen-lockfile --prefer-offline
   artifacts:
-    expire_in: 1 day
+    expire_in: 1 week
     paths:
       - node_modules
 
 .base_yarn_script:
   stage: Code Quality
-  image: node:14-alpine
+  image: node:14.4.0-alpine3.12
 
 .base_yarn_build_next:
   extends: .base_yarn_script
   cache:
-    key: ${CI_COMMIT_REF_SLUG}
+    key: "${CI_JOB_NAME}-${CI_COMMIT_REF_SLUG}"
     paths:
       - .next/cache
   script:
     - yarn build
   artifacts:
-    expire_in: 1 day
+    expire_in: 1 week
     paths:
       - .next

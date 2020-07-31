@@ -1,7 +1,17 @@
 ---
+workflow:
+  rules:
+    # Skip GitHub pull requests pipelines
+    - if: $CI_PIPELINE_SOURCE == 'external_pull_request_event'
+      when: never
+    # Otherwise include the job and set to run normally
+    - when: always
+
+#
 
 include:
   - /base_semantic_release_stage.yml
+  - /base_trigger_stage.yml
 
 stages:
   - Code Quality
@@ -9,27 +19,24 @@ stages:
 
 Lint:
   stage: Code Quality
-  image: node:14-alpine
+  image: node:14.4.0-alpine3.12
   script:
     - npx yaml-lint *.yml
     - npx prettier --check *.yml
 
-Release:
-  extends: .base_semantic_release_stage
-  variables:
-    SEMANTIC_RELEASE_PLUGINS: "@semantic-release/changelog @semantic-release/exec @semantic-release/git"
-
 Test AutoDevOps on SocialGouv/sample-next-app:
   stage: Code Quality
-  image: curlimages/curl:7.71.1
+  extends: .base_trigger_stage
   variables:
-    GIT_STRATEGY: none
-  script:
-    - "[[ -z ${SOCIAL_GOUV_SAMPLE_NEXT_APP_PROJECT_ID} ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
-    - curl --request POST
-        --form ref="autodevops-master"
-        --form token="${CI_JOB_TOKEN}"
-        "${CI_API_V4_URL}/projects/${SOCIAL_GOUV_SAMPLE_NEXT_APP_PROJECT_ID}/trigger/pipeline"
-  only:
-    refs:
-      - master
+    TRIGGER_ARGS: >-
+      --form ref="ci-test-autodevops-${CI_COMMIT_REF_NAME}"
+    TRIGGER_PROJECT_ID: "${SOCIAL_GOUV_SAMPLE_NEXT_APP_PROJECT_ID}"
+
+#
+
+Release:
+  extends: .base_semantic_release_stage
+  rules:
+    - if: "$CI_PROJECT_URL =~ /gitlab.factory.social.gouv.fr/"
+  variables:
+    SEMANTIC_RELEASE_PLUGINS: "@semantic-release/changelog @semantic-release/exec @semantic-release/git"
