@@ -1,3 +1,10 @@
+# [17.3.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.2.0...v17.3.0) (2020-08-01)
+
+
+### Features
+
+* **deps:** update socialgouv/docker images docker tags to v1.51.0 ([#369](https://github.com/SocialGouv/gitlab-ci-yml/issues/369)) ([aa8aae4](https://github.com/SocialGouv/gitlab-ci-yml/commit/aa8aae4ea2c7b3114ed46c1dcebbd137321bd7bd))
+
 # [17.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.1.1...v17.2.0) (2020-07-31)
 
 
