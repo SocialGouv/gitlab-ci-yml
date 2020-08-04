@@ -1,3 +1,10 @@
+## [17.3.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.3.0...v17.3.1) (2020-08-04)
+
+
+### Bug Fixes
+
+* **notify:** allow_failure ([#370](https://github.com/SocialGouv/gitlab-ci-yml/issues/370)) ([ced0b1d](https://github.com/SocialGouv/gitlab-ci-yml/commit/ced0b1de3a2b81def375f04761b86888d6964882))
+
 # [17.3.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.2.0...v17.3.0) (2020-08-01)
 
 
