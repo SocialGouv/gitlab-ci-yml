@@ -1,3 +1,10 @@
+# [17.7.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.6.0...v17.7.0) (2020-08-19)
+
+
+### Features
+
+* **deps:** update curlimages/curl docker tag to v7.72.0 ([#374](https://github.com/SocialGouv/gitlab-ci-yml/issues/374)) ([a6caff4](https://github.com/SocialGouv/gitlab-ci-yml/commit/a6caff412a20d1cfeb65652ca09767699291f9e0))
+
 # [17.6.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.5.0...v17.6.0) (2020-08-15)
 
 
