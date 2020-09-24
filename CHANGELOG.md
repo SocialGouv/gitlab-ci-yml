@@ -1,3 +1,15 @@
+# [17.17.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.16.0...v17.17.0) (2020-09-24)
+
+
+### Bug Fixes
+
+* **ci:** increase reviews env expiration timeout ([#384](https://github.com/SocialGouv/gitlab-ci-yml/issues/384)) ([71d2dbb](https://github.com/SocialGouv/gitlab-ci-yml/commit/71d2dbbc0ba3b1ec59a041a6c9b831d09dab9837))
+
+
+### Features
+
+* **deps:** update socialgouv/docker images docker tags to v1.55.0 ([#387](https://github.com/SocialGouv/gitlab-ci-yml/issues/387)) ([e458b0e](https://github.com/SocialGouv/gitlab-ci-yml/commit/e458b0efa3faa78971de442c42a810968d1b7384))
+
 # [17.16.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.15.0...v17.16.0) (2020-09-16)
 
 
