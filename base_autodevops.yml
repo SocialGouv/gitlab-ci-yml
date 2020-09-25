@@ -58,7 +58,7 @@ variables:
 .trigger_rule: &autodevops_trigger_rule
   if: "$PRODUCTION || $RELEASE"
 .nobuild_rule: &autodevops_nobuild_rule
-  if: "$CI_COMMIT_REF_NAME=ci-skip-version-bump && $CI_COMMIT_MESSAGE =~ /^chore(release): test/"
+  if: "$CI_COMMIT_REF_NAME =~ /ci-skip-version-bump/ && $CI_COMMIT_MESSAGE =~ /^chore(release): test/"
 
 .autodevops_base_rules:
   rules:
