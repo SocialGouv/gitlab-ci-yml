@@ -1,3 +1,10 @@
+## [17.21.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.21.0...v17.21.1) (2020-09-30)
+
+
+### Bug Fixes
+
+* **review:** set env expiration back to 1 day ([#393](https://github.com/SocialGouv/gitlab-ci-yml/issues/393)) ([36c71bf](https://github.com/SocialGouv/gitlab-ci-yml/commit/36c71bfbffe10d070c2c080efca5d469ca18caab))
+
 # [17.21.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.20.0...v17.21.0) (2020-09-28)
 
 
