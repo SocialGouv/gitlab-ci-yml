@@ -39,7 +39,7 @@ variables:
         find ${KOSKO_APPEND_YAML_FROM} -name '*.yaml'
         find ${KOSKO_APPEND_YAML_FROM} -name '*.yaml' -exec \
           echo '---' \; -exec cat {} \; |
-          envsubst \
+          \
         >> ${CI_PROJECT_DIR}/manifest.yaml
       fi
     - kubectl apply -f ${CI_PROJECT_DIR}/manifest.yaml
