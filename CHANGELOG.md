@@ -1,3 +1,10 @@
+# [18.0.0-alpha.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.0.0-alpha.1...v18.0.0-alpha.2) (2020-10-06)
+
+
+### Bug Fixes
+
+* **ci:** do not pipe in >> ... it does not work$ ([3e9c6a7](https://github.com/SocialGouv/gitlab-ci-yml/commit/3e9c6a7894df5abc38b157f77fbdf7e4f1778f6d))
+
 # [18.0.0-alpha.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.23.0...v18.0.0-alpha.1) (2020-10-06)
 
 
