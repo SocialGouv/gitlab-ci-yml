@@ -1,3 +1,13 @@
+# [18.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v17.23.0...v18.0.0) (2020-10-07)
+
+
+* feat(kosko)!: remove envsubst on appended yaml (#397) ([1864163](https://github.com/SocialGouv/gitlab-ci-yml/commit/1864163639e74f34ebc3ed83b48f559b3c7d1d86)), closes [#397](https://github.com/SocialGouv/gitlab-ci-yml/issues/397)
+
+
+### BREAKING CHANGES
+
+* might break `kubectl apply` on the output manifest if `KUBE_NAMESPACE` is not set on the GitLab job
+
 # [18.0.0-alpha.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.0.0-alpha.1...v18.0.0-alpha.2) (2020-10-06)
 
 
