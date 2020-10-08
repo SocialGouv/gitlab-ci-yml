@@ -42,6 +42,10 @@ variables:
         >> ${CI_PROJECT_DIR}/manifest.yaml
       fi
     - kubectl apply -f ${CI_PROJECT_DIR}/manifest.yaml
+    - |
+      printf '*%.0s' $(seq 1 $(tput cols))
+      echo "\n\ndeployed on : ${CI_ENVIRONMENT_URL}\n"
+      printf '*%.0s' $(seq 1 $(tput cols))
   artifacts:
     expire_in: 1 week
     paths:
