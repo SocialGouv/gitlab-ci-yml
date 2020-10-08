@@ -1,3 +1,10 @@
+# [18.3.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.2.0...v18.3.0) (2020-10-08)
+
+
+### Features
+
+* **deploy:** bigger deploy url in gitlab logs ([#400](https://github.com/SocialGouv/gitlab-ci-yml/issues/400)) ([eda8713](https://github.com/SocialGouv/gitlab-ci-yml/commit/eda8713416a35ad5a080e5f99092ef30560800af))
+
 # [18.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.1.0...v18.2.0) (2020-10-08)
 
 
