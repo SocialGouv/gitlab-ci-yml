@@ -1,3 +1,10 @@
+# [18.4.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.3.0...v18.4.0) (2020-10-08)
+
+
+### Features
+
+* **deps:** update node docker tag to v14.13.1 ([#401](https://github.com/SocialGouv/gitlab-ci-yml/issues/401)) ([e2178ab](https://github.com/SocialGouv/gitlab-ci-yml/commit/e2178ab2b78bdccf84f898d51c578abdc643451b))
+
 # [18.3.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.2.0...v18.3.0) (2020-10-08)
 
 
