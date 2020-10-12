@@ -225,16 +225,19 @@ Trigger Production:
   rules:
     - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
       when: never
+    - if: $CI_COMMIT_MESSAGE =~ /^chore(deps):/
+      when: never
     - when: on_success
   variables:
     KOSKO_APPEND_YAML_FROM: .k8s/environments/dev/manifests
     KOSKO_GENERATE_ARGS: >-
       --env dev
   environment:
-    auto_stop_in: 1 day
+    auto_stop_in: 7 day
     name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
     on_stop: Stop review
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+    
 Review:
   extends: .autodevops_review
 
