@@ -9,6 +9,10 @@
   allow_failure: true
   stage: .post
   dependencies: []
+  rules:
+    - if: "$AUTO_DEVOPS_NOTIFY_DISABLED"
+      when: never
+    - when: always
 
 .base_notify_pending_stage:
   extends:

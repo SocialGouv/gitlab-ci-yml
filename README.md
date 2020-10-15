@@ -108,7 +108,7 @@ variables:
 
 ### Disable some jobs 
 
-You can disable test jobs with `AUTO_DEVOPS_TEST_DISABLED` and/or lint with `AUTO_DEVOPS_QUALITY_DISABLED`
+You can disable test jobs with `AUTO_DEVOPS_TEST_DISABLED` and/or lint with `AUTO_DEVOPS_QUALITY_DISABLED`. `AUTO_DEVOPS_NOTIFY_DISABLED` disable GitHub environments notifications.
 
 ```yaml
 include:
@@ -119,6 +119,7 @@ include:
 variables:
   AUTO_DEVOPS_TEST_DISABLED: "🛑"
   AUTO_DEVOPS_QUALITY_DISABLED: "🛑"
+  AUTO_DEVOPS_NOTIFY_DISABLED:  "🛑"
 ```
 
 ### Override existing jobs
