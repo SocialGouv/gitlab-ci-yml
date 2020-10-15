@@ -1,3 +1,10 @@
+# [18.6.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.5.0...v18.6.0) (2020-10-15)
+
+
+### Features
+
+* **autodevops:** add AUTO_DEVOPS_NOTIFY_DISABLED ([#402](https://github.com/SocialGouv/gitlab-ci-yml/issues/402)) ([070a047](https://github.com/SocialGouv/gitlab-ci-yml/commit/070a04733e6c78fd43ab5ebef38bf6b9703f544b))
+
 # [18.5.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.4.0...v18.5.0) (2020-10-14)
 
 
