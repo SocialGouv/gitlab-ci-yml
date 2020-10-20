@@ -58,7 +58,7 @@ variables:
 .trigger_rule: &autodevops_trigger_rule
   if: "$PRODUCTION || $RELEASE"
 .release_trigger_rule: &autodevops_release_trigger_rule
-  if: '$CI_COMMIT_BRANCH != "master" && $CI_COMMIT_BRANCH != "alpha" && $CI_COMMIT_BRANCH != "beta"'
+  if: '($CI_COMMIT_BRANCH != "master" && $CI_COMMIT_BRANCH != "alpha" && $CI_COMMIT_BRANCH != "beta") || ($CI_COMMIT_BRANCH == "master" && $CI_COMMIT_MESSAGE =~ /^chore(release): version/)'
 .master_trigger_rule: &autodevops_master_trigger_rule
   if: '$CI_COMMIT_BRANCH == "master" && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE !~ /^chore(release): version/'
 
