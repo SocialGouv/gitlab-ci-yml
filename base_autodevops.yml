@@ -251,7 +251,7 @@ Review:
     KOSKO_GENERATE_ARGS: >-
       --env preprod
   environment:
-    auto_stop_in: 1 week
+    auto_stop_in: 1 month
     name: preprod${AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME}
     on_stop: Stop preprod
     url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
