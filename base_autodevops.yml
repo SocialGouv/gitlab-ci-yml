@@ -57,23 +57,23 @@ variables:
   if: "$PRODUCTION && $CI_COMMIT_TAG"
 .trigger_rule: &autodevops_trigger_rule
   if: "$PRODUCTION || $RELEASE"
+.release_trigger_rule: &autodevops_release_trigger_rule
+  if: '$CI_COMMIT_BRANCH != "master" && $CI_COMMIT_BRANCH != "alpha" && $CI_COMMIT_BRANCH != "beta"'
+.master_trigger_rule: &autodevops_master_trigger_rule
+  if: '$CI_COMMIT_BRANCH == "master" && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE !~ /^chore(release): version/'
 
 .autodevops_base_rules:
   rules:
     - &autodevops_global_skip_case
       <<: *autodevops_trigger_rule
       when: never
+    - <<: *autodevops_master_trigger_rule
+      when: never
     - when: on_success
 
 #
 #
 #
-
-.release_trigger_rule:
-  rules:
-    - &autodevops_release_trigger_rule
-      if: '$CI_COMMIT_BRANCH != "master" && $CI_COMMIT_BRANCH != "alpha" && $CI_COMMIT_BRANCH != "beta"'
-      when: never
 
 .autodevops_trigger_release:
   extends:
@@ -83,6 +83,7 @@ variables:
   rules:
     - <<: *autodevops_global_skip_case
     - <<: *autodevops_release_trigger_rule
+      when: never
     - if: "$CI_COMMIT_TAG"
       when: never
     - if: "$AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE =~ /^chore(release): version/"
@@ -98,6 +99,8 @@ Trigger Release:
   extends:
     - .base_semantic_release_stage
   rules:
+    - <<: *autodevops_release_trigger_rule
+      when: never
     - if: "$RELEASE"
   variables:
     GIT_DEPTH: 4242
@@ -143,6 +146,8 @@ Trigger Production:
   rules:
     - <<: *autodevops_trigger_rule
       when: never
+    - <<: *autodevops_master_trigger_rule
+      when: never
     - if: "$AUTO_DEVOPS_QUALITY_DISABLED"
       when: never
     - when: always
@@ -160,6 +165,8 @@ Trigger Production:
 .autodevops_test:
   rules:
     - <<: *autodevops_trigger_rule
+      when: never
+    - <<: *autodevops_master_trigger_rule
       when: never
     - if: "$AUTO_DEVOPS_TEST_DISABLED"
       when: never
@@ -232,6 +239,8 @@ Trigger Production:
   rules:
     - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
       when: never
+    - <<: *autodevops_master_trigger_rule
+      when: never
     - when: on_success
   variables:
     KOSKO_APPEND_YAML_FROM: .k8s/environments/dev/manifests
@@ -291,6 +300,8 @@ Production:
   stage: .post
   rules:
     - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
+      when: never
+    - <<: *autodevops_master_trigger_rule
       when: never
     - when: manual
   environment:
