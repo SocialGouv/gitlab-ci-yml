@@ -1,3 +1,11 @@
+## [18.8.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.8.0...v18.8.1) (2020-10-21)
+
+
+### Bug Fixes
+
+* **kosko:** fix foiroose print ([#406](https://github.com/SocialGouv/gitlab-ci-yml/issues/406)) ([cb1fe55](https://github.com/SocialGouv/gitlab-ci-yml/commit/cb1fe555a369b51474fc9d445ea3fc9aee8bedb7))
+* **preprod:** increase auto_stop_in to 1 month ([#407](https://github.com/SocialGouv/gitlab-ci-yml/issues/407)) ([f547534](https://github.com/SocialGouv/gitlab-ci-yml/commit/f5475347fd191afe552e0718db0705f8d6e6eed2))
+
 # [18.8.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.7.0...v18.8.0) (2020-10-16)
 
 
