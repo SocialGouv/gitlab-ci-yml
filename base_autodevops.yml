@@ -368,7 +368,7 @@ Notify Fail:
     - .notify
   rules:
     - if: "$RELEASE"
-      when: never 
+      when: never
     - if: "$AUTO_DEVOPS_NOTIFY_DISABLED"
       when: never
     - when: on_success
