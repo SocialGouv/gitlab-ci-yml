@@ -62,7 +62,7 @@ variables:
 .release_trigger_rule2: &autodevops_release_trigger_rule2
   if: '$CI_COMMIT_BRANCH == "master" && $CI_COMMIT_MESSAGE =~ /^chore(release): version/'
 .master_trigger_rule: &autodevops_master_trigger_rule
-  if: '$CI_COMMIT_BRANCH == "master" && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE !~ /chore\(release\)/'
+  if: "$CI_COMMIT_BRANCH == 'master' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE !~ /chore(release)/"
 
 .autodevops_base_rules:
   rules:
