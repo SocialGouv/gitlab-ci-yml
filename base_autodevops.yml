@@ -322,7 +322,9 @@ Stop preprod:
     - .base_notify_pending_stage
   stage: Deploy
   rules:
-    - if: $RELEASE
+    - if: "$RELEASE"
+      when: never
+    - if: "$AUTO_DEVOPS_NOTIFY_DISABLED"
       when: never
     - when: on_success
 Notify Starting Deployment:
@@ -354,6 +356,8 @@ Notify Starting Deployment:
   rules:
     - if: "$RELEASE"
       when: never
+    - if: "$AUTO_DEVOPS_NOTIFY_DISABLED"
+      when: never
     - when: on_failure
 Notify Fail:
   extends: .autodevops_notify_fail
@@ -364,6 +368,8 @@ Notify Fail:
     - .notify
   rules:
     - if: "$RELEASE"
+      when: never
+    - if: "$AUTO_DEVOPS_NOTIFY_DISABLED"
       when: never
     - when: on_success
 Notify Success:
