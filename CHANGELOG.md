@@ -1,3 +1,10 @@
+## [18.8.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.8.1...v18.8.2) (2020-10-21)
+
+
+### Bug Fixes
+
+* **notify:** more AUTO_DEVOPS_NOTIFY_DISABLED ([#408](https://github.com/SocialGouv/gitlab-ci-yml/issues/408)) ([25cacf1](https://github.com/SocialGouv/gitlab-ci-yml/commit/25cacf1327941f4d3a6f7cde942a89992a9bc014))
+
 ## [18.8.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.8.0...v18.8.1) (2020-10-21)
 
 
