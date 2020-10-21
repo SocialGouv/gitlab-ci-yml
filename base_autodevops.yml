@@ -103,10 +103,10 @@ Trigger Release:
   extends:
     - .base_semantic_release_stage
   rules:
-    - <<: *autodevops_release_trigger_rule
-      when: never
-    - <<: *autodevops_release_trigger_rule2
-      when: never
+    # - <<: *autodevops_release_trigger_rule
+    #   when: never
+    # - <<: *autodevops_release_trigger_rule2
+    #   when: never
     - <<: *autodevops_master_trigger_rule
       when: always
   variables:
