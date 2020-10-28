@@ -8,15 +8,14 @@ include:
 Install:
   extends:
     - .autodevops_install
+# Lint:
+#   extends: .autodevops_lint
 
-Lint:
-  extends: .autodevops_lint
+# Test:
+#   extends: .autodevops_test
 
-Test:
-  extends: .autodevops_test
+# Build:
+#   extends: .autodevops_build
 
-Build:
-  extends: .autodevops_build
-
-Register image:
-  extends: .autodevops_register_image
+# Register image:
+#   extends: .autodevops_register_image
