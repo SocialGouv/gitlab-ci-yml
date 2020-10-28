@@ -8,6 +8,9 @@ include:
 Install:
   extends:
     - .autodevops_install
+Build:
+  extends:
+    - .autodevops_build
 # Lint:
 #   extends: .autodevops_lint
 

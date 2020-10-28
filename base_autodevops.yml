@@ -28,7 +28,7 @@ workflow:
 
 stages:
   - Install
-  # - Code Quality
+  - Build
   # - Registration
   # - Release
   # - Deploy
@@ -82,7 +82,21 @@ variables:
     - .base_yarn
     # - .autodevops_base_rules
   interruptible: true
-# ##############################
+
+##############################
+# Build
+##############################
+
+.autodevops_build:
+  stage: Build
+  extends:
+    - .base_yarn_build_next
+    # - .autodevops_base_rules
+  needs:
+    - job: Install
+      artifacts: true
+
+  # ##############################
 # # Trigger Release
 # ##############################
 
@@ -191,18 +205,6 @@ variables:
 #       artifacts: true
 #   script:
 #     - yarn test
-
-# ##############################
-# # Build
-# ##############################
-
-# .autodevops_build:
-#   extends:
-#     - .base_yarn_build_next
-#     - .autodevops_base_rules
-#   needs:
-#     - job: Install
-#       artifacts: true
 
 # ##############################
 # # Register
