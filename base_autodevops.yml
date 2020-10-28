@@ -65,6 +65,9 @@ variables:
 .master_trigger_rule: &autodevops_master_trigger_rule
   if: "$CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE !~ /chore(release)/"
 
+.rule_on_release: &rule_on_release
+  if: "$CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO"
+
 # .autodevops_base_rules:
 #   rules:
 #     - &autodevops_global_skip_case
@@ -97,7 +100,7 @@ variables:
     - job: Install
       artifacts: true
   rules:
-    - if: "$CI_COMMIT_BRANCH == 'alpha'"
+    - <<: *rule_on_release
       when: never
 
 ##############################
@@ -129,7 +132,9 @@ variables:
 
 .autodevops_test:
   stage: Test
-  # rules:
+  rules:
+    - <<: *rule_on_release
+      when: never
   #   - <<: *autodevops_trigger_rule
   #     when: never
   #   - <<: *autodevops_master_trigger_rule
