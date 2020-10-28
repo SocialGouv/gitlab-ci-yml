@@ -11,9 +11,9 @@ Install:
 Build:
   extends:
     - .autodevops_build
-# Lint:
-#   extends: .autodevops_lint
-
+Lint:
+  extends:
+    - .autodevops_lint
 # Test:
 #   extends: .autodevops_test
 

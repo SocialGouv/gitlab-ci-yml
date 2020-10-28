@@ -29,6 +29,7 @@ workflow:
 stages:
   - Install
   - Build
+  - Test
   # - Registration
   # - Release
   # - Deploy
@@ -96,7 +97,29 @@ variables:
     - job: Install
       artifacts: true
 
-  # ##############################
+##############################
+# Lint
+##############################
+
+.autodevops_lint:
+  stage: Test
+  # rules:
+  #   - <<: *autodevops_trigger_rule
+  #     when: never
+  #   - <<: *autodevops_master_trigger_rule
+  #     when: never
+  #   - if: "$AUTO_DEVOPS_QUALITY_DISABLED"
+  #     when: never
+  #   - when: always
+  extends:
+    - .base_yarn_script
+    # - .autodevops_base_rules
+  needs:
+    - job: Install
+      artifacts: true
+  script:
+    - yarn lint
+# ##############################
 # # Trigger Release
 # ##############################
 
@@ -161,28 +184,6 @@ variables:
 
 # Trigger Production:
 #   extends: .autodevops_trigger_production
-
-# ##############################
-# # Lint
-# ##############################
-
-# .autodevops_lint:
-#   rules:
-#     - <<: *autodevops_trigger_rule
-#       when: never
-#     - <<: *autodevops_master_trigger_rule
-#       when: never
-#     - if: "$AUTO_DEVOPS_QUALITY_DISABLED"
-#       when: never
-#     - when: always
-#   extends:
-#     - .base_yarn_script
-#     - .autodevops_base_rules
-#   needs:
-#     - job: Install
-#       artifacts: true
-#   script:
-#     - yarn lint
 
 # ##############################
 # # Test
