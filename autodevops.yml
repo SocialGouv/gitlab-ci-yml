@@ -14,9 +14,9 @@ Build:
 Lint:
   extends:
     - .autodevops_lint
-# Test:
-#   extends: .autodevops_test
-
+Test:
+  extends:
+    - .autodevops_test
 # Build:
 #   extends: .autodevops_build
 
