@@ -1,5 +1,5 @@
 .base_yarn_quality:
-  image: node:15.0.0-alpine3.12
+  image: node:14.15.0-alpine3.12
   before_script:
     - yarn --frozen-lockfile
   cache:
@@ -11,7 +11,7 @@
     - yarn test
 
 .base_yarn_build:
-  image: node:15.0.0-alpine3.12
+  image: node:14.15.0-alpine3.12
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
@@ -27,7 +27,7 @@
 
 .base_yarn:
   stage: Install
-  image: node:15.0.0-alpine3.12
+  image: node:14.15.0-alpine3.12
   cache:
     key:
       files:
@@ -45,7 +45,7 @@
 
 .base_yarn_script:
   stage: Code Quality
-  image: node:15.0.0-alpine3.12
+  image: node:14.15.0-alpine3.12
 
 .base_yarn_build_next:
   extends: .base_yarn_script
