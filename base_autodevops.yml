@@ -96,6 +96,9 @@ variables:
   needs:
     - job: Install
       artifacts: true
+  rules:
+    - if: "$CI_COMMIT_BRANCH == 'alpha'"
+      when: never
 
 ##############################
 # Lint
