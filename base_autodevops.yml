@@ -99,9 +99,9 @@ variables:
   needs:
     - job: Install
       artifacts: true
-  rules:
-    - <<: *rule_on_release
-      when: never
+  # rules:
+  #   - <<: *rule_on_release
+  #     when: never
 
 ##############################
 # Lint
