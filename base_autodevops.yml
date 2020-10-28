@@ -99,9 +99,10 @@ variables:
   needs:
     - job: Install
       artifacts: true
-  # rules:
-  #   - <<: *rule_on_release
-  #     when: never
+  rules:
+    - <<: *rule_on_release
+      when: never
+    - when: always
 
 ##############################
 # Lint
@@ -135,6 +136,7 @@ variables:
   rules:
     - <<: *rule_on_release
       when: never
+    - when: always
   #   - <<: *autodevops_trigger_rule
   #     when: never
   #   - <<: *autodevops_master_trigger_rule
@@ -167,6 +169,7 @@ variables:
   rules:
     - <<: *rule_on_release
       when: never
+    - when: always
   variables:
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE
