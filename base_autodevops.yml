@@ -30,7 +30,7 @@ stages:
   - Install
   - Build
   - Test
-  # - Registration
+  - Register
   # - Release
   # - Deploy
 
@@ -66,7 +66,7 @@ variables:
   if: "$CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE !~ /chore(release)/"
 
 .rule_on_release: &rule_on_release
-  if: "$CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO"
+  if: "$CI_COMMIT_BRANCH == 'master' && $AUTO_DEVOPS_RELEASE_AUTO"
 
 # .autodevops_base_rules:
 #   rules:
@@ -151,6 +151,25 @@ variables:
     - job: Build
   script:
     - yarn test
+
+##############################
+# Register
+##############################
+
+.autodevops_register_image:
+  stage: Register
+  extends:
+    - .base_register_stage
+    # - .autodevops_base_rules
+  needs:
+    - job: Build
+      artifacts: true
+  rules:
+    - <<: *rule_on_release
+      when: never
+  variables:
+    CONTEXT: .
+    IMAGE_NAME: $CI_REGISTRY_IMAGE
 # ##############################
 # # Trigger Release
 # ##############################
@@ -216,22 +235,6 @@ variables:
 
 # Trigger Production:
 #   extends: .autodevops_trigger_production
-
-# ##############################
-# # Register
-# ##############################
-
-# .autodevops_register_image:
-#   extends:
-#     - .base_register_stage
-#     - .autodevops_base_rules
-#   stage: Registration
-#   needs:
-#     - job: Build
-#       artifacts: true
-#   variables:
-#     CONTEXT: .
-#     IMAGE_NAME: $CI_REGISTRY_IMAGE
 
 # ##############################
 # # Deploy
