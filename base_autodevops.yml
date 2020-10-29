@@ -190,6 +190,30 @@ Preinstall:
     - when: always
 
 ##############################
+# Tag
+##############################
+
+Tag:
+  stage: Build
+  extends:
+    - .base_yarn_script
+  needs:
+    - job: Install
+      artifacts: true
+    - job: Lint
+    - job: Test
+  script:
+    - echo "CI_COMMIT_TAG=$(node -p "require('./package.json').version")" >> build.env
+    - cat build.env
+  rules:
+    - <<: *rule_on_release
+      when: always
+    - when: never
+  artifacts:
+    reports:
+      dotenv: build.env
+
+##############################
 # Register
 ##############################
 
@@ -203,6 +227,8 @@ Preinstall:
     - job: Test
     - job: Build
       artifacts: true
+    - job: Tag
+      artifacts: true
   rules:
     - <<: *rule_to_release
       when: never
@@ -211,110 +237,95 @@ Preinstall:
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE
 
-##############################
-# Release
-##############################
-
-.autodevops_release:
-  extends:
-    - .base_semantic_release_stage
-  rules:
-    - <<: *rule_to_release
-      when: always
-    - when: never
-  # rules:
-  #   # - <<: *autodevops_release_trigger_rule
-  #   #   when: never
-  #   # - <<: *autodevops_release_trigger_rule2
-  #   #   when: never
-  #   - <<: *autodevops_master_trigger_rule
-  #     when: always
-  variables:
-    GIT_DEPTH: 4242
-    SEMANTIC_RELEASE_ARGS: ""
-  stage: Release
-
-Release:
-  extends: .autodevops_release
-
-Fake:
-  stage: Deploy
-  extends:
-    - .base_yarn_script
-  script:
-    - export COMMIT_TAG=$(node -p "require('./package.json').version")
-    - echo COMMIT_TAG from package.json $COMMIT_TAG
-  rules:
-    - <<: *rule_to_release
-      when: never
-    - when: always
-# ##############################
-# # Deploy
-# ##############################
-
-# .deploy_stage:
+# Fake:
 #   stage: Deploy
 #   extends:
-#     - .base_deploy_kosko_stage
-#   cache:
-#     key: deploy-${CI_COMMIT_REF_SLUG}
-#     paths:
-#       - ${CI_PROJECT_DIR}/dotenv.env
-#       - ${CI_PROJECT_DIR}/.cache
-#       - ${K8S_FOLDER}/node_modules
-#   after_script:
-#     - echo "CI_ENVIRONMENT_URL=${CI_ENVIRONMENT_URL}" >> dotenv.env
-
-# # ##############################
-# # # Deploy REVIEW
-# # ##############################
-
-# .autodevops_review:
-#   extends:
-#     - .deploy_stage
+#     - .base_yarn_script
+#   script:
+#     - export COMMIT_TAG=$(node -p "require('./package.json').version")
+#     - echo COMMIT_TAG from package.json $COMMIT_TAG
 #   rules:
-#     - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
+#     - <<: *rule_to_release
 #       when: never
-#     - <<: *autodevops_master_trigger_rule
-#       when: never
-#     - when: on_success
-#   variables:
-#     KOSKO_APPEND_YAML_FROM: .k8s/environments/dev/manifests
-#     KOSKO_GENERATE_ARGS: >-
-#       --env dev
-#   environment:
-#     auto_stop_in: 1 day
-#     name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
-#     on_stop: Stop review
-#     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+#     - when: always
+
+##############################
+# Deploy
+##############################
+
+.deploy_stage:
+  stage: Deploy
+  extends:
+    - .base_deploy_kosko_stage
+  cache:
+    key: deploy-${CI_COMMIT_REF_SLUG}
+    paths:
+      - ${CI_PROJECT_DIR}/dotenv.env
+      - ${CI_PROJECT_DIR}/.cache
+      - ${K8S_FOLDER}/node_modules
+  after_script:
+    - echo "CI_ENVIRONMENT_URL=${CI_ENVIRONMENT_URL}" >> dotenv.env
+
+##############################
+# Deploy REVIEW
+##############################
+
+.autodevops_review:
+  extends:
+    - .deploy_stage
+  # rules:
+  #   - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
+  #     when: never
+  #   - <<: *autodevops_master_trigger_rule
+  #     when: never
+  #   - when: on_success
+  variables:
+    KOSKO_APPEND_YAML_FROM: .k8s/environments/dev/manifests
+    KOSKO_GENERATE_ARGS: >-
+      --env dev
+  environment:
+    auto_stop_in: 1 day
+    name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
+    on_stop: Stop review
+    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
 # Review:
 #   extends: .autodevops_review
 
-# ##############################
-# # Deploy PREPROD
-# ##############################
+##############################
+# Deploy PREPROD
+##############################
 
-# .autodevops_preprod:
-#   extends:
-#     - .deploy_stage
-#     - .autodevops_review
-#   rules:
-#     - if: "$PRODUCTION || $RELEASE"
-#       when: never
-#     - if: "$CI_COMMIT_TAG"
-#   variables:
-#     KOSKO_APPEND_YAML_FROM: .k8s/environments/preprod/manifests
-#     KOSKO_GENERATE_ARGS: >-
-#       --env preprod
-#   environment:
-#     auto_stop_in: 1 week
-#     name: preprod${AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME}
-#     on_stop: Stop preprod
-#     url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+.autodevops_preprod:
+  extends:
+    # - .deploy_stage
+    - .autodevops_review
+  needs:
+    - job: Register
+    - job: Tag
+      artifacts: true
+  # rules:
+  # - if: "$PRODUCTION || $RELEASE"
+  #   when: never
+  # - if: "$CI_COMMIT_TAG"
+  variables:
+    KOSKO_APPEND_YAML_FROM: .k8s/environments/preprod/manifests
+    KOSKO_GENERATE_ARGS: >-
+      --env preprod
+  environment:
+    auto_stop_in: 1 week
+    name: preprod${AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME}
+    on_stop: Stop preprod
+    url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
-# Preprod:
-#   extends: .autodevops_preprod
+Preprod:
+  extends: .autodevops_preprod
+  rules:
+    - <<: *rule_on_release
+      when: always
+    - when: never
+  before_script:
+    - echo CI_COMMIT_TAG $CI_COMMIT_TAG
 
 # ##############################
 # # Trigger Release
@@ -496,3 +507,29 @@ Fake:
 
 # Notify Success:
 #   extends: .autodevops_notify_success
+
+##############################
+# Release
+##############################
+
+.autodevops_release:
+  extends:
+    - .base_semantic_release_stage
+  rules:
+    - <<: *rule_to_release
+      when: always
+    - when: never
+  # rules:
+  #   # - <<: *autodevops_release_trigger_rule
+  #   #   when: never
+  #   # - <<: *autodevops_release_trigger_rule2
+  #   #   when: never
+  #   - <<: *autodevops_master_trigger_rule
+  #     when: always
+  variables:
+    GIT_DEPTH: 4242
+    SEMANTIC_RELEASE_ARGS: ""
+  stage: Release
+
+Release:
+  extends: .autodevops_release
