@@ -72,6 +72,8 @@ variables:
   if: $CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE !~ /^chore\(release\)/
 .rule_on_release: &rule_on_release
   if: $CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE =~ /^chore\(release\)/
+.rule_on_release: &rule_on_feature_branch
+  if: $CI_COMMIT_BRANCH != 'alpha'
 # .autodevops_base_rules:
 #   rules:
 #     - &autodevops_global_skip_case
@@ -282,8 +284,12 @@ Tag:
     # on_stop: Stop review
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
-# Review:
-#   extends: .autodevops_review
+Review:
+  extends: .autodevops_review
+  rules:
+    - <<: *rule_on_feature_branch
+      when: always
+    - when: never
 
 ##############################
 # Deploy PREPROD
