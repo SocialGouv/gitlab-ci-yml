@@ -70,7 +70,7 @@ variables:
 .rule_to_release: &rule_to_release
   if: "$CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE !~ /chore(release)/"
 .rule_on_release: &rule_on_release
-  if: "$CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE =~ /chore(release)/"
+  if: "$CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE =~ /^chore(release): version/"
 # .autodevops_base_rules:
 #   rules:
 #     - &autodevops_global_skip_case
@@ -90,6 +90,12 @@ Preinstall:
     - echo CI_COMMIT_BRANCH $CI_COMMIT_BRANCH
     - echo AUTO_DEVOPS_RELEASE_AUTO $AUTO_DEVOPS_RELEASE_AUTO
     - echo CI_COMMIT_MESSAGE $CI_COMMIT_MESSAGE
+    - echo PRODUCTION $PRODUCTION
+    - echo RELEASE $RELEASE
+    - echo CI_PIPELINE_SOURCE $CI_PIPELINE_SOURCE
+    - echo CI_COMMIT_TAG $CI_COMMIT_TAG
+    - echo test not release ($CI_COMMIT_MESSAGE !~ /chore(release)/)
+    - echo test release ($CI_COMMIT_MESSAGE =~ /chore(release)/)
 
 .autodevops_install:
   extends:
