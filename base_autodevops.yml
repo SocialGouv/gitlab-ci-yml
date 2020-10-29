@@ -80,6 +80,12 @@ variables:
 #       when: never
 #     - when: on_success
 
+.get_commit_tag:
+  extends:
+    - .base_yarn_script
+  script:
+    - export CI_COMMIT_TAG=$(node -p "require('./package.json').version")
+
 ##############################
 # Install
 ##############################
@@ -183,6 +189,7 @@ Preinstall:
 .autodevops_register_image:
   stage: Register
   extends:
+    - .get_commit_tag
     - .base_register_stage
     # - .autodevops_base_rules
   needs:
