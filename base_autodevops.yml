@@ -222,7 +222,7 @@ Tag:
     # - .autodevops_base_rules
   needs:
     - job: Build
-    artifacts: true
+      artifacts: true
     - job: Tag
       artifacts: true
   rules:
