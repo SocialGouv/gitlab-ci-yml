@@ -68,9 +68,9 @@ variables:
 #   if: "$CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE !~ /chore(release)/"
 
 .rule_to_release: &rule_to_release
-  if: "$CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE !~ /^chore\\(release\\)/"
+  if: "$CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE !~ /^chore(release)/"
 .rule_on_release: &rule_on_release
-  if: "$CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE =~ /^chore\\(release\\)/"
+  if: "$CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE =~ /^chore(release)/"
 # .autodevops_base_rules:
 #   rules:
 #     - &autodevops_global_skip_case
