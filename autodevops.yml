@@ -14,9 +14,9 @@ Lint:
 Test:
   extends:
     - .autodevops_test
-# Build:
-#   extends:
-#     - .autodevops_build
-# Register:
-#   extends:
-#     - .autodevops_register_image
+Build:
+  extends:
+    - .autodevops_build
+Register:
+  extends:
+    - .autodevops_register_image
