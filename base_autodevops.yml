@@ -80,13 +80,17 @@ variables:
 #       when: never
 #     - when: on_success
 
-.get_commit_tag:
-  extends:
-    - .base_yarn_script
-  before_script:
-    - echo .get_commit_tag
-    - export CI_COMMIT_TAG=$(node -p "require('./package.json').version")
-    - echo CI_COMMIT_TAG $CI_COMMIT_TAG
+# .get_commit_tag:
+#   extends:
+#     - .base_yarn_script
+#   script:
+#     - echo .get_commit_tag
+#     - export CI_COMMIT_TAG=$(node -p "require('./package.json').version")
+#     - echo "CI_COMMIT_TAG=$(node -p "require('./package.json').version")" >> toto.env
+#     - echo CI_COMMIT_TAG $CI_COMMIT_TAG
+#   artifacts:
+#     reports:
+#       dotenv: build.env
 
 ##############################
 # Install
@@ -192,7 +196,7 @@ Preinstall:
 .autodevops_register_image:
   stage: Register
   extends:
-    - .get_commit_tag
+    # - .get_commit_tag
     - .base_register_stage
     # - .autodevops_base_rules
   needs:

@@ -55,7 +55,11 @@
       - .next/cache
   script:
     - yarn build
+    - echo "CI_COMMIT_TAG=$(node -p "require('./package.json').version")" >> build.env
+    - cat build.env
   artifacts:
     expire_in: 1 week
     paths:
       - .next
+    reports:
+      dotenv: build.env
