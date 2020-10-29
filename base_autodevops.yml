@@ -234,7 +234,7 @@ Tag:
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE
 
-Register app:
+Register-app:
   stage: Register
   extends: .autodevops_register_image
   variables:
