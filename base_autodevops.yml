@@ -249,6 +249,22 @@ Register app:
       when: always
     - when: never
 
+Register release:
+  extends: .autodevops_register_image
+  needs:
+    - job: Build
+      artifacts: true
+    - job: Tag
+      artifacts: true
+  variables:
+    DOCKER_BUILD_ARGS: >-
+      --shm-size 512M
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+  rules:
+    - <<: *rule_on_release
+      when: always
+    - when: never
+
 # ##############################
 # # Deploy
 # ##############################
