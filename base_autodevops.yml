@@ -183,11 +183,10 @@ variables:
   extends:
     - .base_yarn_build_next
     # - .autodevops_base_rules
-  needs:
-    - job: Install
-      artifacts: true
-    - job: Lint
-    - job: Test
+  dependencies:
+    - Install
+    - Lint
+    - Test
   rules:
     - <<: *rule_to_release
       when: never
@@ -201,11 +200,6 @@ Tag:
   stage: Build
   extends:
     - .base_yarn_script
-  needs:
-    - job: Install
-      artifacts: true
-    - job: Lint
-    - job: Test
   script:
     - echo "CI_COMMIT_TAG=$(node -p "require('./package.json').version")" >> build.env
     - cat build.env
@@ -227,7 +221,6 @@ Tag:
     - .base_register_stage
     # - .autodevops_base_rules
   needs:
-    - job: Test
     - job: Build
       artifacts: true
     - job: Tag
