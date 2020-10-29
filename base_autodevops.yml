@@ -325,35 +325,35 @@ Preprod:
       when: always
     - when: never
 
-##############################
-# Trigger Release
-##############################
+# ##############################
+# # Trigger Release
+# ##############################
 
-.autodevops_trigger_release:
-  extends:
-    - .base_trigger_release_stage
-    # - .autodevops_base_rules
-  stage: Actions
-  rules:
-    - <<: *rule_on_feature_branch
-      when: always
-    - when: never
-  # rules:
-  #   - <<: *autodevops_global_skip_case
-  #   - <<: *autodevops_on_feature_branch
-  #     when: never
-  #   - <<: *autodevops_on_release
-  #     when: never
-  #   - if: "$CI_COMMIT_TAG"
-  #     when: never
-  #   - if: "$AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_BRANCH == 'master'"
-  #     when: never
-  #   - if: "$AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE !~ /^chore(release): version/"
-  #     when: on_success
-  #   - when: manual
+# .autodevops_trigger_release:
+#   extends:
+#     - .base_trigger_release_stage
+#     # - .autodevops_base_rules
+#   stage: Actions
+#   rules:
+#     - <<: *rule_on_feature_branch
+#       when: always
+#     - when: never
+#   # rules:
+#   #   - <<: *autodevops_global_skip_case
+#   #   - <<: *autodevops_on_feature_branch
+#   #     when: never
+#   #   - <<: *autodevops_on_release
+#   #     when: never
+#   #   - if: "$CI_COMMIT_TAG"
+#   #     when: never
+#   #   - if: "$AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_BRANCH == 'master'"
+#   #     when: never
+#   #   - if: "$AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE !~ /^chore(release): version/"
+#   #     when: on_success
+#   #   - when: manual
 
-Trigger Release:
-  extends: .autodevops_trigger_release
+# Trigger release:
+#   extends: .autodevops_trigger_release
 
 ##############################
 # Trigger PRODUCTION
