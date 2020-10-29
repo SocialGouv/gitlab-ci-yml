@@ -224,8 +224,9 @@ Tag:
   needs:
     - job: Build
       artifacts: true
+  dependencies:
     - job: Tag
-      artifacts: true
+      # artifacts: true
   rules:
     - <<: *rule_to_release
       when: never
@@ -362,7 +363,7 @@ Preprod:
   #     when: manual
   extends: .base_trigger_production_stage
 
-Trigger Production:
+Ship to prod:
   extends: .autodevops_trigger_production
 
 # ##############################
