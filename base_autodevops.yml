@@ -82,6 +82,13 @@ variables:
 # Install
 ##############################
 
+Preinstall:
+  stage: Install
+  script:
+    - echo CI_COMMIT_BRANCH $CI_COMMIT_BRANCH
+    - echo AUTO_DEVOPS_RELEASE_AUTO $AUTO_DEVOPS_RELEASE_AUTO
+    - echo CI_COMMIT_MESSAGE $CI_COMMIT_MESSAGE
+
 .autodevops_install:
   extends:
     - .base_yarn
@@ -212,6 +219,8 @@ Release:
 
 Fake:
   stage: Deploy
+  extends:
+    - .base_yarn_script
   script:
     - export COMMIT_TAG=$(node -p "require('./package.json').version")
     - echo COMMIT_TAG from package.json $COMMIT_TAG
