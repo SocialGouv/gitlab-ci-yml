@@ -219,7 +219,6 @@ Tag:
 ##############################
 
 .autodevops_register_image:
-  stage: Register
   extends:
     - .base_register_stage
     # - .autodevops_base_rules
@@ -231,20 +230,21 @@ Tag:
   dependencies:
     - Build
     - Tag
-  rules:
-    - <<: *rule_before_release
-      when: never
-    - when: always
   variables:
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE
 
 Register app:
+  stage: Register
   extends: .autodevops_register_image
   variables:
     DOCKER_BUILD_ARGS: >-
       --shm-size 512M
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+  rules:
+    - <<: *rule_on_feature_branch
+      when: always
+    - when: never
 
 # ##############################
 # # Deploy
