@@ -239,6 +239,13 @@ Tag:
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE
 
+Register app:
+  extends: .autodevops_register_image
+  variables:
+    DOCKER_BUILD_ARGS: >-
+      --shm-size 512M
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+
 # ##############################
 # # Deploy
 # ##############################
