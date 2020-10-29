@@ -322,7 +322,7 @@ Review:
     - .autodevops_review
   stage: Deploy
   needs:
-    - job: Register
+    - job: Register release
     - job: Tag
       artifacts: true
   # rules:
