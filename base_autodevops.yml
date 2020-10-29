@@ -84,7 +84,9 @@ variables:
   extends:
     - .base_yarn_script
   script:
+    - echo .get_commit_tag
     - export CI_COMMIT_TAG=$(node -p "require('./package.json').version")
+    - echo CI_COMMIT_TAG $CI_COMMIT_TAG
 
 ##############################
 # Install
