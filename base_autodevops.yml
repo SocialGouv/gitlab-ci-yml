@@ -221,8 +221,8 @@ Tag:
     - .base_register_stage
     # - .autodevops_base_rules
   needs:
-    - job: Build
-      artifacts: true
+    # - job: Build
+    # artifacts: true
     - job: Tag
       artifacts: true
   rules:
