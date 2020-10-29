@@ -249,11 +249,11 @@ Tag:
       - ${K8S_FOLDER}/node_modules
   after_script:
     - echo "CI_ENVIRONMENT_URL=${CI_ENVIRONMENT_URL}" >> dotenv.env
-  script:
-    - echo CI_COMMIT_TAG $CI_COMMIT_TAG
-    - printenv | grep
-      -e "^CI_COMMIT_"
-      -e "^AUTO_DEVOPS_"
+  # script:
+  #   - echo CI_COMMIT_TAG $CI_COMMIT_TAG
+  #   - printenv | grep
+  #     -e "^CI_COMMIT_"
+  #     -e "^AUTO_DEVOPS_"
 
 ##############################
 # Deploy REVIEW
