@@ -35,6 +35,7 @@ stages:
   - Register
   - Release
   - Deploy
+  - Post actions
 
 #
 
@@ -346,7 +347,8 @@ Preprod:
 ##############################
 
 .autodevops_trigger_production:
-  stage: .post
+  # stage: .post
+  stage: Post actions
   rules:
     - <<: *rule_on_release
       when: manual
@@ -391,7 +393,8 @@ Trigger Production:
 .autodevops_stop_review:
   extends:
     - .base_docker_kubectl_image_stage
-  stage: .post
+  stage: Post actions
+  # stage: .post
   # rules:
   #   - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
   #     when: never
