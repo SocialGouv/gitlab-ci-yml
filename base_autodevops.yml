@@ -225,7 +225,7 @@ Tag:
     - job: Build
       artifacts: true
   dependencies:
-    - job: Tag
+    - Tag
       # artifacts: true
   rules:
     - <<: *rule_to_release
