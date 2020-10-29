@@ -219,6 +219,7 @@ Tag:
 ##############################
 
 .autodevops_register_image:
+  stage: Register
   extends:
     - .base_register_stage
     # - .autodevops_base_rules
@@ -227,16 +228,18 @@ Tag:
   #     artifacts: true
   #   - job: Tag
   #     artifacts: true
-  dependencies:
-    - Build
-    - Tag
+  # dependencies:
+  #   - Build
+  #   - Tag
   variables:
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE
 
-Register-app:
-  stage: Register
+Register app:
   extends: .autodevops_register_image
+  needs:
+    - job: Build
+      artifacts: true
   variables:
     DOCKER_BUILD_ARGS: >-
       --shm-size 512M
