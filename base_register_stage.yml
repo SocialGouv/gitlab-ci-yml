@@ -9,7 +9,7 @@
     - docker:19-dind
 
 .base_register_stage:
-  stage: "Registration"
+  # stage: "Registration"
   extends: .base_docker_image_stage
   script:
     # NOTE(douglasduteil): use echo "$CI_JOB_TOKEN" to remove docker login warning.

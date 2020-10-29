@@ -30,8 +30,8 @@ workflow:
 
 stages:
   - Install
+  - Quality check
   - Build
-  - Test
   - Register
   - Release
   - Deploy
@@ -83,7 +83,7 @@ variables:
 .get_commit_tag:
   extends:
     - .base_yarn_script
-  script:
+  before_script:
     - echo .get_commit_tag
     - export CI_COMMIT_TAG=$(node -p "require('./package.json').version")
     - echo CI_COMMIT_TAG $CI_COMMIT_TAG
@@ -114,28 +114,11 @@ Preinstall:
     - when: always
 
 ##############################
-# Build
-##############################
-
-.autodevops_build:
-  stage: Build
-  extends:
-    - .base_yarn_build_next
-    # - .autodevops_base_rules
-  needs:
-    - job: Install
-      artifacts: true
-  rules:
-    - <<: *rule_to_release
-      when: never
-    - when: always
-
-##############################
 # Lint
 ##############################
 
 .autodevops_lint:
-  stage: Test
+  stage: Quality check
   rules:
     - <<: *rule_to_release
       when: never
@@ -162,7 +145,7 @@ Preinstall:
 ##############################
 
 .autodevops_test:
-  stage: Test
+  stage: Quality check
   rules:
     - <<: *rule_to_release
       when: never
@@ -180,9 +163,27 @@ Preinstall:
   needs:
     - job: Install
       artifacts: true
-    - job: Build
   script:
     - yarn test
+
+##############################
+# Build
+##############################
+
+.autodevops_build:
+  stage: Build
+  extends:
+    - .base_yarn_build_next
+    # - .autodevops_base_rules
+  needs:
+    - job: Install
+      artifacts: true
+    - job: Lint
+    - job: Test
+  rules:
+    - <<: *rule_to_release
+      when: never
+    - when: always
 
 ##############################
 # Register
