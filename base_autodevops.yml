@@ -221,12 +221,14 @@ Tag:
   extends:
     - .base_register_stage
     # - .autodevops_base_rules
-  needs:
-    - job: Build
-      artifacts: true
+  # needs:
+  #   - job: Build
+  #     artifacts: true
+  #   - job: Tag
+  #     artifacts: true
   dependencies:
+    - Build
     - Tag
-      # artifacts: true
   rules:
     - <<: *rule_to_release
       when: never
