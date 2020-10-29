@@ -17,6 +17,6 @@ Test:
 Build:
   extends:
     - .autodevops_build
-Register:
-  extends:
-    - .autodevops_register_image
+# Register:
+#   extends:
+#     - .autodevops_register_image

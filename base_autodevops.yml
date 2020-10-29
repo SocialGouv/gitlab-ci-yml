@@ -239,91 +239,91 @@ Tag:
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE
 
-##############################
-# Deploy
-##############################
+# ##############################
+# # Deploy
+# ##############################
 
-.deploy_stage:
-  stage: Deploy
-  extends:
-    - .base_deploy_kosko_stage
-  cache:
-    key: deploy-${CI_COMMIT_REF_SLUG}
-    paths:
-      - ${CI_PROJECT_DIR}/dotenv.env
-      - ${CI_PROJECT_DIR}/.cache
-      - ${K8S_FOLDER}/node_modules
-  after_script:
-    - echo "CI_ENVIRONMENT_URL=${CI_ENVIRONMENT_URL}" >> dotenv.env
-  # script:
-  #   - echo CI_COMMIT_TAG $CI_COMMIT_TAG
-  #   - printenv | grep
-  #     -e "^CI_COMMIT_"
-  #     -e "^AUTO_DEVOPS_"
+# .deploy_stage:
+#   stage: Deploy
+#   extends:
+#     - .base_deploy_kosko_stage
+#   cache:
+#     key: deploy-${CI_COMMIT_REF_SLUG}
+#     paths:
+#       - ${CI_PROJECT_DIR}/dotenv.env
+#       - ${CI_PROJECT_DIR}/.cache
+#       - ${K8S_FOLDER}/node_modules
+#   after_script:
+#     - echo "CI_ENVIRONMENT_URL=${CI_ENVIRONMENT_URL}" >> dotenv.env
+#   # script:
+#   #   - echo CI_COMMIT_TAG $CI_COMMIT_TAG
+#   #   - printenv | grep
+#   #     -e "^CI_COMMIT_"
+#   #     -e "^AUTO_DEVOPS_"
 
-##############################
-# Deploy REVIEW
-##############################
+# ##############################
+# # Deploy REVIEW
+# ##############################
 
-.autodevops_review:
-  extends:
-    - .deploy_stage
-  # rules:
-  #   - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
-  #     when: never
-  #   - <<: *autodevops_master_trigger_rule
-  #     when: never
-  #   - when: on_success
-  variables:
-    KOSKO_APPEND_YAML_FROM: .k8s/environments/dev/manifests
-    KOSKO_GENERATE_ARGS: >-
-      --env dev
-  environment:
-    auto_stop_in: 1 day
-    name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
-    on_stop: Stop review
-    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+# .autodevops_review:
+#   extends:
+#     - .deploy_stage
+#   # rules:
+#   #   - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
+#   #     when: never
+#   #   - <<: *autodevops_master_trigger_rule
+#   #     when: never
+#   #   - when: on_success
+#   variables:
+#     KOSKO_APPEND_YAML_FROM: .k8s/environments/dev/manifests
+#     KOSKO_GENERATE_ARGS: >-
+#       --env dev
+#   environment:
+#     auto_stop_in: 1 day
+#     name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
+#     on_stop: Stop review
+#     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
-Review:
-  extends: .autodevops_review
-  rules:
-    - <<: *rule_on_feature_branch
-      when: always
-    - when: never
+# Review:
+#   extends: .autodevops_review
+#   rules:
+#     - <<: *rule_on_feature_branch
+#       when: always
+#     - when: never
 
-##############################
-# Deploy PREPROD
-##############################
+# ##############################
+# # Deploy PREPROD
+# ##############################
 
-.autodevops_preprod:
-  extends:
-    #   - .deploy_stage
-    - .autodevops_review
-  stage: Deploy
-  needs:
-    - job: Register
-    - job: Tag
-      artifacts: true
-  # rules:
-  # - if: "$PRODUCTION || $RELEASE"
-  #   when: never
-  # - if: "$CI_COMMIT_TAG"
-  variables:
-    KOSKO_APPEND_YAML_FROM: .k8s/environments/preprod/manifests
-    KOSKO_GENERATE_ARGS: >-
-      --env preprod
-  environment:
-    auto_stop_in: 1 week
-    name: preprod${AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME}
-    on_stop: Stop preprod
-    url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+# .autodevops_preprod:
+#   extends:
+#     #   - .deploy_stage
+#     - .autodevops_review
+#   stage: Deploy
+#   needs:
+#     - job: Register
+#     - job: Tag
+#       artifacts: true
+#   # rules:
+#   # - if: "$PRODUCTION || $RELEASE"
+#   #   when: never
+#   # - if: "$CI_COMMIT_TAG"
+#   variables:
+#     KOSKO_APPEND_YAML_FROM: .k8s/environments/preprod/manifests
+#     KOSKO_GENERATE_ARGS: >-
+#       --env preprod
+#   environment:
+#     auto_stop_in: 1 week
+#     name: preprod${AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME}
+#     on_stop: Stop preprod
+#     url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
-Preprod:
-  extends: .autodevops_preprod
-  rules:
-    - <<: *rule_on_release
-      when: always
-    - when: never
+# Preprod:
+#   extends: .autodevops_preprod
+#   rules:
+#     - <<: *rule_on_release
+#       when: always
+#     - when: never
 
 # ##############################
 # # Trigger Release
