@@ -220,7 +220,6 @@ Tag:
 .autodevops_register_image:
   stage: Register
   extends:
-    # - .get_commit_tag
     - .base_register_stage
     # - .autodevops_base_rules
   needs:
@@ -236,18 +235,6 @@ Tag:
   variables:
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE
-
-# Fake:
-#   stage: Deploy
-#   extends:
-#     - .base_yarn_script
-#   script:
-#     - export COMMIT_TAG=$(node -p "require('./package.json').version")
-#     - echo COMMIT_TAG from package.json $COMMIT_TAG
-#   rules:
-#     - <<: *rule_to_release
-#       when: never
-#     - when: always
 
 ##############################
 # Deploy
@@ -298,7 +285,7 @@ Tag:
 
 .autodevops_preprod:
   extends:
-    # - .deploy_stage
+    - .deploy_stage
     - .autodevops_review
   needs:
     - job: Register

@@ -75,4 +75,6 @@
       $DOCKER_BUILD_ARGS
       $CONTEXT
     - docker push ${IMAGE_NAME}:${CI_COMMIT_SHA}
+    - echo "docker push ${IMAGE_NAME}:${CI_COMMIT_SHA}"
     - docker push ${IMAGE_NAME}:${TAG}
+    - echo "docker push ${IMAGE_NAME}:${TAG}"
