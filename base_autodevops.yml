@@ -126,6 +126,8 @@ variables:
   rules:
     - <<: *rule_to_release
       when: never
+    - if: $AUTO_DEVOPS_QUALITY_CHECK_DISABLED
+      when: never
     - when: always
   # rules:
   #   - <<: *autodevops_trigger_rule
@@ -152,6 +154,8 @@ variables:
   stage: Quality check
   rules:
     - <<: *rule_to_release
+      when: never
+    - if: $AUTO_DEVOPS_QUALITY_CHECK_DISABLED
       when: never
     - when: always
   #   - <<: *autodevops_trigger_rule
@@ -284,9 +288,10 @@ Tag:
 ##############################
 
 .autodevops_preprod:
-  extends:
-    - .deploy_stage
-    - .autodevops_review
+  # extends:
+  #   - .deploy_stage
+  #   - .autodevops_review
+  stage: Deploy
   needs:
     - job: Register
     - job: Tag
@@ -304,6 +309,11 @@ Tag:
     name: preprod${AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME}
     # on_stop: Stop preprod
     url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
+  script:
+    - echo CI_COMMIT_TAG $CI_COMMIT_TAG
+    - printenv | grep
+      -e "^CI_COMMIT_"
+      -e "^AUTO_DEVOPS_"
 
 Preprod:
   extends: .autodevops_preprod
@@ -311,8 +321,6 @@ Preprod:
     - <<: *rule_on_release
       when: always
     - when: never
-  before_script:
-    - echo CI_COMMIT_TAG $CI_COMMIT_TAG
 
 # ##############################
 # # Trigger Release

@@ -5,9 +5,9 @@ variables:
   KOSKO_GENERATE_ARGS: ""
 
 .base_deploy_kosko_stage:
-  stage: Deploy
+  # stage: Deploy
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/kosko:2.0.0
-  dependencies: []
+  # dependencies: []
   cache:
     key:
       files:
