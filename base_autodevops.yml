@@ -332,7 +332,7 @@ Preprod:
 .autodevops_trigger_release:
   extends:
     - .base_trigger_release_stage
-    - .autodevops_base_rules
+    # - .autodevops_base_rules
   stage: Actions
   rules:
     - <<: *rule_on_feature_branch
