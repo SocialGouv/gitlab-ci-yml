@@ -111,7 +111,7 @@ Cache setup:
   extends:
     - .base_yarn_script
   needs:
-    - job: Install
+    - job: Cache setup
       artifacts: true
   script:
     - yarn lint
@@ -133,7 +133,7 @@ Cache setup:
   extends:
     - .base_yarn_script
   needs:
-    - job: Install
+    - job: Cache setup
       artifacts: true
   script:
     - yarn test
@@ -147,7 +147,7 @@ Cache setup:
   extends:
     - .base_yarn_build_next
   dependencies:
-    - Install
+    - Cache setup
     - Lint
     - Test
   rules:
