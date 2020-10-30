@@ -492,7 +492,7 @@ Stop preprod:
   #   - .base_notify_fail_stage
   #   - .notify
   rules:
-    - <<: *rule_on_release
+    - <<: *rule_before_release
       when: never
     - when: on_failure
   script:
@@ -515,7 +515,7 @@ Notify fail:
   #   - .base_notify_success_stage
   #   - .notify
   rules:
-    - <<: *rule_on_release
+    - <<: *rule_before_release
       when: never
     - when: on_success
   script:
