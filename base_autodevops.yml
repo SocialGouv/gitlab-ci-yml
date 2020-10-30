@@ -240,7 +240,6 @@ Register release:
   stage: Notify start
   extends:
     - .base_notify_pending_stage
-  stage: Deploy
   rules:
     - <<: *rule_before_release
       when: never
