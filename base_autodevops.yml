@@ -36,7 +36,7 @@ stages:
   - Release
   - Notify deployment start
   - Deploy
-  - Notify deployment end
+  - Toto
   - Actions
 
 #
@@ -491,7 +491,7 @@ Stop preprod:
 ##############################
 
 .autodevops_notify_fail:
-  stage: Notify deployment end
+  stage: Toto
   extends:
     - .base_notify_fail_stage
     - .notify
@@ -512,7 +512,7 @@ Notify fail:
 ##############################
 
 .autodevops_notify_success:
-  stage: Notify deployment end
+  stage: Toto
   extends:
     - .base_notify_success_stage
     - .notify
