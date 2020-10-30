@@ -49,9 +49,10 @@ variables:
   # To activate the auto release
   # AUTO_DEVOPS_RELEASE_AUTO: "🔖"
   # AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
-  # To disable some quality check
-  # AUTO_DEVOPS_QUALITY_DISABLED: "🛑"
+  # To disable quality check jobs
+  # AUTO_DEVOPS_QUALITY_CHECK_DISABLED: "🛑"
   # AUTO_DEVOPS_TEST_DISABLED: "🛑"
+  # AUTO_DEVOPS_LINT_DISABLED: "🛑"
 
 #
 #
@@ -74,47 +75,20 @@ variables:
   if: $CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE =~ /^chore\(release\)/
 .rule_on_release: &rule_on_feature_branch
   if: $CI_COMMIT_BRANCH != 'alpha'
-# .autodevops_base_rules:
-#   rules:
-#     - &autodevops_global_skip_case
-#       <<: *autodevops_trigger_rule
-#       when: never
-#     - <<: *autodevops_master_trigger_rule
-#       when: never
-#     - when: on_success
-
-# .get_commit_tag:
-#   extends:
-#     - .base_yarn_script
-#   script:
-#     - echo .get_commit_tag
-#     - export CI_COMMIT_TAG=$(node -p "require('./package.json').version")
-#     - echo "CI_COMMIT_TAG=$(node -p "require('./package.json').version")" >> toto.env
-#     - echo CI_COMMIT_TAG $CI_COMMIT_TAG
-#   artifacts:
-#     reports:
-#       dotenv: build.env
 
 ##############################
 # Install
 ##############################
 
-# Preinstall:
-#   stage: Install
-#   script:
-#     - echo CI_COMMIT_BRANCH $CI_COMMIT_BRANCH
-#     - echo AUTO_DEVOPS_RELEASE_AUTO $AUTO_DEVOPS_RELEASE_AUTO
-#     - echo CI_COMMIT_MESSAGE $CI_COMMIT_MESSAGE
-#     - echo PRODUCTION $PRODUCTION
-#     - echo RELEASE $RELEASE
-#     - echo CI_PIPELINE_SOURCE $CI_PIPELINE_SOURCE
-#     - echo CI_COMMIT_TAG $CI_COMMIT_TAG
-
 .autodevops_install:
+  stage: Install
   extends:
     - .base_yarn
-    # - .autodevops_base_rules
   interruptible: true
+
+Cache setup:
+  extends:
+    - .autodevops_install
   rules:
     - <<: *rule_before_release
       when: never
@@ -131,18 +105,11 @@ variables:
       when: never
     - if: $AUTO_DEVOPS_QUALITY_CHECK_DISABLED
       when: never
+    - if: $AUTO_DEVOPS_LINT_DISABLED
+      when: never
     - when: always
-  # rules:
-  #   - <<: *autodevops_trigger_rule
-  #     when: never
-  #   - <<: *autodevops_master_trigger_rule
-  #     when: never
-  #   - if: "$AUTO_DEVOPS_QUALITY_DISABLED"
-  #     when: never
-  #   - when: always
   extends:
     - .base_yarn_script
-    # - .autodevops_base_rules
   needs:
     - job: Install
       artifacts: true
@@ -160,17 +127,11 @@ variables:
       when: never
     - if: $AUTO_DEVOPS_QUALITY_CHECK_DISABLED
       when: never
+    - if: "$AUTO_DEVOPS_TEST_DISABLED"
+      when: never
     - when: always
-  #   - <<: *autodevops_trigger_rule
-  #     when: never
-  #   - <<: *autodevops_master_trigger_rule
-  #     when: never
-  #   - if: "$AUTO_DEVOPS_TEST_DISABLED"
-  #     when: never
-  #   - when: always
   extends:
     - .base_yarn_script
-    # - .autodevops_base_rules
   needs:
     - job: Install
       artifacts: true
@@ -185,7 +146,6 @@ variables:
   stage: Build
   extends:
     - .base_yarn_build_next
-    # - .autodevops_base_rules
   dependencies:
     - Install
     - Lint
@@ -199,20 +159,24 @@ variables:
 # Tag
 ##############################
 
-Tag:
+.autodevops_get_tag:
   stage: Build
   extends:
     - .base_yarn_script
   script:
     - echo "CI_COMMIT_TAG=v$(node -p "require('./package.json').version")" >> build.env
     - cat build.env
+  artifacts:
+    reports:
+      dotenv: build.env
+
+Get tag:
+  extends:
+    - .autodevops_get_tag
   rules:
     - <<: *rule_on_release
       when: always
     - when: never
-  artifacts:
-    reports:
-      dotenv: build.env
 
 ##############################
 # Register
@@ -222,18 +186,16 @@ Tag:
   stage: Register
   extends:
     - .base_register_stage
-    # - .autodevops_base_rules
-  # needs:
-  #   - job: Build
-  #     artifacts: true
-  #   - job: Tag
-  #     artifacts: true
-  # dependencies:
-  #   - Build
-  #   - Tag
   variables:
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE
+  rules:
+    - <<: *rule_before_release
+      when: never
+
+##############################
+# Register Feature Branch
+##############################
 
 Register app:
   extends: .autodevops_register_image
@@ -249,12 +211,16 @@ Register app:
       when: always
     - when: never
 
+##############################
+# Register Release
+##############################
+
 Register release:
   extends: .autodevops_register_image
   needs:
     - job: Build
       artifacts: true
-    - job: Tag
+    - job: Get tag
       artifacts: true
   variables:
     DOCKER_BUILD_ARGS: >-
@@ -323,7 +289,7 @@ Review:
   stage: Deploy
   needs:
     - job: Register release
-    - job: Tag
+    - job: Get tag
       artifacts: true
   # rules:
   # - if: "$PRODUCTION || $RELEASE"

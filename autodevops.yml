@@ -5,9 +5,9 @@ include:
 
 #
 
-Install:
-  extends:
-    - .autodevops_install
+# Install:
+#   extends:
+#     - .autodevops_install
 Lint:
   extends:
     - .autodevops_lint
