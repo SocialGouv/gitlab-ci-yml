@@ -6,13 +6,13 @@
 #
 .notify_stage: &notify_stage
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/git-deploy:2.0.0
-  allow_failure: true
-  stage: .post
-  dependencies: []
-  rules:
-    - if: "$AUTO_DEVOPS_NOTIFY_DISABLED"
-      when: never
-    - when: always
+  # allow_failure: true
+  # stage: .post
+  # dependencies: []
+  # rules:
+  #   - if: "$AUTO_DEVOPS_NOTIFY_DISABLED"
+  #     when: never
+  #   - when: always
 
 .base_notify_pending_stage:
   extends:

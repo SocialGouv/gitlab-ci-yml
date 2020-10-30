@@ -34,6 +34,7 @@ stages:
   - Build
   - Register
   - Release
+  - Notify start
   - Deploy
   - Actions
 
@@ -107,7 +108,7 @@ Cache setup:
       when: never
     - if: $AUTO_DEVOPS_LINT_DISABLED
       when: never
-    - when: always
+    - when: on_success
   extends:
     - .base_yarn_script
   needs:
@@ -129,7 +130,7 @@ Cache setup:
       when: never
     - if: "$AUTO_DEVOPS_TEST_DISABLED"
       when: never
-    - when: always
+    - when: on_success
   extends:
     - .base_yarn_script
   needs:
@@ -153,7 +154,7 @@ Cache setup:
   rules:
     - <<: *rule_before_release
       when: never
-    - when: always
+    - when: on_success
 
 ##############################
 # Tag
@@ -175,7 +176,7 @@ Get tag:
     - .autodevops_get_tag
   rules:
     - <<: *rule_on_release
-      when: always
+      when: on_success
     - when: never
 
 ##############################
@@ -208,7 +209,7 @@ Register app:
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
   rules:
     - <<: *rule_on_feature_branch
-      when: always
+      when: on_success
     - when: never
 
 ##############################
@@ -228,26 +229,37 @@ Register release:
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
   rules:
     - <<: *rule_on_release
-      when: always
+      when: on_success
     - when: never
+
+##############################
+# Notify Init
+##############################
+
+.autodevops_notify_starting_deployment:
+  stage: Notify start
+  extends:
+    - .base_notify_pending_stage
+  stage: Deploy
+  rules:
+    - <<: *rule_before_release
+      when: never
+    - when: on_success
+  # rules:
+  #   - if: $RELEASE
+  #     when: never
+  #   - when: on_success
+
+Notify Starting Deployment:
+  extends: .autodevops_notify_starting_deployment
 
 ##############################
 # Deploy
 ##############################
 
-.autodevops_notify_starting_deployment:
-  extends:
-    - .base_notify_pending_stage
-  stage: Deploy
-  rules:
-    - if: $RELEASE
-      when: never
-    - when: on_success
-
 .deploy_stage:
   stage: Deploy
   extends:
-    - .autodevops_notify_starting_deployment
     - .base_deploy_kosko_stage
   cache:
     key: deploy-${CI_COMMIT_REF_SLUG}
@@ -285,7 +297,7 @@ Deploy review:
   extends: .autodevops_review
   rules:
     - <<: *rule_on_feature_branch
-      when: always
+      when: on_success
     - when: never
 
 ##############################
@@ -319,7 +331,7 @@ Deploy preprod:
   extends: .autodevops_preprod
   rules:
     - <<: *rule_on_release
-      when: always
+      when: on_success
     - when: never
 
 # ##############################
@@ -426,7 +438,7 @@ Stop review:
   extends: .autodevops_stop_review
   rules:
     - <<: *rule_on_feature_branch
-      when: always
+      when: on_success
     - when: never
 
 ##############################
@@ -451,22 +463,6 @@ Stop review:
 
 Stop preprod:
   extends: .autodevops_stop_preprod
-
-# ##############################
-# # Notify Init
-# ##############################
-
-# .autodevops_notify_starting_deployment:
-#   extends:
-#     - .base_notify_pending_stage
-#   stage: Deploy
-#   rules:
-#     - if: $RELEASE
-#       when: never
-#     - when: on_success
-
-# Notify Starting Deployment:
-#   extends: .autodevops_notify_starting_deployment
 
 # ##############################
 # # Notify
