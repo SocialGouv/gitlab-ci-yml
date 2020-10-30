@@ -34,7 +34,6 @@ stages:
   - Build
   - Register
   - Release
-  - Notify deployment start
   - Deploy
   - Notify deployment end
   - Actions
@@ -199,7 +198,7 @@ Get tag:
   rules:
     - <<: *rule_before_release
       when: never
-    - when: on_success
+    # - when: on_success
 
 ##############################
 # Register Feature Branch
@@ -244,7 +243,7 @@ Register release:
 ##############################
 
 .autodevops_notify_starting_deployment:
-  stage: Notify deployment start
+  stage: Deploy
   extends:
     - .base_notify_pending_stage
   allow_failure: true
