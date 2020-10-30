@@ -78,6 +78,11 @@ variables:
 .rule_on_release: &rule_on_feature_branch
   if: $CI_COMMIT_BRANCH != 'alpha'
 
+Titi:
+  stage: Toto
+  script:
+    - echo pouet
+
 ##############################
 # Install
 ##############################
