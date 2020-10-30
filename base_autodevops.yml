@@ -235,9 +235,19 @@ Register release:
 # Deploy
 ##############################
 
+.autodevops_notify_starting_deployment:
+  extends:
+    - .base_notify_pending_stage
+  stage: Deploy
+  rules:
+    - if: $RELEASE
+      when: never
+    - when: on_success
+
 .deploy_stage:
   stage: Deploy
   extends:
+    - .autodevops_notify_starting_deployment
     - .base_deploy_kosko_stage
   cache:
     key: deploy-${CI_COMMIT_REF_SLUG}
@@ -271,7 +281,7 @@ Register release:
     on_stop: Stop review
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
-Review:
+Deploy review:
   extends: .autodevops_review
   rules:
     - <<: *rule_on_feature_branch
@@ -305,7 +315,7 @@ Review:
     on_stop: Stop preprod
     url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
-Preprod:
+Deploy preprod:
   extends: .autodevops_preprod
   rules:
     - <<: *rule_on_release
@@ -443,7 +453,7 @@ Stop preprod:
   extends: .autodevops_stop_preprod
 
 # ##############################
-# # Notify Github
+# # Notify Init
 # ##############################
 
 # .autodevops_notify_starting_deployment:
