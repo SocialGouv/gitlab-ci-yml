@@ -35,8 +35,6 @@ stages:
   - Register
   - Release
   - Deploy
-  - Notify deployment end
-  - Actions
 
 #
 
@@ -76,11 +74,6 @@ variables:
   if: $CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE =~ /^chore\(release\)/
 .rule_on_release: &rule_on_feature_branch
   if: $CI_COMMIT_BRANCH != 'alpha'
-
-Titi:
-  stage: Notify deployment end
-  script:
-    - echo pouet
 
 ##############################
 # Install
@@ -198,7 +191,7 @@ Get tag:
   rules:
     - <<: *rule_before_release
       when: never
-    # - when: on_success
+    - when: on_success
 
 ##############################
 # Register Feature Branch
@@ -348,7 +341,7 @@ Deploy preprod:
 #   extends:
 #     - .base_trigger_release_stage
 #     # - .autodevops_base_rules
-#   stage: Actions
+#   stage: .post
 #   rules:
 #     - <<: *rule_on_feature_branch
 #       when: always
@@ -375,8 +368,7 @@ Deploy preprod:
 ##############################
 
 .autodevops_trigger_production:
-  # stage: .post
-  stage: Actions
+  stage: .post
   rules:
     - <<: *rule_on_release
       when: manual
@@ -421,8 +413,7 @@ Ship to prod:
 .autodevops_stop_review:
   extends:
     - .base_docker_kubectl_image_stage
-  stage: Actions
-  # stage: .post
+  stage: .post
   # rules:
   #   - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
   #     when: never
@@ -496,7 +487,7 @@ Stop preprod:
 ##############################
 
 .autodevops_notify_fail:
-  stage: Notify deployment end
+  stage: .post
   extends:
     - .base_notify_fail_stage
     - .notify
@@ -517,7 +508,7 @@ Notify fail:
 ##############################
 
 .autodevops_notify_success:
-  stage: Notify deployment end
+  stage: .post
   extends:
     - .base_notify_success_stage
     - .notify
