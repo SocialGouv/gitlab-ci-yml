@@ -470,7 +470,6 @@ Stop preprod:
 ##############################
 
 .notify:
-  stage: Notify deployment end
   dependencies:
     - Notify Start
   allow_failure: true
@@ -496,6 +495,7 @@ Stop preprod:
 ##############################
 
 .autodevops_notify_fail:
+  stage: Notify deployment end
   extends:
     - .base_notify_fail_stage
     - .notify
@@ -512,6 +512,7 @@ Notify fail:
 ##############################
 
 .autodevops_notify_success:
+  stage: Notify deployment end
   extends:
     - .base_notify_success_stage
     - .notify
