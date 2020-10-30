@@ -309,7 +309,7 @@ Deploy review:
   extends:
     #   - .deploy_stage
     - .autodevops_review
-  stage: Deploy
+  # stage: Deploy
   needs:
     - job: Register release
     - job: Get tag
