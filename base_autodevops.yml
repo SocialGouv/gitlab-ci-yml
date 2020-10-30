@@ -488,9 +488,9 @@ Stop preprod:
 
 .autodevops_notify_fail:
   stage: .post
-  extends:
-    - .base_notify_fail_stage
-    - .notify
+  # extends:
+  #   - .base_notify_fail_stage
+  #   - .notify
   rules:
     - <<: *rule_on_release
       when: never
@@ -509,9 +509,9 @@ Notify fail:
 
 .autodevops_notify_success:
   stage: .post
-  extends:
-    - .base_notify_success_stage
-    - .notify
+  # extends:
+  #   - .base_notify_success_stage
+  #   - .notify
   rules:
     - <<: *rule_on_release
       when: never
