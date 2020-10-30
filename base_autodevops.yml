@@ -496,7 +496,7 @@ Stop preprod:
       when: never
     - when: on_failure
   script:
-    - echo pouet
+    - echo pouet fail
   # rules:
   #   - if: "$RELEASE"
   #     when: never
@@ -518,6 +518,8 @@ Notify fail:
     - <<: *rule_on_release
       when: never
     - when: on_success
+  script:
+    - echo pouet success
   # rules:
   #   - if: "$RELEASE"
   #     when: never
