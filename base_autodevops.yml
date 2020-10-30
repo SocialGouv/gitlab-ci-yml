@@ -34,8 +34,9 @@ stages:
   - Build
   - Register
   - Release
-  - Notify start
+  - Notify deployment start
   - Deploy
+  - Notify deployment end
   - Actions
 
 #
@@ -233,13 +234,14 @@ Register release:
     - when: never
 
 ##############################
-# Notify Init
+# Notify Deployment Start
 ##############################
 
 .autodevops_notify_starting_deployment:
-  stage: Notify start
+  stage: Notify deployment start
   extends:
     - .base_notify_pending_stage
+  allow_failure: true
   rules:
     - <<: *rule_before_release
       when: never
@@ -249,7 +251,7 @@ Register release:
   #     when: never
   #   - when: on_success
 
-Notify Starting Deployment:
+Notify Start:
   extends: .autodevops_notify_starting_deployment
 
 ##############################
@@ -463,58 +465,63 @@ Stop review:
 Stop preprod:
   extends: .autodevops_stop_preprod
 
-# ##############################
-# # Notify
-# ##############################
+##############################
+# Notify
+##############################
 
-# .notify:
-#   stage: .post
-#   dependencies:
-#     - Notify Starting Deployment
-#   cache:
-#     key: deploy-${CI_COMMIT_REF_SLUG}
-#     paths:
-#       - ${CI_PROJECT_DIR}/dotenv.env
-#     policy: pull
-#   before_script:
-#     - |
-#       set -x
+.notify:
+  stage: Notify deployment end
+  dependencies:
+    - Notify Start
+  allow_failure: true
+  cache:
+    key: deploy-${CI_COMMIT_REF_SLUG}
+    paths:
+      - ${CI_PROJECT_DIR}/dotenv.env
+    policy: pull
+  rules:
+    - <<: *rule_on_release
+      when: never
+    # - when: on_success
+  before_script:
+    - |
+      set -x
 
-#       . dotenv.env
+      . dotenv.env
 
-#       export HOST=$CI_ENVIRONMENT_URL
+      export HOST=$CI_ENVIRONMENT_URL
 
-# ##############################
-# # Notify Fail
-# ##############################
+##############################
+# Notify Fail
+##############################
 
-# .autodevops_notify_fail:
-#   extends:
-#     - .base_notify_fail_stage
-#     - .notify
-#   rules:
-#     - if: "$RELEASE"
-#       when: never
-#     - when: on_failure
+.autodevops_notify_fail:
+  extends:
+    - .base_notify_fail_stage
+    - .notify
+  # rules:
+  #   - if: "$RELEASE"
+  #     when: never
+  #   - when: on_failure
 
-# Notify Fail:
-#   extends: .autodevops_notify_fail
+Notify fail:
+  extends: .autodevops_notify_fail
 
-# ##############################
-# # Notify Success
-# ##############################
+##############################
+# Notify Success
+##############################
 
-# .autodevops_notify_success:
-#   extends:
-#     - .base_notify_success_stage
-#     - .notify
-#   rules:
-#     - if: "$RELEASE"
-#       when: never
-#     - when: on_success
+.autodevops_notify_success:
+  extends:
+    - .base_notify_success_stage
+    - .notify
+  # rules:
+  #   - if: "$RELEASE"
+  #     when: never
+  #   - when: on_success
 
-# Notify Success:
-#   extends: .autodevops_notify_success
+Notify success:
+  extends: .autodevops_notify_success
 
 ##############################
 # Release

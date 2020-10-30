@@ -41,7 +41,7 @@
 .base_notify_fail_stage:
   extends:
     - .notify_stage
-  allow_failure: true
+  # allow_failure: true
   rules:
     - when: on_failure
   script:
