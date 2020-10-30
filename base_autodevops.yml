@@ -478,10 +478,6 @@ Stop preprod:
     paths:
       - ${CI_PROJECT_DIR}/dotenv.env
     policy: pull
-  rules:
-    - <<: *rule_on_release
-      when: never
-    # - when: on_success
   before_script:
     - |
       set -x
@@ -499,6 +495,10 @@ Stop preprod:
   extends:
     - .base_notify_fail_stage
     - .notify
+  rules:
+    - <<: *rule_on_release
+      when: never
+    - when: on_failure
   # rules:
   #   - if: "$RELEASE"
   #     when: never
@@ -516,6 +516,10 @@ Notify fail:
   extends:
     - .base_notify_success_stage
     - .notify
+  rules:
+    - <<: *rule_on_release
+      when: never
+    - when: on_success
   # rules:
   #   - if: "$RELEASE"
   #     when: never
