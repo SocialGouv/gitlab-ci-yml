@@ -1,0 +1,29 @@
+#
+
+include:
+  - /base_autodevops_simple.yml
+
+#
+
+# Install:
+#   extends:
+#     - .autodevops_install
+Lint:
+  extends:
+    - .autodevops_lint
+Test:
+  extends:
+    - .autodevops_test
+Build:
+  extends:
+    - .autodevops_build
+# Register:
+#   extends:
+#     - .autodevops_register_image
+
+# Register:
+#   extends: .autodevops_register_image
+#   variables:
+#     DOCKER_BUILD_ARGS: >-
+#       --shm-size 512M
+#     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
