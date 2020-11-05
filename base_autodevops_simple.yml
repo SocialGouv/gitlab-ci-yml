@@ -224,8 +224,8 @@ Register release:
   needs:
     - job: Build
       artifacts: true
-    - job: Get tag
-      artifacts: true
+    # - job: Get tag
+    #   artifacts: true
   variables:
     DOCKER_BUILD_ARGS: >-
       --shm-size 512M
@@ -314,8 +314,8 @@ Deploy review:
   # stage: Deploy
   needs:
     - job: Register release
-    - job: Get tag
-      artifacts: true
+    # - job: Get tag
+    #   artifacts: true
   # rules:
   # - if: "$PRODUCTION || $RELEASE"
   #   when: never
