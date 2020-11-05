@@ -511,15 +511,15 @@ Notify fail:
 
 .autodevops_notify_success:
   stage: .post
-  # extends:
-  #   - .base_notify_success_stage
-  #   - .notify
+  extends:
+    - .base_notify_success_stage
+    - .notify
   rules:
     - <<: *rule_before_release
       when: never
     - when: on_success
-  script:
-    - echo pouet success
+  # script:
+  #   - echo pouet success
   # rules:
   #   - if: "$RELEASE"
   #     when: never
