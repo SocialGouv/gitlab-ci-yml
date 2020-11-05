@@ -435,7 +435,7 @@ Stop review:
   extends: .autodevops_stop_review
   rules:
     - <<: *rule_on_feature_branch
-      when: on_success
+      when: manual
     - when: never
 
 ##############################
