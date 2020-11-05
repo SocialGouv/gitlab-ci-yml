@@ -232,6 +232,24 @@ Register release:
     - when: never
 
 ##############################
+# Create Database
+##############################
+
+Create database:
+  stage: Register
+  extends:
+    - .base_create_azure_db
+
+##############################
+# Create Namespace
+##############################
+
+Create namespace:
+  stage: Register
+  extends:
+    - .base_create_namespace_stage
+
+##############################
 # Notify Deployment Start
 ##############################
 
