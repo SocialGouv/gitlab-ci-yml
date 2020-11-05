@@ -488,15 +488,15 @@ Stop preprod:
 
 .autodevops_notify_fail:
   stage: .post
-  # extends:
-  #   - .base_notify_fail_stage
-  #   - .notify
+  extends:
+    - .base_notify_fail_stage
+    - .notify
   rules:
     - <<: *rule_before_release
       when: never
     - when: on_failure
-  script:
-    - echo pouet fail
+  # script:
+  #   - echo pouet fail
   # rules:
   #   - if: "$RELEASE"
   #     when: never
