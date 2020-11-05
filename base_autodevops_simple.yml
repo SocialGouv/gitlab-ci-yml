@@ -237,8 +237,8 @@ Register release:
 
 Create database:
   stage: Register
-  extends:
-    - .base_create_azure_db
+  # extends:
+  #   - .base_create_azure_db
   script:
     - echo "CREATE DATABASE"
 
