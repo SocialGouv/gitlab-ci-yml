@@ -32,7 +32,7 @@ stages:
   - Install
   - Quality check
   - Build
-  - Register
+  - Registration
   - Release
   - Deploy
 
@@ -182,7 +182,7 @@ Get tag:
 ##############################
 
 .autodevops_register_image:
-  stage: Register
+  stage: Registration
   extends:
     - .base_register_stage
   variables:
@@ -230,37 +230,6 @@ Register release:
     - <<: *rule_on_release
       when: on_success
     - when: never
-
-##############################
-# Create Database
-##############################
-
-Create database:
-  stage: Register
-  extends:
-    - .base_create_azure_db
-
-##############################
-# Create Database
-##############################
-
-Create database2:
-  stage: Register
-  # extends:
-  #   - .base_create_azure_db
-  script:
-    - echo "CREATE DATABASE"
-
-##############################
-# Create Namespace
-##############################
-
-Create namespace:
-  stage: Register
-  extends:
-    - .base_create_namespace_stage
-  script:
-    - echo "CREATE NAMESPACE"
 
 ##############################
 # Notify Deployment Start
