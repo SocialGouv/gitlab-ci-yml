@@ -78,6 +78,8 @@ variables:
   if: $CI_COMMIT_TAG && $AUTO_DEVOPS_RELEASE_AUTO && $PRODUCTION == null
 .rule_on_release: &rule_on_feature_branch
   if: $CI_COMMIT_BRANCH != 'master' && $CI_COMMIT_TAG == null
+.rule_on_production: &rule_on_production
+  if: "$PRODUCTION && $CI_COMMIT_TAG"
 
 ##############################
 # Install
@@ -95,6 +97,8 @@ Cache setup:
   rules:
     - <<: *rule_before_release
       when: never
+    - <<: *rule_on_production
+      when: never
     - when: always
 
 ##############################
@@ -105,6 +109,8 @@ Cache setup:
   stage: Quality check
   rules:
     - <<: *rule_before_release
+      when: never
+    - <<: *rule_on_production
       when: never
     - if: $AUTO_DEVOPS_QUALITY_CHECK_DISABLED
       when: never
@@ -127,6 +133,8 @@ Cache setup:
   stage: Quality check
   rules:
     - <<: *rule_before_release
+      when: never
+    - <<: *rule_on_production
       when: never
     - if: $AUTO_DEVOPS_QUALITY_CHECK_DISABLED
       when: never
@@ -155,6 +163,8 @@ Cache setup:
     - Test
   rules:
     - <<: *rule_before_release
+      when: never
+    - <<: *rule_on_production
       when: never
     - when: on_success
 
@@ -397,9 +407,8 @@ Ship to prod:
   extends:
     - .deploy_stage
   rules:
-    # - <<: *autodevops_production_rule
-    - if: $PRODUCTION && $CI_COMMIT_TAG
-      when: on_success
+    - <<: *rule_on_production
+      when: always
     - when: never
   variables:
     KOSKO_APPEND_YAML_FROM: .k8s/environments/prod/manifests
