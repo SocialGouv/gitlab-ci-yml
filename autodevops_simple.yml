@@ -4,26 +4,92 @@ include:
   - /base_autodevops_simple.yml
 
 #
+Cache setup:
+  extends:
+    - .autodevops_install
+  rules:
+    - <<: *rule_before_release
+      when: never
+    - <<: *rule_on_production
+      when: never
+    - when: always
 
-# Install:
-#   extends:
-#     - .autodevops_install
 Lint:
   extends:
     - .autodevops_lint
+  rules:
+    - <<: *rule_before_release
+      when: never
+    - <<: *rule_on_production
+      when: never
+    - if: $AUTO_DEVOPS_QUALITY_CHECK_DISABLED
+      when: never
+    - if: $AUTO_DEVOPS_LINT_DISABLED
+      when: never
+    - when: on_success
+
 Test:
   extends:
     - .autodevops_test
+  rules:
+    - <<: *rule_before_release
+      when: never
+    - <<: *rule_on_production
+      when: never
+    - if: $AUTO_DEVOPS_QUALITY_CHECK_DISABLED
+      when: never
+    - if: "$AUTO_DEVOPS_TEST_DISABLED"
+      when: never
+    - when: on_success
+
 Build:
   extends:
     - .autodevops_build
-# Register:
-#   extends:
-#     - .autodevops_register_image
+  rules:
+    - <<: *rule_before_release
+      when: never
+    - <<: *rule_on_production
+      when: never
+    - when: on_success
 
-# Register:
-#   extends: .autodevops_register_image
-#   variables:
-#     DOCKER_BUILD_ARGS: >-
-#       --shm-size 512M
-#     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+Register app:
+  extends: .autodevops_register_image
+  rules:
+    - <<: *rule_on_feature_branch
+      when: on_success
+    - when: never
+
+Register release:
+  extends: .autodevops_register_image
+  rules:
+    - <<: *rule_on_release
+      when: on_success
+    - when: never
+
+Deploy review:
+  extends: .autodevops_review
+  rules:
+    - <<: *rule_on_feature_branch
+      when: on_success
+    - when: never
+
+Deploy preprod:
+  extends: .autodevops_preprod
+  rules:
+    - <<: *rule_on_release
+      when: on_success
+    - when: never
+
+Deploy prod:
+  extends: .autodevops_production
+  rules:
+    - <<: *rule_on_production
+      when: always
+    - when: never
+
+Release:
+  extends: .autodevops_release
+  rules:
+    - <<: *rule_before_release
+      when: always
+    - when: never

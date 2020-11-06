@@ -21,8 +21,7 @@ workflow:
     # Skip GitHub pull requests pipelines
     - if: "$CI_PIPELINE_SOURCE == 'external_pull_request_event'"
       when: never
-    # - if: "$CI_COMMIT_TAG"
-    #   when: never
+    # Skip release commits
     - if: $CI_COMMIT_MESSAGE =~ /^chore\(release\)/ && $CI_COMMIT_TAG == null
       when: never
     # Otherwise include the job and set to run normally
@@ -56,25 +55,10 @@ variables:
   # AUTO_DEVOPS_LINT_DISABLED: "🛑"
 
 #
-#
-#
-
-# .production_rule: &autodevops_production_rule
-#   if: "$PRODUCTION && $CI_COMMIT_TAG"
-# .trigger_rule: &autodevops_trigger_rule
-#   if: "$PRODUCTION || $RELEASE"
-# .release_trigger_rule: &autodevops_on_feature_branch
-#   if: '$CI_COMMIT_BRANCH != "master" && $CI_COMMIT_BRANCH != "alpha" && $CI_COMMIT_BRANCH != "beta"'
-# .release_trigger_rule2: &autodevops_on_release
-#   if: '$CI_COMMIT_BRANCH == "master" && $CI_COMMIT_MESSAGE =~ /^chore(release): version/'
-# .master_trigger_rule: &autodevops_master_trigger_rule
-#   if: "$CI_COMMIT_BRANCH == 'alpha' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE !~ /chore(release)/"
 
 .rule_before_release: &rule_before_release
-  # if: $CI_COMMIT_BRANCH == 'master' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE !~ /^chore\(release\)/
   if: $CI_COMMIT_BRANCH == 'master' && $AUTO_DEVOPS_RELEASE_AUTO
 .rule_on_release: &rule_on_release
-  # if: $CI_COMMIT_BRANCH == 'master' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE =~ /^chore\(release\)/
   if: $CI_COMMIT_TAG && $AUTO_DEVOPS_RELEASE_AUTO && $PRODUCTION == null
 .rule_on_release: &rule_on_feature_branch
   if: $CI_COMMIT_BRANCH != 'master' && $CI_COMMIT_TAG == null
@@ -91,15 +75,15 @@ variables:
     - .base_yarn
   interruptible: true
 
-Cache setup:
-  extends:
-    - .autodevops_install
-  rules:
-    - <<: *rule_before_release
-      when: never
-    - <<: *rule_on_production
-      when: never
-    - when: always
+# Cache setup:
+#   extends:
+#     - .autodevops_install
+#   rules:
+#     - <<: *rule_before_release
+#       when: never
+#     - <<: *rule_on_production
+#       when: never
+#     - when: always
 
 ##############################
 # Lint
@@ -107,16 +91,16 @@ Cache setup:
 
 .autodevops_lint:
   stage: Quality check
-  rules:
-    - <<: *rule_before_release
-      when: never
-    - <<: *rule_on_production
-      when: never
-    - if: $AUTO_DEVOPS_QUALITY_CHECK_DISABLED
-      when: never
-    - if: $AUTO_DEVOPS_LINT_DISABLED
-      when: never
-    - when: on_success
+  # rules:
+  #   - <<: *rule_before_release
+  #     when: never
+  #   - <<: *rule_on_production
+  #     when: never
+  #   - if: $AUTO_DEVOPS_QUALITY_CHECK_DISABLED
+  #     when: never
+  #   - if: $AUTO_DEVOPS_LINT_DISABLED
+  #     when: never
+  #   - when: on_success
   extends:
     - .base_yarn_script
   needs:
@@ -131,16 +115,16 @@ Cache setup:
 
 .autodevops_test:
   stage: Quality check
-  rules:
-    - <<: *rule_before_release
-      when: never
-    - <<: *rule_on_production
-      when: never
-    - if: $AUTO_DEVOPS_QUALITY_CHECK_DISABLED
-      when: never
-    - if: "$AUTO_DEVOPS_TEST_DISABLED"
-      when: never
-    - when: on_success
+  # rules:
+  #   - <<: *rule_before_release
+  #     when: never
+  #   - <<: *rule_on_production
+  #     when: never
+  #   - if: $AUTO_DEVOPS_QUALITY_CHECK_DISABLED
+  #     when: never
+  #   - if: "$AUTO_DEVOPS_TEST_DISABLED"
+  #     when: never
+  #   - when: on_success
   extends:
     - .base_yarn_script
   needs:
@@ -161,35 +145,12 @@ Cache setup:
     - Cache setup
     - Lint
     - Test
-  rules:
-    - <<: *rule_before_release
-      when: never
-    - <<: *rule_on_production
-      when: never
-    - when: on_success
-
-# ##############################
-# # Tag
-# ##############################
-
-# .autodevops_get_tag:
-#   stage: Build
-#   extends:
-#     - .base_yarn_script
-#   script:
-#     - echo "CI_COMMIT_TAG=v$(node -p "require('./package.json').version")" >> build.env
-#     - cat build.env
-#   artifacts:
-#     reports:
-#       dotenv: build.env
-
-# Get tag:
-#   extends:
-#     - .autodevops_get_tag
-#   rules:
-#     - <<: *rule_on_release
-#       when: on_success
-#     - when: never
+  # rules:
+  #   - <<: *rule_before_release
+  #     when: never
+  #   - <<: *rule_on_production
+  #     when: never
+  #   - when: on_success
 
 ##############################
 # Register
@@ -199,51 +160,55 @@ Cache setup:
   stage: Registration
   extends:
     - .base_register_stage
+  needs:
+    - job: Build
+      artifacts: true
   variables:
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE
-  rules:
-    - <<: *rule_before_release
-      when: never
-    - when: on_success
+    DOCKER_BUILD_ARGS: >-
+      --shm-size 512M
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+  # rules:
+    # - <<: *rule_before_release
+    #   when: never
+    # - when: on_success
 
 ##############################
 # Register Feature Branch
 ##############################
 
-Register app:
-  extends: .autodevops_register_image
-  needs:
-    - job: Build
-      artifacts: true
-  variables:
-    DOCKER_BUILD_ARGS: >-
-      --shm-size 512M
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
-  rules:
-    - <<: *rule_on_feature_branch
-      when: on_success
-    - when: never
+# Register app:
+#   extends: .autodevops_register_image
+#   needs:
+#     - job: Build
+#       artifacts: true
+#   variables:
+#     DOCKER_BUILD_ARGS: >-
+#       --shm-size 512M
+#     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+#   rules:
+#     - <<: *rule_on_feature_branch
+#       when: on_success
+#     - when: never
 
 ##############################
 # Register Release
 ##############################
 
-Register release:
-  extends: .autodevops_register_image
-  needs:
-    - job: Build
-      artifacts: true
-    # - job: Get tag
-    #   artifacts: true
-  variables:
-    DOCKER_BUILD_ARGS: >-
-      --shm-size 512M
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
-  rules:
-    - <<: *rule_on_release
-      when: on_success
-    - when: never
+# Register release:
+#   extends: .autodevops_register_image
+#   needs:
+#     - job: Build
+#       artifacts: true
+#   variables:
+#     DOCKER_BUILD_ARGS: >-
+#       --shm-size 512M
+#     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+#   rules:
+#     - <<: *rule_on_release
+#       when: on_success
+#     - when: never
 
 ##############################
 # Notify Deployment Start
@@ -258,10 +223,6 @@ Register release:
     - <<: *rule_before_release
       when: never
     - when: on_success
-  # rules:
-  #   - if: $RELEASE
-  #     when: never
-  #   - when: on_success
 
 Notify Start:
   extends: .autodevops_notify_starting_deployment
@@ -290,12 +251,6 @@ Notify Start:
 .autodevops_review:
   extends:
     - .deploy_stage
-  # rules:
-  #   - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
-  #     when: never
-  #   - <<: *autodevops_master_trigger_rule
-  #     when: never
-  #   - when: on_success
   variables:
     KOSKO_APPEND_YAML_FROM: .k8s/environments/dev/manifests
     KOSKO_GENERATE_ARGS: >-
@@ -306,12 +261,12 @@ Notify Start:
     on_stop: Stop review
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
-Deploy review:
-  extends: .autodevops_review
-  rules:
-    - <<: *rule_on_feature_branch
-      when: on_success
-    - when: never
+# Deploy review:
+#   extends: .autodevops_review
+#   rules:
+#     - <<: *rule_on_feature_branch
+#       when: on_success
+#     - when: never
 
 ##############################
 # Deploy PREPROD
@@ -319,17 +274,9 @@ Deploy review:
 
 .autodevops_preprod:
   extends:
-    #   - .deploy_stage
     - .autodevops_review
-  # stage: Deploy
   needs:
     - job: Register release
-    # - job: Get tag
-    #   artifacts: true
-  # rules:
-  # - if: "$PRODUCTION || $RELEASE"
-  #   when: never
-  # - if: "$CI_COMMIT_TAG"
   variables:
     KOSKO_APPEND_YAML_FROM: .k8s/environments/preprod/manifests
     KOSKO_GENERATE_ARGS: >-
@@ -340,12 +287,12 @@ Deploy review:
     on_stop: Stop preprod
     url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
-Deploy preprod:
-  extends: .autodevops_preprod
-  rules:
-    - <<: *rule_on_release
-      when: on_success
-    - when: never
+# Deploy preprod:
+#   extends: .autodevops_preprod
+#   rules:
+#     - <<: *rule_on_release
+#       when: on_success
+#     - when: never
 
 # ##############################
 # # Trigger Release
@@ -387,13 +334,6 @@ Deploy preprod:
     - <<: *rule_on_release
       when: manual
     - when: never
-  # rules:
-  #   - if: "$PRODUCTION"
-  #     when: never
-  #   - if: $CI_COMMIT_TAG && $AUTO_DEVOPS_PRODUCTION_AUTO && $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/
-  #     when: on_success
-  #   - if: "$CI_COMMIT_TAG"
-  #     when: manual
   extends: .base_trigger_production_stage
 
 Ship to prod:
@@ -406,10 +346,6 @@ Ship to prod:
 .autodevops_production:
   extends:
     - .deploy_stage
-  rules:
-    - <<: *rule_on_production
-      when: always
-    - when: never
   variables:
     KOSKO_APPEND_YAML_FROM: .k8s/environments/prod/manifests
     KUBE_NAMESPACE: ${CI_PROJECT_NAME}
@@ -419,8 +355,12 @@ Ship to prod:
     name: ${AUTO_DEVOPS_PROD_ENVIRONMENT_NAME}
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
-Production:
-  extends: .autodevops_production
+# Deploy prod:
+#   extends: .autodevops_production
+#   rules:
+#     - <<: *rule_on_production
+#       when: always
+#     - when: never
 
 ##############################
 # Stop REVIEW
@@ -430,12 +370,6 @@ Production:
   extends:
     - .base_docker_kubectl_image_stage
   stage: .post
-  # rules:
-  #   - if: "$PRODUCTION || $RELEASE || $CI_COMMIT_TAG"
-  #     when: never
-  #   - <<: *autodevops_master_trigger_rule
-  #     when: never
-  #   - when: manual
   environment:
     name: ${CI_COMMIT_REF_NAME}${AUTO_DEVOPS_DEV_ENVIRONMENT_NAME}
     action: stop
@@ -468,11 +402,6 @@ Stop review:
     - <<: *rule_on_release
       when: manual
     - when: never
-  # rules:
-  #   - if: "$PRODUCTION || $RELEASE"
-  #     when: never
-  #   - if: "$CI_COMMIT_TAG"
-  #     when: manual
 
 Stop preprod:
   extends: .autodevops_stop_preprod
@@ -511,12 +440,6 @@ Stop preprod:
     - <<: *rule_before_release
       when: never
     - when: on_failure
-  # script:
-  #   - echo pouet fail
-  # rules:
-  #   - if: "$RELEASE"
-  #     when: never
-  #   - when: on_failure
 
 Notify fail:
   extends: .autodevops_notify_fail
@@ -534,12 +457,6 @@ Notify fail:
     - <<: *rule_before_release
       when: never
     - when: on_success
-  # script:
-  #   - echo pouet success
-  # rules:
-  #   - if: "$RELEASE"
-  #     when: never
-  #   - when: on_success
 
 Notify success:
   extends: .autodevops_notify_success
@@ -551,21 +468,14 @@ Notify success:
 .autodevops_release:
   extends:
     - .base_semantic_release_stage
-  rules:
-    - <<: *rule_before_release
-      when: always
-    - when: never
   # rules:
-  #   # - <<: *autodevops_release_trigger_rule
-  #   #   when: never
-  #   # - <<: *autodevops_release_trigger_rule2
-  #   #   when: never
-  #   - <<: *autodevops_master_trigger_rule
+  #   - <<: *rule_before_release
   #     when: always
+  #   - when: never
   variables:
     GIT_DEPTH: 4242
     SEMANTIC_RELEASE_ARGS: ""
   stage: Release
 
-Release:
-  extends: .autodevops_release
+# Release:
+#   extends: .autodevops_release
