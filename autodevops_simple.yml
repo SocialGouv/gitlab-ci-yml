@@ -2,7 +2,8 @@
 
 include:
   - /base_autodevops_simple.yml
-  # - /base_autodevops_simple_rules.yml
+
+#
 
 .rule_before_release: &rule_before_release
   if: $CI_COMMIT_BRANCH == 'master' && $AUTO_DEVOPS_RELEASE_AUTO

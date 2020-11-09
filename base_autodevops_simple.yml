@@ -40,30 +40,23 @@ stages:
 #
 
 variables:
-  GIT_STRATEGY: fetch
   GIT_DEPTH: 5
+  GIT_STRATEGY: fetch
   #
   AUTO_DEVOPS_DEV_ENVIRONMENT_NAME: "-dev2"
   AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME: "-dev2"
   AUTO_DEVOPS_PROD_ENVIRONMENT_NAME: "prod2"
-  # To activate the auto release
+  #
+  # To activate the auto release:
   # AUTO_DEVOPS_RELEASE_AUTO: "🔖"
   # AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
-  # To disable quality check jobs
+  #
+  # To disable quality check jobs:
   # AUTO_DEVOPS_QUALITY_CHECK_DISABLED: "🛑"
   # AUTO_DEVOPS_TEST_DISABLED: "🛑"
   # AUTO_DEVOPS_LINT_DISABLED: "🛑"
 
 #
-
-# .rule_before_release: &rule_before_release
-#   if: $CI_COMMIT_BRANCH == 'master' && $AUTO_DEVOPS_RELEASE_AUTO
-# .rule_on_release: &rule_on_release
-#   if: $CI_COMMIT_TAG && $AUTO_DEVOPS_RELEASE_AUTO && $PRODUCTION == null
-# .rule_on_release: &rule_on_feature_branch
-#   if: $CI_COMMIT_BRANCH != 'master' && $CI_COMMIT_TAG == null
-# .rule_on_production: &rule_on_production
-#   if: "$PRODUCTION && $CI_COMMIT_TAG"
 
 ##############################
 # Install
@@ -75,32 +68,12 @@ variables:
     - .base_yarn
   interruptible: true
 
-# Cache setup:
-#   extends:
-#     - .autodevops_install
-#   rules:
-#     - <<: *rule_before_release
-#       when: never
-#     - <<: *rule_on_production
-#       when: never
-#     - when: always
-
 ##############################
 # Lint
 ##############################
 
 .autodevops_lint:
   stage: Quality check
-  # rules:
-  #   - <<: *rule_before_release
-  #     when: never
-  #   - <<: *rule_on_production
-  #     when: never
-  #   - if: $AUTO_DEVOPS_QUALITY_CHECK_DISABLED
-  #     when: never
-  #   - if: $AUTO_DEVOPS_LINT_DISABLED
-  #     when: never
-  #   - when: on_success
   extends:
     - .base_yarn_script
   needs:
@@ -115,16 +88,6 @@ variables:
 
 .autodevops_test:
   stage: Quality check
-  # rules:
-  #   - <<: *rule_before_release
-  #     when: never
-  #   - <<: *rule_on_production
-  #     when: never
-  #   - if: $AUTO_DEVOPS_QUALITY_CHECK_DISABLED
-  #     when: never
-  #   - if: "$AUTO_DEVOPS_TEST_DISABLED"
-  #     when: never
-  #   - when: on_success
   extends:
     - .base_yarn_script
   needs:
@@ -145,12 +108,6 @@ variables:
     - Cache setup
     - Lint
     - Test
-  # rules:
-  #   - <<: *rule_before_release
-  #     when: never
-  #   - <<: *rule_on_production
-  #     when: never
-  #   - when: on_success
 
 ##############################
 # Register
@@ -169,46 +126,6 @@ variables:
     DOCKER_BUILD_ARGS: >-
       --shm-size 512M
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
-  # rules:
-    # - <<: *rule_before_release
-    #   when: never
-    # - when: on_success
-
-##############################
-# Register Feature Branch
-##############################
-
-# Register app:
-#   extends: .autodevops_register_image
-#   needs:
-#     - job: Build
-#       artifacts: true
-#   variables:
-#     DOCKER_BUILD_ARGS: >-
-#       --shm-size 512M
-#     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
-#   rules:
-#     - <<: *rule_on_feature_branch
-#       when: on_success
-#     - when: never
-
-##############################
-# Register Release
-##############################
-
-# Register release:
-#   extends: .autodevops_register_image
-#   needs:
-#     - job: Build
-#       artifacts: true
-#   variables:
-#     DOCKER_BUILD_ARGS: >-
-#       --shm-size 512M
-#     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
-#   rules:
-#     - <<: *rule_on_release
-#       when: on_success
-#     - when: never
 
 ##############################
 # Notify Deployment Start
@@ -219,13 +136,6 @@ variables:
   extends:
     - .base_notify_pending_stage
   allow_failure: true
-  # rules:
-  #   - <<: *rule_before_release
-  #     when: never
-  #   - when: on_success
-
-# Notify Start:
-#   extends: .autodevops_notify_starting_deployment
 
 ##############################
 # Deploy
@@ -261,13 +171,6 @@ variables:
     on_stop: Stop review
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
 
-# Deploy review:
-#   extends: .autodevops_review
-#   rules:
-#     - <<: *rule_on_feature_branch
-#       when: on_success
-#     - when: never
-
 ##############################
 # Deploy PREPROD
 ##############################
@@ -286,13 +189,6 @@ variables:
     name: preprod${AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME}
     on_stop: Stop preprod
     url: https://preprod-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
-
-# Deploy preprod:
-#   extends: .autodevops_preprod
-#   rules:
-#     - <<: *rule_on_release
-#       when: on_success
-#     - when: never
 
 # ##############################
 # # Trigger Release
@@ -331,13 +227,6 @@ variables:
 .autodevops_trigger_production:
   stage: .post
   extends: .base_trigger_production_stage
-  # rules:
-  #   - <<: *rule_on_release
-  #     when: manual
-  #   - when: never
-
-# Ship to prod:
-#   extends: .autodevops_trigger_production
 
 ##############################
 # Deploy PRODUCTION
@@ -354,13 +243,6 @@ variables:
   environment:
     name: ${AUTO_DEVOPS_PROD_ENVIRONMENT_NAME}
     url: https://${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
-
-# Deploy prod:
-#   extends: .autodevops_production
-#   rules:
-#     - <<: *rule_on_production
-#       when: always
-#     - when: never
 
 ##############################
 # Stop REVIEW
@@ -381,13 +263,6 @@ variables:
     - echo "kubectl delete namespace ${KUBE_NAMESPACE}"
     - kubectl delete namespace "${KUBE_NAMESPACE}"
 
-# Stop review:
-#   extends: .autodevops_stop_review
-#   rules:
-#     - <<: *rule_on_feature_branch
-#       when: manual
-#     - when: never
-
 ##############################
 # Stop PREPROD
 ##############################
@@ -398,13 +273,6 @@ variables:
   environment:
     name: preprod${AUTO_DEVOPS_PREPROD_ENVIRONMENT_NAME}
     action: stop
-  # rules:
-  #   - <<: *rule_on_release
-  #     when: manual
-  #   - when: never
-
-# Stop preprod:
-#   extends: .autodevops_stop_preprod
 
 ##############################
 # Notify
@@ -436,13 +304,6 @@ variables:
   extends:
     - .base_notify_fail_stage
     - .notify
-  # rules:
-  #   - <<: *rule_before_release
-  #     when: never
-  #   - when: on_failure
-
-# Notify fail:
-#   extends: .autodevops_notify_fail
 
 ##############################
 # Notify Success
@@ -453,13 +314,6 @@ variables:
   extends:
     - .base_notify_success_stage
     - .notify
-  # rules:
-  #   - <<: *rule_before_release
-  #     when: never
-  #   - when: on_success
-
-# Notify success:
-#   extends: .autodevops_notify_success
 
 ##############################
 # Release
@@ -468,14 +322,14 @@ variables:
 .autodevops_release:
   extends:
     - .base_semantic_release_stage
-  # rules:
-  #   - <<: *rule_before_release
-  #     when: always
-  #   - when: never
   variables:
     GIT_DEPTH: 4242
     SEMANTIC_RELEASE_ARGS: ""
   stage: Release
 
-# Release:
-#   extends: .autodevops_release
+Toto:
+  stage: .pre
+  script:
+    - echo PRODUCTION $PRODUCTION
+    - echo RELEASE $RELEASE
+    - echo CI_COMMIT_MESSAGE $CI_COMMIT_MESSAGE
