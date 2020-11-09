@@ -332,4 +332,9 @@ Toto:
   script:
     - echo PRODUCTION $PRODUCTION
     - echo RELEASE $RELEASE
-    - echo CI_COMMIT_MESSAGE $CI_COMMIT_MESSAGE
+    - printenv | grep
+      -e "^CI_COMMIT_"
+      -e "^CI_ENVIRONMENT_"
+      -e "^CI_PROJECT_"
+      -e "^CI_REGISTRY_"
+      -e "^CI_EXTERNAL_" | sort
