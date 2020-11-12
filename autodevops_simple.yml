@@ -6,10 +6,10 @@ include:
 #
 
 .rule_before_release: &rule_before_release
-  if: $CI_COMMIT_BRANCH == 'master' && $AUTO_DEVOPS_RELEASE_AUTO
+  if: $CI_COMMIT_BRANCH == 'master' && $AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE =~ /\(#\d+\)$/
 .rule_on_release: &rule_on_release
   if: $CI_COMMIT_TAG && $AUTO_DEVOPS_RELEASE_AUTO && $PRODUCTION == null
-.rule_on_release: &rule_on_feature_branch
+.rule_on_feature_branch: &rule_on_feature_branch
   if: $CI_COMMIT_BRANCH != 'master' && $CI_COMMIT_TAG == null
 .rule_on_production: &rule_on_production
   if: "$PRODUCTION && $CI_COMMIT_TAG"
