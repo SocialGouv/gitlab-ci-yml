@@ -16,6 +16,34 @@ include:
 
 #
 
+Test1:
+  stage: .pre
+  script:
+    - echo OK
+  rules:
+    - if: $CI_COMMIT_MESSAGE =~ /\(#\d+\)$/
+
+Test2:
+  stage: .pre
+  script:
+    - echo OK
+  rules:
+    - if: $CI_COMMIT_MESSAGE =~ /\(\#\d+\)$/
+
+Test3:
+  stage: .pre
+  script:
+    - echo OK
+  rules:
+    - if: $CI_COMMIT_MESSAGE =~ /\(#\d+\)/
+
+Test4:
+  stage: .pre
+  script:
+    - echo OK
+  rules:
+    - if: $CI_COMMIT_MESSAGE =~ /\(\#\d+\)/
+
 Cache setup:
   extends:
     - .autodevops_install
