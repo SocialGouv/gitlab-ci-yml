@@ -137,6 +137,17 @@ Deploy preprod:
       when: on_success
     - when: never
 
+Trigger release:
+  extends: .autodevops_trigger_release
+  rules:
+    - <<: *rule_before_release
+      when: never
+    - <<: *rule_on_release
+      when: never
+    - <<: *rule_on_production
+      when: never
+    - when: manual
+
 Ship to prod:
   extends: .autodevops_trigger_production
   rules:
