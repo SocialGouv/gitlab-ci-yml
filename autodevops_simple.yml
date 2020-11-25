@@ -102,6 +102,8 @@ Register app:
       when: never
     - <<: *rule_on_release
       when: never
+    - <<: *rule_on_production
+      when: never
     - when: on_success
 
 Register release:
