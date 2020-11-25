@@ -130,6 +130,8 @@ Deploy review:
       when: never
     - <<: *rule_on_release
       when: never
+    - <<: *rule_on_production
+      when: never
     - when: on_success
 
 Deploy preprod:
@@ -173,6 +175,8 @@ Stop review:
     - <<: *rule_before_release
       when: never
     - <<: *rule_on_release
+      when: never
+    - <<: *rule_on_production
       when: never
     - when: manual
 
