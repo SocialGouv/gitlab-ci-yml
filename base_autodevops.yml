@@ -312,6 +312,8 @@ Production:
     GIT_STRATEGY: none
   script:
     - echo "kubectl delete namespace ${KUBE_NAMESPACE}"
+    - |
+      [[ -n $AUTO_DEVOPS_ENABLE_KAPP ]] && kapp -y delete -a ${CI_PROJECT_NAME} --namespace ${KUBE_NAMESPACE}
     - kubectl delete namespace "${KUBE_NAMESPACE}"
 Stop review:
   extends: .autodevops_stop_review
