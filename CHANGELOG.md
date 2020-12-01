@@ -1,3 +1,10 @@
+## [18.11.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.11.0...v18.11.1) (2020-12-01)
+
+
+### Bug Fixes
+
+* **kosko:** rererefix env debug ([#417](https://github.com/SocialGouv/gitlab-ci-yml/issues/417)) ([58cec66](https://github.com/SocialGouv/gitlab-ci-yml/commit/58cec66fcb142a3dc694be7ff620cd2562cfc660))
+
 # [18.11.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.10.0...v18.11.0) (2020-10-30)
 
 
