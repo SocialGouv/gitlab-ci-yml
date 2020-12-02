@@ -351,6 +351,24 @@ include:
     ref: v18.11.1
 ```
 
+# [.base_nuclei_scan](./base_nuclei_scan.yml)
+
+A manual job to run a [nuclei](https://nuclei.projectdiscovery.io) security scan on the deployed environement
+
+## Usage
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_nuclei_scan.yml
+    ref: v18.11.1
+
+Nuclei Scan:
+  extends: .base_nuclei_scan
+  only:
+    - branches
+```
+
 # [.base_register_stage](./base_register_stage.yml)
 
 ## Usage
