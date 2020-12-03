@@ -1,3 +1,10 @@
+## [18.12.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.12.0...v18.12.1) (2020-12-03)
+
+
+### Reverts
+
+* Revert "feat(autodevops): add .k8s/package.json tests job (#419)" ([098a8bc](https://github.com/SocialGouv/gitlab-ci-yml/commit/098a8bc713ced834ddf7a831e08dc2d89bcb5fbb)), closes [#419](https://github.com/SocialGouv/gitlab-ci-yml/issues/419)
+
 # [18.12.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.11.1...v18.12.0) (2020-12-03)
 
 
