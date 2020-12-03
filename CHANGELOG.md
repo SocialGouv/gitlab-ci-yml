@@ -1,3 +1,10 @@
+# [18.12.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.11.1...v18.12.0) (2020-12-03)
+
+
+### Features
+
+* **autodevops:** add .k8s/package.json tests job ([#419](https://github.com/SocialGouv/gitlab-ci-yml/issues/419)) ([48a32b0](https://github.com/SocialGouv/gitlab-ci-yml/commit/48a32b03041017484857021fb78bee68b1d6620f))
+
 ## [18.11.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.11.0...v18.11.1) (2020-12-01)
 
 
