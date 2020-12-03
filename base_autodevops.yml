@@ -173,7 +173,7 @@ Trigger Production:
     - if: "$AUTO_DEVOPS_TEST_DISABLED"
       when: never
     - exists:
-      - .k8s/package.json
+        - .k8s/package.json
   extends:
     - .base_yarn_script
     - .autodevops_base_rules
