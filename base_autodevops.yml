@@ -166,6 +166,20 @@ Trigger Production:
   script:
     - yarn test
 
+.autodevops_k8s_test:
+  rules:
+    - <<: *autodevops_trigger_rule
+      when: never
+    - if: "$AUTO_DEVOPS_TEST_DISABLED"
+      when: never
+    - exists:
+      - .k8s/package.json
+  extends:
+    - .base_yarn_script
+    - .autodevops_base_rules
+  script:
+    - yarn k8s
+    - yarn k8s test
 #
 
 .autodevops_build:
