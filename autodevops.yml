@@ -15,9 +15,6 @@ Lint:
 Test:
   extends: .autodevops_test
 
-K8S Test:
-  extends: .autodevops_k8s_test
-
 Build:
   extends: .autodevops_build
 
