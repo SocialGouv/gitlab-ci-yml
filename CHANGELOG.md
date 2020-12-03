@@ -1,3 +1,10 @@
+# [19.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v19.0.0...v19.1.0) (2020-12-03)
+
+
+### Features
+
+* **autodevops:** .autodevops_k8s_test needs no one to run ([7755180](https://github.com/SocialGouv/gitlab-ci-yml/commit/7755180fdd105b56aef4ff66bee560e03f6af07e))
+
 # [19.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.12.1...v19.0.0) (2020-12-03)
 
 
