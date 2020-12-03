@@ -106,7 +106,7 @@ variables:
   # Will deploy any stable release matching "/^v[0-9]+\\.[0-9]+\\.[0-9]+$/"
 ```
 
-### Disable some jobs 
+### Disable some jobs
 
 You can disable test jobs with `AUTO_DEVOPS_TEST_DISABLED` and/or lint with `AUTO_DEVOPS_QUALITY_DISABLED`. `AUTO_DEVOPS_NOTIFY_DISABLED` disable GitHub environments notifications.
 
@@ -119,7 +119,7 @@ include:
 variables:
   AUTO_DEVOPS_TEST_DISABLED: "🛑"
   AUTO_DEVOPS_QUALITY_DISABLED: "🛑"
-  AUTO_DEVOPS_NOTIFY_DISABLED:  "🛑"
+  AUTO_DEVOPS_NOTIFY_DISABLED: "🛑"
 ```
 
 ### Override existing jobs
@@ -365,6 +365,9 @@ include:
 
 Nuclei Scan:
   extends: .base_nuclei_scan
+  environment:
+    name: ${CI_COMMIT_REF_SLUG}-dev2
+    url: https://${CI_ENVIRONMENT_SLUG}.${KUBE_INGRESS_BASE_DOMAIN}
   only:
     - branches
 ```

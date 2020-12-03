@@ -4,8 +4,5 @@
   stage: .post
   image: projectdiscovery/nuclei:latest
   allow_failure: true
-  environment:
-    name: ${CI_COMMIT_REF_SLUG}-dev2
-    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}
   script:
     - /app/nuclei -update-templates -t /app/nuclei-templates/ -target $CI_ENVIRONMENT_URL
