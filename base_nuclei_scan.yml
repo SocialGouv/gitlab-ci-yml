@@ -1,0 +1,8 @@
+# https://github.com/projectdiscovery/nuclei#running-with-multiple-templates
+
+.base_nuclei_scan:
+  stage: .post
+  image: projectdiscovery/nuclei:latest
+  allow_failure: true
+  script:
+    - /app/nuclei -update-templates -t /app/nuclei-templates/ -target $CI_ENVIRONMENT_URL

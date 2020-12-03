@@ -106,7 +106,7 @@ variables:
   # Will deploy any stable release matching "/^v[0-9]+\\.[0-9]+\\.[0-9]+$/"
 ```
 
-### Disable some jobs 
+### Disable some jobs
 
 You can disable test jobs with `AUTO_DEVOPS_TEST_DISABLED` and/or lint with `AUTO_DEVOPS_QUALITY_DISABLED`. `AUTO_DEVOPS_NOTIFY_DISABLED` disable GitHub environments notifications.
 
@@ -119,7 +119,7 @@ include:
 variables:
   AUTO_DEVOPS_TEST_DISABLED: "🛑"
   AUTO_DEVOPS_QUALITY_DISABLED: "🛑"
-  AUTO_DEVOPS_NOTIFY_DISABLED:  "🛑"
+  AUTO_DEVOPS_NOTIFY_DISABLED: "🛑"
 ```
 
 ### Override existing jobs
@@ -349,6 +349,27 @@ include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_migrate_azure_db.yml
     ref: v19.1.0
+```
+
+# [.base_nuclei_scan](./base_nuclei_scan.yml)
+
+A manual job to run a [nuclei](https://nuclei.projectdiscovery.io) security scan on the deployed environement
+
+## Usage
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_nuclei_scan.yml
+    ref: v18.11.1
+
+Nuclei Scan:
+  extends: .base_nuclei_scan
+  environment:
+    name: ${CI_COMMIT_REF_SLUG}-dev2
+    url: https://${CI_ENVIRONMENT_SLUG}.${KUBE_INGRESS_BASE_DOMAIN}
+  only:
+    - branches
 ```
 
 # [.base_register_stage](./base_register_stage.yml)
