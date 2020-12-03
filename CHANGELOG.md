@@ -1,3 +1,10 @@
+# [19.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v19.1.0...v19.2.0) (2020-12-03)
+
+
+### Features
+
+* add base_nuclei_scan.yml ([#418](https://github.com/SocialGouv/gitlab-ci-yml/issues/418)) ([a18f4ef](https://github.com/SocialGouv/gitlab-ci-yml/commit/a18f4ef867d8ebd6c92ebcab2dbd4c5b440210ac))
+
 # [19.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v19.0.0...v19.1.0) (2020-12-03)
 
 
