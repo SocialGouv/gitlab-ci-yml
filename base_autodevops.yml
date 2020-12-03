@@ -167,6 +167,7 @@ Trigger Production:
     - yarn test
 
 .autodevops_k8s_test:
+  needs: []
   rules:
     - <<: *autodevops_trigger_rule
       when: never
