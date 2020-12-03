@@ -1,3 +1,34 @@
+# [19.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.12.1...v19.0.0) (2020-12-03)
+
+
+### Features
+
+* **autodevops:** add .k8s/package.json tests job ([#419](https://github.com/SocialGouv/gitlab-ci-yml/issues/419)) ([57ae81a](https://github.com/SocialGouv/gitlab-ci-yml/commit/57ae81af08a83c5e4ae8f41c3208a74869f46900))
+
+
+### BREAKING CHANGES
+
+* **autodevops:** Will fail your pipeline if you do not have a "test" script in your `.k8s/package.json`
+
+This change enforce that the "test" script in your `.k8s/package.json` should be successfull.
+Project withour one will have a bad supprise :x:
+
+Will updating to this major version you should consider updating to `@socialgouv/kosko-charts@"4.0.0-alpha.7"`
+with the `@socialgouv/kosko-charts/testing` strategy for `.k8s` forlders
+
+Work aroud (no recommended) :
+
+```
+// .k8s/package.json
+{
+    // [...]
+    "scripts": {
+        "test": "exit 0"
+    }
+    // [...]
+}
+```
+
 ## [18.12.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v18.12.0...v18.12.1) (2020-12-03)
 
 
