@@ -4,6 +4,17 @@ variables:
   K8S_FOLDER: ${CI_PROJECT_DIR}/.k8s
   KOSKO_GENERATE_ARGS: ""
 
+.print_env: &print_env |
+  printenv | grep \
+    -e "^CI_COMMIT_" \
+    -e "^CI_ENVIRONMENT_" \
+    -e "^CI_PROJECT_" \
+    -e "^CI_REGISTRY_" \
+    -e "^KUBE_INGRESS_BASE_DOMAIN" \
+    -e "^KUBE_NAMESPACE" \
+    -e "^PRODUCTION" \
+    -e "^RANCHER_PROJECT_ID" | sort
+
 .base_deploy_kosko_stage:
   stage: Deploy
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/kosko:2.0.1
@@ -17,21 +28,15 @@ variables:
       - ${CI_PROJECT_DIR}/.cache
       - ${K8S_FOLDER}/node_modules
   script:
-    - printenv | grep
-      -e "^CI_COMMIT_"
-      -e "^CI_ENVIRONMENT_"
-      -e "^CI_PROJECT_"
-      -e "^CI_REGISTRY_"
-      -e "^KUBE_INGRESS_BASE_DOMAIN"
-      -e "^KUBE_NAMESPACE"
-      -e "^PRODUCTION"
-      -e "^RANCHER_PROJECT_ID" | sort
+    - *print_env
     #
     - yarn config set cache-folder ${CI_PROJECT_DIR}/.cache/yarn
     - cd ${K8S_FOLDER}
     - yarn --frozen-lockfile --prefer-offline --link-duplicates
+    #
     - echo "kosko generate ${KOSKO_GENERATE_ARGS} >> ${CI_PROJECT_DIR}/manifest.yaml"
     - kosko generate ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml
+    #
     - cd -
     - |
       if [[ -d "${KOSKO_APPEND_YAML_FROM}" ]]; then
@@ -51,3 +56,19 @@ variables:
     paths:
       - manifest.yaml
     when: always
+
+.base_kosko_k8s_test:
+  stage: Code Quality
+  extends:
+    - .base_deploy_kosko_stage
+  script:
+    - *print_env
+    #
+    - yarn config set cache-folder ${CI_PROJECT_DIR}/.cache/yarn
+    - cd ${K8S_FOLDER}
+    - yarn --frozen-lockfile --prefer-offline --link-duplicates
+    # HACK(douglasduteil): pre-cache jest
+    # As it's most likely being used to test our kosko charts
+    - yarn add -D jest --frozen-lockfile --prefer-offline --link-duplicates
+    #
+    - yarn test
