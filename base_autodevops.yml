@@ -176,11 +176,9 @@ Trigger Production:
     - exists:
         - .k8s/package.json
   extends:
-    - .base_yarn_script
+    - .base_kosko_k8s_test
     - .autodevops_base_rules
-  script:
-    - yarn k8s
-    - yarn k8s test
+
 #
 
 .autodevops_build:
