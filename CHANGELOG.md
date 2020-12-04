@@ -1,3 +1,41 @@
+# [20.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v19.3.0...v20.0.0) (2020-12-04)
+
+
+### Features
+
+* **kosko:** only install production deps when deploying ([#421](https://github.com/SocialGouv/gitlab-ci-yml/issues/421)) ([321fcb1](https://github.com/SocialGouv/gitlab-ci-yml/commit/321fcb1c779be8901ea314a58e105e8f0b28c433))
+
+
+### BREAKING CHANGES
+
+* **kosko:** You will want to move your dependencies in the "dependencies" of your `package.json`
+
+```diff
+   "dependencies": {
+     "@kosko/env": "^0.5.2",
+     "@socialgouv/kosko-charts": "^4.0.0-alpha.8",
+     "@socialgouv/kosko-charts": "^4.0.0-alpha.8",
+-    "kubernetes-models": "^0.8.1"
++    "kubernetes-models": "^0.8.1",
++    "kosko": "^0.9.2",
++    "ts-node": "^9.0.0",
++    "typescript": "^4.0.5"
+   },
+   "devDependencies": {
+     "@babel/core": "^7.12.9",
+     "@babel/plugin-transform-modules-commonjs": "^7.12.1",
+-    "@types/jest": "^26.0.16",
+     "@types/node": "^14.11.10",
+-    "dotenv": "^8.2.0",
+-    "kosko": "^0.9.2",
+-    "ts-node": "^9.0.0",
+-    "typescript": "^4.0.5"
++    "@types/jest": "^26.0.16",
++    "dotenv": "^8.2.0"
+   }
+ }
+```
+
 # [19.3.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v19.2.0...v19.3.0) (2020-12-04)
 
 
