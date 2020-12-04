@@ -5,14 +5,14 @@ variables:
   KOSKO_GENERATE_ARGS: ""
 
 .print_env: &print_env |
-  printenv | grep
-    -e "^CI_COMMIT_"
-    -e "^CI_ENVIRONMENT_"
-    -e "^CI_PROJECT_"
-    -e "^CI_REGISTRY_"
-    -e "^KUBE_INGRESS_BASE_DOMAIN"
-    -e "^KUBE_NAMESPACE"
-    -e "^PRODUCTION"
+  printenv | grep \
+    -e "^CI_COMMIT_" \
+    -e "^CI_ENVIRONMENT_" \
+    -e "^CI_PROJECT_" \
+    -e "^CI_REGISTRY_" \
+    -e "^KUBE_INGRESS_BASE_DOMAIN" \
+    -e "^KUBE_NAMESPACE" \
+    -e "^PRODUCTION" \
     -e "^RANCHER_PROJECT_ID" | sort
 
 .base_deploy_kosko_stage:
