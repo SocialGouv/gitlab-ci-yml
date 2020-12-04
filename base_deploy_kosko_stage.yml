@@ -58,6 +58,7 @@ variables:
     when: always
 
 .base_kosko_k8s_test:
+  stage: Code Quality
   extends:
     - .base_deploy_kosko_stage
   script:
