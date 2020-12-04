@@ -1,3 +1,10 @@
+# [19.3.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v19.2.0...v19.3.0) (2020-12-04)
+
+
+### Features
+
+* **kosko:** share env with the user ([#420](https://github.com/SocialGouv/gitlab-ci-yml/issues/420)) ([e2d6dd4](https://github.com/SocialGouv/gitlab-ci-yml/commit/e2d6dd450dd0f184be45e139ec07a76ab079b9d1))
+
 # [19.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v19.1.0...v19.2.0) (2020-12-03)
 
 
