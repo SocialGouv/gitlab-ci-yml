@@ -1,3 +1,10 @@
+# [20.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.0.0...v20.1.0) (2020-12-11)
+
+
+### Features
+
+* **deps:** update socialgouv/docker images docker tags to v2.5.0 ([#415](https://github.com/SocialGouv/gitlab-ci-yml/issues/415)) ([d4c0ef7](https://github.com/SocialGouv/gitlab-ci-yml/commit/d4c0ef73e92918b291d803526112d7722d691958))
+
 # [20.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v19.3.0...v20.0.0) (2020-12-04)
 
 
