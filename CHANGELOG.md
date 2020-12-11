@@ -1,3 +1,10 @@
+## [20.1.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.1.0...v20.1.1) (2020-12-11)
+
+
+### Bug Fixes
+
+* **kosko:** yet another url print ([#422](https://github.com/SocialGouv/gitlab-ci-yml/issues/422)) ([44984fd](https://github.com/SocialGouv/gitlab-ci-yml/commit/44984fd6fb2d1ba40e503b1ff6a2ce2720b9dbf0))
+
 # [20.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.0.0...v20.1.0) (2020-12-11)
 
 
