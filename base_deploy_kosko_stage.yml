@@ -48,9 +48,13 @@ variables:
       fi
     - kubectl apply -f ${CI_PROJECT_DIR}/manifest.yaml
     - |
-      printf '\n****************************************************\n'
-      echo "deployed on : ${CI_ENVIRONMENT_URL}\n"
-      printf '****************************************************\n'
+      echo ""
+      echo ""
+      echo "******************************************************************************************"
+      echo " 🚀  deployed on : ${CI_ENVIRONMENT_URL}"
+      echo "******************************************************************************************"
+      echo ""
+      echo ""
   artifacts:
     expire_in: 1 week
     paths:
