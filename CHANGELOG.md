@@ -1,3 +1,10 @@
+## [20.1.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.1.1...v20.1.2) (2020-12-14)
+
+
+### Bug Fixes
+
+* **autodevops:** dont run test+lint on tags ([#423](https://github.com/SocialGouv/gitlab-ci-yml/issues/423)) ([ada8380](https://github.com/SocialGouv/gitlab-ci-yml/commit/ada838069bc76bde53c4cc9985250e30bb3d2f97))
+
 ## [20.1.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.1.0...v20.1.1) (2020-12-11)
 
 
