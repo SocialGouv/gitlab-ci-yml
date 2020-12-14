@@ -138,6 +138,8 @@ Trigger Production:
       when: never
     - if: "$AUTO_DEVOPS_QUALITY_DISABLED"
       when: never
+    - if: "$CI_COMMIT_TAG"
+      when: never
     - when: always
   extends:
     - .base_yarn_script
@@ -155,6 +157,8 @@ Trigger Production:
     - <<: *autodevops_trigger_rule
       when: never
     - if: "$AUTO_DEVOPS_TEST_DISABLED"
+      when: never
+    - if: "$CI_COMMIT_TAG"
       when: never
     - when: always
   extends:
