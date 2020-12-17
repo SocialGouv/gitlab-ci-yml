@@ -14,11 +14,12 @@ variables:
     -e "^KUBE_INGRESS_BASE_DOMAIN" \
     -e "^KUBE_NAMESPACE" \
     -e "^PRODUCTION" \
+    -e "^KOSKO_" \
     -e "^RANCHER_PROJECT_ID" | sort
 
 .base_deploy_kosko_stage:
   stage: Deploy
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/kosko:4.3.1
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/no-k8s:4.4.0
   dependencies: []
   cache:
     key:
@@ -30,10 +31,20 @@ variables:
       - ${K8S_FOLDER}/node_modules
   script:
     - *print_env
-    #
-    - yarn config set cache-folder ${CI_PROJECT_DIR}/.cache/yarn
-    - cd ${K8S_FOLDER}
-    - yarn --production --frozen-lockfile --prefer-offline --link-duplicates
+    - |
+      if [[ -d "${CI_PROJECT_DIR}/.socialgouv" ]]; then
+        echo "Use .socialgouv config."
+        rm -rf /k8s/.socialgouv
+        cp -r ${CI_PROJECT_DIR}/.socialgouv /k8s/
+        if [[ -d "/k8s/.socialgouv/environments" ]]; then
+          cp -r /k8s/.socialgouv/environments/* /k8s/.k8s/environments/
+        fi
+        cd /k8s/.k8s
+      else
+        yarn config set cache-folder ${CI_PROJECT_DIR}/.cache/yarn
+        cd ${K8S_FOLDER}
+        yarn --production --frozen-lockfile --prefer-offline --link-duplicates
+      fi
     #
     - echo "kosko generate ${KOSKO_GENERATE_ARGS} >> ${CI_PROJECT_DIR}/manifest.yaml"
     - kosko generate ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml
