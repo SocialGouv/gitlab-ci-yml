@@ -1,3 +1,11 @@
+## [20.1.3](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.1.2...v20.1.3) (2020-12-31)
+
+
+### Bug Fixes
+
+* handle multiple hosts urls fix [#429](https://github.com/SocialGouv/gitlab-ci-yml/issues/429) ([#430](https://github.com/SocialGouv/gitlab-ci-yml/issues/430)) ([e3a5625](https://github.com/SocialGouv/gitlab-ci-yml/commit/e3a562576bd199b10926c6c68544a0c65d7d8441))
+* **autodevops:** dont always trigger release ([#428](https://github.com/SocialGouv/gitlab-ci-yml/issues/428)) ([b00ed25](https://github.com/SocialGouv/gitlab-ci-yml/commit/b00ed25bb272f4c911922967d67659943100bce2))
+
 ## [20.1.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.1.1...v20.1.2) (2020-12-14)
 
 
