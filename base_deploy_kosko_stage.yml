@@ -51,7 +51,7 @@ variables:
       echo ""
       echo ""
       echo "******************************************************************************************"
-      echo " 🚀  deployed on : ${CI_ENVIRONMENT_URL}"
+      cat ${CI_PROJECT_DIR}/manifest.yaml | grep "\- host:" | sed -e s/-\ host\:\ /🚀\ https\:\\/\\//
       echo "******************************************************************************************"
       echo ""
       echo ""
