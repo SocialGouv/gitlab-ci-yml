@@ -51,7 +51,7 @@ variables:
       echo ""
       echo ""
       echo "******************************************************************************************"
-      cat ${CI_PROJECT_DIR}/manifest.yaml | grep "\- host:" | sed -e s/-\ host\:\ /🚀\ https\:\\/\\//
+      [[ -f "${CI_PROJECT_DIR}/manifest.yaml" ]] && cat "${CI_PROJECT_DIR}/manifest.yaml" | grep "\- host:" | sed -e s/-\ host\:\ /🚀\ https\:\\/\\//
       echo "******************************************************************************************"
       echo ""
       echo ""
