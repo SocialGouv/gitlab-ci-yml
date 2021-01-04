@@ -1,3 +1,10 @@
+## [20.1.5](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.1.4...v20.1.5) (2021-01-04)
+
+
+### Bug Fixes
+
+* **deploy:** dont exit when no manifest file ([764894e](https://github.com/SocialGouv/gitlab-ci-yml/commit/764894ef61e1130d0ef56ec0cb76540c6558d939))
+
 ## [20.1.4](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.1.3...v20.1.4) (2021-01-04)
 
 
