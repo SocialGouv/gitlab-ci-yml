@@ -1,3 +1,10 @@
+## [20.1.4](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.1.3...v20.1.4) (2021-01-04)
+
+
+### Bug Fixes
+
+* **deploy:** ensure manifest.yaml exist to print ([#432](https://github.com/SocialGouv/gitlab-ci-yml/issues/432)) ([d1e1db6](https://github.com/SocialGouv/gitlab-ci-yml/commit/d1e1db6428baf7b80bcc784260179814ae7187c8))
+
 ## [20.1.3](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.1.2...v20.1.3) (2020-12-31)
 
 
