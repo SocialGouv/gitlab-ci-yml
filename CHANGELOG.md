@@ -1,3 +1,10 @@
+## [9.1.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v9.1.1...v9.1.2) (2021-01-05)
+
+
+### Bug Fixes
+
+* **helm-hpa:** fix helm stable url ([dfa74c6](https://github.com/SocialGouv/gitlab-ci-yml/commit/dfa74c693e38ddc58735e7deb0714da573fee4ec))
+
 ## [9.1.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v9.1.0...v9.1.1) (2020-03-10)
 
 
