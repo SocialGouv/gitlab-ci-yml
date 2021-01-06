@@ -4,9 +4,9 @@
 #
 
 .base_docker_image_stage:
-  image: docker:19
+  image: docker:20
   services:
-    - docker:19-dind
+    - docker:20-dind
 
 .base_register_stage:
   stage: "Registration"
