@@ -335,25 +335,9 @@ Notify success:
     MATTERMOST_CHANNEL: notifications
 ```
 
-# [.base_migrate_azure_db](./base_migrate_azure_db.yml)
-
-This will run the two following scripts for feature-branches deployments :
-
-- yarn run migrate:latest
-- yarn run seed:run
-
-## Usage
-
-```yaml
-include:
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_migrate_azure_db.yml
-    ref: v20.2.0
-```
-
 # [.base_nuclei_scan](./base_nuclei_scan.yml)
 
-A manual job to run a [nuclei](https://nuclei.projectdiscovery.io) security scan on the deployed environement
+A job to run a [nuclei](https://nuclei.projectdiscovery.io) security scan on the deployed environement.
 
 ## Usage
 
@@ -370,6 +354,22 @@ Nuclei Scan:
     url: https://${CI_ENVIRONMENT_SLUG}.${KUBE_INGRESS_BASE_DOMAIN}
   only:
     - branches
+```
+
+# [.base_migrate_azure_db](./base_migrate_azure_db.yml)
+
+This will run the two following scripts for feature-branches deployments :
+
+- yarn run migrate:latest
+- yarn run seed:run
+
+## Usage
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_migrate_azure_db.yml
+    ref: v20.2.0
 ```
 
 # [.base_register_stage](./base_register_stage.yml)
