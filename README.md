@@ -293,6 +293,40 @@ Helm job:
     - helm version --client
 ```
 
+# [.base_deploy_kosko_stage](./base_deploy_kosko_stage.yml)
+
+## Usage
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_docker_kubectl_image_stage.yml
+    ref: v20.2.0
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_deploy_kosko_stage.yml
+    ref: v20.2.0
+
+#
+
+Deploy:
+  extends: .base_deploy_kosko_stage
+  environment:
+    name: prod2
+  variables:
+    KOSKO_GENERATE_ARGS: --env prod
+```
+
+### Options
+
+if `AUTO_DEVOPS_ENABLE_KAPP` is set, then the deploy will use [kapp](https://github.com/vmware-tanzu/carvel-kapp) instead of `kubectl` to apply the manifests. This makes debugging easier with feedback directly in the GitLab job log.
+
+For this to work, you need to add these annotations to your deployments :
+
+```yaml
+kapp.k14s.io/disable-default-ownership-label-rules: ""
+kapp.k14s.io/disable-default-label-scoping-rules: ""
+```
+
 # [.base_docker_kubectl_image_stage](./base_docker_kubectl_image_stage.yml)
 
 ## Usage
