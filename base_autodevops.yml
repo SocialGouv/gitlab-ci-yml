@@ -80,7 +80,7 @@ variables:
       when: never
     - if: "$AUTO_DEVOPS_RELEASE_AUTO && $CI_COMMIT_MESSAGE =~ /^chore(release): version/"
       when: never
-    - if: "$AUTO_DEVOPS_RELEASE_AUTO && ($CI_COMMIT_REF_NAME == 'master' || $CI_COMMIT_REF_NAME == 'beta' || $CI_COMMIT_REF_NAME == 'alpha')"
+    - if: "$AUTO_DEVOPS_RELEASE_AUTO && ($CI_COMMIT_REF_NAME == 'master' || $CI_COMMIT_REF_NAME == 'beta' || $CI_COMMIT_REF_NAME == 'alpha') && $CI_COMMIT_MESSAGE !~ /^chore(release): version/"
       when: on_success
     - when: manual
 
