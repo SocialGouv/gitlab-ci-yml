@@ -1,3 +1,10 @@
+## [20.3.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.3.0...v20.3.1) (2021-01-12)
+
+
+### Reverts
+
+* Revert "feat(deps): update docker docker tag to v20" (#438) ([9dd4a1f](https://github.com/SocialGouv/gitlab-ci-yml/commit/9dd4a1ff9aaa93e9ea6b2c50f534631dea7558c9)), closes [#438](https://github.com/SocialGouv/gitlab-ci-yml/issues/438)
+
 # [20.3.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.2.0...v20.3.0) (2021-01-12)
 
 
