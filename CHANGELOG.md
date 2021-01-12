@@ -1,3 +1,10 @@
+# [20.3.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.2.0...v20.3.0) (2021-01-12)
+
+
+### Features
+
+* add AUTO_DEVOPS_ENABLE_KAPP ([#416](https://github.com/SocialGouv/gitlab-ci-yml/issues/416)) ([dba82c5](https://github.com/SocialGouv/gitlab-ci-yml/commit/dba82c58d8c52873bb07445702e7b79b1e90fd4f))
+
 # [20.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.1.5...v20.2.0) (2021-01-06)
 
 

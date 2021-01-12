@@ -24,10 +24,10 @@ Use like this in your `.gitlab-ci.yml` :
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_semantic_release_stage.yml
-    ref: v20.2.0
+    ref: v20.3.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_register_stage.yml
-    ref: v20.2.0
+    ref: v20.3.0
 ```
 
 <br>
@@ -51,7 +51,7 @@ This pipeline produces :
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops.yml
-    ref: v20.2.0
+    ref: v20.3.0
 ```
 
 ### Deploy
@@ -69,7 +69,7 @@ Changing the cluster target will automatically alter the domaine as the url is f
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops.yml
-    ref: v20.2.0
+    ref: v20.3.0
 
 variables:
   AUTO_DEVOPS_DEV_ENVIRONMENT_NAME: "-tmp"
@@ -85,7 +85,7 @@ To automatically release changes on branches you can set the `AUTO_DEVOPS_RELEAS
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops.yml
-    ref: v20.2.0
+    ref: v20.3.0
 
 variables:
   AUTO_DEVOPS_RELEASE_AUTO: "🔖"
@@ -99,7 +99,7 @@ To automatically deploy releases to production you can set the `AUTO_DEVOPS_PROD
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops.yml
-    ref: v20.2.0
+    ref: v20.3.0
 
 variables:
   AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
@@ -114,7 +114,7 @@ You can disable test jobs with `AUTO_DEVOPS_TEST_DISABLED` and/or lint with `AUT
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops.yml
-    ref: v20.2.0
+    ref: v20.3.0
 
 variables:
   AUTO_DEVOPS_TEST_DISABLED: "🛑"
@@ -131,7 +131,7 @@ Autodevops jobs are using a `.autodevops_*` definition you can extend.
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /autodevops.yml
-    ref: v20.2.0
+    ref: v20.3.0
 
 # Same name as the "Build" job defined in the autodevops file
 # Override https://github.com/SocialGouv/gitlab-ci-yml/blob/v17.0.0/autodevops.yml#L50
@@ -175,10 +175,10 @@ As the gitlab yaml parser is working, defining a job **with the same name** will
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v20.2.0
+    ref: v20.3.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_create_namespace_stage.yml
-    ref: v20.2.0
+    ref: v20.3.0
 
 #
 
@@ -208,7 +208,7 @@ Create namespace:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_delete_useless_k8s_ns_stage.yml
-    ref: v20.2.0
+    ref: v20.3.0
 #
 
 Delete useless k8s namespaces:
@@ -227,10 +227,10 @@ Delete useless k8s namespaces:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v20.2.0
+    ref: v20.3.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_deploy_app_chart_stage.yml
-    ref: v20.2.0
+    ref: v20.3.0
 
 #
 
@@ -280,10 +280,10 @@ Deploy app (prod):
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v20.2.0
+    ref: v20.3.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v20.2.0
+    ref: v20.3.0
 
 #
 
@@ -301,10 +301,10 @@ Helm job:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v20.2.0
+    ref: v20.3.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_deploy_kosko_stage.yml
-    ref: v20.2.0
+    ref: v20.3.0
 
 #
 
@@ -335,7 +335,7 @@ kapp.k14s.io/disable-default-label-scoping-rules: ""
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v20.2.0
+    ref: v20.3.0
 #
 
 Kubectl job:
@@ -356,7 +356,7 @@ You'll need a `MATTERMOST_WEBHOOK` variable in your CI.
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_notify_mattermost.yml
-    ref: v20.2.0
+    ref: v20.3.0
 
 Notify fail:
   extends: .base_notify_fail_mattermost
@@ -379,7 +379,7 @@ A job to run a [nuclei](https://nuclei.projectdiscovery.io) security scan on the
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_nuclei_scan.yml
-    ref: v20.2.0
+    ref: v20.3.0
 
 Nuclei Scan:
   extends: .base_nuclei_scan
@@ -403,7 +403,7 @@ This will run the two following scripts for feature-branches deployments :
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_migrate_azure_db.yml
-    ref: v20.2.0
+    ref: v20.3.0
 ```
 
 # [.base_register_stage](./base_register_stage.yml)
@@ -414,7 +414,7 @@ include:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_register_stage.yml
-    ref: v20.2.0
+    ref: v20.3.0
 
 Register myapp image:
   extends: .base_register_stage
@@ -433,7 +433,7 @@ Register myapp image:
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_semantic_release_stage.yml
-    ref: v20.2.0
+    ref: v20.3.0
 
 #
 
@@ -459,7 +459,7 @@ A manual job to run a [trivy](https://github.com/aquasecurity/trivy) security sc
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_trivy_scan.yml
-    ref: v20.2.0
+    ref: v20.3.0
 
 Trivy Scan:
   extends: .base_trivy_scan
