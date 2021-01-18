@@ -344,6 +344,19 @@ Kubectl job:
     - kubectl version --client
 ```
 
+# [.base_kaniko_stage](./base_kaniko_stage.yml)
+
+To use kaniko instead of docker build, import this stage **after** other includes
+
+## Usage
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_kaniko_stage.yml
+    ref: v20.3.1
+```
+
 # [.base_notify_mattermost](./base_notify_mattermost.yml)
 
 Send a mattermost notification on pipeline success/failure
