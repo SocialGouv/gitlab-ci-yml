@@ -1,3 +1,15 @@
+# [20.4.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.3.1...v20.4.0) (2021-01-18)
+
+
+### Bug Fixes
+
+* **autodevops:** dont trigger release when released ([#437](https://github.com/SocialGouv/gitlab-ci-yml/issues/437)) ([ca0085a](https://github.com/SocialGouv/gitlab-ci-yml/commit/ca0085adcc76df883379ced2053d520c17371cf9))
+
+
+### Features
+
+* add .base_kaniko_stage ([#439](https://github.com/SocialGouv/gitlab-ci-yml/issues/439)) ([affde80](https://github.com/SocialGouv/gitlab-ci-yml/commit/affde809d00d6cb966adc2c5a63f58a0df416cd6))
+
 ## [20.3.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.3.0...v20.3.1) (2021-01-12)
 
 
