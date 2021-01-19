@@ -1,3 +1,11 @@
+## [20.4.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.4.0...v20.4.1) (2021-01-19)
+
+
+### Bug Fixes
+
+* lint ([8c195b6](https://github.com/SocialGouv/gitlab-ci-yml/commit/8c195b622cadf0081fbe8d044d25066438b1d4bd))
+* **kaniko:** always prefix CONTEXT with $PWD ([3a28fab](https://github.com/SocialGouv/gitlab-ci-yml/commit/3a28fabab853b495afc38d44520db5c01d315f72))
+
 # [20.4.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.3.1...v20.4.0) (2021-01-18)
 
 
