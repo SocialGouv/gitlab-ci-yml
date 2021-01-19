@@ -14,7 +14,7 @@
       if [[ "${CONTEXT}" == "." ]]; then
         export KANIKO_CONTEXT=$PWD
       elif [[ -n "${CONTEXT}" ]]; then
-        export KANIKO_CONTEXT=$CONTEXT
+        export KANIKO_CONTEXT=$PWD/$CONTEXT
       else
         export KANIKO_CONTEXT=$PWD
       fi
@@ -38,3 +38,4 @@
       echo 📦 ${HARBOR_REGISTRY}/${HARBOR_PROJECT}/${IMAGE_NAME}:${CI_COMMIT_SHA}
       echo 📦 ${HARBOR_REGISTRY}/${HARBOR_PROJECT}/${IMAGE_NAME}:${TAG}
       echo "*******************************************************************"
+
