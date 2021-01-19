@@ -38,4 +38,3 @@
       echo 📦 ${HARBOR_REGISTRY}/${HARBOR_PROJECT}/${IMAGE_NAME}:${CI_COMMIT_SHA}
       echo 📦 ${HARBOR_REGISTRY}/${HARBOR_PROJECT}/${IMAGE_NAME}:${TAG}
       echo "*******************************************************************"
-
