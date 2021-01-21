@@ -23,6 +23,9 @@
       echo Build docker image and publish to ${HARBOR_REGISTRY}
       echo Context ${KANIKO_CONTEXT}
       echo Build args ${DOCKER_BUILD_ARGS}
+      echo Harbor project ${HARBOR_PROJECT}
+      echo Image name ${IMAGE_NAME}
+      echo Kaniko context ${KANIKO_CONTEXT}
       echo Publish to ${HARBOR_PROJECT}/${IMAGE_NAME}:${CI_COMMIT_SHA}
       echo Publish to ${HARBOR_PROJECT}/${IMAGE_NAME}:${TAG}
       echo "*******************************************************************"
