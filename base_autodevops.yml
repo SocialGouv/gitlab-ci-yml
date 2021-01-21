@@ -9,7 +9,8 @@ include:
   - /base_docker_helm_image_stage.yml
   - /base_docker_kubectl_image_stage.yml
   - /base_notify_github_stage.yml
-  - /base_register_stage.yml
+  - /base_register_docker_stage.yml
+  - /base_register_kaniko_stage.yml
   - /base_semantic_release_stage.yml
   - /base_trigger_stage.yml
   - /base_yarn_stage.yml
@@ -48,6 +49,7 @@ variables:
   # To disable some quality check
   # AUTO_DEVOPS_QUALITY_DISABLED: "🛑"
   # AUTO_DEVOPS_TEST_DISABLED: "🛑"
+  # AUTO_DEVOPS_KANIKO: "Oh yeah!"
 
 #
 #
@@ -201,9 +203,9 @@ Trigger Production:
 #
 #
 
-.autodevops_register_image:
+.autodevops_register_docker_image:
   extends:
-    - .base_register_stage
+    - .base_register_docker_stage
     - .autodevops_base_rules
   stage: Registration
   needs:
@@ -212,6 +214,26 @@ Trigger Production:
   variables:
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE
+  rules:
+    - if: "$AUTO_DEVOPS_KANIKO"
+      when: never
+    - when: on_success
+
+.autodevops_register_kaniko_image:
+  extends:
+    - .base_register_kaniko_stage
+    - .autodevops_base_rules
+  stage: Registration
+  needs:
+    - job: Build
+      artifacts: true
+  variables:
+    CONTEXT: .
+    IMAGE_NAME: $CI_REGISTRY_IMAGE
+  rules:
+    - if: "$AUTO_DEVOPS_KANIKO"
+      when: on_success
+    - when: never
 
 #
 #
