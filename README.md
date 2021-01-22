@@ -124,7 +124,7 @@ variables:
 
 ### Register your image with Kaniko
 
-You can change the use [Kaniko](https://github.com/GoogleContainerTools/kaniko) as container image builder.
+You can use [Kaniko](https://github.com/GoogleContainerTools/kaniko) as container image builder by setting the `AUTO_DEVOPS_KANIKO`.
 
 ```yaml
 include:
@@ -135,7 +135,6 @@ include:
 variables:
   AUTO_DEVOPS_KANIKO: "🕹️"
 ```
-
 
 ### Override existing jobs
 
