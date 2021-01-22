@@ -358,19 +358,6 @@ Kubectl job:
     - kubectl version --client
 ```
 
-# [.base_kaniko_stage](./base_kaniko_stage.yml)
-
-To use kaniko instead of docker build, import this stage **after** other includes
-
-## Usage
-
-```yaml
-include:
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_kaniko_stage.yml
-    ref: v20.4.1
-```
-
 # [.base_notify_mattermost](./base_notify_mattermost.yml)
 
 Send a mattermost notification on pipeline success/failure
@@ -433,18 +420,39 @@ include:
     ref: v20.4.1
 ```
 
-# [.base_register_stage](./base_register_stage.yml)
+# [.base_register_docker_stage](./base_register_docker_stage.yml)
 
 ## Usage
 
 ```yaml
 include:
   - project: SocialGouv/gitlab-ci-yml
-    file: /base_register_stage.yml
+    file: /base_register_docker_stage.yml
     ref: v20.4.1
 
 Register myapp image:
-  extends: .base_register_stage
+  extends: .base_register_docker_stage
+  variables:
+    CONTEXT: . # The folder where the Dockerfile is
+    IMAGE_NAME: $CI_REGISTRY_IMAGE # The image name
+    # optional
+    DOCKER_BUILD_ARGS: "--build-arg SENTRY_DSN=https://sentry"
+```
+
+# [.base_register_kaniko_stage](./base_register_kaniko_stage.yml)
+
+To use kaniko instead of docker build, import this stage **after** other includes
+
+## Usage
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_register_kaniko_stage.yml
+    ref: v20.4.1
+    
+Register myapp image:
+  extends: .base_register_kaniko_stage
   variables:
     CONTEXT: . # The folder where the Dockerfile is
     IMAGE_NAME: $CI_REGISTRY_IMAGE # The image name
