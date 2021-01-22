@@ -122,6 +122,21 @@ variables:
   AUTO_DEVOPS_NOTIFY_DISABLED: "🛑"
 ```
 
+### Register your image with Kaniko
+
+You can change the use [Kaniko](https://github.com/GoogleContainerTools/kaniko) as container image builder.
+
+```yaml
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /autodevops.yml
+    ref: v20.4.1
+
+variables:
+  AUTO_DEVOPS_KANIKO: "🕹️"
+```
+
+
 ### Override existing jobs
 
 All gitlab jobs are overridable. You can or extend them or completely replace them.
