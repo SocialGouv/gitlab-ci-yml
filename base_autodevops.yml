@@ -206,7 +206,6 @@ Trigger Production:
 .autodevops_register_docker_image:
   extends:
     - .base_register_docker_stage
-    - .autodevops_base_rules
   stage: Registration
   needs:
     - job: Build
@@ -215,6 +214,8 @@ Trigger Production:
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE
   rules:
+    - <<: *autodevops_trigger_rule
+      when: never
     - if: "$AUTO_DEVOPS_KANIKO"
       when: never
     - when: on_success
@@ -222,7 +223,6 @@ Trigger Production:
 .autodevops_register_kaniko_image:
   extends:
     - .base_register_kaniko_stage
-    - .autodevops_base_rules
   stage: Registration
   needs:
     - job: Build
@@ -231,6 +231,8 @@ Trigger Production:
     CONTEXT: .
     IMAGE_NAME: $CI_PROJECT_NAME
   rules:
+    - <<: *autodevops_trigger_rule
+      when: never
     - if: "$AUTO_DEVOPS_KANIKO"
       when: on_success
     - when: never
