@@ -1,3 +1,10 @@
+# [20.5.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.4.1...v20.5.0) (2021-01-22)
+
+
+### Features
+
+* Switch from Docker to Kaniko based on pipeline env variable: AUTO_DEVOPS_KANIKO. ([#441](https://github.com/SocialGouv/gitlab-ci-yml/issues/441)) ([53d9b2d](https://github.com/SocialGouv/gitlab-ci-yml/commit/53d9b2d97fa07a807c5bd2cadf6a7eaaa36193f0))
+
 ## [20.4.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.4.0...v20.4.1) (2021-01-19)
 
 
