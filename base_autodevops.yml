@@ -229,7 +229,7 @@ Trigger Production:
       artifacts: true
   variables:
     CONTEXT: .
-    IMAGE_NAME: $CI_REGISTRY_IMAGE
+    IMAGE_NAME: $CI_PROJECT_NAME
   rules:
     - if: "$AUTO_DEVOPS_KANIKO"
       when: on_success
