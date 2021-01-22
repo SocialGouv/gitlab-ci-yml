@@ -22,4 +22,7 @@ Build:
   extends: .autodevops_build
 
 Register image:
-  extends: .autodevops_register_image
+  extends: .autodevops_register_docker_image
+
+Register Kaniko image:
+  extends: .autodevops_register_kaniko_image
