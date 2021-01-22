@@ -1,3 +1,10 @@
+## [20.5.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.5.0...v20.5.1) (2021-01-22)
+
+
+### Bug Fixes
+
+* Set autodevops_trigger_rule to registration jobs. ([#442](https://github.com/SocialGouv/gitlab-ci-yml/issues/442)) ([716a544](https://github.com/SocialGouv/gitlab-ci-yml/commit/716a5448ff9ac7f726608dc395f6f1e6b5ca5020))
+
 # [20.5.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.4.1...v20.5.0) (2021-01-22)
 
 
