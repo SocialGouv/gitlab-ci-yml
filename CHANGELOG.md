@@ -1,3 +1,10 @@
+# [20.6.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.5.1...v20.6.0) (2021-01-25)
+
+
+### Features
+
+* **kosko:** log the AUTO_ variables too ([#444](https://github.com/SocialGouv/gitlab-ci-yml/issues/444)) ([1e55e66](https://github.com/SocialGouv/gitlab-ci-yml/commit/1e55e6657107dfee18b6e08d82315f53304af2e7))
+
 ## [20.5.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.5.0...v20.5.1) (2021-01-22)
 
 
