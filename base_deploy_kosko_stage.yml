@@ -6,6 +6,7 @@ variables:
 
 .print_env: &print_env |
   printenv | grep \
+    -e "^AUTO_" \
     -e "^CI_COMMIT_" \
     -e "^CI_ENVIRONMENT_" \
     -e "^CI_PROJECT_" \
