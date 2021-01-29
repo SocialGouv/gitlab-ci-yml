@@ -1,3 +1,10 @@
+## [20.6.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.6.0...v20.6.1) (2021-01-29)
+
+
+### Bug Fixes
+
+* release ([cdc3b25](https://github.com/SocialGouv/gitlab-ci-yml/commit/cdc3b25776e20cc838357531bcba622fadddf627))
+
 # [20.6.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.5.1...v20.6.0) (2021-01-25)
 
 
