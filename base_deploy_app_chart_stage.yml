@@ -12,9 +12,6 @@ variables:
     - echo "kubectl config set-context --current --namespace=${K8S_NAMESPACE}"
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
-    - echo "helm template app socialgouv/app --version "${HELM_CHART_VERSION}" --output-dir manifests"
-    - 
-
     - envsubst < ./.charts/app/values.socialgouv.yaml > /tmp/values.socialgouv.yaml
     - envsubst < $VALUES_FILE > ./values.yaml
 
@@ -36,8 +33,7 @@ variables:
           ${HELM_RENDER_ARGS}"
       fi
 
-    - echo "$ helm just render ${CONTEXT} app --values /tmp/values.socialgouv.yaml --values ./values.yaml ${HELM_RENDER_ARGS}"
-    - echo "$ helm template app socialgouv/app --version "${HELM_CHART_VERSION}" --output-dir manifests"
+    - echo "$ helm template app socialgouv/app --output-dir manifests --values ./values.yaml --values /tmp/values.socialgouv.yaml --version ${HELM_CHART_VERSION} ${HELM_RENDER_ARGS}"
 
     - helm template app socialgouv/app
       --output-dir manifests
