@@ -12,16 +12,18 @@ variables:
     - echo "kubectl config set-context --current --namespace=${K8S_NAMESPACE}"
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
-    - echo "helm just fetch socialgouv/app#${HELM_CHART_VERSION}"
-    - helm just fetch "socialgouv/app#${HELM_CHART_VERSION}"
+    - echo "helm template app socialgouv/app --version "${HELM_CHART_VERSION}" --output-dir manifests"
+    - 
 
     - envsubst < ./.charts/app/values.socialgouv.yaml > /tmp/values.socialgouv.yaml
     - envsubst < $VALUES_FILE > ./values.yaml
+
     # Set own wildcard when deploying in dev environment
     - >-
       HELM_RENDER_ARGS="
         --set image.tag=${IMAGE_TAG}
         ${HELM_RENDER_ARGS}"
+
     # Set own certificate when deploying in prod environment
     - |-
       if [[ -z "${PRODUCTION+x}" ]]; then
@@ -35,12 +37,15 @@ variables:
       fi
 
     - echo "$ helm just render ${CONTEXT} app --values /tmp/values.socialgouv.yaml --values ./values.yaml ${HELM_RENDER_ARGS}"
+    - echo "$ helm template app socialgouv/app --version "${HELM_CHART_VERSION}" --output-dir manifests"
 
-    - helm just render ${CONTEXT} app
-      --values /tmp/values.socialgouv.yaml
+    - helm template app socialgouv/app
+      --output-dir manifests
       --values ./values.yaml
+      --values /tmp/values.socialgouv.yaml
+      --version "${HELM_CHART_VERSION}"
       ${HELM_RENDER_ARGS}
-    - helm just apply ${CONTEXT}
+    - kubectl apply -f manifests/app/templates/
   artifacts:
     expire_in: 1 week
     paths:
