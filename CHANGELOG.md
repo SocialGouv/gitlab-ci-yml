@@ -1,3 +1,10 @@
+# [20.7.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.6.1...v20.7.0) (2021-02-05)
+
+
+### Features
+
+* No .k8s folder. ([a4b29ae](https://github.com/SocialGouv/gitlab-ci-yml/commit/a4b29ae25af0004c755ae87ff10f2a99b80ddf50))
+
 ## [20.6.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.6.0...v20.6.1) (2021-01-29)
 
 
