@@ -1,3 +1,10 @@
+## [20.7.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.1...v20.7.2) (2021-02-08)
+
+
+### Bug Fixes
+
+* restore base_register_stage ([#453](https://github.com/SocialGouv/gitlab-ci-yml/issues/453)) ([fa74eb7](https://github.com/SocialGouv/gitlab-ci-yml/commit/fa74eb7231d43b08b730155147ebfef73f8e9891))
+
 ## [20.7.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.0...v20.7.1) (2021-02-05)
 
 
