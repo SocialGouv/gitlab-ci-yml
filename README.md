@@ -430,6 +430,7 @@ include:
 
 Register myapp image:
   extends: .base_register_docker_stage
+  # or .base_register_stage
   variables:
     CONTEXT: . # The folder where the Dockerfile is
     IMAGE_NAME: $CI_REGISTRY_IMAGE # The image name

@@ -76,3 +76,6 @@
       $CONTEXT
     - docker push ${IMAGE_NAME}:${CI_COMMIT_SHA}
     - docker push ${IMAGE_NAME}:${TAG}
+
+.base_register_stage:
+  extends: .base_register_docker_stage
