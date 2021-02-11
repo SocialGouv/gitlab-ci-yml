@@ -1,3 +1,10 @@
+## [20.7.3](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.2...v20.7.3) (2021-02-11)
+
+
+### Bug Fixes
+
+* Restore autodevops_register_image job. ([#455](https://github.com/SocialGouv/gitlab-ci-yml/issues/455)) ([a494a08](https://github.com/SocialGouv/gitlab-ci-yml/commit/a494a08ebf1ab47f0c5f8d51178b859fa8dff7ba))
+
 ## [20.7.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.1...v20.7.2) (2021-02-08)
 
 
