@@ -220,6 +220,10 @@ Trigger Production:
       when: never
     - when: on_success
 
+.autodevops_register_image:
+  extends:
+    - .autodevops_register_docker_image
+
 .autodevops_register_kaniko_image:
   extends:
     - .base_register_kaniko_stage
