@@ -1,3 +1,10 @@
+## [20.7.4](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.3...v20.7.4) (2021-02-22)
+
+
+### Bug Fixes
+
+* force path version ([42d5002](https://github.com/SocialGouv/gitlab-ci-yml/commit/42d500267e384d827c5a478f73f3a3b92dcd01f7))
+
 ## [20.7.3](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.2...v20.7.3) (2021-02-11)
 
 
