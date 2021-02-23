@@ -124,6 +124,13 @@ Trigger Production:
   extends:
     - .base_yarn
     - .autodevops_base_rules
+  rules:
+    - &autodevops_global_skip_case
+      <<: *autodevops_trigger_rule
+      when: never
+    - if: $AUTO_DEVOPS_INSTALL_DISABLED
+      when: never
+    - when: on_success
   interruptible: true
 
 #
@@ -191,6 +198,15 @@ Trigger Production:
   extends:
     - .base_yarn_build_next
     - .autodevops_base_rules
+  rules:
+    - &autodevops_global_skip_case
+      <<: *autodevops_trigger_rule
+      when: never
+    - if: $AUTO_DEVOPS_INSTALL_DISABLED
+      when: never
+    - if: $AUTO_DEVOPS_BUILD_DISABLED
+      when: never
+    - when: on_success
   needs:
     - job: Install
       artifacts: true

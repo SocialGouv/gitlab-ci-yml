@@ -108,6 +108,14 @@ variables:
 
 You can disable test jobs with `AUTO_DEVOPS_TEST_DISABLED` and/or lint with `AUTO_DEVOPS_QUALITY_DISABLED`. `AUTO_DEVOPS_NOTIFY_DISABLED` disable GitHub environments notifications.
 
+| name                         | desc                         |
+| ---------------------------- | ---------------------------- |
+| AUTO_DEVOPS_TEST_DISABLED    | disable test jobs            |
+| AUTO_DEVOPS_QUALITY_DISABLED | disable lints jobs           |
+| AUTO_DEVOPS_INSTALL_DISABLED | disable installs jobs        |
+| AUTO_DEVOPS_BUILD_DISABLED   | disable builds jobs          |
+| AUTO_DEVOPS_NOTIFY_DISABLED  | disable GitHub notifications |
+
 ```yaml
 include:
   - project: SocialGouv/gitlab-ci-yml
@@ -449,7 +457,7 @@ include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_register_kaniko_stage.yml
     ref: v20.7.6
-    
+
 Register myapp image:
   extends: .base_register_kaniko_stage
   variables:
