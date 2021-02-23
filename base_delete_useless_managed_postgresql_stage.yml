@@ -4,7 +4,7 @@
   stage: Notify Finished Deployment
   dependencies: []
   allow_failure: true
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/pg-cleaner:4.6.0
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/pg-cleaner:4.6.1
   script:
     - python /bin/pg-cleaner.py
   only:
