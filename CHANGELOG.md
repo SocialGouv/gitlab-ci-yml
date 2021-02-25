@@ -1,3 +1,10 @@
+## [20.7.7](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.6...v20.7.7) (2021-02-25)
+
+
+### Bug Fixes
+
+* **deps:** update registry.gitlab.factory.social.gouv.fr/socialgouv/docker/kubectl docker tag to v4.6.2 ([#465](https://github.com/SocialGouv/gitlab-ci-yml/issues/465)) ([e318156](https://github.com/SocialGouv/gitlab-ci-yml/commit/e318156b689bb16c959d3276823abdb57ed71beb))
+
 ## [20.7.6](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.5...v20.7.6) (2021-02-23)
 
 
