@@ -1,3 +1,10 @@
+## [20.7.9](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.8...v20.7.9) (2021-02-26)
+
+
+### Bug Fixes
+
+* **deps:** update socialgouv/docker images docker tags to v4.6.3 ([#467](https://github.com/SocialGouv/gitlab-ci-yml/issues/467)) ([162cc6f](https://github.com/SocialGouv/gitlab-ci-yml/commit/162cc6f81986ce92d53b5b9b365553c83c512575))
+
 ## [20.7.8](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.7...v20.7.8) (2021-02-25)
 
 
