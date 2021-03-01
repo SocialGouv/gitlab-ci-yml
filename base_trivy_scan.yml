@@ -2,7 +2,7 @@
 
 .base_trivy_scan:
   stage: Deploy
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:4.6.3
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:4.7.0
   allow_failure: true
   variables:
     IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
