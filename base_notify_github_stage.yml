@@ -5,7 +5,7 @@
 
 #
 .notify_stage: &notify_stage
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/git-deploy:4.7.1
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/git-deploy:4.8.0
   allow_failure: true
   stage: .post
   dependencies: []
