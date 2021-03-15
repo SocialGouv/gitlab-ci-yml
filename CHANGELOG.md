@@ -1,3 +1,10 @@
+## [20.7.11](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.10...v20.7.11) (2021-03-15)
+
+
+### Bug Fixes
+
+* **deploy:** fix urls print when too long ([#472](https://github.com/SocialGouv/gitlab-ci-yml/issues/472)) ([066d195](https://github.com/SocialGouv/gitlab-ci-yml/commit/066d1950a283fdae2c5e184867f65ec93da09486))
+
 ## [20.7.10](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.9...v20.7.10) (2021-03-15)
 
 
