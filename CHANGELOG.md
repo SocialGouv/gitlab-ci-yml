@@ -1,3 +1,10 @@
+## [20.7.10](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.9...v20.7.10) (2021-03-15)
+
+
+### Bug Fixes
+
+* Trigger release. ([6fd7d92](https://github.com/SocialGouv/gitlab-ci-yml/commit/6fd7d924c139907897e839be2b72c63d5284c522))
+
 ## [20.7.9](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.8...v20.7.9) (2021-02-26)
 
 
