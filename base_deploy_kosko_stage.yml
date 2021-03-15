@@ -19,7 +19,7 @@ variables:
 
 .base_deploy_kosko_stage:
   stage: Deploy
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/no-k8s:4.8.0
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/no-k8s:4.9.0
   dependencies: []
   cache:
     key:
@@ -72,7 +72,7 @@ variables:
       echo ""
       echo ""
       echo "******************************************************************************************"
-      [[ -f "${CI_PROJECT_DIR}/manifest.yaml" ]] && cat "${CI_PROJECT_DIR}/manifest.yaml" | grep "\- host:" | sed -e s/-\ host\:\ /🚀\ https\:\\/\\// || true
+      [[ -f "${CI_PROJECT_DIR}/manifest.yaml" ]] && cat "${CI_PROJECT_DIR}/manifest.yaml" | yq r --doc "*" - 'spec.rules[0].host' | sed -e s/^/\ \ 🚀\ https\:\\/\\// || true
       echo "******************************************************************************************"
       echo ""
       echo ""
