@@ -1,3 +1,10 @@
+## [20.7.13](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.12...v20.7.13) (2021-03-17)
+
+
+### Bug Fixes
+
+* **monorepo:** remove only skip file before check ([7b86afc](https://github.com/SocialGouv/gitlab-ci-yml/commit/7b86afc4e1e47a05169b6236497462ef9662271a))
+
 ## [20.7.12](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.11...v20.7.12) (2021-03-17)
 
 
