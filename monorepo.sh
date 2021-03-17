@@ -62,7 +62,6 @@ has_changed() {
 
   #
 
-  rm -rf "${cache_folder}"
   mkdir -p "${cache_folder}"
 
   local previous_hash
@@ -102,6 +101,7 @@ has_changed() {
   fi
 
 
+  rm -rf "${cache_folder}/skip"
   if [[ "${previous_hash}" == "${hash_cache}" ]]; then
     touch "${cache_folder}/skip"
     exit 0
