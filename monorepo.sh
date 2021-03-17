@@ -62,6 +62,7 @@ has_changed() {
 
   #
 
+  rm -rf "${cache_folder}"
   mkdir -p "${cache_folder}"
 
   local previous_hash
