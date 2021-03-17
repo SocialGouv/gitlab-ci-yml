@@ -1,3 +1,10 @@
+## [20.7.12](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.11...v20.7.12) (2021-03-17)
+
+
+### Bug Fixes
+
+* **monorepo:** invalidate cache folder on has_changed cmd ([cd0c222](https://github.com/SocialGouv/gitlab-ci-yml/commit/cd0c222bdb2af3fe52b8a6a51422d69f69675331))
+
 ## [20.7.11](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.10...v20.7.11) (2021-03-15)
 
 
