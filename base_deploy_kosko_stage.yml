@@ -72,7 +72,7 @@ variables:
       echo ""
       echo ""
       echo "******************************************************************************************"
-      [[ -f "${CI_PROJECT_DIR}/manifest.yaml" ]] && cat "${CI_PROJECT_DIR}/manifest.yaml" | yq r --doc "*" - 'spec.rules[0].host' | sed -e s/^/\ \ 🚀\ https\:\\/\\// || true
+      [[ -f "${CI_PROJECT_DIR}/manifest.yaml" ]] && yq e -N '.spec.rules[0].host' "${CI_PROJECT_DIR}/manifest.yaml" | grep -v null | sed -e s/^/\ \ 🚀\ https\:\\/\\// || true
       echo "******************************************************************************************"
       echo ""
       echo ""
