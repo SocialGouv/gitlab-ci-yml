@@ -1,3 +1,10 @@
+## [20.7.14](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.13...v20.7.14) (2021-03-18)
+
+
+### Bug Fixes
+
+* **yq:** yq version 4 args ([#476](https://github.com/SocialGouv/gitlab-ci-yml/issues/476)) ([279390e](https://github.com/SocialGouv/gitlab-ci-yml/commit/279390e8718c5be7c3b783d6356d8812e022a794))
+
 ## [20.7.13](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.12...v20.7.13) (2021-03-17)
 
 
