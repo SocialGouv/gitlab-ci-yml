@@ -39,6 +39,9 @@ variables:
         if [[ -d "/k8s/.socialgouv/environments" ]]; then
           cp -r /k8s/.socialgouv/environments/* /k8s/.k8s/environments/
         fi
+        if [[ -d "/k8s/.socialgouv/components" ]]; then
+          cp -r /k8s/.socialgouv/components/* /k8s/.k8s/components/
+        fi
         cd /k8s/.k8s
       else
         yarn config set cache-folder ${CI_PROJECT_DIR}/.cache/yarn
