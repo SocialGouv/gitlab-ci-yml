@@ -1,4 +1,5 @@
 .base_register_kaniko_stage:
+  stage: "Registration"
   image:
     name: gcr.io/kaniko-project/executor:v1.5.1-debug
     entrypoint: [""]
