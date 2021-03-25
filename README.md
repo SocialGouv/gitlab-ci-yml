@@ -132,6 +132,21 @@ include:
 
 variables:
   AUTO_DEVOPS_KANIKO: "🕹️"
+
+Register Kaniko image:
+  extends: .base_register_kaniko_stage
+  variables:
+    IMAGE_NAME: app
+
+Register another image:
+  extends: .base_register_kaniko_stage
+  dependencies: []
+  needs: []
+  variables:
+    DOCKER_BUILD_ARGS: >-
+      --dockerfile=hasura/Dockerfile
+    CONTEXT: hasura
+    IMAGE_NAME: hasura
 ```
 
 ### Override existing jobs
