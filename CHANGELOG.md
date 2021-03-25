@@ -1,3 +1,15 @@
+# [20.8.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.14...v20.8.0) (2021-03-25)
+
+
+### Bug Fixes
+
+* **base_register_kaniko_stage:** add default stage ([#459](https://github.com/SocialGouv/gitlab-ci-yml/issues/459)) ([dcd9a6e](https://github.com/SocialGouv/gitlab-ci-yml/commit/dcd9a6efb34060fae9d284187d24bd11fe88e368))
+
+
+### Features
+
+* **no-k8s:** Get config from components folder ([#475](https://github.com/SocialGouv/gitlab-ci-yml/issues/475)) ([8f30bf1](https://github.com/SocialGouv/gitlab-ci-yml/commit/8f30bf1f352a6dff6c9268081a33410d98601f6c))
+
 ## [20.7.14](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.13...v20.7.14) (2021-03-18)
 
 
