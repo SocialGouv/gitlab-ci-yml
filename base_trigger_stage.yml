@@ -23,7 +23,7 @@ variables:
   variables:
     TRIGGER_ARGS: >-
       --form ref="${CI_COMMIT_REF_NAME}"
-      --form variables[RELEASE]="true"
+      --form variables[TRIGGER]="RELEASE"
 
 .base_trigger_production_stage:
   extends:
