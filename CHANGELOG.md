@@ -1,3 +1,16 @@
+# [21.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.8.0...v21.0.0) (2021-04-01)
+
+
+* feat(autodevops)!: use generic TRIGGER (#480) ([b155f6b](https://github.com/SocialGouv/gitlab-ci-yml/commit/b155f6be26925780e4e195aeea307d0625f47134)), closes [#480](https://github.com/SocialGouv/gitlab-ci-yml/issues/480)
+
+
+### BREAKING CHANGES
+
+* Manual releases will need to go through the `TRIGGER` env variable now
+
+No impact on existing `Trigger Production` and `Trigger Release` jobs.
+But other jobs will need to do `TRIGGER="<my stuff>"`
+
 # [20.8.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.7.14...v20.8.0) (2021-03-25)
 
 
