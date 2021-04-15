@@ -1,3 +1,11 @@
+## [21.0.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v21.0.0...v21.0.1) (2021-04-15)
+
+
+### Bug Fixes
+
+* **autodevops:** do not try to trigger production on triggers ([8c0031e](https://github.com/SocialGouv/gitlab-ci-yml/commit/8c0031e6956aea78220775d26cd30c18deba378d))
+* **autodevops:** do not try to trigger production on triggers (2) ([dd87e8b](https://github.com/SocialGouv/gitlab-ci-yml/commit/dd87e8b16ccc531d2c1e24714136602fdad5ec8b))
+
 # [21.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v20.8.0...v21.0.0) (2021-04-01)
 
 
