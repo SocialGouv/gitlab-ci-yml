@@ -270,7 +270,7 @@ Trigger Production:
   rules:
     - if: "$PRODUCTION || $TRIGGER || $CI_COMMIT_TAG"
       when: never
-    - when: on_success
+    - when: manual
   variables:
     KOSKO_APPEND_YAML_FROM: .k8s/environments/dev/manifests
     KOSKO_GENERATE_ARGS: >-
