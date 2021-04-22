@@ -1,3 +1,10 @@
+## [21.0.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v21.0.1...v21.0.2) (2021-04-22)
+
+
+### Bug Fixes
+
+* **autodevops:** autodevops_stop_review is not using an image with kapp ([#485](https://github.com/SocialGouv/gitlab-ci-yml/issues/485)) ([2b31705](https://github.com/SocialGouv/gitlab-ci-yml/commit/2b3170582fc5b3199edcc7989abdd0d7179c067f))
+
 ## [21.0.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v21.0.0...v21.0.1) (2021-04-15)
 
 
