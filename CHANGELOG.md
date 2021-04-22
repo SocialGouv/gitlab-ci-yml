@@ -1,3 +1,13 @@
+# [22.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v21.0.2...v22.0.0) (2021-04-22)
+
+
+* feat(autodevops)!: disable auto deploy on branches to save budget (#484) ([c6b11b0](https://github.com/SocialGouv/gitlab-ci-yml/commit/c6b11b0ca142d345bd23792f03abb42d1dbb3aaf)), closes [#484](https://github.com/SocialGouv/gitlab-ci-yml/issues/484)
+
+
+### BREAKING CHANGES
+
+* One will have to manually click on the buttons in the pipeline to deploy
+
 ## [21.0.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v21.0.1...v21.0.2) (2021-04-22)
 
 
