@@ -374,7 +374,7 @@ Stop preprod:
       when: never
     - if: "$AUTO_DEVOPS_NOTIFY_DISABLED"
       when: never
-    - when: on_success
+    - when: manual
 Notify Starting Deployment:
   extends: .autodevops_notify_starting_deployment
 
@@ -419,6 +419,6 @@ Notify Fail:
       when: never
     - if: "$AUTO_DEVOPS_NOTIFY_DISABLED"
       when: never
-    - when: on_success
+    - when: manual
 Notify Success:
   extends: .autodevops_notify_success
