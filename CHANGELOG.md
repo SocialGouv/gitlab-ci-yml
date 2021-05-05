@@ -1,3 +1,10 @@
+## [22.0.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.0.0...v22.0.1) (2021-05-05)
+
+
+### Bug Fixes
+
+* use ghcr.io docker registry ([#486](https://github.com/SocialGouv/gitlab-ci-yml/issues/486)) ([52fe0c6](https://github.com/SocialGouv/gitlab-ci-yml/commit/52fe0c6cc96f2fe62ec46722e06bec9341bb843b))
+
 # [22.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v21.0.2...v22.0.0) (2021-04-22)
 
 
