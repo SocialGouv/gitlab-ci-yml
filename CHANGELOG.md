@@ -1,3 +1,10 @@
+# [22.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.0.1...v22.1.0) (2021-05-06)
+
+
+### Features
+
+* **kosko:** add dangerous-override-ownership-of-existing-resources flag to kapp ([#487](https://github.com/SocialGouv/gitlab-ci-yml/issues/487)) ([efbc500](https://github.com/SocialGouv/gitlab-ci-yml/commit/efbc500531428ed8b19330bf4eec8d4df862c64b))
+
 ## [22.0.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.0.0...v22.0.1) (2021-05-05)
 
 
