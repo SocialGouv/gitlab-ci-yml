@@ -67,7 +67,7 @@ variables:
           kubectl create ns ${KUBE_NAMESPACE} || true
           kubectl annotate ns ${KUBE_NAMESPACE} azure-pg-admin-user=${CI_PROJECT_NAME} || true
         fi
-        kapp -y deploy -a ${CI_PROJECT_NAME} --namespace ${KUBE_NAMESPACE} -f ${CI_PROJECT_DIR}/manifest.yaml ${KAPP_DEPLOY_ARGS}
+        kapp --dangerous-override-ownership-of-existing-resources -y deploy -a ${CI_PROJECT_NAME} --namespace ${KUBE_NAMESPACE} -f ${CI_PROJECT_DIR}/manifest.yaml ${KAPP_DEPLOY_ARGS}
       else
         kubectl apply -f ${CI_PROJECT_DIR}/manifest.yaml
       fi
