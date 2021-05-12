@@ -18,7 +18,6 @@
 Use like this in your `.gitlab-ci.yml` :
 
 ```yml
----
 include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_semantic_release_stage.yml
