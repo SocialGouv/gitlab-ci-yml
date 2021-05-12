@@ -1,3 +1,10 @@
+## [22.1.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.1.1...v22.1.2) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** update socialgouv/docker images docker tags to v6.7.1 ([#493](https://github.com/SocialGouv/gitlab-ci-yml/issues/493)) ([bf864b7](https://github.com/SocialGouv/gitlab-ci-yml/commit/bf864b759893075fc0750890b551ab4630147e9d))
+
 ## [22.1.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.1.0...v22.1.1) (2021-05-12)
 
 
