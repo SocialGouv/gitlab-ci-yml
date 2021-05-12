@@ -1,5 +1,6 @@
 {
   "$schema": "http://json.schemastore.org/renovate",
+  "enabled": true,
   "extends": [
     "github>SocialGouv/renovate-config",
     ":automergeAll"
