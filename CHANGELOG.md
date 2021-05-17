@@ -1,3 +1,10 @@
+## [22.1.4](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.1.3...v22.1.4) (2021-05-17)
+
+
+### Bug Fixes
+
+* **release:** force patch ([16bd355](https://github.com/SocialGouv/gitlab-ci-yml/commit/16bd35512113573dd68486da1143dfc9ea969ab2))
+
 ## [22.1.3](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.1.2...v22.1.3) (2021-05-12)
 
 
