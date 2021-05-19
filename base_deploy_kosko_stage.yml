@@ -19,7 +19,7 @@ variables:
 
 .base_deploy_kosko_stage:
   stage: Deploy
-  image: ghcr.io/socialgouv/docker/no-k8s:6.11.0
+  image: ghcr.io/socialgouv/docker/kubectl:6.11.0
   dependencies: []
   cache:
     key:
@@ -46,8 +46,9 @@ variables:
       else
         yarn config set cache-folder ${CI_PROJECT_DIR}/.cache/yarn
         cd ${K8S_FOLDER}
-        yarn --production --frozen-lockfile --prefer-offline --link-duplicates
       fi
+    - echo "yarn --production --frozen-lockfile --prefer-offline --link-duplicates"
+    - yarn --production --frozen-lockfile --prefer-offline --link-duplicates
     #
     - echo "kosko generate ${KOSKO_GENERATE_ARGS} >> ${CI_PROJECT_DIR}/manifest.yaml"
     - kosko generate ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml
