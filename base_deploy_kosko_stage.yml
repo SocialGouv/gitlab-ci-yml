@@ -49,11 +49,13 @@ variables:
         yarn config set cache-folder ${CI_PROJECT_DIR}/.cache/yarn
         cd ${K8S_FOLDER}
       fi
+    - pwd
+    - cat package.json
     - echo "yarn --production --frozen-lockfile --prefer-offline --link-duplicates"
     - yarn --production --frozen-lockfile --prefer-offline --link-duplicates
     #
-    - echo "kosko generate ${KOSKO_GENERATE_ARGS} >> ${CI_PROJECT_DIR}/manifest.yaml"
-    - kosko generate ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml
+    - echo "yarn kosko generate ${KOSKO_GENERATE_ARGS} >> ${CI_PROJECT_DIR}/manifest.yaml"
+    - yarn kosko generate ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml
     #
     - cd -
     - |
