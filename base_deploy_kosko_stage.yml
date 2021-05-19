@@ -34,15 +34,17 @@ variables:
     - |
       if [[ -d "${CI_PROJECT_DIR}/.socialgouv" ]]; then
         echo "Use .socialgouv config."
-        rm -rf /k8s/.socialgouv
-        cp -r ${CI_PROJECT_DIR}/.socialgouv /k8s/
-        if [[ -d "/k8s/.socialgouv/environments" ]]; then
-          cp -r /k8s/.socialgouv/environments/* /k8s/.k8s/environments/
+        mkdir socialgouv
+        git clone --depth 1 --branch v1.5.1 https://github.com/SocialGouv/k8s socialgouv
+        rm -rf ./socialgouv/.socialgouv
+        cp -r ${CI_PROJECT_DIR}/.socialgouv ./socialgouv/
+        if [[ -d "./socialgouv/.socialgouv/environments" ]]; then
+          cp -r ./socialgouv/.socialgouv/environments/* ./socialgouv/.k8s/environments/
         fi
-        if [[ -d "/k8s/.socialgouv/components" ]]; then
-          cp -r /k8s/.socialgouv/components/* /k8s/.k8s/components/
+        if [[ -d "./socialgouv/.socialgouv/components" ]]; then
+          cp -r ./socialgouv/.socialgouv/components/* ./socialgouv/.k8s/components/
         fi
-        cd /k8s/.k8s
+        cd ./socialgouv/.k8s
       else
         yarn config set cache-folder ${CI_PROJECT_DIR}/.cache/yarn
         cd ${K8S_FOLDER}
