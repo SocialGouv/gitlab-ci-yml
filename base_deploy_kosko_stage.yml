@@ -19,7 +19,7 @@ variables:
 
 .base_deploy_kosko_stage:
   stage: Deploy
-  image: ghcr.io/socialgouv/docker/kubectl:6.11.0
+  image: ghcr.io/socialgouv/docker/kubectl:tests
   dependencies: []
   cache:
     key:
