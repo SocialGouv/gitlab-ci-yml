@@ -54,8 +54,8 @@ variables:
     - echo "yarn --production --frozen-lockfile --prefer-offline --link-duplicates"
     - yarn --production --frozen-lockfile --prefer-offline --link-duplicates
     #
-    - echo "yarn kosko generate ${KOSKO_GENERATE_ARGS} >> ${CI_PROJECT_DIR}/manifest.yaml"
-    - yarn kosko generate ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml
+    - echo "yarn -s kosko generate ${KOSKO_GENERATE_ARGS} >> ${CI_PROJECT_DIR}/manifest.yaml"
+    - yarn -s kosko generate ${KOSKO_GENERATE_ARGS} > ${CI_PROJECT_DIR}/manifest.yaml
     #
     - cd -
     - |
