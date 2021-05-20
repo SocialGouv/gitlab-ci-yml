@@ -38,7 +38,6 @@ variables:
       if [[ -d "${CI_PROJECT_DIR}/.socialgouv" ]]; then
         echo "Use .socialgouv config."
         echo "Use no-k8s version $NOK8S_VERSION"
-        mkdir socialgouv
         git clone --depth 1 --branch $NOK8S_VERSION https://github.com/SocialGouv/k8s socialgouv
         rm -rf ./socialgouv/.socialgouv
         cp -r ${CI_PROJECT_DIR}/.socialgouv ./socialgouv/
