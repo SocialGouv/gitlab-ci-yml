@@ -3,6 +3,7 @@
 variables:
   K8S_FOLDER: ${CI_PROJECT_DIR}/.k8s
   KOSKO_GENERATE_ARGS: ""
+  # renovate: datasource=github-releases depName=socialgouv/k8s
   NOK8S_VERSION: v1.6.0
 
 .print_env: &print_env |
@@ -20,6 +21,7 @@ variables:
 
 .base_deploy_kosko_stage:
   stage: Deploy
+  # todo: use gitlab-deploy image
   image: ghcr.io/socialgouv/docker/kubectl:sha-12af17fb38dc2c19e2101b2a2b28a82b2ca4f24b
   dependencies: []
   cache:
@@ -35,8 +37,8 @@ variables:
     - |
       if [[ -d "${CI_PROJECT_DIR}/.socialgouv" ]]; then
         echo "Use .socialgouv config."
-        mkdir socialgouv
         echo "Use no-k8s version $NOK8S_VERSION"
+        mkdir socialgouv
         git clone --depth 1 --branch $NOK8S_VERSION https://github.com/SocialGouv/k8s socialgouv
         rm -rf ./socialgouv/.socialgouv
         cp -r ${CI_PROJECT_DIR}/.socialgouv ./socialgouv/
@@ -51,8 +53,6 @@ variables:
         yarn config set cache-folder ${CI_PROJECT_DIR}/.cache/yarn
         cd ${K8S_FOLDER}
       fi
-    - pwd
-    - cat package.json
     - echo "yarn --production --frozen-lockfile --prefer-offline --link-duplicates"
     - yarn --production --frozen-lockfile --prefer-offline --link-duplicates
     #
