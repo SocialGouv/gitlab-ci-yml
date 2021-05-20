@@ -1,3 +1,10 @@
+## [22.1.6](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.1.5...v22.1.6) (2021-05-19)
+
+
+### Bug Fixes
+
+* Bump no-k8s image version. ([#499](https://github.com/SocialGouv/gitlab-ci-yml/issues/499)) ([ff25475](https://github.com/SocialGouv/gitlab-ci-yml/commit/ff254758b59098271f7762fb14a17187e0f46a14))
+
 ## [22.1.5](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.1.4...v22.1.5) (2021-05-19)
 
 
