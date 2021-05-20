@@ -3,6 +3,7 @@
 variables:
   K8S_FOLDER: ${CI_PROJECT_DIR}/.k8s
   KOSKO_GENERATE_ARGS: ""
+  NOK8S_VERSION: v1.6.0
 
 .print_env: &print_env |
   printenv | grep \
@@ -35,7 +36,8 @@ variables:
       if [[ -d "${CI_PROJECT_DIR}/.socialgouv" ]]; then
         echo "Use .socialgouv config."
         mkdir socialgouv
-        git clone --depth 1 --branch v1.5.1 https://github.com/SocialGouv/k8s socialgouv
+        echo "Use no-k8s version $NOK8S_VERSION"
+        git clone --depth 1 --branch $NOK8S_VERSION https://github.com/SocialGouv/k8s socialgouv
         rm -rf ./socialgouv/.socialgouv
         cp -r ${CI_PROJECT_DIR}/.socialgouv ./socialgouv/
         if [[ -d "./socialgouv/.socialgouv/environments" ]]; then
