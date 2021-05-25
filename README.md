@@ -13,7 +13,6 @@
 <br>
 <br>
 
-
 ## Usage
 
 Use like this in your `.gitlab-ci.yml` :
