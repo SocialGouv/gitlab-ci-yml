@@ -270,8 +270,7 @@ Trigger Production:
   rules:
     - if: "$PRODUCTION || $TRIGGER || $CI_COMMIT_TAG"
       when: never
-    - when: manual
-  allow_failure: true
+    - when: on_success
   variables:
     KOSKO_APPEND_YAML_FROM: .k8s/environments/dev/manifests
     KOSKO_GENERATE_ARGS: >-
@@ -373,7 +372,7 @@ Stop preprod:
       when: never
     - if: "$AUTO_DEVOPS_NOTIFY_DISABLED"
       when: never
-    - when: manual
+    - when: on_success
 Notify Starting Deployment:
   extends: .autodevops_notify_starting_deployment
 
@@ -418,6 +417,6 @@ Notify Fail:
       when: never
     - if: "$AUTO_DEVOPS_NOTIFY_DISABLED"
       when: never
-    - when: manual
+    - when: on_success
 Notify Success:
   extends: .autodevops_notify_success
