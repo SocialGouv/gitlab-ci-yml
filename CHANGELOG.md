@@ -1,3 +1,13 @@
+# [23.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.1.9...v23.0.0) (2021-06-11)
+
+
+* revert(autodevops)!: disable auto deploy on branches to save budget (#505) ([b657f7e](https://github.com/SocialGouv/gitlab-ci-yml/commit/b657f7e8b97c53b9c26909c724d609a58e4e5eff)), closes [#505](https://github.com/SocialGouv/gitlab-ci-yml/issues/505)
+
+
+### BREAKING CHANGES
+
+* We are now deploying to new clusters :)
+
 ## [22.1.9](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.1.8...v22.1.9) (2021-05-27)
 
 
