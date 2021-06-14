@@ -1,3 +1,17 @@
+## [23.0.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.0.0...v23.0.1) (2021-06-14)
+
+
+### Bug Fixes
+
+* **deps:** update socialgouv/docker images docker tags to v6.21.1 ([a1f60af](https://github.com/SocialGouv/gitlab-ci-yml/commit/a1f60afed76e974181bc863b2aabfecf83d5a873))
+* **release:** force patch ([73998c8](https://github.com/SocialGouv/gitlab-ci-yml/commit/73998c80e9e5f3b1506c7bc4d7712419c63ce8f4))
+* **release:** force patch ([0ed5314](https://github.com/SocialGouv/gitlab-ci-yml/commit/0ed5314154d07990c21454b8e968333e0c09e41d))
+
+
+### Reverts
+
+* **renovate:** force enable the 🤖 on this repo ([e72c1c7](https://github.com/SocialGouv/gitlab-ci-yml/commit/e72c1c762039af51e94c94db2babfdc0d854a629))
+
 # [23.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.1.9...v23.0.0) (2021-06-11)
 
 
