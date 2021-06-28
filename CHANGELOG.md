@@ -1,3 +1,10 @@
+# [23.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.0.1...v23.1.0) (2021-06-28)
+
+
+### Features
+
+* add rancher/grafana urls ([#521](https://github.com/SocialGouv/gitlab-ci-yml/issues/521)) ([9b10ecc](https://github.com/SocialGouv/gitlab-ci-yml/commit/9b10ecc16206c0aa0142542b7f15bc5f8f87bc38))
+
 ## [23.0.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.0.0...v23.0.1) (2021-06-14)
 
 
