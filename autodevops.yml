@@ -3,6 +3,11 @@
 include:
   - /base_autodevops.yml
 
+workflow:
+  rules:
+    - if: ($CI_COMMIT_REF_NAME === 'master' || $CI_COMMIT_REF_NAME === 'main') && $CI_COMMIT_MESSAGE =~ /^chore\(release\):$/
+      when: never
+      
 #
 
 Install:
