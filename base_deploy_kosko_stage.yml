@@ -72,21 +72,19 @@ variables:
         kubectl apply -f ${CI_PROJECT_DIR}/manifest.yaml
       fi
     - |
-      echo ""
-      echo ""
-      echo "******************************************************************************************"
-      echo ""
+      echo "\n"
+      echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+      echo "\n"
       [[ -f "${CI_PROJECT_DIR}/manifest.yaml" ]] && yq e -N '.spec.rules[0].host' "${CI_PROJECT_DIR}/manifest.yaml" | grep -v null | sed -e s/^/\ \ 🚀\ https\:\\/\\// || true
-      echo ""
+      echo "\n"
       [[ -z $PRODUCTION ]] && GRAFANA_CLUSTER="dev2" || GRAFANA_CLUSTER="prod2";
       echo "  📕 logs : https://grafana.fabrique.social.gouv.fr/explore?orgId=1&left=%5B%22now-1h%22,%22now%22,%22Loki-tail%22,%7B%22expr%22:%22%7Bnamespace%3D%5C%22${KUBE_NAMESPACE}%5C%22%7D%22%7D%5D"
       echo "  📊 pods : https://grafana.fabrique.social.gouv.fr/d/85a562078cdf77779eaa1add43ccec1e/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=default&var-cluster=${GRAFANA_CLUSTER}&var-namespace=${KUBE_NAMESPACE}"
       echo "  📊 workloads : https://grafana.fabrique.social.gouv.fr/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=${GRAFANA_CLUSTER}&var-namespace=${KUBE_NAMESPACE}&var-type=deployment"
       echo "  🔎 rancher : https://rancher.fabrique.social.gouv.fr/p/${RANCHER_PROJECT_ID}/workloads"
-      echo ""
-      echo "******************************************************************************************"
-      echo ""
-      echo ""
+      echo "\n"
+      echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+      echo "\n"
   artifacts:
     expire_in: 1 week
     paths:
