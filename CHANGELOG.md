@@ -1,3 +1,10 @@
+## [23.1.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.1.0...v23.1.1) (2021-06-30)
+
+
+### Bug Fixes
+
+* **kosko-deploy:** output multiple rules url ([#522](https://github.com/SocialGouv/gitlab-ci-yml/issues/522)) ([8895125](https://github.com/SocialGouv/gitlab-ci-yml/commit/8895125fd0e34c3a56c87bbec349195a81f7f7ec))
+
 # [23.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.0.1...v23.1.0) (2021-06-28)
 
 
