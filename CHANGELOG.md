@@ -1,3 +1,15 @@
+# [23.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.1.1...v23.2.0) (2021-07-01)
+
+
+### Bug Fixes
+
+* **autodevops:** skip post-release master pipeline ([#523](https://github.com/SocialGouv/gitlab-ci-yml/issues/523)) ([455adcc](https://github.com/SocialGouv/gitlab-ci-yml/commit/455adcceed855dc769516e15e2320b3dffea13b1))
+
+
+### Features
+
+* add grafana urls ([#524](https://github.com/SocialGouv/gitlab-ci-yml/issues/524)) ([1e9a3dc](https://github.com/SocialGouv/gitlab-ci-yml/commit/1e9a3dcaf461a2132792b6e23e25c2707b3c2821))
+
 ## [23.1.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.1.0...v23.1.1) (2021-06-30)
 
 
