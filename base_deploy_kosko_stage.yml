@@ -22,7 +22,7 @@ variables:
 .base_deploy_kosko_stage:
   stage: Deploy
   # todo: use gitlab-deploy image
-  image: ghcr.io/socialgouv/docker/kubectl:sha-12af17fb38dc2c19e2101b2a2b28a82b2ca4f24b
+  image: ghcr.io/socialgouv/docker/ci-deploy:6.36.0
   dependencies: []
   cache:
     key:
