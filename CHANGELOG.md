@@ -1,3 +1,74 @@
+# [23.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.1.1...v23.2.0) (2021-07-01)
+
+
+### Bug Fixes
+
+* **autodevops:** skip post-release master pipeline ([#523](https://github.com/SocialGouv/gitlab-ci-yml/issues/523)) ([455adcc](https://github.com/SocialGouv/gitlab-ci-yml/commit/455adcceed855dc769516e15e2320b3dffea13b1))
+
+
+### Features
+
+* add grafana urls ([#524](https://github.com/SocialGouv/gitlab-ci-yml/issues/524)) ([1e9a3dc](https://github.com/SocialGouv/gitlab-ci-yml/commit/1e9a3dcaf461a2132792b6e23e25c2707b3c2821))
+
+## [23.1.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.1.0...v23.1.1) (2021-06-30)
+
+
+### Bug Fixes
+
+* **kosko-deploy:** output multiple rules url ([#522](https://github.com/SocialGouv/gitlab-ci-yml/issues/522)) ([8895125](https://github.com/SocialGouv/gitlab-ci-yml/commit/8895125fd0e34c3a56c87bbec349195a81f7f7ec))
+
+# [23.1.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.0.1...v23.1.0) (2021-06-28)
+
+
+### Features
+
+* add rancher/grafana urls ([#521](https://github.com/SocialGouv/gitlab-ci-yml/issues/521)) ([9b10ecc](https://github.com/SocialGouv/gitlab-ci-yml/commit/9b10ecc16206c0aa0142542b7f15bc5f8f87bc38))
+
+## [23.0.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.0.0...v23.0.1) (2021-06-14)
+
+
+### Bug Fixes
+
+* **deps:** update socialgouv/docker images docker tags to v6.21.1 ([a1f60af](https://github.com/SocialGouv/gitlab-ci-yml/commit/a1f60afed76e974181bc863b2aabfecf83d5a873))
+* **release:** force patch ([73998c8](https://github.com/SocialGouv/gitlab-ci-yml/commit/73998c80e9e5f3b1506c7bc4d7712419c63ce8f4))
+* **release:** force patch ([0ed5314](https://github.com/SocialGouv/gitlab-ci-yml/commit/0ed5314154d07990c21454b8e968333e0c09e41d))
+
+
+### Reverts
+
+* **renovate:** force enable the 🤖 on this repo ([e72c1c7](https://github.com/SocialGouv/gitlab-ci-yml/commit/e72c1c762039af51e94c94db2babfdc0d854a629))
+
+# [23.0.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.1.9...v23.0.0) (2021-06-11)
+
+
+* revert(autodevops)!: disable auto deploy on branches to save budget (#505) ([b657f7e](https://github.com/SocialGouv/gitlab-ci-yml/commit/b657f7e8b97c53b9c26909c724d609a58e4e5eff)), closes [#505](https://github.com/SocialGouv/gitlab-ci-yml/issues/505)
+
+
+### BREAKING CHANGES
+
+* We are now deploying to new clusters :)
+
+## [22.1.9](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.1.8...v22.1.9) (2021-05-27)
+
+
+### Bug Fixes
+
+* **deps:** update socialgouv/docker images docker tags to v6.16.0 ([#504](https://github.com/SocialGouv/gitlab-ci-yml/issues/504)) ([c10f60a](https://github.com/SocialGouv/gitlab-ci-yml/commit/c10f60ac2da654da8c19f5d5f3d576f447d1f243))
+
+## [22.1.8](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.1.7...v22.1.8) (2021-05-27)
+
+
+### Bug Fixes
+
+* force release ([fc7a88b](https://github.com/SocialGouv/gitlab-ci-yml/commit/fc7a88bd7e7857f369398421d442d9f21d40dfcc))
+
+## [22.1.7](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.1.6...v22.1.7) (2021-05-25)
+
+
+### Bug Fixes
+
+* force release ([09e6f5d](https://github.com/SocialGouv/gitlab-ci-yml/commit/09e6f5d9571d3a0fbc7171affdf48955a53d8371))
+
 ## [22.1.6](https://github.com/SocialGouv/gitlab-ci-yml/compare/v22.1.5...v22.1.6) (2021-05-19)
 
 
