@@ -1,3 +1,10 @@
+## [23.2.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.2.0...v23.2.1) (2021-07-28)
+
+
+### Bug Fixes
+
+* **release:** force patch ([0a64e71](https://github.com/SocialGouv/gitlab-ci-yml/commit/0a64e7149514871b2ca034fc12ecc6b355b4f5ba))
+
 # [23.2.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.1.1...v23.2.0) (2021-07-01)
 
 
