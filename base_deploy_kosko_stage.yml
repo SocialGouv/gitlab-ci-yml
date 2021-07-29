@@ -11,6 +11,7 @@ variables:
     -e "^CI_ENVIRONMENT_" \
     -e "^CI_PROJECT_" \
     -e "^CI_REGISTRY_" \
+    -e "^HARBOR_" \
     -e "^KUBE_INGRESS_BASE_DOMAIN" \
     -e "^KUBE_NAMESPACE" \
     -e "^PRODUCTION" \
