@@ -19,7 +19,7 @@ variables:
 
 .base_deploy_kosko_stage:
   stage: Deploy
-  image: ghcr.io/socialgouv/docker/no-k8s:6.38.3
+  image: ghcr.io/socialgouv/docker/no-k8s:6.38.5
   dependencies: []
   cache:
     key:
