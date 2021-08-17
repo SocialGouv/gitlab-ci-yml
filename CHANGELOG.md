@@ -1,3 +1,10 @@
+# [23.3.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.2.1...v23.3.0) (2021-08-17)
+
+
+### Features
+
+* **semantic_release:** ignore subgroup on release github remote ([#548](https://github.com/SocialGouv/gitlab-ci-yml/issues/548)) ([78f9a0c](https://github.com/SocialGouv/gitlab-ci-yml/commit/78f9a0cba2f616dc890f126e50dca3482f23232a))
+
 ## [23.2.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.2.0...v23.2.1) (2021-07-28)
 
 
