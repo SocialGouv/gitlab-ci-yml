@@ -19,7 +19,7 @@ variables:
       - $CI_PROJECT_DIR/.yarn
   before_script:
     # Use github as origin
-    - git remote set-url origin https://${GITHUB_TOKEN}@github.com/${CI_PROJECT_PATH}.git
+    - git remote set-url origin https://${GITHUB_TOKEN}@github.com/${CI_PROJECT_ROOT_NAMESPACE}/${CI_PROJECT_TITLE}.git
   script:
     # Set git to a branch
     - git checkout ${CI_COMMIT_REF_NAME}
