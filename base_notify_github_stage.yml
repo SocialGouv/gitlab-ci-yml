@@ -5,7 +5,7 @@
 
 #
 .notify_stage: &notify_stage
-  image: ghcr.io/socialgouv/docker/git-deploy:6.46.0
+  image: ghcr.io/socialgouv/docker/git-deploy:6.47.0
   allow_failure: true
   stage: .post
   dependencies: []
