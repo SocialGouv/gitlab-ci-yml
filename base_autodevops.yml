@@ -324,7 +324,7 @@ Production:
 #
 
 .autodevops_stop_review:
-  image: ghcr.io/socialgouv/docker/no-k8s:6.47.4
+  image: ghcr.io/socialgouv/docker/no-k8s:6.47.5
   stage: .post
   rules:
     - if: "$PRODUCTION || $TRIGGER || $CI_COMMIT_TAG"
