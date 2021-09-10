@@ -5,7 +5,7 @@
     - \. <(kubectl get secret azure-pg-admin-user -n ${CI_PROJECT_NAME}-secret -o json | export_from_k8s_secret)
 
 .base_azure_db:
-  image: ghcr.io/socialgouv/docker/azure-db:6.47.7
+  image: ghcr.io/socialgouv/docker/azure-db:6.47.8
   dependencies: []
   only:
     refs:
