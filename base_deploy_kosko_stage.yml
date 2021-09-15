@@ -62,7 +62,7 @@ variables:
         >> ${CI_PROJECT_DIR}/manifest.yaml
       fi
     # this enable legacy gitlab+nok8s repos (ex: medle)
-    - sed -i -e /certmanager.k8s.io\/cluster-issuer/cert-manager.io\/cluster-issuer/g ${CI_PROJECT_DIR}/manifest.yaml
+    - sed -i "s#certmanager.k8s.io/cluster-issuer#cert-manager.io/cluster-issuer#" ${CI_PROJECT_DIR}/manifest.yaml
     - cat ${CI_PROJECT_DIR}/manifest.yaml
     - |
       if [[ -n $AUTO_DEVOPS_ENABLE_KAPP ]]; then
