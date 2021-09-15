@@ -19,7 +19,7 @@ variables:
 
 .base_deploy_kosko_stage:
   stage: Deploy
-  image: ghcr.io/socialgouv/docker/no-k8s:6.48.0
+  image: ghcr.io/socialgouv/docker/no-k8s:6.48.1
   dependencies: []
   cache:
     key:
@@ -61,6 +61,9 @@ variables:
           echo '---' \; -exec cat {} \; \
         >> ${CI_PROJECT_DIR}/manifest.yaml
       fi
+    # this enable legacy gitlab+nok8s repos (ex: medle)
+    - sed -i -e /certmanager.k8s.io\/cluster-issuer/cert-manager.io\/cluster-issuer/g ${CI_PROJECT_DIR}/manifest.yaml
+    - cat ${CI_PROJECT_DIR}/manifest.yaml
     - |
       if [[ -n $AUTO_DEVOPS_ENABLE_KAPP ]]; then
         if [[ -z $PRODUCTION ]]; then
