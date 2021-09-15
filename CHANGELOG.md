@@ -1,3 +1,11 @@
+## [23.3.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.3.0...v23.3.1) (2021-09-15)
+
+
+### Bug Fixes
+
+* **autodevops:** increase envs lifetime ([#551](https://github.com/SocialGouv/gitlab-ci-yml/issues/551)) ([2f9be59](https://github.com/SocialGouv/gitlab-ci-yml/commit/2f9be593fc2bee34280347dd76fa7d42df27fb38))
+* **base_deploy_kosko_stage:** force new cert-manager annotation ([#569](https://github.com/SocialGouv/gitlab-ci-yml/issues/569)) ([16c3e30](https://github.com/SocialGouv/gitlab-ci-yml/commit/16c3e3079d1ec087e106fd509464397e379a9e50))
+
 # [23.3.0](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.2.1...v23.3.0) (2021-08-17)
 
 
