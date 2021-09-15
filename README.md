@@ -13,6 +13,8 @@
 <br>
 <br>
 
+⚠️ Considered **legacy**, checkout our new [GitHub actions](https://github.com/SocialGouv/actions/)
+
 
 ## Usage
 
