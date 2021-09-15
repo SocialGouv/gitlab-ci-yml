@@ -1,3 +1,10 @@
+## [23.3.2](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.3.1...v23.3.2) (2021-09-15)
+
+
+### Bug Fixes
+
+* **base_deploy_kosko_stage:** sed it again ([5e2a7b7](https://github.com/SocialGouv/gitlab-ci-yml/commit/5e2a7b7ca110554040c8a3a7d64543bc272736bc))
+
 ## [23.3.1](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.3.0...v23.3.1) (2021-09-15)
 
 
