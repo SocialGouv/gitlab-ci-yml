@@ -2,5 +2,5 @@
 
 .base_docker_kubectl_image_stage:
   image:
-    name: ghcr.io/socialgouv/docker/kubectl:6.51.1
+    name: ghcr.io/socialgouv/docker/kubectl:6.52.0
     entrypoint: [""]
