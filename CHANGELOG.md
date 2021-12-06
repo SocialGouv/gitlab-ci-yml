@@ -1,3 +1,10 @@
+## [23.3.4](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.3.3...v23.3.4) (2021-12-06)
+
+
+### Bug Fixes
+
+* **release:** use node@16 ([#583](https://github.com/SocialGouv/gitlab-ci-yml/issues/583)) ([2120735](https://github.com/SocialGouv/gitlab-ci-yml/commit/21207354c9345840fe39a2b42331a338d8f5b2f5))
+
 ## [23.3.3](https://github.com/SocialGouv/gitlab-ci-yml/compare/v23.3.2...v23.3.3) (2021-09-15)
 
 
