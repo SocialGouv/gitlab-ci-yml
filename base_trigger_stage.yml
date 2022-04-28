@@ -5,7 +5,7 @@ variables:
   TRIGGER_ARGS: ""
 
 .base_trigger_stage:
-  image: curlimages/curl:7.82.0
+  image: curlimages/curl:7.83.0
   dependencies: []
   allow_failure: true
   variables:
