@@ -1,7 +1,7 @@
 .base_register_kaniko_stage:
   stage: "Registration"
   image:
-    name: gcr.io/kaniko-project/executor:v1.13.0-debug
+    name: gcr.io/kaniko-project/executor:v1.14.0-debug
     entrypoint: [""]
   script:
     - mkdir -p /kaniko/.docker
